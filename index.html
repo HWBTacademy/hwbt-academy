@@ -1,0 +1,867 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HWBT Academy | Hard Work Beats Talent</title>
+  <meta name="description" content="HWBT Academy — Méthode de padel (piliers + diagnostic couleurs), plateforme de suivi, shop. Nivelles, Diegem.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --white:#ffffff;
+      --ink:#0b0b0f;
+      --muted:#555560;
+      --muted2:#6b6b78;
+      --line:#e8e8ee;
+
+      --bronze:#A67C52;
+      --bronze-soft: rgba(166,124,82,.12);
+      --bronze-soft2: rgba(166,124,82,.06);
+
+      --shadow: 0 18px 50px rgba(11,11,15,.08);
+      --shadow2: 0 10px 30px rgba(11,11,15,.06);
+
+      --radius: 18px;
+      --max: 1120px;
+      --pad: clamp(16px, 4vw, 28px);
+      --section: clamp(80px, 10vw, 120px);
+
+      --red:#e63946;
+      --green:#2a9d8f;
+      --blue:#457b9d;
+    }
+
+    *{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      font-family:'Oswald', sans-serif;
+      background:var(--white);
+      color:var(--ink);
+      line-height:1.55;
+      letter-spacing:.35px;
+      overflow-x:hidden;
+    }
+    img{max-width:100%;display:block}
+    a{text-decoration:none;color:inherit}
+    :focus-visible{outline:2px solid var(--bronze); outline-offset:3px}
+
+    .container{max-width:var(--max);margin:0 auto;padding:0 var(--pad)}
+    .section{padding:var(--section) 0}
+    .grid{display:grid;gap:36px}
+    .muted{color:var(--muted);font-weight:300;text-transform:none}
+    .muted2{color:var(--muted2);font-weight:300;text-transform:none}
+    .bronze{color:var(--bronze)}
+    .sr-only{
+      position:absolute; width:1px; height:1px;
+      padding:0; margin:-1px; overflow:hidden;
+      clip:rect(0,0,0,0); border:0;
+    }
+
+    /* HEADER */
+    header{
+      position:sticky;top:0;z-index:1000;
+      background:rgba(255,255,255,.86);
+      backdrop-filter:blur(12px);
+      -webkit-backdrop-filter:blur(12px);
+      border-bottom:1px solid var(--line);
+    }
+    .nav{
+      height:76px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+    }
+    .brand{display:flex; align-items:center; gap:12px}
+    .brand img{height:56px;width:auto}
+    .brand .word{
+      letter-spacing:2px;
+      text-transform:uppercase;
+      font-weight:700;
+      font-size:1rem;
+      line-height:1;
+    }
+
+    /* Desktop nav */
+    nav{display:none;gap:22px;align-items:center}
+    nav a{
+      font-size:.85rem;
+      letter-spacing:2px;
+      text-transform:uppercase;
+      color:var(--muted);
+      padding:10px 0;
+      position:relative;
+    }
+    nav a:hover{color:var(--ink)}
+    nav a::after{
+      content:"";
+      position:absolute;left:0;bottom:0;
+      width:0;height:2px;background:var(--bronze);
+      transition:.2s;
+    }
+    nav a:hover::after{width:100%}
+
+    /* Buttons */
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:12px 18px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:#fff;
+      font-size:.85rem;
+      letter-spacing:2px;
+      text-transform:uppercase;
+      box-shadow:var(--shadow2);
+      transition:.2s;
+      cursor:pointer;
+      white-space:nowrap;
+    }
+    .btn:hover{transform:translateY(-1px); box-shadow:var(--shadow)}
+    .btn-primary{
+      border-color:rgba(166,124,82,.55);
+      background:linear-gradient(180deg,#fff,var(--bronze-soft));
+    }
+
+    /* Mobile menu (CSS only) */
+    .nav-toggle{display:none}
+    .burger{
+      display:inline-flex;
+      width:46px;height:46px;
+      border-radius:999px;
+      align-items:center;
+      justify-content:center;
+      border:1px solid var(--line);
+      background:#fff;
+      box-shadow:var(--shadow2);
+      cursor:pointer;
+      transition:.2s;
+    }
+    .burger:hover{transform:translateY(-1px); box-shadow:var(--shadow)}
+    .burger-lines{width:18px;height:12px; position:relative;}
+    .burger-lines span{
+      position:absolute; left:0; right:0;
+      height:2px; background:var(--ink);
+      transition: transform .25s ease, top .25s ease, opacity .2s ease;
+    }
+    .burger-lines span:nth-child(1){top:0}
+    .burger-lines span:nth-child(2){top:5px}
+    .burger-lines span:nth-child(3){top:10px}
+
+    .mobile-menu{
+      position:fixed; inset:0;
+      background:rgba(255,255,255,.96);
+      backdrop-filter:blur(10px);
+      -webkit-backdrop-filter:blur(10px);
+      transform:translateX(100%);
+      transition:.45s cubic-bezier(0.77, 0, 0.175, 1);
+      z-index:999;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:28px;
+    }
+    .mobile-menu .panel{
+      width:min(560px, 92vw);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      background:#fff;
+      box-shadow:var(--shadow);
+      padding:22px;
+      display:grid;
+      gap:12px;
+      text-align:center;
+    }
+    .mobile-menu a{
+      font-size:1.1rem;
+      letter-spacing:4px;
+      text-transform:uppercase;
+      padding:12px 10px;
+      border-radius:14px;
+      border:1px solid var(--line);
+      background:#fff;
+      box-shadow:var(--shadow2);
+      transition:.2s;
+    }
+    .mobile-menu a:hover{transform:translateY(-1px); box-shadow:var(--shadow)}
+    .mobile-menu .cta{margin-top:4px}
+
+    /* Toggle open */
+    .nav-toggle:checked ~ .mobile-menu{transform:translateX(0)}
+    .nav-toggle:checked ~ header .burger-lines span:nth-child(1){top:5px; transform:rotate(45deg)}
+    .nav-toggle:checked ~ header .burger-lines span:nth-child(2){opacity:0}
+    .nav-toggle:checked ~ header .burger-lines span:nth-child(3){top:5px; transform:rotate(-45deg)}
+
+    /* HERO */
+    .hero{
+      min-height:calc(100vh - 76px);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      position:relative;
+      overflow:hidden;
+      background:
+        linear-gradient(rgba(255,255,255,.84), rgba(255,255,255,.84)),
+        url("assets/img/hero.jpg") center/cover no-repeat;
+    }
+    .hero::before{
+      content:"";
+      position:absolute;
+      inset:-90px -120px auto -120px;
+      height:560px;
+      background:
+        radial-gradient(560px 290px at 50% 42%, rgba(166,124,82,.18), transparent 62%),
+        radial-gradient(420px 240px at 85% 30%, rgba(11,11,15,.06), transparent 65%);
+      pointer-events:none;
+    }
+    .hero-center{
+      position:relative;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:10px; /* compact */
+      max-width:860px;
+      padding: 0 var(--pad);
+    }
+    .hero-logo{margin-bottom:4px;}
+    .hero-logo img{width:600px;height:auto} /* slightly smaller to reduce vertical push */
+
+    .hero-sub{
+      font-size:1rem;
+      letter-spacing:6px;
+      text-transform:uppercase;
+      color:var(--bronze);
+      font-weight:600;
+      margin:0;
+      line-height:1.2;
+    }
+    .hero .muted{margin:4px 0 12px;}
+
+    /* SECTION HEAD */
+    .section-head{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-end;
+      border-bottom:1px solid var(--line);
+      padding-bottom:18px;
+      margin-bottom:32px;
+      gap:20px;
+    }
+    .section-head h2{
+      font-size:clamp(2rem,5vw,3.2rem);
+      letter-spacing:2px;
+      text-transform:uppercase;
+      line-height:1;
+    }
+
+    /* Card */
+    .card{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      padding:22px;
+      box-shadow:var(--shadow2);
+      transition:.2s;
+    }
+    .card:hover{box-shadow:var(--shadow); border-color: rgba(166,124,82,.22);}
+
+    /* Story */
+    .photo{
+      border-radius:var(--radius);
+      overflow:hidden;
+      border:1px solid var(--line);
+      box-shadow:var(--shadow);
+      min-height: 340px;
+      background:#f6f6fa;
+    }
+    .photo img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      filter:grayscale(100%);
+      transform: scale(1.01);
+      transition: transform .45s ease, filter .45s ease;
+    }
+    .photo:hover img{
+      filter:grayscale(75%);
+      transform:scale(1.04);
+    }
+    .story p{margin: 0 0 12px}
+    .story p:last-child{margin:0}
+
+    /* METHODE */
+    .methode-grid{
+      display:grid;
+      gap:36px;
+      align-items:stretch;
+    }
+    .m-col{
+      height:100%;
+      display:flex;
+      flex-direction:column;
+    }
+    .m-col h3{
+      letter-spacing:2px;
+      text-transform:uppercase;
+      margin: 0 0 14px;
+      font-size: 1.2rem;
+    }
+
+    .pillars, .diag{display:grid;gap:14px;margin-top:2px}
+    .pillar{
+      display:flex;gap:14px;
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      padding:18px;
+      box-shadow:var(--shadow2);
+      background:#fff;
+      transition:.2s;
+    }
+    .pillar:hover{transform:translateY(-1px); box-shadow:var(--shadow)}
+    .icon{
+      width:46px;height:46px;
+      border-radius:14px;
+      background:var(--bronze-soft2);
+      color:var(--bronze);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-weight:700;
+      flex:0 0 auto;
+    }
+    .diag-card{
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      padding:18px;
+      box-shadow:var(--shadow2);
+      background:#fff;
+      transition:.2s;
+    }
+    .diag-card:hover{transform:translateY(-1px); box-shadow:var(--shadow)}
+    .dots{display:flex;gap:8px;margin-bottom:10px}
+    .d{width:14px;height:14px;border-radius:50%}
+    .diag-card strong{letter-spacing:1px; text-transform:uppercase}
+    .note{
+      margin-top:14px;
+      padding:14px 16px;
+      border:1px dashed rgba(166,124,82,.45);
+      border-radius:var(--radius);
+      background: rgba(166,124,82,.05);
+    }
+
+    /* Platform */
+    .platform-bg{background:#fafafa}
+    .platform-wrap{
+      display:grid;
+      gap:36px;
+      align-items:stretch;
+    }
+    .platform-box{
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      background: linear-gradient(180deg, #fff, rgba(166,124,82,.05));
+      padding: 26px;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      min-height: 240px;
+    }
+    .platform-kicker{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      letter-spacing:2px;
+      text-transform:uppercase;
+      font-size:.9rem;
+      color:var(--muted);
+    }
+    .platform-kicker span{
+      width:8px;height:8px;border-radius:50%;
+      background:var(--bronze);
+      box-shadow: 0 0 0 4px rgba(166,124,82,.14);
+      display:inline-block;
+    }
+    .feature-list{display:grid; gap:10px; margin-top:12px}
+    .feat{
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+      color:var(--muted);
+      font-weight:300;
+      text-transform:none;
+    }
+    .check{
+      width:18px;height:18px;border-radius:6px;
+      border:1px solid rgba(166,124,82,.45);
+      background: rgba(166,124,82,.12);
+      flex:0 0 auto;
+      margin-top:3px;
+    }
+    .preview{
+      border-radius:var(--radius);
+      overflow:hidden;
+      border:1px solid var(--line);
+      box-shadow:var(--shadow);
+      background:#fff;
+      min-height: 280px;
+    }
+    .preview img{width:100%; height:100%; object-fit:cover}
+
+    /* Shop */
+    .shop-grid{
+      display:grid;
+      gap:14px;
+    }
+    .product{
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow2);
+      background:#fff;
+      overflow:hidden;
+      display:flex;
+      flex-direction:column;
+      transition:.2s;
+    }
+    .product:hover{transform:translateY(-2px); box-shadow:var(--shadow); border-color: rgba(166,124,82,.28);}
+    .product-media{
+      height: 260px;
+      background: #f5f5f8;
+      border-bottom:1px solid var(--line);
+      overflow:hidden;
+    }
+    .product-media img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      transition: transform .45s ease;
+    }
+    .product:hover .product-media img{transform:scale(1.03)}
+    .product-body{padding:18px}
+    .product-body h3{
+      margin:0 0 8px;
+      letter-spacing:2px;
+      text-transform:uppercase;
+      font-size:1.2rem;
+    }
+    .price{
+      margin-top:10px;
+      letter-spacing:2px;
+      text-transform:uppercase;
+      font-weight:600;
+      color:var(--bronze);
+    }
+
+    /* Tarifs */
+    .prices{display:grid;gap:14px}
+    .price-row{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      padding:18px;
+      box-shadow:var(--shadow2);
+      background:#fff;
+      transition:.2s;
+    }
+    .price-row:hover{transform:translateY(-1px); box-shadow:var(--shadow)}
+    .price-row strong{
+      letter-spacing:2px;
+      text-transform:uppercase;
+    }
+
+    /* Contact */
+    form{
+      display:grid;
+      gap:12px;
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      padding:22px;
+      box-shadow:var(--shadow);
+      background:#fff;
+    }
+    input,textarea{
+      padding:14px;
+      border-radius:14px;
+      border:1px solid var(--line);
+      font-family:'Oswald', sans-serif;
+      letter-spacing:1px;
+      text-transform:uppercase;
+      outline:none;
+    }
+    textarea{
+      min-height:140px;
+      resize:vertical;
+      text-transform:none;
+      letter-spacing:.2px;
+      font-weight:300;
+      color:var(--muted);
+    }
+    input:focus, textarea:focus{
+      border-color: rgba(166,124,82,.65);
+      box-shadow: 0 0 0 4px rgba(166,124,82,.12);
+    }
+
+    footer{
+      padding:54px 0 34px;
+      border-top:1px solid var(--line);
+      color:var(--muted);
+      font-weight:300;
+      text-transform:none;
+      letter-spacing:.2px;
+      text-align:center;
+    }
+    .footer-logo{
+      height:30px;
+      width:auto;
+      margin:0 auto 18px;
+      opacity:.5;
+    }
+
+    @media(min-width:900px){
+      nav{display:flex}
+      .burger{display:none}
+      .grid{grid-template-columns:1fr 1fr}
+      .methode-grid{grid-template-columns:1fr 1fr}
+      .platform-wrap{grid-template-columns:1fr 1fr}
+      .shop-grid{grid-template-columns:repeat(3, 1fr)}
+      .prices{grid-template-columns:repeat(2, 1fr)}
+    }
+
+    @media(max-width:600px){
+      .hero-logo img{width:260px;}
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      *{scroll-behavior:auto}
+      .btn, .card, .product, .pillar, .diag-card, .price-row,
+      .product-media img, .photo img{transition:none}
+      .btn:hover, .product:hover, .pillar:hover, .diag-card:hover, .price-row:hover{transform:none}
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Mobile toggle -->
+  <input class="nav-toggle" type="checkbox" id="nav-toggle" aria-hidden="true">
+
+  <!-- Mobile menu overlay -->
+  <div class="mobile-menu" aria-label="Menu mobile">
+    <div class="panel">
+      <a href="#histoire">Histoire</a>
+      <a href="#methode">Méthode</a>
+      <a href="#plateforme">Plateforme</a>
+      <a href="#shop">Shop</a>
+      <a href="#tarifs">Tarifs</a>
+      <a href="#contact" class="btn btn-primary cta">Rejoindre</a>
+      <label for="nav-toggle" class="btn" style="justify-self:center; width:100%;">Fermer</label>
+    </div>
+  </div>
+
+  <header>
+    <div class="container nav">
+      <a class="brand" href="#top" aria-label="Accueil">
+        <img src="assets/img/logo-hwbt.jpg" alt="HWBT Academy">
+        <span class="word"></span>
+      </a>
+
+      <nav aria-label="Navigation principale">
+        <a href="#histoire">Histoire</a>
+        <a href="#methode">Méthode</a>
+        <a href="#plateforme">Plateforme</a>
+        <a href="#shop">Shop</a>
+        <a href="#tarifs">Tarifs</a>
+        <a href="#contact">Rejoindre</a>
+      </nav>
+
+      <label for="nav-toggle" class="burger" aria-label="Ouvrir le menu">
+        <span class="sr-only">Menu</span>
+        <span class="burger-lines" aria-hidden="true">
+          <span></span><span></span><span></span>
+        </span>
+      </label>
+    </div>
+  </header>
+
+  <main id="top">
+
+    <!-- HERO -->
+    <section class="hero" aria-label="Introduction">
+      <div class="hero-center">
+        <div class="hero-logo">
+          <img src="assets/img/logo-hwbt.jpg" alt="HWBT Academy">
+        </div>
+
+        <div class="hero-sub">Hard Work Beats Talent</div>
+
+        <p class="muted" style="max-width:640px;">
+          Académie de padel basée sur la rigueur, la méthode et la progression.
+        </p>
+
+        <a href="#contact" class="btn btn-primary">Commencer l’entraînement</a>
+      </div>
+    </section>
+
+    <!-- HISTOIRE -->
+    <section id="histoire" class="section">
+      <div class="container">
+        <div class="section-head">
+          <h2>Mon <span class="bronze">histoire</span></h2>
+          <p class="muted">D’où ça vient, et pourquoi je le fais.</p>
+        </div>
+
+        <div class="grid">
+          <div class="photo">
+            <img src="assets/img/photo-coach.jpg" alt="Thomas — Coach HWBT Academy" loading="lazy">
+          </div>
+
+          <div class="card story">
+            <p class="muted">
+              Je m’appelle <strong>Thomas</strong>. J’ai commencé par le volley, puis le tennis.
+              J’aimais déjà ce qui ne se voit pas trop : les déplacements, le timing, la lecture du jeu.
+            </p>
+            <p class="muted">
+              Quand je suis arrivé au padel, j’ai retrouvé ce mélange que j’aime : du rythme, des choix rapides,
+              et surtout un sport où le duo compte vraiment. On peut avoir de bons coups, mais sans cadre, ça ne tient pas longtemps.
+            </p>
+            <p class="muted">
+              Avec le temps, j’ai remarqué un truc simple : la plupart des gens ne manquent pas de motivation.
+              Ils manquent surtout d’un plan clair. Ils s’entraînent “un peu de tout”, et progressent… mais pas comme ils voudraient.
+            </p>
+            <p class="muted">
+              HWBT est né pour ça : travailler propre, prioriser, et construire un jeu qui reste stable quand ça compte.
+              Sans faire compliqué. Juste faire les bons choix.
+            </p>
+            <p class="muted2" style="margin:0;">
+              Je coach principalement à <span class="bronze" style="font-weight:600;">Nivelles</span> et
+              <span class="bronze" style="font-weight:600;">Diegem</span>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- METHODE -->
+    <section id="methode" class="section">
+      <div class="container">
+        <div class="section-head">
+          <h2>Méthode <span class="bronze">HWBT</span></h2>
+          <p class="muted">Piliers + diagnostic. Simple. Actionnable.</p>
+        </div>
+
+        <div class="methode-grid">
+          <div class="card m-col">
+            <h3>Les 4 piliers</h3>
+            <div class="pillars">
+              <div class="pillar"><div class="icon">T</div><p class="muted" style="margin:0;">Technique propre et répétable.</p></div>
+              <div class="pillar"><div class="icon">Ta</div><p class="muted" style="margin:0;">Tactique et lecture du jeu.</p></div>
+              <div class="pillar"><div class="icon">M</div><p class="muted" style="margin:0;">Mental : décisions sous pression.</p></div>
+              <div class="pillar"><div class="icon">P</div><p class="muted" style="margin:0;">Physique : déplacements et explosivité.</p></div>
+            </div>
+          </div>
+
+          <div class="card m-col">
+            <h3>Diagnostic couleurs</h3>
+            <p class="muted" style="margin:0 0 12px;">
+              Diagnostic basé sur 16 profils au total : forces, points de vigilance et axes de travail.
+            </p>
+
+            <div class="diag">
+              <div class="diag-card">
+                <div class="dots"><span class="d" style="background:var(--red)"></span><span class="d" style="background:var(--red)"></span></div>
+                <p class="muted" style="margin:0;"><strong>Finisseur</strong><br>Force : initiative, impact. Vigilance : patience, risque.</p>
+              </div>
+              <div class="diag-card">
+                <div class="dots"><span class="d" style="background:var(--blue)"></span><span class="d" style="background:var(--red)"></span></div>
+                <p class="muted" style="margin:0;"><strong>Chef d’orchestre</strong><br>Force : vision, tempo. Vigilance : sur-contrôle.</p>
+              </div>
+              <div class="diag-card">
+                <div class="dots"><span class="d" style="background:var(--green)"></span><span class="d" style="background:var(--green)"></span></div>
+                <p class="muted" style="margin:0;"><strong>Métronome</strong><br>Force : stabilité. Vigilance : initiative.</p>
+              </div>
+            </div>
+
+            <div class="note">
+              <p class="muted" style="margin:0;">Le diagnostic complet couvre 16 profils : forces, vigilance, axes de travail.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PLATEFORME -->
+    <section id="plateforme" class="section platform-bg">
+      <div class="container">
+        <div class="section-head">
+          <h2>Plateforme <span class="bronze">membres</span></h2>
+          <p class="muted">Ton suivi. Ton historique. Tes priorités.</p>
+        </div>
+
+        <div class="platform-wrap">
+          <div class="platform-box">
+            <div>
+              <div class="platform-kicker"><span></span> Accès membres HWBT</div>
+              <div style="height:10px"></div>
+              <h3 style="letter-spacing:2px;text-transform:uppercase;margin:0 0 10px;">Ton carnet de bord digital</h3>
+              <p class="muted" style="margin:0;">Séances, objectifs, retour coach. Tu sais quoi bosser, et pourquoi.</p>
+              <div class="feature-list">
+                <div class="feat"><span class="check"></span><span>Historique des séances</span></div>
+                <div class="feat"><span class="check"></span><span>Objectifs simples et actionnables</span></div>
+                <div class="feat"><span class="check"></span><span>Feedback après séance</span></div>
+                <div class="feat"><span class="check"></span><span>Profil couleur + vigilance</span></div>
+              </div>
+            </div>
+            <div style="height:14px"></div>
+            <a class="btn btn-primary" href="#contact">Demander l’accès</a>
+          </div>
+
+          <div class="preview">
+            <img src="assets/img/plateforme-preview.jpg" alt="Aperçu plateforme membres HWBT" loading="lazy">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SHOP -->
+    <section id="shop" class="section">
+      <div class="container">
+        <div class="section-head">
+          <h2>HWBT <span class="bronze">Shop</span></h2>
+          <p class="muted">Essentiels. Sobres. Propres.</p>
+        </div>
+
+        <div class="shop-grid">
+          <div class="product">
+            <div class="product-media"><img src="assets/img/tshirt-noir.jpg" alt="T-shirt HWBT Noir" loading="lazy"></div>
+            <div class="product-body">
+              <h3>Cotton T-Shirt Noir - HWBT</h3>
+              <p class="muted" style="margin:0;">HARD WORK BEATS TALENT</p>
+              <div class="price">15€</div>
+            </div>
+          </div>
+
+          <div class="product">
+            <div class="product-media"><img src="assets/img/tshirt-bronze.jpg" alt="T-shirt HWBT Bronze" loading="lazy"></div>
+            <div class="product-body">
+              <h3>Cotton T-Shirt Noir - CFTA</h3>
+              <p class="muted" style="margin:0;">CONTROL FIRST THEN ATTACK</p>
+              <div class="price">15€</div>
+            </div>
+          </div>
+
+          <div class="product">
+            <div class="product-media"><img src="assets/img/tshirt-blanc.jpg" alt="T-shirt HWBT Blanc" loading="lazy"></div>
+            <div class="product-body">
+              <h3>Cotton T-Shirt Noir - THPS</h3>
+              <p class="muted" style="margin:0;">TRAIN HARD PLAT SMART</p>
+              <div class="price">15€</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TARIFS -->
+    <section id="tarifs" class="section">
+      <div class="container">
+        <div class="section-head">
+          <h2>Tarifs</h2>
+          <p class="muted">Un objectif = une proposition claire.</p>
+        </div>
+
+        <div class="prices">
+          <div class="price-row"><div><strong>Individuel</strong><p class="muted" style="margin:6px 0 0;">1 joueur — focus sur ton jeu.</p></div><span class="muted2">Sur demande</span></div>
+          <div class="price-row"><div><strong>Duo</strong><p class="muted" style="margin:6px 0 0;">2 joueurs — focus paire.</p></div><span class="muted2">Sur demande</span></div>
+          <div class="price-row"><div><strong>Groupe</strong><p class="muted" style="margin:6px 0 0;">Organisation.</p></div><span class="muted2">Sur demande</span></div>
+          <div class="price-row"><div><strong>Compétition</strong><p class="muted" style="margin:6px 0 0;">Accompagnement tournoi.</p></div><span class="muted2">Sur demande</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="section">
+      <div class="container">
+        <div class="section-head">
+          <h2>Rejoindre</h2>
+          <p class="muted">Explique-moi ton niveau et ton objectif.</p>
+        </div>
+
+        <div class="grid">
+          <div class="card">
+            <p class="muted" style="margin:0;">
+              Coaching à <strong>Nivelles</strong> et <strong>Diegem</strong>.<br>
+              Réponse rapide. Simple. Du concret.
+            </p>
+          </div>
+
+          <form class="card" onsubmit="return false;">
+  		<input id="c-name" type="text" placeholder="Nom complet" required>
+ 	 	<input id="c-email" type="email" placeholder="Email" required>
+ 		 <textarea id="c-msg" placeholder="Ton niveau, ton objectif, ton club, tes dispos..." required></textarea>
+
+ 	 <button id="sendBtn" class="btn btn-primary" type="button">
+    Envoyer la demande
+	  </button>
+
+ 	 <p class="muted" style="margin-top:10px;">
+    Mobile : WhatsApp · Ordinateur : Email
+  </p>
+</form>
+
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="container">
+        <img class="footer-logo" src="assets/img/logo-hwbt.jpg" alt="HWBT Academy">
+        <div>© 2026 HWBT Academy — Belgique</div>
+      </div>
+    </footer>
+
+  </main>
+<script>
+  document.getElementById("sendBtn").addEventListener("click", function () {
+    const name = document.getElementById("c-name").value.trim();
+    const email = document.getElementById("c-email").value.trim();
+    const msg = document.getElementById("c-msg").value.trim();
+
+    if (!name || !email || !msg) {
+      alert("Merci de compléter tous les champs.");
+      return;
+    }
+
+    const text =
+      `HWBT Academy — Demande de coaching\n\n` +
+      `Nom : ${name}\n` +
+      `Email : ${email}\n\n` +
+      `Message :\n${msg}`;
+
+    const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+    if (isMobile) {
+      // WhatsApp
+      const phone = "+32498088771"; // ← TON NUMÉRO (sans le 0)
+      const waUrl = `https://wa.me/${phone}?text=${encodeURIComponent(text)}`;
+      window.open(waUrl, "_blank");
+    } else {
+      // Email
+      const mail = "hwbtacademy@hotmail.com"; // ← TON EMAIL
+      const subject = "Demande de coaching – HWBT Academy";
+      const mailUrl = `mailto:${mail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(text)}`;
+      window.location.href = mailUrl;
+    }
+  });
+</script>
+
+</body>
+</html>
