@@ -864,9 +864,35 @@
     }
   });
 </script>
+<script>
+  // Fermer le menu mobile quand on clique sur une ancre
+  (function () {
+    const toggle = document.getElementById("nav-toggle");
+    const mobileMenu = document.querySelector(".mobile-menu");
+
+    if (!toggle || !mobileMenu) return;
+
+    mobileMenu.querySelectorAll('a[href^="#"]').forEach((link) => {
+      link.addEventListener("click", () => {
+        toggle.checked = false;
+      });
+    });
+
+    // Optionnel : clic sur l'overlay (hors panel) => ferme
+    mobileMenu.addEventListener("click", (e) => {
+      if (e.target === mobileMenu) toggle.checked = false;
+    });
+
+    // Optionnel : ESC => ferme
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") toggle.checked = false;
+    });
+  })();
+</script>
 
 </body>
 </html>
+
 
 
 
