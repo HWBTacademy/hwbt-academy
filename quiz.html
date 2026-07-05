@@ -1036,28 +1036,44 @@ async function renderCardCanvas(){
   ctx.fillStyle=grad;
   ctx.fillRect(0,0,1080,1920);
 
-  ctx.globalAlpha=.25;
-  ctx.fillStyle=c1.hex; ctx.beginPath(); ctx.arc(130,320,360,0,Math.PI*2); ctx.fill();
-  ctx.fillStyle=c2.hex; ctx.beginPath(); ctx.arc(1060,1320,430,0,Math.PI*2); ctx.fill();
-  ctx.globalAlpha=.07;
-  ctx.strokeStyle='#ffffff';
-  for(let y=0;y<1920;y+=32){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(1080,y);ctx.stroke();}
+  ctx.globalAlpha=.24;
+  ctx.fillStyle=c1.hex; ctx.beginPath(); ctx.arc(115,300,340,0,Math.PI*2); ctx.fill();
+  ctx.fillStyle=c2.hex; ctx.beginPath(); ctx.arc(1040,1370,450,0,Math.PI*2); ctx.fill();
+  ctx.globalAlpha=.09;
+  ctx.strokeStyle='#f5f1e8';
+  for(let y=0;y<1920;y+=34){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(1080,y);ctx.stroke();}
+  ctx.globalAlpha=.16;
+  ctx.strokeStyle='#c9a07a';
+  ctx.lineWidth=3;
+  for(let x=-620;x<1120;x+=180){ctx.beginPath();ctx.moveTo(x,1900);ctx.lineTo(x+780,70);ctx.stroke();}
   ctx.globalAlpha=1;
 
-  ctx.strokeStyle=mixHex(c1.hex,c2.hex,.55);
-  ctx.lineWidth=6;
+  ctx.fillStyle='rgba(0,0,0,.58)';
+  ctx.fillRect(56,56,968,170);
+  ctx.fillRect(56,1664,968,200);
+  ctx.strokeStyle='#c9a07a';
+  ctx.lineWidth=7;
   ctx.strokeRect(56,56,968,1808);
+  ctx.strokeStyle='rgba(255,255,255,.24)';
+  ctx.lineWidth=2;
+  ctx.strokeRect(78,78,924,1764);
 
   ctx.fillStyle='#fff';
   ctx.font='800 86px Oswald, Arial';
   ctx.letterSpacing=0;
   ctx.fillText('HWBT',84,150);
+  ctx.strokeStyle='#c9a07a';
+  ctx.lineWidth=3;
+  ctx.beginPath();
+  ctx.moveTo(84,166);
+  ctx.lineTo(345,166);
+  ctx.stroke();
   ctx.fillStyle='#c9a07a';
   ctx.font='600 28px Oswald, Arial';
   ctx.fillText(tr().storyKicker,86,192);
   ctx.fillStyle='rgba(255,255,255,.08)';
-  ctx.font='800 180px Oswald, Arial';
-  ctx.fillText('HWBT',615,170);
+  ctx.font='800 230px Oswald, Arial';
+  ctx.fillText('HWBT',555,192);
 
   if(storyPhotoImage && storyPhotoImage.complete){
     ctx.save();
@@ -1077,11 +1093,11 @@ async function renderCardCanvas(){
   const playerName=(document.getElementById('pcNameInput').value.trim() || tr().cardName).toUpperCase();
   ctx.fillStyle='#fff';
   ctx.font='800 82px Oswald, Arial';
-  wrapCanvasText(ctx,playerName,84,380,520,82);
+  wrapCanvasText(ctx,playerName,84,360,520,82);
 
   ctx.fillStyle='#c9a07a';
   ctx.font='800 76px Oswald, Arial';
-  let nextY=wrapCanvasText(ctx,display.name,84,610,820,76);
+  let nextY=wrapCanvasText(ctx,display.name,84,585,820,76);
   ctx.fillStyle='#fff';
   ctx.font='500 34px Oswald, Arial';
   nextY=wrapCanvasText(ctx,display.line,88,nextY+18,800,46);
@@ -1092,6 +1108,11 @@ async function renderCardCanvas(){
   wrapCanvasText(ctx,story,88,nextY+42,850,48);
 
   const ovr = Math.round((p.stats.pui+p.stats.pre+p.stats.sfr+p.stats.cre+p.stats.reg+p.stats.equ)/6);
+  ctx.fillStyle='rgba(0,0,0,.46)';
+  ctx.fillRect(84,1150,912,322);
+  ctx.strokeStyle='rgba(201,160,122,.75)';
+  ctx.lineWidth=3;
+  ctx.strokeRect(84,1150,912,322);
   ctx.fillStyle='#fff';
   ctx.font='800 160px Oswald, Arial';
   ctx.fillText(String(ovr),84,1320);
@@ -1113,15 +1134,18 @@ async function renderCardCanvas(){
   });
   ctx.textAlign='left';
 
-  ctx.fillStyle='rgba(245,245,240,.75)';
-  ctx.font='500 27px Inter, Arial';
-  wrapCanvasText(ctx,'#HWBTAcademy  #HardWorkBeatsTalent  #PadelProgress  #TrainWithPurpose',84,1620,900,42);
+  ctx.fillStyle='#fff';
+  ctx.font='800 48px Oswald, Arial';
+  ctx.fillText('#HWBTacademy',84,1736);
   ctx.fillStyle='#c9a07a';
-  ctx.font='700 32px Oswald, Arial';
-  ctx.fillText('HARD WORK BEATS TALENT',84,1760);
-  ctx.fillStyle='rgba(245,245,240,.45)';
-  ctx.font='500 25px Inter, Arial';
-  ctx.fillText('hwbtacademy.github.io/hwbt-academy/quiz.html',84,1808);
+  ctx.font='800 43px Oswald, Arial';
+  ctx.fillText('#Hardworksbeatstalent',84,1798);
+  ctx.fillStyle='rgba(245,245,240,.72)';
+  ctx.font='700 27px Oswald, Arial';
+  ctx.fillText('BOUSSOLE HWBT EXPRESS',84,1588);
+  ctx.fillStyle='rgba(255,255,255,.08)';
+  ctx.font='800 250px Oswald, Arial';
+  ctx.fillText('A',800,1808);
   return canvas;
 }
 async function downloadCard(){
@@ -1133,7 +1157,7 @@ async function downloadCard(){
 }
 function shareTextFor(p){
   const display = profileDisplay(p);
-  return `${tr().shareText(display.name)}\n\n#HWBTAcademy\n#HardWorkBeatsTalent\n#PadelProgress\n#TrainWithPurpose\n#MeasuredProgress\n${TEST_URL}`;
+  return `${tr().shareText(display.name)}\n\n#HWBTacademy\n#Hardworksbeatstalent`;
 }
 async function tryNativeShare(p){
   // On mobile, this opens the system share sheet with Instagram/Facebook/Messages etc. among the options,
