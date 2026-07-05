@@ -1030,164 +1030,155 @@ async function renderCardCanvas(){
   canvas.height=1920;
   const ctx=canvas.getContext('2d');
   const grad=ctx.createLinearGradient(0,0,1080,1920);
-  grad.addColorStop(0,'#07070a');
-  grad.addColorStop(.48,mixHex(c1.hex,'#08080b',0.28));
-  grad.addColorStop(1,mixHex(c2.hex,'#07070a',0.22));
+  grad.addColorStop(0,mixHex(c1.hex,'#07070a',0.16));
+  grad.addColorStop(.52,'#0b0b0f');
+  grad.addColorStop(1,mixHex(c2.hex,'#07070a',0.16));
   ctx.fillStyle=grad;
   ctx.fillRect(0,0,1080,1920);
 
-  ctx.globalAlpha=.32;
-  ctx.fillStyle=c1.hex;
-  ctx.beginPath();
-  ctx.moveTo(-120,265);
-  ctx.lineTo(1080,120);
-  ctx.lineTo(1080,245);
-  ctx.lineTo(-120,420);
-  ctx.closePath();
-  ctx.fill();
-  ctx.fillStyle=c2.hex;
-  ctx.beginPath();
-  ctx.moveTo(0,1480);
-  ctx.lineTo(1180,1320);
-  ctx.lineTo(1180,1505);
-  ctx.lineTo(0,1690);
-  ctx.closePath();
-  ctx.fill();
-  ctx.globalAlpha=.22;
-  ctx.fillStyle='#c9a07a';
-  ctx.beginPath();
-  ctx.moveTo(735,0);
-  ctx.lineTo(1080,0);
-  ctx.lineTo(1080,1920);
-  ctx.lineTo(915,1920);
-  ctx.closePath();
-  ctx.fill();
-  ctx.globalAlpha=.09;
+  ctx.globalAlpha=.07;
   ctx.strokeStyle='#f5f1e8';
   for(let y=0;y<1920;y+=34){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(1080,y);ctx.stroke();}
-  ctx.globalAlpha=.16;
-  ctx.strokeStyle='#c9a07a';
-  ctx.lineWidth=3;
-  for(let x=-620;x<1120;x+=180){ctx.beginPath();ctx.moveTo(x,1900);ctx.lineTo(x+780,70);ctx.stroke();}
   ctx.globalAlpha=1;
 
-  if(storyPhotoImage && storyPhotoImage.complete){
-    ctx.save();
-    ctx.globalAlpha=.72;
-    ctx.beginPath();
-    roundedRectPath(ctx,470,250,510,790,42);
-    ctx.clip();
-    drawCoverImage(ctx,storyPhotoImage,470,250,510,790);
-    ctx.restore();
-    let photoShade=ctx.createLinearGradient(430,250,980,1040);
-    photoShade.addColorStop(0,'rgba(0,0,0,.88)');
-    photoShade.addColorStop(.42,'rgba(0,0,0,.34)');
-    photoShade.addColorStop(1,'rgba(0,0,0,.88)');
-    ctx.fillStyle=photoShade;
-    ctx.fillRect(430,220,590,860);
-    ctx.strokeStyle='rgba(201,160,122,.86)';
-    ctx.lineWidth=5;
-    ctx.beginPath();
-    roundedRectPath(ctx,470,250,510,790,42);
-    ctx.stroke();
-  }else{
-    ctx.fillStyle='rgba(255,255,255,.06)';
-    ctx.font='800 320px Oswald, Arial';
-    ctx.fillText('HWBT',345,650);
-    ctx.strokeStyle='rgba(201,160,122,.55)';
-    ctx.lineWidth=5;
-    ctx.strokeRect(510,285,390,610);
-  }
+  ctx.strokeStyle='rgba(201,160,122,.48)';
+  ctx.lineWidth=4;
+  ctx.strokeRect(70,70,940,1780);
 
-  ctx.fillStyle='rgba(0,0,0,.58)';
-  ctx.fillRect(56,56,968,170);
-  ctx.fillRect(56,1664,968,200);
-  ctx.strokeStyle='#c9a07a';
-  ctx.lineWidth=7;
-  ctx.strokeRect(56,56,968,1808);
-  ctx.strokeStyle='rgba(255,255,255,.24)';
-  ctx.lineWidth=2;
-  ctx.strokeRect(78,78,924,1764);
-
+  ctx.fillStyle='rgba(255,255,255,.08)';
+  ctx.font='800 230px Oswald, Arial';
+  ctx.fillText('HWBT',620,170);
   ctx.fillStyle='#fff';
-  ctx.font='800 86px Oswald, Arial';
+  ctx.font='800 92px Oswald, Arial';
   ctx.letterSpacing=0;
-  ctx.fillText('HWBT',84,150);
+  ctx.fillText('HWBT',110,162);
   ctx.strokeStyle='#c9a07a';
   ctx.lineWidth=3;
   ctx.beginPath();
-  ctx.moveTo(84,166);
-  ctx.lineTo(345,166);
+  ctx.moveTo(110,180);
+  ctx.lineTo(386,180);
   ctx.stroke();
   ctx.fillStyle='#c9a07a';
-  ctx.font='600 28px Oswald, Arial';
-  ctx.fillText(tr().storyKicker,86,192);
-  ctx.fillStyle='rgba(255,255,255,.08)';
-  ctx.font='800 230px Oswald, Arial';
-  ctx.fillText('HWBT',555,192);
+  ctx.font='600 29px Oswald, Arial';
+  ctx.fillText(tr().storyKicker,112,220);
+
+  const cardX=110, cardY=295, cardW=860, cardH=1035, radius=18;
+  ctx.save();
+  ctx.shadowColor=rgba(c1.hex,.35);
+  ctx.shadowBlur=42;
+  ctx.shadowOffsetY=12;
+  ctx.beginPath();
+  roundedRectPath(ctx,cardX,cardY,cardW,cardH,radius);
+  ctx.fillStyle='#101014';
+  ctx.fill();
+  ctx.restore();
+
+  ctx.save();
+  ctx.beginPath();
+  roundedRectPath(ctx,cardX,cardY,cardW,cardH,radius);
+  ctx.clip();
+  const cardGrad=ctx.createLinearGradient(cardX,cardY,cardX+cardW,cardY+cardH);
+  cardGrad.addColorStop(0,mixHex(c1.hex,'#050505',0.40));
+  cardGrad.addColorStop(.50,'#101014');
+  cardGrad.addColorStop(1,mixHex(c2.hex,'#0c0c10',0.40));
+  ctx.fillStyle=cardGrad;
+  ctx.fillRect(cardX,cardY,cardW,cardH);
+
+  if(storyPhotoImage && storyPhotoImage.complete){
+    ctx.globalAlpha=.88;
+    drawCoverImage(ctx,storyPhotoImage,cardX+405,cardY+18,455,990);
+    ctx.globalAlpha=1;
+  }else{
+    ctx.fillStyle='rgba(255,255,255,.055)';
+    ctx.font='800 230px Oswald, Arial';
+    ctx.fillText('HWBT',cardX+410,cardY+500);
+  }
+
+  const overlay=ctx.createLinearGradient(cardX,cardY,cardX+cardW,cardY);
+  overlay.addColorStop(0,'rgba(6,6,8,.97)');
+  overlay.addColorStop(.42,'rgba(6,6,8,.84)');
+  overlay.addColorStop(.70,'rgba(6,6,8,.30)');
+  overlay.addColorStop(1,'rgba(6,6,8,.08)');
+  ctx.fillStyle=overlay;
+  ctx.fillRect(cardX,cardY,cardW,cardH);
+  const bottomFade=ctx.createLinearGradient(cardX,cardY+cardH*.58,cardX,cardY+cardH);
+  bottomFade.addColorStop(0,'rgba(0,0,0,0)');
+  bottomFade.addColorStop(1,'rgba(0,0,0,.60)');
+  ctx.fillStyle=bottomFade;
+  ctx.fillRect(cardX,cardY,cardW,cardH);
+
+  ctx.fillStyle='rgba(255,255,255,.07)';
+  ctx.font='800 78px Oswald, Arial';
+  ctx.fillText('HWBT',cardX+625,cardY+86);
+  ctx.fillStyle='#c9a07a';
+  ctx.font='600 24px Oswald, Arial';
+  ctx.fillText(tr().profileCard.toUpperCase(),cardX+54,cardY+66);
 
   const playerName=(document.getElementById('pcNameInput').value.trim() || tr().cardName).toUpperCase();
   ctx.fillStyle='#fff';
-  ctx.font='800 82px Oswald, Arial';
-  wrapCanvasText(ctx,playerName,84,360,520,82);
+  ctx.font='800 74px Oswald, Arial';
+  wrapCanvasText(ctx,playerName,cardX+54,cardY+180,465,74);
 
   ctx.fillStyle='#c9a07a';
-  ctx.font='800 76px Oswald, Arial';
-  let nextY=wrapCanvasText(ctx,display.name,84,585,820,76);
+  ctx.fillRect(cardX+54,cardY+238,168,3);
+
+  ctx.fillStyle='#c9a07a';
+  ctx.font='800 58px Oswald, Arial';
+  let nextY=wrapCanvasText(ctx,display.name.toUpperCase(),cardX+54,cardY+330,640,58);
   ctx.fillStyle='#fff';
-  ctx.font='500 34px Oswald, Arial';
-  nextY=wrapCanvasText(ctx,display.line,88,nextY+18,800,46);
+  ctx.font='500 26px Oswald, Arial';
+  nextY=wrapCanvasText(ctx,display.line.toUpperCase(),cardX+92,nextY+18,560,35);
+  ctx.strokeStyle='#c9a07a';
+  ctx.lineWidth=2;
+  ctx.beginPath();
+  ctx.arc(cardX+70,nextY-27,18,0,Math.PI*2);
+  ctx.stroke();
 
   const story=(details?details.story:p.story);
-  ctx.fillStyle='rgba(245,245,240,.78)';
-  ctx.font='400 32px Inter, Arial';
-  wrapCanvasText(ctx,story,88,nextY+42,850,48);
+  const cardStory = story.split('. ').slice(0,2).join('. ') + (story.split('. ').length>2 ? '.' : '');
+  ctx.fillStyle='rgba(245,245,240,.68)';
+  ctx.font='400 25px Inter, Arial';
+  wrapCanvasText(ctx,cardStory,cardX+54,nextY+34,560,38);
 
   const ovr = Math.round((p.stats.pui+p.stats.pre+p.stats.sfr+p.stats.cre+p.stats.reg+p.stats.equ)/6);
-  ctx.fillStyle='rgba(0,0,0,.62)';
-  ctx.fillRect(84,1150,912,322);
-  ctx.fillStyle=c1.hex;
-  ctx.globalAlpha=.72;
-  ctx.fillRect(84,1150,14,322);
-  ctx.fillStyle=c2.hex;
-  ctx.fillRect(982,1150,14,322);
-  ctx.globalAlpha=1;
-  ctx.strokeStyle='rgba(201,160,122,.86)';
-  ctx.lineWidth=4;
-  ctx.strokeRect(84,1150,912,322);
-  ctx.fillStyle='#fff';
-  ctx.font='800 160px Oswald, Arial';
-  ctx.fillText(String(ovr),84,1320);
-  ctx.fillStyle='#c9a07a';
-  ctx.font='600 28px Oswald, Arial';
-  ctx.fillText(tr().cardNote,94,1360);
-
   const statLabels = [['pui','PUI'],['pre','PRE'],['sfr','SFR'],['cre','CRE'],['reg','REG'],['equ','EQU']];
-  let sx=320, sy=1225;
+  let sx=cardX+92, sy=cardY+760;
   ctx.textAlign='center';
   statLabels.forEach(([k,l],i)=>{
-    const x=sx+(i%3)*185, y=sy+Math.floor(i/3)*145;
+    const x=sx+(i%3)*145, y=sy+Math.floor(i/3)*118;
     ctx.fillStyle='#fff';
-    ctx.font='800 62px Oswald, Arial';
+    ctx.font='800 48px Oswald, Arial';
     ctx.fillText(p.stats[k],x,y);
     ctx.fillStyle='rgba(245,245,240,.55)';
-    ctx.font='600 20px Oswald, Arial';
-    ctx.fillText(l,x,y+34);
+    ctx.font='600 16px Oswald, Arial';
+    ctx.fillText(l,x,y+27);
   });
   ctx.textAlign='left';
-
   ctx.fillStyle='#fff';
-  ctx.font='800 48px Oswald, Arial';
-  ctx.fillText('#HWBTacademy',84,1736);
+  ctx.font='800 116px Oswald, Arial';
+  ctx.textAlign='right';
+  ctx.fillText(String(ovr),cardX+cardW-54,cardY+cardH-88);
   ctx.fillStyle='#c9a07a';
-  ctx.font='800 43px Oswald, Arial';
-  ctx.fillText('#Hardworksbeatstalent',84,1798);
-  ctx.fillStyle='rgba(245,245,240,.72)';
+  ctx.font='600 22px Oswald, Arial';
+  ctx.fillText(tr().cardNote,cardX+cardW-54,cardY+cardH-52);
+  ctx.textAlign='left';
+  ctx.restore();
+
+  ctx.strokeStyle=mixHex(c1.hex,c2.hex,.55);
+  ctx.lineWidth=5;
+  ctx.beginPath();
+  roundedRectPath(ctx,cardX,cardY,cardW,cardH,radius);
+  ctx.stroke();
+
+  ctx.fillStyle='rgba(245,245,240,.54)';
   ctx.font='700 27px Oswald, Arial';
-  ctx.fillText('BOUSSOLE HWBT EXPRESS',84,1588);
-  ctx.fillStyle='rgba(255,255,255,.08)';
-  ctx.font='800 250px Oswald, Arial';
-  ctx.fillText('A',800,1808);
+  ctx.fillText('BOUSSOLE HWBT EXPRESS',110,1438);
+  ctx.fillStyle='rgba(245,245,240,.50)';
+  ctx.font='800 44px Oswald, Arial';
+  ctx.fillText('#HWBTacademy',110,1540);
+  ctx.fillStyle='rgba(201,160,122,.58)';
+  ctx.font='800 40px Oswald, Arial';
+  ctx.fillText('#Hardworksbeatstalent',110,1600);
   return canvas;
 }
 async function downloadCard(){
