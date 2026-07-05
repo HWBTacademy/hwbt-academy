@@ -501,6 +501,9 @@ function mq(cat,text,rouge,jaune,vert,bleu){
     {c:'bleu',t:{fr:bleu[0],nl:bleu[1],en:bleu[2]}}
   ]};
 }
+function mqOriginal(cat,text,rouge,jaune,vert,bleu){
+  return mq(cat,[text,text,text],[rouge,rouge,rouge],[jaune,jaune,jaune],[vert,vert,vert],[bleu,bleu,bleu]);
+}
 
 /* Manual color blending in JS (instead of CSS color-mix, which many mobile
    browsers — notably in-app browsers like Instagram/Facebook — don't support yet). */
@@ -818,6 +821,44 @@ mq('MATCH',['Le score chauffe.','De score wordt spannend.','The score gets tight
 mq('MATCH',['Une paire inconnue arrive.','Er komt een onbekend duo.','An unknown pair arrives.'],['Je teste vite leur résistance.','Ik test snel hun weerstand.','I quickly test their resistance.'],['Je crée une bonne énergie.','Ik creëer goede energie.','I create good energy.'],['Je commence solide.','Ik start solide.','I start solid.'],['J’observe leurs habitudes.','Ik observeer hun gewoontes.','I observe their habits.']),
 mq('MATCH',['Tu dois mesurer ton progrès.','Je wil je vooruitgang meten.','You want to measure your progress.'],['Je regarde les points importants.','Ik kijk naar de belangrijke punten.','I look at the important points.'],['Je demande le ressenti du duo.','Ik vraag hoe het duo het voelt.','I ask how the pair feels.'],['Je regarde la stabilité.','Ik kijk naar de stabiliteit.','I look at stability.'],['Je compare les décisions.','Ik vergelijk de beslissingen.','I compare decisions.'])
 ];
+const ORIGINAL_QUESTION_POOL = [
+mqOriginal('TECHNIQUE',"Avant l'entraînement, tu dois choisir le coup technique du jour.","Je choisis le coup qui peut faire mal en match et je le travaille fort.","Je choisis un coup qui aide mon duo et crée de bonnes balles pour l'autre.","Je choisis un fondamental fiable et je répète jusqu'à sentir le geste stable.","Je choisis le coup qui a le plus besoin d'être compris et décortiqué."),
+mqOriginal('TECHNIQUE',"Pendant l'échauffement, ta volée ne sort pas proprement.","J'augmente l'intention et je cherche une volée plus tranchante.","Je demande une balle plus adaptée pour retrouver du rythme avec le partenaire.","Je ralentis, je pose les appuis et je reconstruis le geste.","Je cherche la cause précise: préparation, impact, orientation ou timing."),
+mqOriginal('TECHNIQUE',"Le coach corrige ta prise sur la bandeja.","J'essaie directement avec intensité pour voir si ça fonctionne.","Je demande au coach de me le faire sentir en situation avec échange.","Je répète calmement, même si ce n'est pas efficace tout de suite.","Je veux comprendre pourquoi cette prise change la trajectoire."),
+mqOriginal('TECHNIQUE',"En match, ton smash revient trop souvent dans la vitre adverse.","Je continue à l'imposer mais je cherche plus de décision au bon moment.","Je communique pour que mon partenaire couvre le retour possible.","Je choisis un smash plus sûr ou une bandeja jusqu'à retrouver la maîtrise.","J'analyse si le problème vient du choix, de la hauteur ou de la zone."),
+mqOriginal('TECHNIQUE',"Après une séance, tu dois retenir une correction technique.","Je retiens l'action clé à appliquer dès le prochain match.","Je retiens comment cette correction aide notre jeu à deux.","Je l'écris simplement et je la répète dans ma routine.","Je note le détail mécanique exact et le contexte où il apparaît."),
+mqOriginal('TECHNIQUE',"Tu dois travailler ton revers de fond de court.","Je cherche à le rendre plus agressif pour ne plus subir.","Je le travaille avec un partenaire pour sentir le rythme de l'échange.","Je sécurise la trajectoire et la régularité avant toute vitesse.","Je filme ou j'observe pour comprendre ce qui casse le geste."),
+mqOriginal('TECHNIQUE',"Ton service manque de danger.","Je cherche plus de vitesse, de profondeur ou d'effet.","Je construis un service qui met mon partenaire dans une bonne position.","Je veux d'abord un service régulier qui entre sous pression.","Je teste les zones et je mesure celles qui gênent le plus."),
+mqOriginal('TECHNIQUE',"Tu rates plusieurs sorties de vitre.","Je veux reprendre le contrôle et jouer une sortie plus affirmée.","Je demande à mon partenaire de m'annoncer ou de me couvrir.","Je reviens à une sortie simple, haute et sûre.","Je lis mieux l'angle, la vitesse et le rebond avant de frapper."),
+mqOriginal('TECHNIQUE',"Le coach donne un exercice très répétitif.","Je mets un objectif de performance pour garder de l'intensité.","Je le transforme en défi avec mon partenaire pour rester engagé.","Je l'accepte: la répétition construit la fiabilité.","Je cherche ce que cet exercice doit automatiser exactement."),
+mqOriginal('TACTIQUE',"Avant le match, tu prépares ton plan de jeu.","Je veux imposer notre identité dès les premiers points.","Je construis un plan simple que mon partenaire comprend et sent.","Je prépare un cadre stable: zones, consignes et sécurité.","J'analyse adversaires, forces, faiblesses et scénarios possibles."),
+mqOriginal('TACTIQUE',"Après deux jeux, l'adversaire vise toujours ton partenaire.","Je reprends plus d'espace et je change le rapport de force.","Je rassure mon partenaire et on décide ensemble.","Je garde le plan et j'évite la panique.","J'identifie pourquoi ils le visent et je propose un ajustement."),
+mqOriginal('TACTIQUE',"Tu mènes facilement le premier set.","Je continue à pousser pour casser leur confiance.","Je garde l'énergie du duo haute sans se disperser.","Je reste discipliné dans le plan qui fonctionne.","J'observe ce qu'ils pourraient changer au deuxième set."),
+mqOriginal('TACTIQUE',"Tu perds 0-3 dès le départ.","Je change l'intensité et je provoque un déclic.","Je parle au partenaire pour remettre de l'énergie commune.","Je ralentis et je reconstruis point par point.","Je cherche la cause tactique avant de changer quoi que ce soit."),
+mqOriginal('TACTIQUE',"L'adversaire défend très bien.","Je prends plus de risques pour ouvrir le terrain.","Je cherche avec mon partenaire une manière de les faire bouger.","J'accepte de construire plus longtemps.","Je varie hauteur, vitesse et zones pour tester leur structure."),
+mqOriginal('TACTIQUE',"Ton duo ne sait plus qui prend le centre.","Je décide rapidement pour éviter l'hésitation.","Je clarifie avec le partenaire avec des mots simples.","Je fixe une règle stable pour les prochaines balles.","J'analyse les positions où le conflit apparaît."),
+mqOriginal('TACTIQUE',"Avant le deuxième set, il faut ajuster.","Je propose un changement clair et fort.","Je demande à mon partenaire ce qu'il sent sur le terrain.","Je garde ce qui marche et change une seule chose.","Je liste précisément les patterns gagnants et perdants."),
+mqOriginal('TACTIQUE',"Tu dois choisir une zone de service importante.","Je vise la zone qui met le plus de pression.","Je choisis celle qui lance bien le schéma avec mon partenaire.","Je choisis la zone la plus sûre sous tension.","Je choisis selon le retour préféré et faible de l'adversaire."),
+mqOriginal('TACTIQUE',"L'équipe adverse ralentit beaucoup le jeu.","Je casse le rythme avec une prise d'initiative.","Je remets de l'énergie verbale dans notre duo.","Je reste patient sans forcer.","J'identifie si ralentir les avantage et comment inverser."),
+mqOriginal('PHYSIQUE',"Avant match, ton échauffement commence.","Je monte vite en intensité pour être prêt au combat.","Je m'échauffe avec mon partenaire pour trouver le rythme ensemble.","Je suis ma routine complète sans brûler d'énergie.","Je cible les zones du corps utiles selon le match à venir."),
+mqOriginal('PHYSIQUE',"Au milieu d'un match long, tes jambes deviennent lourdes.","Je me bats et je continue à avancer malgré la fatigue.","Je le dis au partenaire pour mieux répartir les efforts.","Je simplifie les déplacements et je gère mon souffle.","J'analyse quels déplacements me coûtent le plus cher."),
+mqOriginal('PHYSIQUE',"La veille d'un tournoi, tu organises ta journée.","Je veux arriver avec de l'énergie et une vraie envie de jouer.","Je prévois un moment calme avec mon partenaire ou le groupe.","Je protège sommeil, repas et récupération.","Je planifie précisément hydratation, horaires et activation."),
+mqOriginal('PHYSIQUE',"Pendant une séance physique, l'exercice est très dur.","Je pousse jusqu'au bout et je refuse de lâcher.","J'utilise l'énergie du groupe pour tenir.","Je garde une intensité régulière et propre.","Je contrôle mes sensations pour rester efficace."),
+mqOriginal('PHYSIQUE',"Tu ressens une petite gêne avant de jouer.","Je teste si je peux quand même performer.","Je préviens coach ou partenaire pour ne pas mettre le duo en danger.","Je réduis le risque et j'adapte mon engagement.","J'identifie la gêne, sa cause possible et ses limites."),
+mqOriginal('PHYSIQUE',"Après une défaite physique, tu fais ton bilan.","Je veux devenir plus dur et plus explosif.","Je veux mieux gérer l'effort avec mon partenaire.","Je veux construire une base plus fiable.","Je veux comprendre où mon corps a décroché."),
+mqOriginal('PHYSIQUE',"Tu dois améliorer tes déplacements latéraux.","Je mets de la vitesse et de l'agressivité dans les appuis.","Je le travaille en situation de duo avec appels et couvertures.","Je répète des déplacements propres, sans précipitation.","Je mesure angles, fréquence d'appuis et replacement."),
+mqOriginal('PHYSIQUE',"En match, tu gagnes quand le rythme est élevé.","Je cherche à accélérer encore pour imposer mon moteur.","Je partage cette énergie avec le partenaire.","Je garde l'intensité sans sortir de mon cadre.","Je choisis les moments où accélérer rapporte vraiment."),
+mqOriginal('PHYSIQUE',"Tu manques d'explosivité sur les balles courtes.","Je travaille le démarrage comme une arme de conquête.","Je demande des exercices avec partenaire pour réagir à des signaux.","Je construis force et appuis progressivement.","J'analyse posture de départ et temps de réaction."),
+mqOriginal('MENTAL',"La nuit avant un match important, tu penses beaucoup.","Je transforme ça en envie de combattre.","Je parle à quelqu'un ou au partenaire pour poser l'émotion.","Je reviens à une routine simple pour dormir.","J'écris le plan et les points contrôlables pour calmer le mental."),
+mqOriginal('MENTAL',"Tu perds un point facile au mauvais moment.","Je veux reprendre immédiatement l'initiative.","Je regarde mon partenaire pour ne pas rester seul dans l'erreur.","Je respire et je reviens au point suivant.","J'identifie la cause sans me juger."),
+mqOriginal('MENTAL',"Avant d'entrer sur le terrain, ton discours intérieur est...","Je vais imposer mon jeu.","On joue ensemble, on reste unis.","Point par point, je fais mon travail.","Je sais quoi faire et pourquoi."),
+mqOriginal('MENTAL',"L'adversaire mène et semble en confiance.","Je veux casser sa confiance par une action forte.","Je veux remonter l'énergie de mon duo.","Je reste patient et je ne donne rien.","Je cherche ce qui nourrit sa confiance pour l'enlever."),
+mqOriginal('MENTAL',"Après une victoire, tu dois rester lucide.","Je pense déjà au prochain défi.","Je célèbre avec ceux qui ont partagé le match.","Je garde la satisfaction sans m'emballer.","J'analyse ce qui est reproductible et ce qui ne l'est pas."),
+mqOriginal('MENTAL',"Après une défaite, ton premier besoin est...","Revenir travailler vite pour corriger.","Parler, évacuer et retrouver le lien.","Digérer calmement sans dramatiser.","Comprendre précisément pourquoi."),
+mqOriginal('MENTAL',"Ton partenaire doute pendant le match.","Je prends plus de responsabilité pour le soulager.","Je lui parle avec énergie et confiance.","Je lui donne une consigne simple et rassurante.","Je cherche la cause de son doute pour y répondre juste."),
+mqOriginal('MENTAL',"Tu sens la pression du regard des autres.","Je m'en sers comme carburant.","Je transforme le public en énergie positive.","Je me recentre sur ma routine personnelle.","Je me rappelle que seuls mes choix contrôlables comptent."),
+mqOriginal('MENTAL',"Tu dois rester concentré pendant un match facile.","Je me donne un objectif de domination.","Je garde du plaisir et de l'énergie avec le partenaire.","Je respecte chaque point de la même manière.","Je choisis un thème mental ou tactique à tester.")
+];
 const QUESTIONS_PER_QUIZ = 12;
 let QUESTIONS = [];
 function shuffleArray(arr){
@@ -892,7 +933,7 @@ document.addEventListener('DOMContentLoaded',()=>{
 function startQuiz(){
   currentQ = 0;
   scores = {rouge:0,jaune:0,vert:0,bleu:0};
-  QUESTIONS = shuffleArray(MULTI_QUESTION_POOL.slice())
+  QUESTIONS = shuffleArray(ORIGINAL_QUESTION_POOL.slice())
     .slice(0, QUESTIONS_PER_QUIZ)
     .map(q => ({ q: q.q[currentLang], opts: shuffleArray(q.opts.slice()).map(o=>({t:o.t[currentLang], c:o.c})) }));
   showScreen('quizScreen');
