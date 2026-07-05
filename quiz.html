@@ -66,6 +66,7 @@ input{font-family:var(--font-body)}
 .qtext{font-family:var(--font-title);font-size:clamp(18px,3.4vw,24px);font-weight:600;line-height:1.35;margin-bottom:26px}
 .opt{display:block;width:100%;text-align:left;background:var(--bg4);border:1px solid var(--border2);border-radius:10px;padding:15px 18px;margin-bottom:10px;color:var(--white);font-family:var(--font-body);font-size:14px;line-height:1.4;transition:all .15s}
 .opt:hover{border-color:var(--bronze);background:var(--bronze-dim)}
+.opt:focus,.opt:focus-visible,.opt:active{outline:none;border-color:var(--border2);background:var(--bg4)}
 
 /* ---- Player card (personnalisable, style HWBT) ---- */
 .resultwrap{width:min(470px,94vw);text-align:center}
@@ -912,6 +913,7 @@ function startQuiz(){
   renderQuestion();
 }
 function renderQuestion(){
+  if(document.activeElement && typeof document.activeElement.blur === 'function') document.activeElement.blur();
   const item = QUESTIONS[currentQ];
   document.getElementById('progLabel').textContent = `Q${currentQ+1}/${QUESTIONS.length}`;
   document.getElementById('progFill').style.width = ((currentQ)/QUESTIONS.length*100)+'%';
@@ -922,11 +924,15 @@ function renderQuestion(){
     const b = document.createElement('button');
     b.className = 'opt';
     b.textContent = opt.t;
-    b.onclick = ()=>answer(opt.c);
+    b.onclick = ()=>answer(opt.c, b);
     optsEl.appendChild(b);
   });
 }
-async function answer(color){
+async function answer(color, button){
+  if(button){
+    button.disabled = true;
+    button.blur();
+  }
   scores[color] = (scores[color]||0) + 2;
   currentQ++;
   if(currentQ >= QUESTIONS.length){
