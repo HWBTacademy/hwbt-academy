@@ -113,6 +113,9 @@ input{font-family:var(--font-body)}
 .result-actions{display:flex;flex-direction:column;gap:10px;margin-top:20px}
 .result-row2{display:flex;gap:10px}
 .result-row2 .btn{flex:1}
+.story-preview{display:block;width:100%;max-width:430px;margin:0 auto;border:2px solid var(--bronze);box-shadow:0 0 44px -12px rgba(0,0,0,.8);background:#050506}
+.source-card{position:absolute;left:-9999px;top:0;opacity:0;pointer-events:none}
+.preview-loading{width:100%;max-width:430px;aspect-ratio:9/16;margin:0 auto;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--gray);font-family:var(--font-title);font-size:11px;letter-spacing:2px;background:var(--bg2)}
 
 /* ---- Detail section ---- */
 .detail-section{margin-top:28px;text-align:left}
@@ -237,7 +240,9 @@ input{font-family:var(--font-body)}
 <!-- RESULT -->
 <div class="screen hidden" id="resultScreen">
   <div class="resultwrap">
-    <div class="playercard" id="fifaCard">
+    <div class="preview-loading" id="previewLoading">CRÉATION DE TA STORY</div>
+    <img class="story-preview hidden" id="storyPreview" alt="Story HWBT Academy">
+    <div class="playercard source-card" id="fifaCard" aria-hidden="true">
       <div class="playercard-photo" id="pcPhoto"></div>
       <div class="playercard-overlay"></div>
       <div class="pc-top">
@@ -267,6 +272,7 @@ input{font-family:var(--font-body)}
     </div>
 
     <div class="result-actions">
+      <button class="btn btn-primary btn-block" onclick="shareProfile()">PARTAGER / ENREGISTRER LA STORY</button>
       <div class="result-row2">
         <button class="btn btn-primary" onclick="shareToInstagram()">📷 INSTAGRAM</button>
         <button class="btn btn-primary" onclick="shareToFacebook()">📘 FACEBOOK</button>
@@ -352,7 +358,7 @@ const UI = {
     sub:"Découvre ton profil naturel en match. 12 questions tirées d'une banque de 30. Résultat immédiat, carte joueur partageable.",
     start:'COMMENCER LE TEST', profileCard:'PROFIL JOUEUR', cardName:'JOUEUR HWBT', cardNote:'NOTE /99',
     personalize:'PERSONNALISE TA CARTE', namePlaceholder:'Ton prénom', photo:'PHOTO',
-    instagram:'INSTAGRAM', facebook:'FACEBOOK', download:'TÉLÉCHARGER LA STORY', email:'ENVOYER PAR EMAIL', restart:'REFAIRE LE TEST',
+    shareSave:'PARTAGER / ENREGISTRER LA STORY', instagram:'INSTAGRAM', facebook:'FACEBOOK', download:'TÉLÉCHARGER LA STORY', email:'ENVOYER PAR EMAIL', restart:'REFAIRE LE TEST',
     storyKicker:'ACADEMY · PROFIL JOUEUR',
     detail:'TON PROFIL EN DÉTAIL', strengths:'POINTS FORTS', work:'AXES DE TRAVAIL', comm:'COMMENT BIEN COMMUNIQUER AVEC TOI',
     cta:'Envie de développer ce profil sur le terrain avec un vrai programme de coaching ?', ctaBtn:'DÉCOUVRIR HWBT ACADEMY',
@@ -367,7 +373,7 @@ const UI = {
     sub:'Ontdek jouw natuurlijke wedstrijdprofiel. 12 vragen uit een basis van 30. Direct resultaat, deelbare spelerskaart.',
     start:'START DE TEST', profileCard:'SPELERSPROFIEL', cardName:'HWBT-SPELER', cardNote:'SCORE /99',
     personalize:'PERSONALISEER JE KAART', namePlaceholder:'Je voornaam', photo:'FOTO',
-    instagram:'INSTAGRAM', facebook:'FACEBOOK', download:'DOWNLOAD DE STORY', email:'VERSTUUR VIA EMAIL', restart:'HERSTART DE TEST',
+    shareSave:'DEEL / BEWAAR DE STORY', instagram:'INSTAGRAM', facebook:'FACEBOOK', download:'DOWNLOAD DE STORY', email:'VERSTUUR VIA EMAIL', restart:'HERSTART DE TEST',
     storyKicker:'ACADEMY · SPELERSPROFIEL',
     detail:'JOUW PROFIEL IN DETAIL', strengths:'STERKE PUNTEN', work:'WERKPUNTEN', comm:'HOE COMMUNICEER JE BEST MET JOU',
     cta:'Wil je dit profiel op het terrein ontwikkelen met echte coaching?', ctaBtn:'ONTDEK HWBT ACADEMY',
@@ -382,7 +388,7 @@ const UI = {
     sub:'Discover your natural match profile. 12 questions selected from a base of 30. Instant result, shareable player card.',
     start:'START THE TEST', profileCard:'PLAYER PROFILE', cardName:'HWBT PLAYER', cardNote:'RATING /99',
     personalize:'CUSTOMIZE YOUR CARD', namePlaceholder:'Your first name', photo:'PHOTO',
-    instagram:'INSTAGRAM', facebook:'FACEBOOK', download:'DOWNLOAD STORY', email:'SEND BY EMAIL', restart:'RESTART TEST',
+    shareSave:'SHARE / SAVE STORY', instagram:'INSTAGRAM', facebook:'FACEBOOK', download:'DOWNLOAD STORY', email:'SEND BY EMAIL', restart:'RESTART TEST',
     storyKicker:'ACADEMY · PLAYER PROFILE',
     detail:'YOUR PROFILE IN DETAIL', strengths:'STRENGTHS', work:'WORK AXES', comm:'HOW TO COMMUNICATE WITH YOU',
     cta:'Want to develop this profile on court with a real coaching program?', ctaBtn:'DISCOVER HWBT ACADEMY',
@@ -804,6 +810,7 @@ let scores = {};
 let finalProfile = null;
 let storyPhotoImage = null;
 let storyNightCourtPromise = null;
+let storyPreviewVersion = 0;
 
 function showScreen(id){
   document.querySelectorAll('.screen').forEach(s=>s.classList.add('hidden'));
@@ -832,11 +839,12 @@ function applyLanguage(){
   document.getElementById('pcNameInput').placeholder = u.namePlaceholder;
   document.querySelector('.file-btn').childNodes[0].textContent = u.photo + ' ';
   const actionButtons = document.querySelectorAll('.result-actions button');
-  if(actionButtons[0]) actionButtons[0].textContent = u.instagram;
-  if(actionButtons[1]) actionButtons[1].textContent = u.facebook;
-  if(actionButtons[2]) actionButtons[2].textContent = u.download;
-  if(actionButtons[3]) actionButtons[3].textContent = u.email;
-  if(actionButtons[4]) actionButtons[4].textContent = u.restart;
+  if(actionButtons[0]) actionButtons[0].textContent = u.shareSave;
+  if(actionButtons[1]) actionButtons[1].textContent = u.instagram;
+  if(actionButtons[2]) actionButtons[2].textContent = u.facebook;
+  if(actionButtons[3]) actionButtons[3].textContent = u.download;
+  if(actionButtons[4]) actionButtons[4].textContent = u.email;
+  if(actionButtons[5]) actionButtons[5].textContent = u.restart;
   document.querySelector('.detail-title').textContent = u.detail;
   document.querySelector('.detail-box.forts h4').textContent = u.strengths;
   document.querySelector('.detail-box.faibles h4').textContent = u.work;
@@ -958,11 +966,13 @@ function renderResultCard(resetPersonalization=true){
   document.getElementById('detailComm').textContent = details ? details.comm : p.comm;
   document.getElementById('commBox').style.setProperty('--p1', c1.var);
   applyLanguage();
+  refreshStoryPreview();
 }
 
 function updateCardName(){
   const v = document.getElementById('pcNameInput').value.trim();
   document.getElementById('pcName').textContent = v ? v.toUpperCase() : tr().cardName;
+  refreshStoryPreview();
 }
 function updateCardPhoto(e){
   const file = e.target.files && e.target.files[0];
@@ -974,8 +984,29 @@ function updateCardPhoto(e){
     photo.style.backgroundImage = `url(${url})`;
     photo.style.opacity = '0.9';
     storyPhotoImage = img;
+    refreshStoryPreview();
   };
   img.src = url;
+}
+
+async function refreshStoryPreview(){
+  if(!finalProfile) return;
+  const version = ++storyPreviewVersion;
+  const img = document.getElementById('storyPreview');
+  const loader = document.getElementById('previewLoading');
+  if(loader) loader.classList.remove('hidden');
+  if(img) img.classList.add('hidden');
+  try{
+    if(document.fonts && document.fonts.ready) await document.fonts.ready;
+    const canvas = await renderCardCanvas();
+    if(version !== storyPreviewVersion) return;
+    img.src = canvas.toDataURL('image/png');
+    img.classList.remove('hidden');
+    if(loader) loader.classList.add('hidden');
+  }catch(e){
+    console.error('Preview error', e);
+    if(loader) loader.textContent = 'APERÇU INDISPONIBLE';
+  }
 }
 
 /* ================= TOAST ================= */
@@ -1212,6 +1243,15 @@ async function downloadCard(){
 function shareTextFor(p){
   const display = profileDisplay(p);
   return `${tr().shareText(display.name)}\n\n#HWBTAcademy\n#HardWorkBeatsTalent`;
+}
+async function shareProfile(){
+  const p = PROFILES[finalProfile];
+  const shared = await tryNativeShare(p);
+  if(!shared){
+    await downloadCard();
+    try{ await navigator.clipboard.writeText(shareTextFor(p)); }catch(e){}
+    showToast(tr().shareToast);
+  }
 }
 async function tryNativeShare(p){
   // On mobile, this opens the system share sheet with Instagram/Facebook/Messages etc. among the options,
