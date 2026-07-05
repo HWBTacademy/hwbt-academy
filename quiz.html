@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quel type de joueur es-tu ? — HWBT Academy</title>
+<meta name="robots" content="noindex, nofollow">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0B0B0F;--bg2:#131318;--bg3:#191922;--bg4:#0d0d12;
+  --border:#1e1e28;--border2:#2c2c3a;
+  --bronze:#A67C52;--bronze2:#c9a07a;--bronze-dim:#A67C5222;--bronze-dim2:#A67C5244;
+  --white:#F5F5F0;--gray:#8a8a95;--gray2:#5c5c68;
+  --rouge:#e15241;--jaune:#e8b923;--vert:#2fae66;--bleu:#3d8bd4;
+  --font-title:'Oswald',sans-serif;--font-body:'Inter',sans-serif;
+}
+html,body{width:100%;min-height:100%;background:var(--bg);color:var(--white);font-family:var(--font-body);overflow-x:hidden}
+button{font-family:var(--font-title);cursor:pointer}
+input{font-family:var(--font-body)}
+.screen{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px}
+.hidden{display:none!important}
+.lang-choice{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:18px}
+.langbar{position:fixed;top:14px;right:14px;z-index:50;display:flex;gap:6px}
+.langbar button{padding:7px 10px;border-radius:6px;border:1px solid var(--border2);background:rgba(13,13,18,.75);color:var(--gray);font-size:9px;letter-spacing:1px}
+.langbar button.active{color:#fff;border-color:var(--bronze);background:var(--bronze-dim)}
+.micro-note{font-size:10px;color:var(--gray2);line-height:1.55;margin-top:10px}
+
+/* ---- Gate ---- */
+.gatebox{width:min(380px,92vw);background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:32px 28px;text-align:center}
+.gate-logo{font-family:var(--font-title);font-size:32px;font-weight:700;letter-spacing:6px}
+.gate-tag{font-size:10px;letter-spacing:3px;color:var(--bronze);margin-top:6px;font-family:var(--font-title)}
+.gate-input{width:100%;margin-top:22px;padding:13px 14px;background:var(--bg4);border:1px solid var(--border2);border-radius:8px;color:var(--white);font-size:14px;letter-spacing:1px;text-align:center}
+.gate-input:focus{outline:none;border-color:var(--bronze)}
+.gate-err{font-size:11px;color:var(--rouge);margin-top:10px;height:14px}
+
+/* ---- Buttons ---- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 26px;border-radius:8px;border:none;font-size:12px;font-weight:600;letter-spacing:2px;transition:all .15s}
+.btn-primary{background:var(--bronze);color:#fff}
+.btn-primary:hover{background:var(--bronze2)}
+.btn-ghost{background:transparent;color:var(--gray);border:1px solid var(--border2)}
+.btn-ghost:hover{color:var(--white);border-color:var(--gray2)}
+.btn-block{width:100%}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+
+/* ---- Landing ---- */
+.landing{max-width:520px;text-align:center}
+.landing-eyebrow{font-size:10px;letter-spacing:4px;color:var(--bronze);font-family:var(--font-title);margin-bottom:18px}
+.landing-title{font-family:var(--font-title);font-size:clamp(32px,7vw,52px);font-weight:800;line-height:1.02;letter-spacing:.5px;text-transform:uppercase}
+.landing-title em{font-style:normal;color:var(--bronze)}
+.landing-sub{font-size:14px;color:var(--gray);line-height:1.7;margin:20px auto 30px;max-width:400px}
+.landing-meta{display:flex;justify-content:center;gap:22px;margin-top:26px;font-size:10px;letter-spacing:1.5px;color:var(--gray2);font-family:var(--font-title)}
+.color-legend{display:flex;justify-content:center;gap:14px;margin-top:22px;flex-wrap:wrap}
+.color-chip{display:flex;align-items:center;gap:6px;font-size:9px;letter-spacing:1.5px;color:var(--gray);font-family:var(--font-title)}
+.color-dot{width:8px;height:8px;border-radius:50%}
+
+/* ---- Quiz ---- */
+.quizwrap{width:min(560px,94vw)}
+.progress-row{display:flex;align-items:center;gap:12px;margin-bottom:26px}
+.progress-label{font-family:var(--font-title);font-size:10px;letter-spacing:2px;color:var(--bronze);white-space:nowrap}
+.progress-track{flex:1;height:3px;background:var(--border2);border-radius:2px;overflow:hidden}
+.progress-fill{height:100%;background:var(--bronze);transition:width .3s}
+.qcard{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:32px 28px}
+.qtext{font-family:var(--font-title);font-size:clamp(18px,3.4vw,24px);font-weight:600;line-height:1.35;margin-bottom:26px}
+.opt{display:block;width:100%;text-align:left;background:var(--bg4);border:1px solid var(--border2);border-radius:10px;padding:15px 18px;margin-bottom:10px;color:var(--white);font-family:var(--font-body);font-size:14px;line-height:1.4;transition:all .15s}
+.opt:hover{border-color:var(--bronze);background:var(--bronze-dim)}
+
+/* ---- Player card (personnalisable, style HWBT) ---- */
+.resultwrap{width:min(440px,94vw);text-align:center}
+.playercard{position:relative;width:100%;max-width:380px;margin:0 auto;aspect-ratio:4/4.5;border-radius:10px;overflow:hidden;padding:26px 24px 22px;
+  background:#101014;
+  border:2px solid var(--bronze);
+  box-shadow:0 0 40px -14px rgba(0,0,0,.6);
+  display:flex;flex-direction:column;text-align:left}
+.playercard-photo{position:absolute;right:0;bottom:0;width:56%;height:90%;background-size:cover;background-position:center top;filter:contrast(1.05) saturate(.85);opacity:0;transition:opacity .2s;pointer-events:none}
+.playercard-overlay{position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(100deg, rgba(6,6,8,.96) 0%, rgba(6,6,8,.82) 38%, rgba(6,6,8,.25) 68%, rgba(6,6,8,.05) 100%), linear-gradient(0deg, rgba(0,0,0,.5) 0%, transparent 40%)}
+.pc-top{display:flex;justify-content:space-between;align-items:flex-start;position:relative;z-index:2}
+.pc-eyebrow{font-family:var(--font-title);font-size:9px;letter-spacing:3px;color:var(--bronze2)}
+.pc-watermark{font-family:var(--font-title);font-size:30px;font-weight:800;letter-spacing:3px;color:rgba(255,255,255,.07)}
+.pc-name{font-family:var(--font-title);font-size:clamp(24px,6.4vw,32px);font-weight:800;color:#fff;text-transform:uppercase;line-height:1;margin-top:18px;position:relative;z-index:2;word-break:break-word}
+.pc-line{height:1px;width:80px;background:var(--bronze);margin:14px 0 12px;position:relative;z-index:2}
+.pc-rows{display:flex;flex-direction:column;gap:6px;position:relative;z-index:2}
+.pc-profile-name{font-family:var(--font-title);font-size:clamp(20px,5.2vw,25px);font-weight:800;letter-spacing:.5px;color:var(--bronze2);text-transform:uppercase;line-height:1.05}
+.pc-row{display:flex;align-items:center;gap:10px;margin-top:4px}
+.pc-icon{width:22px;height:22px;border-radius:50%;border:1px solid var(--bronze);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:10px;color:var(--bronze2)}
+.pc-row span{font-family:var(--font-title);font-size:11.5px;letter-spacing:1px;color:#fff;text-transform:uppercase}
+.pc-blurb{font-size:11px;color:rgba(255,255,255,.68);line-height:1.55;margin-top:10px;position:relative;z-index:2;padding-right:26%}
+.pc-stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px 4px;margin-top:14px;position:relative;z-index:2;max-width:78%}
+.pc-stat{text-align:center}
+.pc-stat .v{font-family:var(--font-title);font-size:23px;font-weight:800;color:#fff;line-height:1}
+.pc-stat .k{font-family:var(--font-title);font-size:7px;letter-spacing:1px;color:rgba(255,255,255,.55);margin-top:3px}
+.pc-bottom{position:absolute;right:20px;bottom:18px;text-align:right;z-index:2}
+.pc-bottom .n{font-family:var(--font-title);font-size:44px;font-weight:800;color:#fff;line-height:1}
+.pc-bottom .l{font-family:var(--font-title);font-size:8.5px;letter-spacing:1.3px;color:var(--bronze2);margin-top:2px}
+
+.personalize-box{width:100%;max-width:380px;margin:16px auto 0;background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:14px 16px;text-align:left}
+.personalize-title{font-family:var(--font-title);font-size:9.5px;letter-spacing:2px;color:var(--gray2);margin-bottom:10px}
+.personalize-row{display:flex;gap:8px}
+.personalize-row input[type=text]{flex:1;padding:10px 12px;background:var(--bg4);border:1px solid var(--border2);border-radius:8px;color:var(--white);font-size:13px}
+.personalize-row input[type=text]:focus{outline:none;border-color:var(--bronze)}
+.file-btn{display:inline-flex;align-items:center;justify-content:center;padding:10px 14px;background:transparent;border:1px solid var(--border2);border-radius:8px;color:var(--gray);font-size:10px;letter-spacing:1px;font-family:var(--font-title);cursor:pointer;white-space:nowrap}
+.file-btn:hover{color:var(--white);border-color:var(--gray2)}
+
+.result-actions{display:flex;flex-direction:column;gap:10px;margin-top:20px}
+.result-row2{display:flex;gap:10px}
+.result-row2 .btn{flex:1}
+
+/* ---- Detail section ---- */
+.detail-section{margin-top:28px;text-align:left}
+.detail-title{font-family:var(--font-title);font-size:11px;letter-spacing:2.5px;color:var(--gray2);text-align:center;margin-bottom:16px}
+.detail-story{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:16px;font-size:12.5px;color:#d8d8dd;line-height:1.7;margin-bottom:12px}
+.detail-cols{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:420px){.detail-cols{grid-template-columns:1fr}}
+.detail-box{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:16px}
+.detail-box h4{font-family:var(--font-title);font-size:10px;letter-spacing:1.5px;margin-bottom:10px}
+.detail-box.forts h4{color:#4caf7d}
+.detail-box.faibles h4{color:var(--bronze2)}
+.detail-box ul{list-style:none}
+.detail-box li{font-size:12px;color:#d8d8dd;line-height:1.6;padding-left:14px;position:relative;margin-bottom:6px}
+.detail-box.forts li:before{content:"+";position:absolute;left:0;color:#4caf7d;font-weight:700}
+.detail-box.faibles li:before{content:"–";position:absolute;left:0;color:var(--bronze2);font-weight:700}
+.comm-box{margin-top:12px;background:var(--bg2);border:1px solid var(--border2);border-left:3px solid var(--p1,var(--bronze));border-radius:8px;padding:16px}
+.comm-box h4{font-family:var(--font-title);font-size:10px;letter-spacing:1.5px;color:var(--bronze2);margin-bottom:8px}
+.comm-box p{font-size:12.5px;color:#d8d8dd;line-height:1.65}
+
+.cta-block{margin-top:26px;padding-top:22px;border-top:1px solid var(--border)}
+.cta-text{font-size:12.5px;color:var(--gray);margin-bottom:12px;line-height:1.6}
+.footlink{margin-top:34px;font-size:10px;letter-spacing:1px;color:var(--border2);text-decoration:none;display:block;text-align:center}
+.footlink:hover{color:var(--gray2)}
+
+/* ---- Admin ---- */
+.adminwrap{width:min(760px,94vw)}
+.admin-title{font-family:var(--font-title);font-size:20px;font-weight:700;letter-spacing:1px;margin-bottom:4px}
+.admin-sub{font-size:12px;color:var(--gray);margin-bottom:24px}
+.admin-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:8px;margin-bottom:26px}
+.stat-box{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:12px}
+.stat-box .n{font-family:var(--font-title);font-size:22px;font-weight:700}
+.stat-box .l{font-size:8px;letter-spacing:1px;color:var(--gray);margin-top:4px}
+.admin-toprow{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap;margin-bottom:10px}
+
+@media(max-width:480px){
+  .screen{padding:16px}
+  .langbar{top:10px;right:10px}
+  .langbar button{padding:7px 9px;font-size:8px}
+  .landing{padding-top:18px}
+  .landing-eyebrow{font-size:9px;letter-spacing:3px}
+  .landing-title{font-size:clamp(34px,12vw,48px);line-height:1}
+  .landing-sub{font-size:13px;max-width:330px}
+  .landing-meta{gap:16px;font-size:9px}
+  .qcard{padding:24px 20px}
+  .qtext{font-size:21px}
+  .opt{font-size:13px;padding:14px 15px}
+  .playercard{max-width:100%;padding:24px 20px 20px}
+  .pc-name{font-size:30px}
+  .pc-profile-name{font-size:25px}
+  .pc-row span{font-size:10.5px;line-height:1.2}
+  .pc-blurb{font-size:10.5px;padding-right:22%}
+  .pc-bottom{right:16px;bottom:16px}
+  .pc-bottom .n{font-size:40px}
+  .personalize-box{max-width:100%}
+  .detail-story,.detail-box,.comm-box{font-size:12px}
+}
+@media(max-width:360px){
+  .screen{padding:12px}
+  .landing-title{font-size:34px}
+  .result-row2{flex-direction:column}
+  .btn{width:100%;padding:13px 16px}
+  .personalize-row{flex-direction:column}
+  .pc-stats-grid{max-width:72%;gap:9px 2px}
+  .pc-stat .v{font-size:20px}
+  .pc-bottom .n{font-size:34px}
+  .pc-blurb{padding-right:16%}
+}
+</style>
+</head>
+<body>
+
+<div class="langbar" id="langbar">
+  <button onclick="setLang('fr')" data-lang-btn="fr">FR</button>
+  <button onclick="setLang('nl')" data-lang-btn="nl">NL</button>
+  <button onclick="setLang('en')" data-lang-btn="en">EN</button>
+</div>
+
+<!-- LANGUAGE GATE -->
+<div class="screen" id="gateScreen">
+  <div class="gatebox">
+    <div class="gate-logo">HWBT</div>
+    <div class="gate-tag" id="languageGateTag">BOUSSOLE EXPRESS</div>
+    <div class="micro-note" id="languageGateText">Choisis ta langue pour commencer.</div>
+    <div class="lang-choice">
+      <button class="btn btn-primary" onclick="setLang('fr');showScreen('landingScreen')">FR</button>
+      <button class="btn btn-ghost" onclick="setLang('nl');showScreen('landingScreen')">NL</button>
+      <button class="btn btn-ghost" onclick="setLang('en');showScreen('landingScreen')">EN</button>
+    </div>
+  </div>
+</div>
+
+<!-- LANDING -->
+<div class="screen hidden" id="landingScreen">
+  <div class="landing">
+    <div class="landing-eyebrow">HWBT ACADEMY · TEST DE PERSONNALITÉ</div>
+    <div class="landing-title">QUEL TYPE DE <em>JOUEUR</em> ES-TU ?</div>
+    <p class="landing-sub">12 questions tirées d'une banque de 30. 3 minutes. Découvre lequel des 12 profils HWBT te correspond, et personnalise ta carte joueur avant de la partager.</p>
+    <button class="btn btn-primary" onclick="startQuiz()">COMMENCER LE TEST</button>
+    <div class="landing-meta"><span>12 QUESTIONS</span><span>12 PROFILS</span><span>100% GRATUIT</span></div>
+    <div class="color-legend hidden">
+      <div class="color-chip"><div class="color-dot" style="background:var(--rouge)"></div>ROUGE</div>
+      <div class="color-chip"><div class="color-dot" style="background:var(--jaune)"></div>JAUNE</div>
+      <div class="color-chip"><div class="color-dot" style="background:var(--vert)"></div>VERT</div>
+      <div class="color-chip"><div class="color-dot" style="background:var(--bleu)"></div>BLEU</div>
+    </div>
+  </div>
+</div>
+
+<!-- QUIZ -->
+<div class="screen hidden" id="quizScreen">
+  <div class="quizwrap">
+    <div class="progress-row">
+      <div class="progress-label" id="progLabel">Q1/12</div>
+      <div class="progress-track"><div class="progress-fill" id="progFill" style="width:8%"></div></div>
+    </div>
+    <div class="qcard">
+      <div class="qtext" id="qtext"></div>
+      <div id="opts"></div>
+    </div>
+  </div>
+</div>
+
+<!-- RESULT -->
+<div class="screen hidden" id="resultScreen">
+  <div class="resultwrap">
+    <div class="playercard" id="fifaCard">
+      <div class="playercard-photo" id="pcPhoto"></div>
+      <div class="playercard-overlay"></div>
+      <div class="pc-top">
+        <div class="pc-eyebrow">PROFIL JOUEUR</div>
+        <div class="pc-watermark">HWBT</div>
+      </div>
+      <div class="pc-name" id="pcName">JOUEUR HWBT</div>
+      <div class="pc-line"></div>
+      <div class="pc-rows">
+        <div class="pc-profile-name" id="pcPill">—</div>
+        <div class="pc-row"><div class="pc-icon">◆</div><span id="pcSub">—</span></div>
+      </div>
+      <p class="pc-blurb" id="pcBlurb"></p>
+      <div class="pc-stats-grid" id="pcStatsGrid"></div>
+      <div class="pc-bottom"><div class="n" id="pcOvr">—</div><div class="l">NOTE /99</div></div>
+    </div>
+
+    <div class="personalize-box">
+      <div class="personalize-title">PERSONNALISE TA CARTE</div>
+      <div class="personalize-row">
+        <input type="text" id="pcNameInput" placeholder="Ton prénom (optionnel)" oninput="updateCardName()">
+        <label class="file-btn">
+          PHOTO
+          <input type="file" accept="image/*" id="pcPhotoInput" style="display:none" onchange="updateCardPhoto(event)">
+        </label>
+      </div>
+    </div>
+
+    <div class="result-actions">
+      <div class="result-row2">
+        <button class="btn btn-primary" onclick="shareToInstagram()">📷 INSTAGRAM</button>
+        <button class="btn btn-primary" onclick="shareToFacebook()">📘 FACEBOOK</button>
+      </div>
+      <div class="result-row2">
+        <button class="btn btn-ghost" onclick="downloadCard()">TÉLÉCHARGER L'IMAGE</button>
+        <button class="btn btn-ghost" onclick="emailCard()">ENVOYER PAR EMAIL</button>
+      </div>
+      <button class="btn btn-ghost btn-block" onclick="restartQuiz()">REFAIRE LE TEST</button>
+    </div>
+
+    <div class="detail-section">
+      <div class="detail-title">TON PROFIL EN DÉTAIL</div>
+      <div class="detail-story" id="detailStory"></div>
+      <div class="detail-cols">
+        <div class="detail-box forts"><h4>POINTS FORTS</h4><ul id="detailForts"></ul></div>
+        <div class="detail-box faibles"><h4>AXES DE TRAVAIL</h4><ul id="detailFaibles"></ul></div>
+      </div>
+      <div class="comm-box" id="commBox">
+        <h4>COMMENT BIEN COMMUNIQUER AVEC TOI</h4>
+        <p id="detailComm"></p>
+      </div>
+    </div>
+
+    <div class="cta-block">
+      <p class="cta-text">Envie de développer ce profil sur le terrain avec un vrai programme de coaching ?</p>
+      <a class="btn btn-primary btn-block" href="https://hwbtacademy.github.io/hwbt-academy/" target="_blank" style="text-decoration:none">DÉCOUVRIR HWBT ACADEMY</a>
+    </div>
+
+    <a class="footlink" href="#" onclick="openAdminGate();return false;">Espace coach</a>
+  </div>
+</div>
+
+<!-- ADMIN GATE -->
+<div class="screen hidden" id="adminGateScreen">
+  <div class="gatebox">
+    <div class="gate-logo" style="font-size:22px">ESPACE COACH</div>
+    <input class="gate-input" id="adminInput" placeholder="MOT DE PASSE COACH" type="password">
+    <div class="gate-err" id="adminErr"></div>
+    <button class="btn btn-primary btn-block" style="margin-top:14px" onclick="checkAdminGate()">ENTRER</button>
+    <button class="btn btn-ghost btn-block" style="margin-top:8px" onclick="showScreen('resultScreen')">RETOUR</button>
+  </div>
+</div>
+
+<!-- ADMIN PANEL -->
+<div class="screen hidden" id="adminScreen">
+  <div class="adminwrap">
+    <div class="admin-toprow">
+      <div>
+        <div class="admin-title">Statistiques du test</div>
+        <div class="admin-sub">Nombre de tests complétés par profil (données anonymes, aucune information personnelle collectée).</div>
+      </div>
+      <div style="display:flex;gap:8px">
+        <button class="btn btn-ghost" onclick="exportCSV()">EXPORT CSV</button>
+        <button class="btn btn-ghost" onclick="showScreen('landingScreen')">RETOUR AU TEST</button>
+      </div>
+    </div>
+    <div class="admin-stats" id="adminStats"></div>
+  </div>
+</div>
+
+<script>
+/* ================= CONFIG ================= */
+const QUIZ_PASSWORD = 'HWBT2026';
+const ADMIN_PASSWORD = 'COACHHWBT'; // à changer par Thomas
+const TEST_URL = 'https://hwbtacademy.github.io/hwbt-academy/'; // ⚠️ à remplacer par l'URL réelle une fois le test mis en ligne
+
+/* ================= COLORS ================= */
+const COLORS = {
+  rouge:{name:'ROUGE', var:'var(--rouge)', hex:'#e15241'},
+  jaune:{name:'JAUNE', var:'var(--jaune)', hex:'#e8b923'},
+  vert: {name:'VERT',  var:'var(--vert)',  hex:'#2fae66'},
+  bleu: {name:'BLEU',  var:'var(--bleu)',  hex:'#3d8bd4'}
+};
+const COLOR_ORDER = ['rouge','jaune','vert','bleu'];
+
+let currentLang = sessionStorage.getItem('hwbt_lang') || 'fr';
+const UI = {
+  fr:{
+    gateText:'Choisis ta langue pour commencer.',
+    eyebrow:'HWBT ACADEMY · BOUSSOLE EXPRESS',
+    title:'QUEL TYPE DE <em>JOUEUR</em> ES-TU ?',
+    sub:"Découvre ton profil naturel en match. 12 questions tirées d'une banque de 30. Résultat immédiat, carte joueur partageable.",
+    start:'COMMENCER LE TEST', profileCard:'PROFIL JOUEUR', cardName:'JOUEUR HWBT', cardNote:'NOTE /99',
+    personalize:'PERSONNALISE TA CARTE', namePlaceholder:'Ton prénom', photo:'PHOTO',
+    instagram:'INSTAGRAM', facebook:'FACEBOOK', download:"TÉLÉCHARGER L'IMAGE", email:'ENVOYER PAR EMAIL', restart:'REFAIRE LE TEST',
+    detail:'TON PROFIL EN DÉTAIL', strengths:'POINTS FORTS', work:'AXES DE TRAVAIL', comm:'COMMENT BIEN COMMUNIQUER AVEC TOI',
+    cta:'Envie de développer ce profil sur le terrain avec un vrai programme de coaching ?', ctaBtn:'DÉCOUVRIR HWBT ACADEMY',
+    shareToast:"Image téléchargée — ouvre ton app et publie-la avec le texte copié.", copied:'Texte de partage copié',
+    shareText:n=>`J’ai fait la Boussole HWBT Express.\nMon profil padel est : ${n}.\nEt toi, tu es quel type de joueur ?`,
+    resultText:'Ce profil ne définit pas ton niveau. Il montre ta tendance naturelle en match. Le terrain confirme le profil.'
+  },
+  nl:{
+    gateText:'Kies je taal om te starten.',
+    eyebrow:'HWBT ACADEMY · EXPRESS KOMPAS',
+    title:'WELK TYPE <em>HWBT-SPELER</em> BEN JIJ?',
+    sub:'Ontdek jouw natuurlijke wedstrijdprofiel. 12 vragen uit een basis van 30. Direct resultaat, deelbare spelerskaart.',
+    start:'START DE TEST', profileCard:'SPELERSPROFIEL', cardName:'HWBT-SPELER', cardNote:'SCORE /99',
+    personalize:'PERSONALISEER JE KAART', namePlaceholder:'Je voornaam', photo:'FOTO',
+    instagram:'INSTAGRAM', facebook:'FACEBOOK', download:'DOWNLOAD DE AFBEELDING', email:'VERSTUUR VIA EMAIL', restart:'HERSTART DE TEST',
+    detail:'JOUW PROFIEL IN DETAIL', strengths:'STERKE PUNTEN', work:'WERKPUNTEN', comm:'HOE COMMUNICEER JE BEST MET JOU',
+    cta:'Wil je dit profiel op het terrein ontwikkelen met echte coaching?', ctaBtn:'ONTDEK HWBT ACADEMY',
+    shareToast:'Afbeelding gedownload — open je app en post ze met de gekopieerde tekst.', copied:'Deeltekst gekopieerd',
+    shareText:n=>`Ik heb het HWBT Express Kompas gedaan.\nMijn padelprofiel is: ${n}.\nEn jij, welk type speler ben jij?`,
+    resultText:'Dit profiel bepaalt niet jouw niveau. Het toont jouw natuurlijke wedstrijdreactie. Het terrein bevestigt het profiel.'
+  },
+  en:{
+    gateText:'Choose your language to start.',
+    eyebrow:'HWBT ACADEMY · EXPRESS COMPASS',
+    title:'WHAT TYPE OF <em>HWBT PLAYER</em> ARE YOU?',
+    sub:'Discover your natural match profile. 12 questions selected from a base of 30. Instant result, shareable player card.',
+    start:'START THE TEST', profileCard:'PLAYER PROFILE', cardName:'HWBT PLAYER', cardNote:'RATING /99',
+    personalize:'CUSTOMIZE YOUR CARD', namePlaceholder:'Your first name', photo:'PHOTO',
+    instagram:'INSTAGRAM', facebook:'FACEBOOK', download:'DOWNLOAD IMAGE', email:'SEND BY EMAIL', restart:'RESTART TEST',
+    detail:'YOUR PROFILE IN DETAIL', strengths:'STRENGTHS', work:'WORK AXES', comm:'HOW TO COMMUNICATE WITH YOU',
+    cta:'Want to develop this profile on court with a real coaching program?', ctaBtn:'DISCOVER HWBT ACADEMY',
+    shareToast:'Image downloaded — open your app and post it with the copied text.', copied:'Share text copied',
+    shareText:n=>`I completed the HWBT Express Compass.\nMy padel profile is: ${n}.\nWhat type of player are you?`,
+    resultText:'This profile does not define your level. It shows your natural match tendency. The court confirms the profile.'
+  }
+};
+const PROFILE_I18N = {
+ 'rouge-jaune':{fr:['LE CATALYSEUR','Tu fais bouger le match.'],nl:['DE KATALYSATOR','Jij brengt de wedstrijd in beweging.'],en:['THE CATALYST','You make the match move.']},
+ 'rouge-vert':{fr:['LE PILIER','Tu imposes par ta présence.'],nl:['DE PIJLER','Jij maakt impact door je aanwezigheid.'],en:['THE PILLAR','You impose through your presence.']},
+ 'rouge-bleu':{fr:['LE CAPITAINE','Tu veux diriger le match.'],nl:['DE KAPITEIN','Jij wil de wedstrijd sturen.'],en:['THE CAPTAIN','You want to lead the match.']},
+ 'jaune-rouge':{fr:['LE SHOWMAN','Tu joues pour créer l’impact.'],nl:['DE SHOWMAN','Jij speelt om impact te creëren.'],en:['THE SHOWMAN','You play to create impact.']},
+ 'jaune-vert':{fr:['LE MOTEUR','Tu fais vivre le duo.'],nl:['DE MOTOR','Jij houdt het duo in beweging.'],en:['THE ENGINE','You keep the pair alive.']},
+ 'jaune-bleu':{fr:['LE CRÉATIF','Tu vois des options que les autres ne voient pas.'],nl:['DE CREATIEVELING','Jij ziet opties die anderen niet zien.'],en:['THE CREATIVE','You see options others do not see.']},
+ 'vert-jaune':{fr:['LE POSÉ','Tu stabilises le match.'],nl:['DE RUSTBRENGER','Jij brengt rust in de wedstrijd.'],en:['THE COMPOSED PLAYER','You stabilize the match.']},
+ 'vert-rouge':{fr:['LE ROC','Tu ne donnes rien facilement.'],nl:['DE ROTS','Jij geeft niets makkelijk weg.'],en:['THE ROCK','You give nothing away easily.']},
+ 'vert-bleu':{fr:['LE MÉTRONOME','Tu construis avec patience et logique.'],nl:['DE METRONOOM','Jij bouwt met geduld en logica.'],en:['THE METRONOME','You build with patience and logic.']},
+ 'bleu-vert':{fr:['LE STRATÈGE','Tu gagnes avec le plan.'],nl:['DE STRATEEG','Jij wint met een plan.'],en:['THE STRATEGIST','You win with the plan.']},
+ 'bleu-rouge':{fr:['LE CONTRÔLEUR','Tu veux comprendre, puis exécuter.'],nl:['DE CONTROLEUR','Jij wil eerst begrijpen en dan uitvoeren.'],en:['THE CONTROLLER','You want to understand, then execute.']},
+ 'bleu-jaune':{fr:['LE LECTEUR','Tu lis le jeu et tu cherches la solution.'],nl:['DE LEZER','Jij leest het spel en zoekt de oplossing.'],en:['THE READER','You read the game and look for the solution.']}
+};
+const PROFILE_DETAILS_I18N = {
+ 'rouge-jaune':{
+  nl:{story:"Jij bent een explosie van gecontroleerde energie. Onder druk analyseer je niet lang: je handelt, en je neemt iedereen met je mee. Wanneer je verbonden bent met het spel, kan je een wedstrijd die verloren leek in enkele rally’s doen kantelen.",forts:["Vermogen om op je eentje een match te doen kantelen in kritieke momenten","Risico nemen dat de tegenstander volledig uit balans brengt","Energie en charisma die ook de partner meenemen"],faibles:["Kan zich haasten en punten verliezen door te veel zelfvertrouwen","Mist soms geduld in de opbouw van het punt","Heeft moeite om dezelfde intensiteit vast te houden in een lange match"],comm:"De Katalysator moet voelen dat men hem vertrouwt om initiatief te nemen; hem te vroeg afremmen breekt zijn dynamiek. Geef hem duidelijke doelen over wanneer hij mag durven, eerder dan of hij mag durven, en waardeer zijn lef zelfs wanneer de bal niet lukt: zo groeit hij het snelst."},
+  en:{story:"You are an explosion of controlled energy. Under pressure, you do not analyze for long: you act, and you bring everyone with you. When connected, you can turn a match that seemed lost in just a few exchanges.",forts:["Ability to turn a match around almost alone in critical moments","Risk-taking that completely destabilizes the opponent","Energy and charisma that pull the partner along"],faibles:["Can rush and lose points through overconfidence","Sometimes lacks patience in point construction","Can struggle to keep the same intensity throughout a long match"],comm:"The Catalyst needs to feel trusted to take initiative; restraining this player too early breaks the momentum. Give clear goals about when to dare rather than whether to dare, and praise the courage even when the shot misses: that is what makes this player progress fastest."}
+ },
+ 'rouge-vert':{
+  nl:{story:"Jij bent tegelijk een rustige en explosieve kracht. Niets haalt je uit balans: hoe hoger de druk, hoe meer je jezelf verankert. Je aanwezigheid en je regelmaat stellen je partner gerust en putten de tegenstander punt na punt uit.",forts:["Uithouding en intensiteit die de hele match blijven duren","Volledige betrouwbaarheid in kritieke momenten","Fysieke aanwezigheid die mentaal weegt op de tegenstander"],faibles:["Kan creativiteit missen om uit een plan te komen dat niet meer werkt","Wacht soms te veel af en laat winbare punten liggen","Heeft moeite om snel van ritme te veranderen"],comm:"De Pijler groeit door herhaling en vertrouwen, niet door druk. Geef hem een stabiel kader, concrete fysieke referentiepunten, en vermijd te frequente tactische veranderingen: hij heeft tijd nodig om aan te passen, maar zodra hij aangepast is, laat hij niet meer los."},
+  en:{story:"You are both a calm and explosive force. Nothing makes you lose control: the more pressure rises, the more you anchor yourself. Your presence and consistency reassure your partner and wear the opponent down, point after point.",forts:["Endurance and intensity that last throughout the match","Total reliability in critical moments","Physical presence that weighs on the opponent’s mind"],faibles:["Can lack creativity to get out of a plan that no longer works","Sometimes waits too much and lets winnable points drag on","Can struggle to change rhythm quickly"],comm:"The Pillar progresses through repetition and trust, not through pressure. Give a stable framework, concrete physical reference points, and avoid changing tactics too often: this player needs time to adjust, but once adjusted, will not let go."}
+ },
+ 'rouge-bleu':{
+  nl:{story:"Jij handelt met overtuiging en leest de match snel, zelden vanuit twijfel. Die combinatie maakt van jou een speler die onder druk beslissingen neemt zonder paniek, en ze tot het einde blijft dragen.",forts:["Uitzonderlijke spelinzicht, anticipeert de patronen van de tegenstander","Vermogen om tactisch aan te passen tijdens de match","Kalmte en helderheid in belangrijke beslissingen"],faibles:["Kan alles willen controleren en moeite hebben met loslaten","Soms te directief tegenover de partner","Heeft moeite om een plan te aanvaarden dat niet van hem komt"],comm:"De Kapitein heeft argumenten nodig, geen opgelegde bevelen. Presenteer zaken als tactische opties om te evalueren, niet als orders. Hij volgt snel als de logica klopt, en wordt dan je beste relais op het terrein."},
+  en:{story:"You act with conviction and read the match quickly, rarely from doubt. This combination makes you a player who makes decisions under pressure without panic, and owns them until the end.",forts:["Exceptional game reading, anticipates opponent patterns","Ability to adapt tactically during the match","Calm and clarity in important decisions"],faibles:["Can want to control everything and struggle to let go","Sometimes too directive with the partner","Can struggle to accept a plan that is not their own"],comm:"The Captain needs arguments rather than imposed instructions. Present things as tactical options to evaluate, not as orders. If the logic holds, this player buys in quickly and becomes your best relay on court."}
+ },
+ 'jaune-rouge':{
+  nl:{story:"Jouw spel ontstaat uit durf en expressie. Je bedenkt slagen die de tegenstander niet ziet aankomen, en je energie maakt van elke match een spektakel. Dat overvloedige vertrouwen draagt je, maar kan je ook de draad van de match doen verliezen.",forts:["Uitgebreid en gevarieerd technisch repertoire","Durf in beslissende momenten","Vermogen om de tegenstander te verrassen en te destabiliseren"],faibles:["Kan de mooie slag verkiezen boven de efficiënte slag","Mist soms discipline in eenvoudige punten","Gevoelig voor de blik van anderen, speelt soms voor het publiek"],comm:"De Showman heeft erkenning nodig om het beste van zichzelf te geven; waardeer zijn geslaagde risico’s. Herkader hem met eenvoudige en meetbare doelen op de makkelijke punten, waar zijn neiging om te veel te doen duur kan kosten."},
+  en:{story:"Your game is born from boldness and expression. You create shots the opponent does not see coming, and your energy turns every match into a show. This overflowing confidence carries you, but it can also make you lose the thread of the match.",forts:["Wide and varied technical repertoire","Assumed boldness in decisive moments","Ability to surprise and destabilize the opponent"],faibles:["Can favor the beautiful shot over the efficient one","Sometimes lacks discipline on simple points","Sensitive to the eyes of others, sometimes plays for the audience"],comm:"The Showman needs recognition to give the best version of himself; value the successful risks. Reframe with simple and measurable goals on the easy points, where the tendency to do too much can be costly."}
+ },
+ 'jaune-vert':{
+  nl:{story:"Jij geeft je partner energie, houdt het ritme van het duo vast en laat op lange termijn niet los. Je positieve energie is aanstekelijk; vaak ben jij degene die het duo draagt in momenten van twijfel.",forts:["Fysiek en mentaal uithoudingsvermogen over de hele match","Constante positieve impact op het moreel van de partner","Regelmaat in de inspanning, ook wanneer de score ongunstig is"],faibles:["Kan scherpte missen in beslissende punten","Soms te veel gericht op sfeer ten koste van tactiek","Heeft moeite om alleen het niveau te verhogen, zonder externe energie"],comm:"De Motor geeft het beste van zichzelf in een warm collectief kader. Waardeer zijn rol als energiemaker van het team, maar geef hem ook concrete individuele doelen zodat hij niet alleen op de groepsenergie steunt."},
+  en:{story:"You energize your partner, maintain the rhythm of the pair, and do not let go over time. Your positive energy is contagious; you are often the one carrying the pair in moments of doubt.",forts:["Physical and mental endurance throughout the match","Constant positive impact on the partner’s morale","Consistency in effort, even when the score is unfavorable"],faibles:["Can lack edge in decisive points","Sometimes too focused on atmosphere at the expense of tactics","Can struggle to raise the level alone, without outside energy"],comm:"The Engine gives the best version of himself in a warm collective environment. Value the role of team energizer, but also give concrete individual goals so this player does not rely only on group energy."}
+ },
+ 'jaune-bleu':{
+  nl:{story:"Jij bouwt complexe punten op met een spelintelligentie die de tegenstander vaak pas te laat begrijpt. Een onvoorspelbare maar doordachte speler: creatief, met een echte methode erachter.",forts:["Uitzonderlijke spelvisie, ziet de hoeken voor de anderen","Opbouw van complexe en originele punten","Creatief aanpassingsvermogen tegenover ongewone patronen"],faibles:["Kan punten te ingewikkeld maken die eenvoudig hadden kunnen zijn","Twijfelt soms tussen instinct en analyse","Mist regelmaat in de uitvoering van zijn ideeën"],comm:"De Creatieveling heeft ruimte nodig om ideeën te verkennen, maar ook een kader om ze te kanaliseren. Moedig hem aan om zijn redenering hardop uit te leggen: dat helpt hem zijn keuzes te verduidelijken en goede ideeën te onderscheiden van te riskante pogingen."},
+  en:{story:"You build complex points with a game intelligence the opponent often understands too late. An unpredictable but thoughtful player: creative, with a real method behind it.",forts:["Exceptional game vision, sees angles before others","Construction of complex and original points","Creative adaptation to unusual patterns"],faibles:["Can overcomplicate points that could have been simple","Sometimes hesitates between instinct and analysis","Lacks consistency in executing ideas"],comm:"The Creative needs space to explore ideas, but also a framework to channel them. Encourage this player to explain the reasoning out loud: it helps clarify choices and distinguish good ideas from overly risky attempts."}
+ },
+ 'vert-jaune':{
+  nl:{story:"Je emotionele stabiliteit stelt je partner gerust, en je menselijke contact creëert echte samenhang op het terrein. Je probeert niet snel te winnen; je verandert geduld in een wapen van weerstand.",forts:["Voorbeeldige emotionele stabiliteit, bijna onverstoorbaar","Positieve en geruststellende impact op de partner","Technische regelmaat, zelfs onder druk"],faibles:["Kan scherpte missen in momenten die agressiviteit vragen","Soms te inschikkelijk, vermijdt constructief conflict","Heeft moeite om het ritme te verhogen wanneer het nodig is"],comm:"De Rustbrenger bloeit open in een klimaat van vertrouwen en zachtheid. Vermijd te harde opmerkingen of te veel urgentie; geef liever tijd en regelmatige aanmoediging, en hij zal uiteindelijk elke tegenstander uitputten met zijn constantheid."},
+  en:{story:"Your emotional stability reassures your partner, and your human connection creates real complicity on court. You do not try to win quickly; you turn patience into a weapon of resistance.",forts:["Exemplary emotional stability, almost unshakeable","Positive and reassuring impact on the partner","Technical consistency even under pressure"],faibles:["Can lack bite in moments that require aggression","Sometimes too accommodating, avoids constructive conflict","Can struggle to raise the rhythm when needed"],comm:"The Composed Player thrives in a climate of trust and kindness. Avoid remarks that are too harsh or urgency that is too intense; give time and regular encouragement, and this player will eventually wear down any opponent through consistency."}
+ },
+ 'vert-rouge':{
+  nl:{story:"Niets doet jou plooien: je brengt de bal altijd terug en je maakt van slijtage een wapen om te winnen. Tegen jou moet de tegenstander het punt drie keer winnen voor het echt voorbij is.",forts:["Uitzonderlijke technische regelmaat over de volledige match","Fysiek en mentaal uithoudingsvermogen dat bijna niet breekt","Geen paniek mogelijk onder druk"],faibles:["Kan initiatief missen om punten sneller af te maken","Soms te afwachtend tegenover een tegenstander die initiatief neemt","Heeft moeite om uit zijn tactische comfortzone te komen"],comm:"De Rots heeft nodig dat zijn regelmaat gewaardeerd wordt, eerder dan dat men vraagt om spectaculairder te zijn; dat is niet zijn spel. Moedig hem aan om af en toe initiatief te nemen door een duidelijk signaal te geven van het juiste moment, in plaats van hem te laten raden wanneer hij moet aanvallen."},
+  en:{story:"Nothing makes you fold: you always return the ball and turn wear-and-tear into a weapon for victory. Against you, the opponent has to win the point three times before it is truly over.",forts:["Exceptional technical consistency throughout the entire match","Physical and mental endurance that is almost unbreakable","No panic under pressure"],faibles:["Can lack initiative to finish points more quickly","Sometimes too passive against an opponent taking initiative","Can struggle to leave the tactical comfort zone"],comm:"The Rock needs consistency to be valued rather than being asked to become more spectacular; that is not this player’s game. Encourage occasional initiative by giving a clear signal for the right moment, rather than letting this player guess when to attack."}
+ },
+ 'vert-bleu':{
+  nl:{story:"Je kalme precisie legt een ritme op dat de tegenstander uiteindelijk ondergaat, gedwongen om zich aan jouw tempo aan te passen en niet omgekeerd. Jij wint door je cadans op te leggen, niet door koste wat kost de winner te zoeken.",forts:["Uitzonderlijke technische regelmaat, bijna foutloos","Scherpe lezing van het spel die intenties van de tegenstander anticipeert","Vermogen om het eigen ritme aan de match op te leggen"],faibles:["Kan variatie missen om een tegenstander te verrassen die zich aanpast","Soms te voorspelbaar in de keuzes","Heeft moeite om te versnellen wanneer de context dat vraagt"],comm:"De Metronoom reageert goed op precieze en meetbare doelen; geef hem cijfermatige referenties eerder dan algemene instructies. Hij moet ook aangemoedigd worden om af en toe bewust uit zijn tactische comfortzone te stappen."},
+  en:{story:"Your calm precision imposes a rhythm the opponent eventually has to endure, forced to adapt to your tempo rather than the other way around. You win by imposing your cadence, not by chasing the winning shot at all costs.",forts:["Exceptional technical consistency, almost faultless","Sharp game reading that anticipates opponent intentions","Ability to impose your own rhythm on the match"],faibles:["Can lack variation to surprise an opponent who adapts","Sometimes too predictable in choices","Can struggle to accelerate when the context requires it"],comm:"The Metronome responds well to precise, measurable goals; give numerical reference points rather than general instructions. This player also needs encouragement to occasionally step out of the tactical comfort zone."}
+ },
+ 'bleu-vert':{
+  nl:{story:"Jij bouwt een totaal begrip op van de tegenstander en de context, en voert daarna je plan uit met precisie en zonder haast. Je spel lijkt op een schaakpartij die op volle snelheid wordt gespeeld.",forts:["Fijne en snelle tactische analyse van het spel van de tegenstander","Anticipatie van patronen en spelschema’s","Permanente en intelligente aanpassing van het speelplan"],faibles:["Kan te veel analyseren in plaats van op het moment te handelen","Soms te rigide wanneer het oorspronkelijke plan snel verlaten moet worden","Mist instinct in volledig onverwachte situaties"],comm:"De Strateeg moet het waarom begrijpen voor hij uitvoert; geef context en logica, niet alleen instructies. Let er wel op dat hij niet te veel gaat nadenken tijdens het punt: soms moet hij leren handelen voor hij alle antwoorden heeft."},
+  en:{story:"You build a total understanding of the opponent and the context, then execute your plan with precision and without rushing. Your game looks like a chess match played at full speed.",forts:["Fine and quick tactical analysis of the opponent’s game","Anticipation of patterns and playing sequences","Permanent and intelligent adaptation of the game plan"],faibles:["Can overanalyze instead of acting in the moment","Sometimes too rigid when the original plan must be abandoned quickly","Lacks instinct in completely unexpected situations"],comm:"The Strategist needs to understand the why before executing; give context and logic, not just instructions. Be careful not to let this player think too much during the point: sometimes action must come before all the answers are available."}
+ },
+ 'bleu-rouge':{
+  nl:{story:"Jij voert je spel uit met mechanische strengheid, zonder je ooit te laten afleiden door de emotie van het moment. Die discipline wordt een geducht competitief voordeel over de duur van een match of een seizoen.",forts:["Uitzonderlijke en constante technische precisie","Onwrikbare concentratie over lange duur","Solide emotionele beheersing, bijna zonder barsten"],faibles:["Kan spontaniteit en creativiteit missen","Soms te hard voor zichzelf na een fout","Heeft moeite om zich aan te passen aan een volledig atypische tegenstander"],comm:"De Controleur reageert goed op duidelijke en veeleisende standaarden; hij weet graag precies wat er van hem verwacht wordt. Let op zijn zelfkritiek: vaak heeft hij nodig dat men hem eraan herinnert dat regelmaat ook het recht op fouten omvat."},
+  en:{story:"You execute your game with mechanical rigor, without ever letting yourself be distracted by the emotion of the moment. This discipline becomes a formidable competitive advantage over the length of a match or a season.",forts:["Exceptional and constant technical precision","Unshakeable concentration over time","Solid emotional management, almost flawless"],faibles:["Can lack spontaneity and creativity","Sometimes too hard on himself after a mistake","Can struggle to adapt to a completely atypical opponent"],comm:"The Controller responds well to clear and demanding standards; this player likes knowing exactly what is expected. Watch the self-criticism: this player often needs to be reminded that consistency also includes the right to make mistakes."}
+ },
+ 'bleu-jaune':{
+  nl:{story:"Jij ziet oplossingen die anderen nog niet bedenken, en je voert ze uit met rustig vertrouwen. Een speler die verrast zonder ooit verrast te lijken.",forts:["Uitzonderlijke spelvisie, altijd een stap vooruit","Permanente tactische innovatie","Vermogen om de tegenstander te verrassen terwijl de controle behouden blijft"],faibles:["Kan afstandelijk lijken of te veel in zijn hoofd zitten voor de partner","Soms te zeker van oplossingen die nog niet getest zijn","Heeft moeite om terug te keren naar eenvoudig spel wanneer dat nodig is"],comm:"De Lezer heeft nodig dat zijn ideeën serieus genomen worden, zelfs wanneer ze buiten het gewone vallen; vaak zit net daar zijn meerwaarde. Help hem een eenvoudig en solide plan B te houden voor momenten waarop inspiratie niet genoeg is."},
+  en:{story:"You see solutions others have not yet imagined, and you execute them with quiet confidence. A player who surprises without ever seeming caught off guard.",forts:["Exceptional game vision, one step ahead","Permanent tactical innovation","Ability to surprise the opponent while keeping control"],faibles:["Can seem distant or too much in the head for the partner","Sometimes too confident in untested solutions","Can struggle to return to a simple game when needed"],comm:"The Reader needs ideas to be taken seriously, even when they are unusual; that is often where the added value lies. Help this player keep a simple and solid plan B for moments when inspiration is not enough."}
+ }
+};
+function tr(){return UI[currentLang] || UI.fr;}
+function profileDisplay(p){
+  const entry = PROFILE_I18N[p.key]?.[currentLang] || [p.name,p.quote];
+  return {name:entry[0], line:entry[1]};
+}
+function profileDetails(p){
+  return PROFILE_DETAILS_I18N[p.key]?.[currentLang] || null;
+}
+function mq(cat,text,rouge,jaune,vert,bleu){
+  return {cat,q:{fr:text[0],nl:text[1],en:text[2]},opts:[
+    {c:'rouge',t:{fr:rouge[0],nl:rouge[1],en:rouge[2]}},
+    {c:'jaune',t:{fr:jaune[0],nl:jaune[1],en:jaune[2]}},
+    {c:'vert',t:{fr:vert[0],nl:vert[1],en:vert[2]}},
+    {c:'bleu',t:{fr:bleu[0],nl:bleu[1],en:bleu[2]}}
+  ]};
+}
+
+/* Manual color blending in JS (instead of CSS color-mix, which many mobile
+   browsers — notably in-app browsers like Instagram/Facebook — don't support yet). */
+function hexToRgb(hex){
+  const h = hex.replace('#','');
+  return { r: parseInt(h.substring(0,2),16), g: parseInt(h.substring(2,4),16), b: parseInt(h.substring(4,6),16) };
+}
+function mixHex(hexA, hexB, ratioA){
+  const a = hexToRgb(hexA), b = hexToRgb(hexB);
+  const r = Math.round(a.r*ratioA + b.r*(1-ratioA));
+  const g = Math.round(a.g*ratioA + b.g*(1-ratioA));
+  const bl = Math.round(a.b*ratioA + b.b*(1-ratioA));
+  return `rgb(${r}, ${g}, ${bl})`;
+}
+function rgba(hex, alpha){
+  const c = hexToRgb(hex);
+  return `rgba(${c.r}, ${c.g}, ${c.b}, ${alpha})`;
+}
+
+/* ================= 12 PROFILES (primary-secondary) ================= */
+const PROFILES = {
+'rouge-jaune': {
+  key:'rouge-jaune', name:'LE CATALYSEUR', sub:'Le Bâtisseur', p1:'rouge', p2:'jaune',
+  story:"Tu es une explosion d'énergie contrôlée. Sous pression, tu n'analyses pas longtemps : tu agis, et tu entraînes tout le monde avec toi. Connecté, tu fais basculer un match qui semblait perdu en quelques échanges.",
+  forts:["Capacité à renverser un match à lui seul dans les moments critiques","Prise de risque qui déstabilise complètement l'adversaire","Énergie et charisme qui entraînent tout le partenaire"],
+  faibles:["Peut se précipiter et perdre des points par excès de confiance","Manque parfois de patience dans la construction du point","Difficulté à garder la même intensité sur un match long"],
+  comm:"Le Catalyseur a besoin de sentir qu'on lui fait confiance pour prendre des initiatives — le brider trop tôt casse sa dynamique. Donne-lui des objectifs clairs sur le \"quand\" oser plutôt que sur le \"si\" il doit oser, et félicite l'audace même quand le coup ne passe pas : c'est ce qui le fait progresser le plus vite.",
+  quote:"Le Catalyseur ne fait pas gagner le point. Il fait basculer le match.",
+  stats:{pui:88,pre:65,sfr:70,cre:82,reg:60,equ:75}
+},
+'rouge-vert': {
+  key:'rouge-vert', name:'LE PILIER', sub:'Le Gardien', p1:'rouge', p2:'vert',
+  story:"Tu es une force tranquille et explosive à la fois. Rien ne te fait perdre tes moyens : plus la pression monte, plus tu t'ancres. Ta présence et ta constance rassurent ton partenaire et usent l'adversaire, point après point.",
+  forts:["Endurance et intensité qui tiennent sur la durée du match","Fiabilité totale dans les moments critiques","Présence physique qui pèse sur le moral adverse"],
+  faibles:["Peut manquer de créativité pour sortir d'un plan qui ne fonctionne plus","Parfois trop attentiste, laisse traîner des points gagnables","Difficulté à changer de rythme rapidement"],
+  comm:"Le Pilier progresse par la répétition et la confiance, pas par la pression. Donne-lui un cadre stable, des repères physiques concrets, et évite de le bousculer avec des changements tactiques trop fréquents : il a besoin de temps pour ajuster, mais une fois ajusté, il ne lâche plus.",
+  quote:"Le Pilier ne cherche pas le spectaculaire. Il cherche la victoire.",
+  stats:{pui:90,pre:68,sfr:80,cre:55,reg:78,equ:70}
+},
+'rouge-bleu': {
+  key:'rouge-bleu', name:'LE CAPITAINE', sub:'Le Général', p1:'rouge', p2:'bleu',
+  story:"Tu agis avec conviction et tu lis le match vite, rarement dans le doute. Cette combinaison fait de toi un joueur qui prend des décisions sous pression sans paniquer — et qui les assume jusqu'au bout.",
+  forts:["Lecture de jeu exceptionnelle, anticipe les schémas adverses","Capacité d'adaptation tactique en plein match","Calme et clarté dans les décisions importantes"],
+  faibles:["Peut vouloir tout contrôler et manquer de lâcher-prise","Parfois trop directif avec son partenaire","Difficulté à accepter un plan qui n'est pas le sien"],
+  comm:"Le Capitaine a besoin qu'on argumente plutôt qu'on lui impose. Présente-lui les choses comme des options tactiques à évaluer, pas comme des ordres — il adhère vite si la logique tient la route, et devient alors ton meilleur relais sur le terrain.",
+  quote:"Le Capitaine ne subit pas le match — il le dirige.",
+  stats:{pui:82,pre:78,sfr:84,cre:62,reg:74,equ:76}
+},
+'jaune-rouge': {
+  key:'jaune-rouge', name:'LE SHOWMAN', sub:"L'Artiste", p1:'jaune', p2:'rouge',
+  story:"Ton jeu naît de l'audace et de l'expression. Tu inventes des coups que l'adversaire ne voit pas venir, et ton énergie transforme chaque match en spectacle. Cette confiance débordante te porte — mais elle peut aussi te faire perdre le fil du match.",
+  forts:["Répertoire technique étendu et varié","Audace assumée dans les moments décisifs","Capacité à surprendre et déstabiliser l'adversaire"],
+  faibles:["Peut privilégier le beau geste au coup efficace","Manque parfois de discipline dans les points simples","Sensible au regard des autres, joue parfois pour l'audience"],
+  comm:"Le Showman a besoin de reconnaissance pour donner le meilleur de lui-même — valorise ses prises de risque réussies. Recadre-le avec des objectifs simples et mesurables sur les points \"faciles\", où sa tendance à en faire trop peut coûter cher.",
+  quote:"Le Showman ne joue pas pour gagner. Il gagne en jouant.",
+  stats:{pui:78,pre:70,sfr:62,cre:92,reg:55,equ:72}
+},
+'jaune-vert': {
+  key:'jaune-vert', name:'LE MOTEUR', sub:'Le Dynamo', p1:'jaune', p2:'vert',
+  story:"Tu dynamises ton partenaire, maintiens le rythme du duo et ne lâches rien sur la durée. Ton énergie positive est contagieuse — c'est souvent toi qui portes le duo dans les moments de doute.",
+  forts:["Endurance physique et mentale sur tout le match","Impact positif constant sur le moral du partenaire","Régularité dans l'effort, même quand le score est défavorable"],
+  faibles:["Peut manquer de tranchant dans les points décisifs","Parfois trop centré sur l'ambiance au détriment de la tactique","Difficulté à hausser le niveau seul, sans énergie extérieure"],
+  comm:"Le Moteur donne le meilleur de lui-même dans un cadre collectif chaleureux. Valorise son rôle d'entraîneur d'équipe, mais donne-lui aussi des objectifs individuels concrets pour qu'il ne se repose pas uniquement sur l'énergie du groupe.",
+  quote:"Le Moteur ne finit jamais à plat. Il finit toujours à fond.",
+  stats:{pui:74,pre:62,sfr:68,cre:76,reg:80,equ:90}
+},
+'jaune-bleu': {
+  key:'jaune-bleu', name:'LE CRÉATIF', sub:'Le Visionnaire libre', p1:'jaune', p2:'bleu',
+  story:"Tu construis des points complexes avec une intelligence de jeu que l'adversaire ne perçoit souvent que trop tard. Un joueur imprévisible mais réfléchi — créatif avec une vraie méthode derrière.",
+  forts:["Vision de jeu exceptionnelle, voit les angles avant les autres","Construction de points complexes et originaux","Capacité d'adaptation créative face à des schémas inhabituels"],
+  faibles:["Peut sur-compliquer des points qui auraient pu être simples","Parfois hésitant entre l'instinct et l'analyse","Manque de régularité dans l'exécution de ses idées"],
+  comm:"Le Créatif a besoin d'espace pour explorer ses idées, mais aussi d'un cadre pour les canaliser. Encourage-le à expliquer son raisonnement à voix haute — ça l'aide à clarifier ses choix et à distinguer les bonnes idées des tentatives trop risquées.",
+  quote:"Le Créatif voit des options que les autres n'ont pas encore imaginées.",
+  stats:{pui:62,pre:74,sfr:66,cre:94,reg:58,equ:68}
+},
+'vert-jaune': {
+  key:'vert-jaune', name:'LE POSÉ', sub:"L'Équilibriste", p1:'vert', p2:'jaune',
+  story:"Ta stabilité émotionnelle rassure ton partenaire, et ton contact humain crée une vraie complicité sur le terrain. Tu ne cherches pas à gagner vite — tu transformes la patience en arme de résistance.",
+  forts:["Stabilité émotionnelle exemplaire, quasi imperturbable","Impact positif et rassurant sur le partenaire","Régularité technique même sous pression"],
+  faibles:["Peut manquer de mordant dans les moments qui demandent de l'agressivité","Parfois trop conciliant, évite le conflit constructif","Difficulté à hausser le rythme quand il le faudrait"],
+  comm:"Le Posé s'épanouit dans un climat de confiance et de bienveillance. Évite les remarques trop dures ou l'urgence excessive — donne-lui plutôt du temps et des encouragements réguliers, et il finira par éroder n'importe quel adversaire par sa constance.",
+  quote:"Le Posé n'essaie pas de gagner vite. Il fait en sorte que l'adversaire finisse par perdre.",
+  stats:{pui:58,pre:72,sfr:85,cre:68,reg:82,equ:88}
+},
+'vert-rouge': {
+  key:'vert-rouge', name:'LE ROC', sub:'Le Mur', p1:'vert', p2:'rouge',
+  story:"Rien ne te fait plier : tu rends toujours la balle et tu transformes l'usure en arme de victoire. Face à toi, l'adversaire doit gagner le point trois fois avant qu'il ne soit vraiment terminé.",
+  forts:["Régularité technique exceptionnelle sur toute la durée du match","Endurance physique et mentale à toute épreuve","Aucune panique possible sous pression"],
+  faibles:["Peut manquer d'initiative pour conclure les points rapidement","Parfois trop attentiste face à un adversaire qui prend l'initiative","Difficulté à sortir de sa zone de confort tactique"],
+  comm:"Le Roc a besoin qu'on valorise sa constance plutôt que de lui demander d'être plus spectaculaire — ce n'est pas son jeu. Encourage-le à prendre ponctuellement l'initiative en lui donnant un signal clair du \"bon moment\", plutôt que de le laisser deviner quand attaquer.",
+  quote:"Le Roc ne cède jamais. Il fait toujours douter en premier.",
+  stats:{pui:84,pre:70,sfr:88,cre:50,reg:90,equ:72}
+},
+'vert-bleu': {
+  key:'vert-bleu', name:'LE MÉTRONOME', sub:'Le Temps', p1:'vert', p2:'bleu',
+  story:"Ta précision calme impose un rythme que l'adversaire finit par subir, forcé de s'adapter à ton tempo plutôt que l'inverse. Tu gagnes en imposant ta cadence, pas en cherchant le coup gagnant à tout prix.",
+  forts:["Régularité technique exceptionnelle, quasi sans faute","Lecture du jeu affûtée qui anticipe les intentions adverses","Capacité à imposer son propre rythme au match"],
+  faibles:["Peut manquer de variation pour surprendre un adversaire qui s'adapte","Parfois trop prévisible dans ses choix de jeu","Difficulté à accélérer quand le contexte l'exige"],
+  comm:"Le Métronome répond bien à des objectifs précis et mesurables — donne-lui des repères chiffrés plutôt que des consignes générales. Il a aussi besoin d'être encouragé à sortir ponctuellement de sa zone de confort tactique.",
+  quote:"Le Métronome transforme la régularité en arme tactique.",
+  stats:{pui:60,pre:90,sfr:82,cre:55,reg:92,equ:65}
+},
+'bleu-vert': {
+  key:'bleu-vert', name:'LE STRATÈGE', sub:"L'Architecte", p1:'bleu', p2:'vert',
+  story:"Tu construis une compréhension totale de l'adversaire et du contexte, puis tu exécutes ton plan avec précision et sans précipitation. Ton jeu ressemble à une partie d'échecs jouée à pleine vitesse.",
+  forts:["Analyse tactique fine et rapide du jeu adverse","Anticipation des schémas et des patterns de jeu","Adaptation permanente et intelligente du plan de jeu"],
+  faibles:["Peut sur-analyser au lieu d'agir dans l'instant","Parfois trop rigide quand le plan initial doit être abandonné vite","Manque d'instinct dans les situations totalement imprévues"],
+  comm:"Le Stratège a besoin de comprendre le \"pourquoi\" avant d'exécuter — donne-lui du contexte et de la logique, pas juste des consignes. Attention cependant à ne pas le laisser trop réfléchir en plein point : parfois, il doit apprendre à agir avant d'avoir toutes les réponses.",
+  quote:"Le Stratège ne joue pas le point. Il joue le match.",
+  stats:{pui:58,pre:85,sfr:80,cre:70,reg:86,equ:68}
+},
+'bleu-rouge': {
+  key:'bleu-rouge', name:'LE DISCIPLINÉ', sub:'Le Soldat', p1:'bleu', p2:'rouge',
+  story:"Tu exécutes ton jeu avec une rigueur mécanique, sans jamais te laisser distraire par l'émotion du moment. Cette discipline devient un avantage compétitif redoutable sur la durée d'un match ou d'une saison.",
+  forts:["Précision technique exceptionnelle et constante","Concentration inébranlable sur la durée","Gestion émotionnelle solide, quasi sans faille"],
+  faibles:["Peut manquer de spontanéité et de créativité","Parfois trop dur avec lui-même après une erreur","Difficulté à s'adapter à un adversaire complètement atypique"],
+  comm:"Le Discipliné répond bien à des standards clairs et exigeants — il aime savoir précisément ce qui est attendu de lui. Sois vigilant sur son autocritique : il a souvent besoin qu'on lui rappelle que la régularité inclut aussi le droit à l'erreur.",
+  quote:"Le Discipliné transforme la méthode en avantage compétitif.",
+  stats:{pui:76,pre:92,sfr:88,cre:48,reg:90,equ:60}
+},
+'bleu-jaune': {
+  key:'bleu-jaune', name:'LE VISIONNAIRE', sub:"L'Oracle", p1:'bleu', p2:'jaune',
+  story:"Tu vois les solutions que les autres n'imaginent pas encore, et tu les exécutes avec une confiance tranquille. Un joueur qui surprend sans jamais paraître pris de court.",
+  forts:["Vision de jeu exceptionnelle, une longueur d'avance","Innovation tactique permanente","Capacité à surprendre l'adversaire tout en gardant le contrôle"],
+  faibles:["Peut sembler distant ou trop dans sa tête pour son partenaire","Parfois trop confiant dans des solutions non testées","Difficulté à revenir à un jeu simple quand c'est nécessaire"],
+  comm:"Le Visionnaire a besoin qu'on prenne ses idées au sérieux, même quand elles sortent de l'ordinaire — c'est souvent là que se trouve sa valeur ajoutée. Aide-le à garder un plan B simple et solide pour les moments où l'inspiration ne suffit pas.",
+  quote:"Le Visionnaire joue un coup d'avance. Toujours.",
+  stats:{pui:60,pre:82,sfr:72,cre:90,reg:64,equ:66}
+}
+};
+
+/* ================= QUESTION POOL (30 questions, one color per option, weight 2) ================= */
+/* A random set of 12 is drawn from this pool each time the quiz starts, so retaking it feels fresh. */
+const QUESTION_POOL = [
+  {q:"Tu es mené 3-5 dans le set décisif, ta réaction ?", opts:[
+    {t:"Je hausse le rythme, je veux le prendre à l'usure physique.", c:'rouge'},
+    {t:"Je tente un coup inattendu pour changer la dynamique.", c:'jaune'},
+    {t:"Je reste stable, un point après l'autre, sans rien changer.", c:'vert'},
+    {t:"J'analyse rapidement où est la faille tactique.", c:'bleu'}]},
+  {q:"Ton coup préféré ?", opts:[
+    {t:"Le smash qui écrase le point.", c:'rouge'},
+    {t:"La vibora ou l'amortie qui surprend tout le monde.", c:'jaune'},
+    {t:"Le coup sûr qui ne prend jamais de risque inutile.", c:'vert'},
+    {t:"Le passing shot millimétré, calculé au centimètre.", c:'bleu'}]},
+  {q:"En double, ton rôle naturel ?", opts:[
+    {t:"Je prends les responsabilités dans les points chauds.", c:'rouge'},
+    {t:"Je motive et je mets de l'ambiance tout le match.", c:'jaune'},
+    {t:"Je rassure mon partenaire et je stabilise le duo.", c:'vert'},
+    {t:"Je gère la construction tactique du point.", c:'bleu'}]},
+  {q:"Avant un match important, tu es plutôt...", opts:[
+    {t:"Impatient, j'ai hâte que ça commence, physiquement prêt.", c:'rouge'},
+    {t:"Détendu, je blague avec mon partenaire.", c:'jaune'},
+    {t:"Calme et posé, rien ne me déstabilise.", c:'vert'},
+    {t:"Concentré, je repasse mentalement ma stratégie.", c:'bleu'}]},
+  {q:"Un entraînement type pour toi, c'est...", opts:[
+    {t:"Des exercices physiques intenses, à fond.", c:'rouge'},
+    {t:"Des jeux libres où j'invente des solutions.", c:'jaune'},
+    {t:"De la régularité, répéter les bases sans jamais lâcher.", c:'vert'},
+    {t:"Des situations de match pour travailler les choix tactiques.", c:'bleu'}]},
+  {q:"Ton partenaire rate un coup facile, tu réagis comment ?", opts:[
+    {t:"Je monte en intensité pour porter l'équipe.", c:'rouge'},
+    {t:"Je le fais rire pour désamorcer la tension.", c:'jaune'},
+    {t:"Je l'encourage calmement, ça ne me déstabilise pas.", c:'vert'},
+    {t:"J'ajuste immédiatement la tactique pour compenser.", c:'bleu'}]},
+  {q:"Ce qu'on dit souvent de ton jeu ?", opts:[
+    {t:"T'es increvable, tu ne lâches jamais rien.", c:'rouge'},
+    {t:"On ne sait jamais ce que tu vas sortir.", c:'jaune'},
+    {t:"T'es d'une régularité incroyable, tu ne t'effondres jamais.", c:'vert'},
+    {t:"Tu vois toujours le coup avant les autres.", c:'bleu'}]},
+  {q:"Ta plus grande fierté sur le terrain ?", opts:[
+    {t:"Une remontée héroïque après avoir été mené.", c:'rouge'},
+    {t:"Un coup improbable qui a fait retourner tout le monde.", c:'jaune'},
+    {t:"Avoir tenu le rythme du début à la fin sans craquer.", c:'vert'},
+    {t:"Un point construit à la perfection, coup par coup.", c:'bleu'}]},
+  {q:"Ta plus grande motivation pour jouer ?", opts:[
+    {t:"Le duel, la confrontation, gagner physiquement.", c:'rouge'},
+    {t:"Le plaisir, le spectacle, l'échange avec les autres.", c:'jaune'},
+    {t:"Le collectif, les liens créés avec mon partenaire.", c:'vert'},
+    {t:"Le défi intellectuel, résoudre le problème du match.", c:'bleu'}]},
+  {q:"Face à un adversaire qui te surprend...", opts:[
+    {t:"Je hausse le combat physique pour reprendre le dessus.", c:'rouge'},
+    {t:"Je m'adapte avec ma propre créativité.", c:'jaune'},
+    {t:"Je garde mon calme et j'attends mon moment.", c:'vert'},
+    {t:"J'analyse vite son jeu pour trouver la faille.", c:'bleu'}]},
+  {q:"Ce que tu préfères entendre après un match ?", opts:[
+    {t:"T'as rien lâché jusqu'au bout.", c:'rouge'},
+    {t:"T'as fait vivre tout le monde, c'était un vrai spectacle.", c:'jaune'},
+    {t:"T'as porté toute l'équipe par ta stabilité.", c:'vert'},
+    {t:"T'as trouvé la faille avant tout le monde.", c:'bleu'}]},
+  {q:"Dans un moment de tension pendant le match...", opts:[
+    {t:"Je hausse le ton, physiquement et vocalement.", c:'rouge'},
+    {t:"Je tente quelque chose d'inattendu pour tout changer.", c:'jaune'},
+    {t:"Je respire, je reste stable, je ne montre rien.", c:'vert'},
+    {t:"Je recadre rapidement la tactique avec mon partenaire.", c:'bleu'}]},
+  {q:"Le jour d'un match, ton échauffement idéal ?", opts:[
+    {t:"Je monte en intensité vite, j'ai besoin de sentir mon corps chauffer fort.", c:'rouge'},
+    {t:"Je papote, je rigole, je me sens bien dans l'ambiance avant de jouer.", c:'jaune'},
+    {t:"Je fais toujours la même routine, sans rien changer.", c:'vert'},
+    {t:"Je visualise mentalement les points et les schémas à venir.", c:'bleu'}]},
+  {q:"Sur un point important à 40-40, tu penses à...", opts:[
+    {t:"Prendre le point de force, ne rien laisser à l'adversaire.", c:'rouge'},
+    {t:"Tenter le coup qui va marquer les esprits.", c:'jaune'},
+    {t:"Ne rien changer à ce qui fonctionne déjà.", c:'vert'},
+    {t:"Rejouer mentalement les schémas qui ont déjà marché contre cet adversaire.", c:'bleu'}]},
+  {q:"Ton pire ennemi sur le terrain, c'est plutôt...", opts:[
+    {t:"L'attente, les points qui traînent trop longtemps.", c:'rouge'},
+    {t:"La routine, les matchs sans enjeu ni fun.", c:'jaune'},
+    {t:"Le chaos, un jeu sans queue ni tête.", c:'vert'},
+    {t:"L'imprévu qui casse mon plan de match.", c:'bleu'}]},
+  {q:"Ce que ton coach devrait te dire plus souvent ?", opts:[
+    {t:"Vas-y, fonce, tu as le niveau.", c:'rouge'},
+    {t:"Amuse-toi, c'est là que tu es le meilleur.", c:'jaune'},
+    {t:"Continue comme ça, c'est du solide.", c:'vert'},
+    {t:"Bonne lecture, ton analyse était juste.", c:'bleu'}]},
+  {q:"Si le match tourne mal, ta première réaction ?", opts:[
+    {t:"Je hausse encore plus l'intensité, je refuse de perdre comme ça.", c:'rouge'},
+    {t:"Je me détends, je relance différemment avec légèreté.", c:'jaune'},
+    {t:"Je reviens aux fondamentaux, sans paniquer.", c:'vert'},
+    {t:"Je change complètement de plan tactique.", c:'bleu'}]},
+  {q:"Dans le vestiaire avant un match, tu es plutôt...", opts:[
+    {t:"Prêt à en découdre, presque impatient physiquement.", c:'rouge'},
+    {t:"Sociable, je discute avec tout le monde.", c:'jaune'},
+    {t:"Discret et calme, dans ma bulle tranquille.", c:'vert'},
+    {t:"Concentré, je relis mentalement mes points clés.", c:'bleu'}]},
+  {q:"Ta plus grande qualité selon ton partenaire de double ?", opts:[
+    {t:"Mon engagement total, je ne lâche jamais.", c:'rouge'},
+    {t:"Ma bonne humeur qui détend tout le monde.", c:'jaune'},
+    {t:"Ma fiabilité, je suis toujours là quand il faut.", c:'vert'},
+    {t:"Ma capacité à lire le jeu et à donner des conseils.", c:'bleu'}]},
+  {q:"Un tournoi approche, comment tu te prépares mentalement ?", opts:[
+    {t:"Je me mets une pression positive, j'ai besoin de l'enjeu.", c:'rouge'},
+    {t:"Je pense à l'ambiance et au plaisir de jouer, pas au résultat.", c:'jaune'},
+    {t:"Je garde ma routine habituelle, sans rien changer.", c:'vert'},
+    {t:"J'étudie mes adversaires potentiels et j'ajuste ma stratégie.", c:'bleu'}]},
+  {q:"Le style de jeu qui t'agace le plus en face ?", opts:[
+    {t:"Celui qui joue la montre, qui ralentit tout le temps.", c:'rouge'},
+    {t:"Celui qui ne sourit jamais, trop sérieux pour moi.", c:'jaune'},
+    {t:"Celui qui est instable, un coup fort un coup nul.", c:'vert'},
+    {t:"Celui qui joue au hasard, sans aucune logique.", c:'bleu'}]},
+  {q:"Ce que tu préfères dans le padel ou le tennis ?", opts:[
+    {t:"La confrontation directe, le combat physique.", c:'rouge'},
+    {t:"Le partage, les rires, les moments avec les autres.", c:'jaune'},
+    {t:"La régularité, sentir que je progresse pas à pas.", c:'vert'},
+    {t:"La dimension stratégique, le jeu d'échecs permanent.", c:'bleu'}]},
+  {q:"Après une défaite, tu as besoin de...", opts:[
+    {t:"Me défouler, évacuer la frustration physiquement.", c:'rouge'},
+    {t:"En parler, relativiser avec humour.", c:'jaune'},
+    {t:"Prendre du recul calmement, sans en faire un drame.", c:'vert'},
+    {t:"Analyser ce qui n'a pas fonctionné, point par point.", c:'bleu'}]},
+  {q:"Ta plus grande source de fierté à la fin d'une saison ?", opts:[
+    {t:"Les matchs remportés à l'arraché.", c:'rouge'},
+    {t:"Les liens créés avec les partenaires et le groupe.", c:'jaune'},
+    {t:"La régularité et la progression constante.", c:'vert'},
+    {t:"Les progrès tactiques et la compréhension du jeu.", c:'bleu'}]},
+  {q:"Ta plus grande peur en match ?", opts:[
+    {t:"Ne plus avoir la force de me battre jusqu'au bout.", c:'rouge'},
+    {t:"Que le match devienne ennuyeux, sans spectacle.", c:'jaune'},
+    {t:"Perdre ma régularité et m'effondrer d'un coup.", c:'vert'},
+    {t:"Perdre le fil de ma stratégie et ne plus rien contrôler.", c:'bleu'}]},
+  {q:"Ta relation à la compétition ?", opts:[
+    {t:"J'ai besoin de gagner, physiquement et mentalement.", c:'rouge'},
+    {t:"Je joue pour le plaisir avant tout, la victoire vient après.", c:'jaune'},
+    {t:"Je joue pour progresser, match après match.", c:'vert'},
+    {t:"Je joue pour résoudre le problème que pose chaque adversaire.", c:'bleu'}]},
+  {q:"Comment tu gères un partenaire très différent de toi ?", opts:[
+    {t:"Je prends les choses en main pour compenser.", c:'rouge'},
+    {t:"Je m'adapte avec le sourire, ça se passe toujours bien.", c:'jaune'},
+    {t:"Je reste stable, ça rassure l'autre naturellement.", c:'vert'},
+    {t:"J'analyse vite comment on peut se compléter.", c:'bleu'}]},
+  {q:"Un jour sans envie de jouer, qu'est-ce qui te relance ?", opts:[
+    {t:"Le défi, l'envie de me prouver quelque chose.", c:'rouge'},
+    {t:"Le plaisir de retrouver mes partenaires.", c:'jaune'},
+    {t:"La routine, le rituel qui me remet en marche.", c:'vert'},
+    {t:"Un objectif clair à atteindre.", c:'bleu'}]},
+  {q:"Ce que les autres retiennent de toi après un tournoi ?", opts:[
+    {t:"Ma combativité jusqu'au dernier point.", c:'rouge'},
+    {t:"Mon énergie et ma bonne humeur.", c:'jaune'},
+    {t:"Ma constance, je suis toujours fiable.", c:'vert'},
+    {t:"Ma justesse tactique, mes choix payants.", c:'bleu'}]},
+  {q:"Si tu devais résumer ton jeu en un mot ?", opts:[
+    {t:"Intensité.", c:'rouge'},
+    {t:"Spectacle.", c:'jaune'},
+    {t:"Solidité.", c:'vert'},
+    {t:"Précision.", c:'bleu'}]}
+];
+const MULTI_QUESTION_POOL = [
+mq('TECHNIQUE',['Quand tu rates une volée simple, tu fais quoi ?','Wat doe je als je een makkelijke volley mist?','What do you do when you miss an easy volley?'],['Je remets de l’intensité tout de suite.','Ik zet meteen meer intensiteit.','I add intensity straight away.'],['Je cherche le rythme avec mon partenaire.','Ik zoek het ritme met mijn partner.','I look for rhythm with my partner.'],['Je ralentis et je sécurise le geste.','Ik vertraag en maak de slag veilig.','I slow down and secure the stroke.'],['J’analyse appuis, impact et timing.','Ik analyseer voetenwerk, raakpunt en timing.','I analyze footwork, contact and timing.']),
+mq('TECHNIQUE',['Le coach corrige ton geste.','De coach corrigeert je techniek.','The coach corrects your technique.'],['J’essaie en situation réelle.','Ik probeer het meteen in spelsituatie.','I try it in a real situation.'],['Je demande un repère simple en échange.','Ik vraag een eenvoudige cue tijdens de rally.','I ask for a simple cue during play.'],['Je répète calmement pour stabiliser.','Ik herhaal rustig tot het stabiel voelt.','I repeat calmly until it feels stable.'],['Je veux comprendre pourquoi ça marche.','Ik wil begrijpen waarom het werkt.','I want to understand why it works.']),
+mq('TECHNIQUE',['Ton service manque de danger.','Je opslag mist gevaar.','Your serve lacks danger.'],['Je cherche plus de vitesse ou d’effet.','Ik zoek meer snelheid of effect.','I look for more speed or spin.'],['Je construis pour aider mon partenaire.','Ik bouw hem zodat mijn partner beter staat.','I build it to help my partner.'],['Je vise d’abord une première balle sûre.','Ik mik eerst op een betrouwbare eerste opslag.','I aim first for a reliable first serve.'],['Je teste les zones qui gênent le plus.','Ik test welke zones het meest storen.','I test the zones that create most trouble.']),
+mq('TECHNIQUE',['Un nouveau coup te paraît inconfortable.','Een nieuwe slag voelt oncomfortabel.','A new shot feels uncomfortable.'],['Je l’attaque franchement.','Ik ga er vol voor.','I attack it directly.'],['Je le rends plus vivant avec le duo.','Ik maak het levendiger met mijn partner.','I make it more alive with the pair.'],['Je l’intègre étape par étape.','Ik bouw het stap voor stap op.','I integrate it step by step.'],['Je veux d’abord comprendre son utilité.','Ik wil eerst het nut begrijpen.','I first want to understand its purpose.']),
+mq('TACTIQUE',['Tu perds 0-3 au départ.','Je staat meteen 0-3 achter.','You go down 0-3 at the start.'],['Je provoque un déclic.','Ik forceer een klikmoment.','I trigger a shift.'],['Je relance l’énergie du duo.','Ik breng energie terug in het duo.','I restart the pair’s energy.'],['Je reconstruis point par point.','Ik bouw punt per punt opnieuw op.','I rebuild point by point.'],['Je cherche la cause tactique.','Ik zoek de tactische oorzaak.','I look for the tactical cause.']),
+mq('TACTIQUE',['L’adversaire vise ton partenaire.','De tegenstander speelt op je partner.','The opponent targets your partner.'],['Je prends plus d’espace.','Ik neem meer ruimte.','I take more space.'],['Je rassure et on décide ensemble.','Ik stel gerust en we beslissen samen.','I reassure and we decide together.'],['Je fixe une règle stable.','Ik zet een vaste regel.','I set a stable rule.'],['J’identifie pourquoi ça arrive.','Ik zoek waarom het gebeurt.','I identify why it happens.']),
+mq('TACTIQUE',['Tu as 10 secondes pour donner une consigne.','Je hebt 10 seconden voor een instructie.','You have 10 seconds to give an instruction.'],['On avance et on met pression.','We stappen in en zetten druk.','We move forward and apply pressure.'],['Ensemble, on reste liés.','Samen, we blijven verbonden.','Together, we stay connected.'],['Haut, profond, centre.','Hoog, diep, midden.','High, deep, middle.'],['Ils ouvrent côté revers.','Ze openen aan de backhandkant.','They open on the backhand side.']),
+mq('TACTIQUE',['Le plan ne marche plus.','Het plan werkt niet meer.','The plan no longer works.'],['Je change vite.','Ik verander snel.','I change quickly.'],['Je demande ce que l’autre ressent.','Ik vraag wat de ander voelt.','I ask what the other player feels.'],['Je change une variable.','Ik verander één variabele.','I change one variable.'],['Je vérifie si le plan est mal exécuté.','Ik check of het plan slecht uitgevoerd wordt.','I check whether the plan is poorly executed.']),
+mq('TACTIQUE',['Tu dois gérer une avance.','Je moet een voorsprong beheren.','You have to manage a lead.'],['Je continue d’avancer.','Ik blijf vooruit spelen.','I keep moving forward.'],['Je garde le duo vivant.','Ik houd het duo wakker.','I keep the pair alive.'],['Je protège notre base.','Ik bescherm onze basis.','I protect our base.'],['Je choisis les schémas rentables.','Ik kies de meest rendabele patronen.','I choose the highest-percentage patterns.']),
+mq('PHYSIQUE',['Tes jambes deviennent lourdes.','Je benen worden zwaar.','Your legs get heavy.'],['Je continue à avancer.','Ik blijf vooruit gaan.','I keep moving forward.'],['Je le dis au partenaire.','Ik zeg het tegen mijn partner.','I tell my partner.'],['Je simplifie et je respire.','Ik vereenvoudig en adem.','I simplify and breathe.'],['J’analyse ce qui coûte cher.','Ik analyseer wat veel energie kost.','I analyze what costs too much.']),
+mq('PHYSIQUE',['La veille d’un tournoi.','De dag voor een tornooi.','The day before a tournament.'],['Je veux arriver avec du feu.','Ik wil met vuur aankomen.','I want to arrive with fire.'],['Je prépare le lien avec le duo.','Ik bereid de connectie met het duo voor.','I prepare the connection with the pair.'],['Je protège sommeil et récupération.','Ik bewaak slaap en herstel.','I protect sleep and recovery.'],['Je planifie les horaires et l’activation.','Ik plan timing en activatie.','I plan timing and activation.']),
+mq('PHYSIQUE',['Un point long vient de te vider.','Een lang punt heeft je leeg gemaakt.','A long point just drained you.'],['Je veux gagner le suivant.','Ik wil het volgende punt winnen.','I want to win the next one.'],['Je cherche le regard du partenaire.','Ik zoek de blik van mijn partner.','I look for my partner’s eyes.'],['Je respire et je retrouve ma base.','Ik adem en vind mijn basis terug.','I breathe and return to my base.'],['J’adapte selon ma récupération.','Ik pas aan volgens mijn herstel.','I adapt to my recovery.']),
+mq('PHYSIQUE',['Tu arrives fatigué à l’entraînement.','Je komt moe aan op training.','You arrive tired at training.'],['Je fais une séance engagée.','Ik train toch met inzet.','I still train with commitment.'],['Je m’appuie sur l’ambiance.','Ik gebruik de sfeer.','I use the group energy.'],['Je règle l’intensité juste.','Ik kies de juiste intensiteit.','I set the right intensity.'],['Je choisis le contenu compatible.','Ik kies inhoud die past bij mijn energie.','I choose content that fits my energy.']),
+mq('PHYSIQUE',['Tu veux progresser physiquement.','Je wil fysiek vooruitgaan.','You want to progress physically.'],['Explosivité et puissance.','Explosiviteit en kracht.','Explosiveness and power.'],['Énergie commune et présence.','Gezamenlijke energie en aanwezigheid.','Shared energy and presence.'],['Mobilité, régularité, prévention.','Mobiliteit, regelmaat, preventie.','Mobility, consistency, prevention.'],['Indicateurs précis et charge.','Precieze indicatoren en belasting.','Precise indicators and load.']),
+mq('MENTAL',['Tu rates un point facile au mauvais moment.','Je mist een makkelijk punt op een slecht moment.','You miss an easy point at the wrong time.'],['Je reprends l’initiative.','Ik neem het initiatief terug.','I take the initiative back.'],['Je regarde mon partenaire.','Ik kijk naar mijn partner.','I look at my partner.'],['Je respire et je passe au suivant.','Ik adem en ga naar het volgende punt.','I breathe and move to the next point.'],['J’identifie la cause sans me juger.','Ik zoek de oorzaak zonder oordeel.','I identify the cause without judging myself.']),
+mq('MENTAL',['Ton partenaire doute.','Je partner twijfelt.','Your partner doubts.'],['Je prends plus de responsabilité.','Ik neem meer verantwoordelijkheid.','I take more responsibility.'],['Je parle avec énergie.','Ik spreek met energie.','I speak with energy.'],['Je donne une consigne simple.','Ik geef een eenvoudige instructie.','I give a simple instruction.'],['Je cherche la cause du doute.','Ik zoek de oorzaak van de twijfel.','I look for the cause of the doubt.']),
+mq('MENTAL',['Pendant un tie-break.','Tijdens een tie-break.','During a tie-break.'],['Courage et initiative.','Moed en initiatief.','Courage and initiative.'],['Énergie commune.','Gezamenlijke energie.','Shared energy.'],['Calme et routine.','Rust en routine.','Calm and routine.'],['Plan clair et lecture.','Duidelijk plan en lezing.','Clear plan and reading.']),
+mq('MENTAL',['Ton émotion monte trop haut.','Je emotie loopt te hoog op.','Your emotion rises too high.'],['Je la transforme en intensité.','Ik zet ze om in intensiteit.','I turn it into intensity.'],['Je la partage.','Ik deel ze.','I share it.'],['Je reviens au présent.','Ik kom terug naar het moment.','I return to the present.'],['Je nomme et je choisis.','Ik benoem en kies.','I name it and choose.']),
+mq('MENTAL',['Tu joues contre quelqu’un qui t’impressionne.','Je speelt tegen iemand die indruk maakt.','You play someone who impresses you.'],['Je montre que je ne recule pas.','Ik toon dat ik niet wijk.','I show I will not back down.'],['Je cherche la connexion du duo.','Ik zoek de connectie van het duo.','I look for pair connection.'],['Je reste dans mes bases.','Ik blijf bij mijn basis.','I stay in my basics.'],['J’analyse son jeu.','Ik analyseer zijn spel.','I analyze their game.']),
+mq('IDENTITÉ',['Ton identité de joueur.','Jouw spelersidentiteit.','Your player identity.'],['J’avance et je décide.','Ik ga vooruit en beslis.','I move forward and decide.'],['Je donne de l’énergie au duo.','Ik geef energie aan het duo.','I give energy to the pair.'],['Je suis fiable dans les moments durs.','Ik ben betrouwbaar in moeilijke momenten.','I am reliable in tough moments.'],['Je comprends et je m’adapte.','Ik begrijp en pas me aan.','I understand and adapt.']),
+mq('IDENTITÉ',['Après une défaite.','Na een nederlaag.','After a loss.'],['Je veux retravailler vite.','Ik wil snel opnieuw trainen.','I want to get back to work quickly.'],['Je veux parler et évacuer.','Ik wil praten en ontladen.','I want to talk and release.'],['Je veux digérer calmement.','Ik wil het rustig verwerken.','I want to process it calmly.'],['Je veux comprendre précisément.','Ik wil precies begrijpen.','I want to understand precisely.']),
+mq('IDENTITÉ',['Tu gagnes en jouant mal.','Je wint maar speelt slecht.','You win while playing badly.'],['Je remets de l’exigence.','Ik leg de lat opnieuw hoger.','I raise the standard again.'],['Je savoure avec le partenaire.','Ik geniet ervan met mijn partner.','I enjoy it with my partner.'],['Je reste humble.','Ik blijf nederig.','I stay humble.'],['J’analyse pourquoi ça a suffi.','Ik analyseer waarom het genoeg was.','I analyze why it was enough.']),
+mq('IDENTITÉ',['Ton meilleur match arrive quand...','Je beste match komt wanneer...','Your best match happens when...'],['Je peux imposer ma présence.','Ik mijn aanwezigheid kan opleggen.','I can impose my presence.'],['Je me sens libre et connecté.','Ik me vrij en verbonden voel.','I feel free and connected.'],['Je me sens stable.','Ik me stabiel voel.','I feel stable.'],['Je lis clairement le jeu.','Ik het spel duidelijk lees.','I read the game clearly.']),
+mq('DUO',['Au centre, personne ne sait qui prend la balle.','In het midden weet niemand wie de bal neemt.','In the middle, nobody knows who takes the ball.'],['Je tranche vite.','Ik hak snel de knoop door.','I decide quickly.'],['Je clarifie avec des mots simples.','Ik verduidelijk met simpele woorden.','I clarify with simple words.'],['Je fixe une règle durable.','Ik zet een duurzame regel.','I set a durable rule.'],['J’analyse les positions.','Ik analyseer de posities.','I analyze the positions.']),
+mq('DUO',['Ton partenaire veut jouer très agressif.','Je partner wil heel agressief spelen.','Your partner wants to play very aggressively.'],['Je l’accompagne dans l’initiative.','Ik ga mee in het initiatief.','I join the initiative.'],['Je canalise sans l’éteindre.','Ik kanaliseer zonder af te remmen.','I channel it without shutting it down.'],['Je cherche l’équilibre.','Ik zoek evenwicht.','I look for balance.'],['J’évalue quand c’est rentable.','Ik evalueer wanneer het rendeert.','I evaluate when it pays off.']),
+mq('COACHING',['Le coaching qui t’aide le plus.','De coaching die jou het meest helpt.','The coaching that helps you most.'],['Direct, court, orienté action.','Direct, kort, actiegericht.','Direct, short, action-focused.'],['Vivant, positif, connecté.','Levendig, positief, verbonden.','Alive, positive, connected.'],['Calme, régulier, rassurant.','Rustig, regelmatig, geruststellend.','Calm, steady, reassuring.'],['Précis, logique, argumenté.','Precies, logisch, onderbouwd.','Precise, logical, reasoned.']),
+mq('COACHING',['Une consigne trop longue arrive.','Er komt een te lange instructie.','A coaching message is too long.'],['Je veux l’action clé.','Ik wil de sleutelactie.','I want the key action.'],['Je veux le mot qui relance.','Ik wil het woord dat herstart.','I want the word that restarts me.'],['Je veux une règle simple.','Ik wil een eenvoudige regel.','I want a simple rule.'],['Je veux la raison précise.','Ik wil de precieze reden.','I want the exact reason.']),
+mq('MATCH',['Le score chauffe.','De score wordt spannend.','The score gets tight.'],['Je prends mes responsabilités.','Ik neem mijn verantwoordelijkheid.','I take responsibility.'],['Je connecte le duo.','Ik verbind het duo.','I connect the pair.'],['Je garde la routine.','Ik houd mijn routine vast.','I keep the routine.'],['Je choisis le meilleur schéma.','Ik kies het beste patroon.','I choose the best pattern.']),
+mq('MATCH',['Une paire inconnue arrive.','Er komt een onbekend duo.','An unknown pair arrives.'],['Je teste vite leur résistance.','Ik test snel hun weerstand.','I quickly test their resistance.'],['Je crée une bonne énergie.','Ik creëer goede energie.','I create good energy.'],['Je commence solide.','Ik start solide.','I start solid.'],['J’observe leurs habitudes.','Ik observeer hun gewoontes.','I observe their habits.']),
+mq('MATCH',['Tu dois mesurer ton progrès.','Je wil je vooruitgang meten.','You want to measure your progress.'],['Je regarde les points importants.','Ik kijk naar de belangrijke punten.','I look at the important points.'],['Je demande le ressenti du duo.','Ik vraag hoe het duo het voelt.','I ask how the pair feels.'],['Je regarde la stabilité.','Ik kijk naar de stabiliteit.','I look at stability.'],['Je compare les décisions.','Ik vergelijk de beslissingen.','I compare decisions.'])
+];
+const QUESTIONS_PER_QUIZ = 12;
+let QUESTIONS = [];
+function shuffleArray(arr){
+  for(let i=arr.length-1;i>0;i--){
+    const j = Math.floor(Math.random()*(i+1));
+    [arr[i],arr[j]] = [arr[j],arr[i]];
+  }
+  return arr;
+}
+
+/* ================= STATE ================= */
+let currentQ = 0;
+let scores = {};
+let finalProfile = null;
+
+function showScreen(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.add('hidden'));
+  document.getElementById(id).classList.remove('hidden');
+  window.scrollTo(0,0);
+}
+function setLang(lang){
+  currentLang = lang;
+  sessionStorage.setItem('hwbt_lang', lang);
+  document.documentElement.lang = lang;
+  applyLanguage();
+  if(!document.getElementById('quizScreen').classList.contains('hidden')) renderQuestion();
+  if(finalProfile && !document.getElementById('resultScreen').classList.contains('hidden')) renderResultCard(false);
+}
+function applyLanguage(){
+  const u = tr();
+  document.querySelectorAll('[data-lang-btn]').forEach(b=>b.classList.toggle('active', b.dataset.langBtn===currentLang));
+  document.getElementById('languageGateText').textContent = u.gateText;
+  document.querySelector('.landing-eyebrow').textContent = u.eyebrow;
+  document.querySelector('.landing-title').innerHTML = u.title;
+  document.querySelector('.landing-sub').textContent = u.sub;
+  document.querySelector('#landingScreen .btn-primary').textContent = u.start;
+  document.querySelector('.pc-eyebrow').textContent = u.profileCard;
+  document.querySelector('.pc-bottom .l').textContent = u.cardNote;
+  document.querySelector('.personalize-title').textContent = u.personalize;
+  document.getElementById('pcNameInput').placeholder = u.namePlaceholder;
+  document.querySelector('.file-btn').childNodes[0].textContent = u.photo + ' ';
+  const actionButtons = document.querySelectorAll('.result-actions button');
+  if(actionButtons[0]) actionButtons[0].textContent = u.instagram;
+  if(actionButtons[1]) actionButtons[1].textContent = u.facebook;
+  if(actionButtons[2]) actionButtons[2].textContent = u.download;
+  if(actionButtons[3]) actionButtons[3].textContent = u.email;
+  if(actionButtons[4]) actionButtons[4].textContent = u.restart;
+  document.querySelector('.detail-title').textContent = u.detail;
+  document.querySelector('.detail-box.forts h4').textContent = u.strengths;
+  document.querySelector('.detail-box.faibles h4').textContent = u.work;
+  document.querySelector('.comm-box h4').textContent = u.comm;
+  document.querySelector('.cta-text').textContent = u.cta;
+  document.querySelector('.cta-block>a').textContent = u.ctaBtn;
+}
+
+/* ================= GATE ================= */
+function checkGate(){
+  const v = document.getElementById('gateInput').value.trim();
+  if(v.toUpperCase() === QUIZ_PASSWORD.toUpperCase()){
+    showScreen('landingScreen');
+  } else {
+    document.getElementById('gateErr').textContent = 'Mot de passe incorrect.';
+  }
+}
+document.addEventListener('DOMContentLoaded',()=>{
+  applyLanguage();
+  const gateInput = document.getElementById('gateInput');
+  if(gateInput) gateInput.addEventListener('keydown',e=>{if(e.key==='Enter')checkGate();});
+});
+
+/* ================= QUIZ ================= */
+function startQuiz(){
+  currentQ = 0;
+  scores = {rouge:0,jaune:0,vert:0,bleu:0};
+  QUESTIONS = shuffleArray(MULTI_QUESTION_POOL.slice())
+    .slice(0, QUESTIONS_PER_QUIZ)
+    .map(q => ({ q: q.q[currentLang], opts: shuffleArray(q.opts.slice()).map(o=>({t:o.t[currentLang], c:o.c})) }));
+  showScreen('quizScreen');
+  renderQuestion();
+}
+function renderQuestion(){
+  const item = QUESTIONS[currentQ];
+  document.getElementById('progLabel').textContent = `Q${currentQ+1}/${QUESTIONS.length}`;
+  document.getElementById('progFill').style.width = ((currentQ)/QUESTIONS.length*100)+'%';
+  document.getElementById('qtext').textContent = item.q;
+  const optsEl = document.getElementById('opts');
+  optsEl.innerHTML = '';
+  item.opts.forEach(opt=>{
+    const b = document.createElement('button');
+    b.className = 'opt';
+    b.textContent = opt.t;
+    b.onclick = ()=>answer(opt.c);
+    optsEl.appendChild(b);
+  });
+}
+async function answer(color){
+  scores[color] = (scores[color]||0) + 2;
+  currentQ++;
+  if(currentQ >= QUESTIONS.length){
+    document.getElementById('progFill').style.width = '100%';
+    computeResult();
+    await saveCompletion(finalProfile);
+    renderResultCard();
+    showScreen('resultScreen');
+  } else {
+    renderQuestion();
+  }
+}
+function computeResult(){
+  const sorted = COLOR_ORDER.slice().sort((a,b)=> (scores[b]-scores[a]) || (COLOR_ORDER.indexOf(a)-COLOR_ORDER.indexOf(b)) );
+  const primary = sorted[0], secondary = sorted[1];
+  finalProfile = PROFILES[primary+'-'+secondary].key;
+}
+function restartQuiz(){
+  showScreen('landingScreen');
+}
+
+/* ================= ANONYMOUS COMPLETION STATS ================= */
+async function saveCompletion(profileKey){
+  try{
+    let counts = {};
+    try{
+      const res = await window.storage.get('profile-counts', true);
+      if(res && res.value) counts = JSON.parse(res.value);
+    }catch(e){ counts = {}; }
+    counts[profileKey] = (counts[profileKey]||0) + 1;
+    await window.storage.set('profile-counts', JSON.stringify(counts), true);
+  }catch(e){ console.error('Storage error', e); }
+}
+
+/* ================= RESULT CARD (personalisable player card) ================= */
+function renderResultCard(resetPersonalization=true){
+  const p = PROFILES[finalProfile];
+  const display = profileDisplay(p);
+  const details = profileDetails(p);
+  const c1 = COLORS[p.p1], c2 = COLORS[p.p2];
+  const card = document.getElementById('fifaCard');
+  card.style.setProperty('--p1', c1.var);
+  card.style.setProperty('--p2', c2.var);
+  card.style.background = `linear-gradient(135deg, ${mixHex(c1.hex,'#050505',0.40)} 0%, #101014 50%, ${mixHex(c2.hex,'#0c0c10',0.40)} 100%)`;
+  card.style.borderColor = mixHex(c1.hex, c2.hex, 0.55);
+  card.style.boxShadow = `0 0 50px -12px ${rgba(c1.hex,0.55)}, 0 0 50px -12px ${rgba(c2.hex,0.4)}`;
+
+  const ovr = Math.round((p.stats.pui+p.stats.pre+p.stats.sfr+p.stats.cre+p.stats.reg+p.stats.equ)/6);
+  document.getElementById('pcOvr').textContent = ovr;
+  document.getElementById('pcPill').textContent = display.name;
+  document.getElementById('pcSub').textContent = display.line.toUpperCase();
+  const cardStory = details ? details.story : p.story;
+  document.getElementById('pcBlurb').textContent = cardStory.split('. ').slice(0,2).join('. ') + (cardStory.split('. ').length>2 ? '.' : '');
+
+  const statLabels = [['pui','PUI'],['pre','PRE'],['sfr','SFR'],['cre','CRE'],['reg','REG'],['equ','EQU']];
+  document.getElementById('pcStatsGrid').innerHTML = statLabels.map(([k,l])=>`
+    <div class="pc-stat"><div class="v">${p.stats[k]}</div><div class="k">${l}</div></div>`).join('');
+
+  if(resetPersonalization){
+    document.getElementById('pcNameInput').value = '';
+    document.getElementById('pcName').textContent = tr().cardName;
+    document.getElementById('pcPhoto').style.backgroundImage = '';
+    document.getElementById('pcPhoto').style.opacity = '0';
+    document.getElementById('pcPhotoInput').value = '';
+  }
+
+  document.getElementById('detailStory').textContent = details ? details.story : p.story;
+  document.getElementById('detailForts').innerHTML = (details ? details.forts : p.forts).map(f=>`<li>${f}</li>`).join('');
+  document.getElementById('detailFaibles').innerHTML = (details ? details.faibles : p.faibles).map(f=>`<li>${f}</li>`).join('');
+  document.getElementById('detailComm').textContent = details ? details.comm : p.comm;
+  document.getElementById('commBox').style.setProperty('--p1', c1.var);
+  applyLanguage();
+}
+
+function updateCardName(){
+  const v = document.getElementById('pcNameInput').value.trim();
+  document.getElementById('pcName').textContent = v ? v.toUpperCase() : tr().cardName;
+}
+function updateCardPhoto(e){
+  const file = e.target.files && e.target.files[0];
+  if(!file) return;
+  const url = URL.createObjectURL(file);
+  const img = new Image();
+  img.onload = ()=>{
+    const photo = document.getElementById('pcPhoto');
+    photo.style.backgroundImage = `url(${url})`;
+    photo.style.opacity = '0.9';
+  };
+  img.src = url;
+}
+
+/* ================= TOAST ================= */
+function showToast(msg){
+  let t = document.getElementById('hwbtToast');
+  if(!t){
+    t = document.createElement('div');
+    t.id = 'hwbtToast';
+    t.style.cssText = 'position:fixed;left:50%;bottom:28px;transform:translateX(-50%);background:var(--bg2);border:1px solid var(--border2);color:var(--white);padding:12px 18px;border-radius:8px;font-size:12px;font-family:var(--font-body);z-index:9999;box-shadow:0 6px 24px rgba(0,0,0,.4);opacity:0;transition:opacity .2s';
+    document.body.appendChild(t);
+  }
+  t.textContent = msg;
+  requestAnimationFrame(()=>{ t.style.opacity = '1'; });
+  clearTimeout(t._hideTimer);
+  t._hideTimer = setTimeout(()=>{ t.style.opacity = '0'; }, 2600);
+}
+
+/* ================= SHARE / DOWNLOAD ================= */
+async function renderCardCanvas(){
+  const node = document.getElementById('fifaCard');
+  return await html2canvas(node, {backgroundColor:'#0B0B0F', scale:2, useCORS:true});
+}
+async function downloadCard(){
+  const canvas = await renderCardCanvas();
+  const link = document.createElement('a');
+  link.download = 'hwbt-carte-joueur.png';
+  link.href = canvas.toDataURL('image/png');
+  link.click();
+}
+function shareTextFor(p){
+  const display = profileDisplay(p);
+  return `${tr().shareText(display.name)}\n\n#HWBTAcademy\n#HardWorkBeatsTalent\n#PadelProgress\n#TrainWithPurpose\n#MeasuredProgress\n${TEST_URL}`;
+}
+async function tryNativeShare(p){
+  // On mobile, this opens the system share sheet with Instagram/Facebook/Messages etc. among the options,
+  // with the card image already attached — the closest thing to a real "one-tap post" from a browser.
+  try{
+    const canvas = await renderCardCanvas();
+    return await new Promise((resolve)=>{
+      canvas.toBlob(async (blob)=>{
+        const file = new File([blob], 'hwbt-carte-joueur.png', {type:'image/png'});
+        if(navigator.canShare && navigator.canShare({files:[file]})){
+          try{ await navigator.share({files:[file], text: shareTextFor(p)}); resolve(true); return; }catch(e){ resolve(false); return; }
+        }
+        resolve(false);
+      }, 'image/png');
+    });
+  }catch(e){ return false; }
+}
+async function shareToInstagram(){
+  const p = PROFILES[finalProfile];
+  const shared = await tryNativeShare(p);
+  if(!shared){
+    await downloadCard();
+    try{ await navigator.clipboard.writeText(shareTextFor(p)); }catch(e){}
+    showToast(tr().shareToast);
+  }
+}
+async function shareToFacebook(){
+  const p = PROFILES[finalProfile];
+  const shared = await tryNativeShare(p);
+  if(!shared){
+    // Facebook does not allow a browser to attach an image to a post automatically without their
+    // login/Graph API — so on desktop we download the image and open Facebook's share dialog for the link.
+    await downloadCard();
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(TEST_URL), '_blank');
+    try{ await navigator.clipboard.writeText(shareTextFor(p)); }catch(e){}
+    showToast(tr().shareToast);
+  }
+}
+function emailCard(){
+  const p = PROFILES[finalProfile];
+  const display = profileDisplay(p);
+  const subject = `HWBT Academy : ${display.name}`;
+  const body = `${shareTextFor(p)}\n\n${display.line}`;
+  window.location.href = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+}
+
+/* ================= ADMIN ================= */
+function openAdminGate(){ showScreen('adminGateScreen'); }
+function checkAdminGate(){
+  const v = document.getElementById('adminInput').value.trim();
+  if(v === ADMIN_PASSWORD){
+    loadAdmin();
+    showScreen('adminScreen');
+  } else {
+    document.getElementById('adminErr').textContent = 'Mot de passe incorrect.';
+  }
+}
+async function loadAdmin(){
+  let counts = {};
+  try{
+    const res = await window.storage.get('profile-counts', true);
+    if(res && res.value) counts = JSON.parse(res.value);
+  }catch(e){ counts = {}; }
+
+  const total = Object.values(counts).reduce((a,b)=>a+b,0);
+  const statsEl = document.getElementById('adminStats');
+  statsEl.innerHTML = `<div class="stat-box"><div class="n">${total}</div><div class="l">TESTS COMPLÉTÉS</div></div>` +
+    Object.keys(PROFILES).map(k=>`<div class="stat-box"><div class="n">${counts[k]||0}</div><div class="l">${PROFILES[k].name}</div></div>`).join('');
+
+  window._countsCache = counts;
+}
+function exportCSV(){
+  const counts = window._countsCache || {};
+  let csv = 'profil,nombre_de_tests\n';
+  Object.keys(PROFILES).forEach(k=>{ csv += `"${PROFILES[k].name}",${counts[k]||0}\n`; });
+  const blob = new Blob([csv], {type:'text/csv'});
+  const link = document.createElement('a');
+  link.href = URL.createObjectURL(blob);
+  link.download = 'hwbt-stats-profils.csv';
+  link.click();
+}
+</script>
+</body>
+</html>
