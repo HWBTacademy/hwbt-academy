@@ -798,6 +798,7 @@ let currentQ = 0;
 let scores = {};
 let finalProfile = null;
 let storyPhotoImage = null;
+let storyBackgroundPromise = null;
 
 function showScreen(id){
   document.querySelectorAll('.screen').forEach(s=>s.classList.add('hidden'));
@@ -1008,6 +1009,16 @@ function drawCoverImage(ctx,img,x,y,w,h){
   const sx=(img.width-sw)/2, sy=(img.height-sh)/2;
   ctx.drawImage(img,sx,sy,sw,sh,x,y,w,h);
 }
+function loadStoryBackground(){
+  if(storyBackgroundPromise) return storyBackgroundPromise;
+  storyBackgroundPromise = new Promise((resolve)=>{
+    const img = new Image();
+    img.onload = ()=>resolve(img);
+    img.onerror = ()=>resolve(null);
+    img.src = 'assets/img/hwbt-story-background.png';
+  });
+  return storyBackgroundPromise;
+}
 function roundedRectPath(ctx,x,y,w,h,r){
   const radius=Math.min(r,w/2,h/2);
   ctx.moveTo(x+radius,y);
@@ -1029,11 +1040,27 @@ async function renderCardCanvas(){
   canvas.width=1080;
   canvas.height=1920;
   const ctx=canvas.getContext('2d');
-  const grad=ctx.createLinearGradient(0,0,1080,1920);
-  grad.addColorStop(0,mixHex(c1.hex,'#07070a',0.16));
-  grad.addColorStop(.52,'#0b0b0f');
-  grad.addColorStop(1,mixHex(c2.hex,'#07070a',0.16));
-  ctx.fillStyle=grad;
+  ctx.fillStyle='#040405';
+  ctx.fillRect(0,0,1080,1920);
+  const bg = await loadStoryBackground();
+  if(bg){
+    const bgH = 1080 * (bg.height / bg.width);
+    ctx.drawImage(bg,0,0,1080,bgH);
+  }
+
+  const bgShade=ctx.createLinearGradient(0,0,1080,1920);
+  bgShade.addColorStop(0,'rgba(0,0,0,.18)');
+  bgShade.addColorStop(.25,'rgba(0,0,0,.46)');
+  bgShade.addColorStop(.54,'rgba(0,0,0,.78)');
+  bgShade.addColorStop(1,'rgba(0,0,0,.88)');
+  ctx.fillStyle=bgShade;
+  ctx.fillRect(0,0,1080,1920);
+
+  const colorWash=ctx.createLinearGradient(0,0,1080,1920);
+  colorWash.addColorStop(0,rgba(c1.hex,.22));
+  colorWash.addColorStop(.55,'rgba(0,0,0,0)');
+  colorWash.addColorStop(1,rgba(c2.hex,.20));
+  ctx.fillStyle=colorWash;
   ctx.fillRect(0,0,1080,1920);
 
   ctx.globalAlpha=.07;
@@ -1045,24 +1072,7 @@ async function renderCardCanvas(){
   ctx.lineWidth=4;
   ctx.strokeRect(70,70,940,1780);
 
-  ctx.fillStyle='rgba(255,255,255,.08)';
-  ctx.font='800 230px Oswald, Arial';
-  ctx.fillText('HWBT',620,170);
-  ctx.fillStyle='#fff';
-  ctx.font='800 92px Oswald, Arial';
-  ctx.letterSpacing=0;
-  ctx.fillText('HWBT',110,162);
-  ctx.strokeStyle='#c9a07a';
-  ctx.lineWidth=3;
-  ctx.beginPath();
-  ctx.moveTo(110,180);
-  ctx.lineTo(386,180);
-  ctx.stroke();
-  ctx.fillStyle='#c9a07a';
-  ctx.font='600 29px Oswald, Arial';
-  ctx.fillText(tr().storyKicker,112,220);
-
-  const cardX=110, cardY=295, cardW=860, cardH=1035, radius=18;
+  const cardX=72, cardY=405, cardW=936, cardH=1018, radius=18;
   ctx.save();
   ctx.shadowColor=rgba(c1.hex,.35);
   ctx.shadowBlur=42;
@@ -1107,9 +1117,6 @@ async function renderCardCanvas(){
   ctx.fillStyle=bottomFade;
   ctx.fillRect(cardX,cardY,cardW,cardH);
 
-  ctx.fillStyle='rgba(255,255,255,.07)';
-  ctx.font='800 78px Oswald, Arial';
-  ctx.fillText('HWBT',cardX+625,cardY+86);
   ctx.fillStyle='#c9a07a';
   ctx.font='600 24px Oswald, Arial';
   ctx.fillText(tr().profileCard.toUpperCase(),cardX+54,cardY+66);
@@ -1117,17 +1124,17 @@ async function renderCardCanvas(){
   const playerName=(document.getElementById('pcNameInput').value.trim() || tr().cardName).toUpperCase();
   ctx.fillStyle='#fff';
   ctx.font='800 74px Oswald, Arial';
-  wrapCanvasText(ctx,playerName,cardX+54,cardY+180,465,74);
+  wrapCanvasText(ctx,playerName,cardX+54,cardY+178,500,74);
 
   ctx.fillStyle='#c9a07a';
   ctx.fillRect(cardX+54,cardY+238,168,3);
 
   ctx.fillStyle='#c9a07a';
   ctx.font='800 58px Oswald, Arial';
-  let nextY=wrapCanvasText(ctx,display.name.toUpperCase(),cardX+54,cardY+330,640,58);
+  let nextY=wrapCanvasText(ctx,display.name.toUpperCase(),cardX+54,cardY+328,700,58);
   ctx.fillStyle='#fff';
   ctx.font='500 26px Oswald, Arial';
-  nextY=wrapCanvasText(ctx,display.line.toUpperCase(),cardX+92,nextY+18,560,35);
+  nextY=wrapCanvasText(ctx,display.line.toUpperCase(),cardX+92,nextY+18,620,35);
   ctx.strokeStyle='#c9a07a';
   ctx.lineWidth=2;
   ctx.beginPath();
@@ -1138,14 +1145,14 @@ async function renderCardCanvas(){
   const cardStory = story.split('. ').slice(0,2).join('. ') + (story.split('. ').length>2 ? '.' : '');
   ctx.fillStyle='rgba(245,245,240,.68)';
   ctx.font='400 25px Inter, Arial';
-  wrapCanvasText(ctx,cardStory,cardX+54,nextY+34,560,38);
+  wrapCanvasText(ctx,cardStory,cardX+54,nextY+34,610,38);
 
   const ovr = Math.round((p.stats.pui+p.stats.pre+p.stats.sfr+p.stats.cre+p.stats.reg+p.stats.equ)/6);
   const statLabels = [['pui','PUI'],['pre','PRE'],['sfr','SFR'],['cre','CRE'],['reg','REG'],['equ','EQU']];
-  let sx=cardX+92, sy=cardY+760;
+  let sx=cardX+98, sy=cardY+760;
   ctx.textAlign='center';
   statLabels.forEach(([k,l],i)=>{
-    const x=sx+(i%3)*145, y=sy+Math.floor(i/3)*118;
+    const x=sx+(i%3)*152, y=sy+Math.floor(i/3)*118;
     ctx.fillStyle='#fff';
     ctx.font='800 48px Oswald, Arial';
     ctx.fillText(p.stats[k],x,y);
@@ -1170,15 +1177,15 @@ async function renderCardCanvas(){
   roundedRectPath(ctx,cardX,cardY,cardW,cardH,radius);
   ctx.stroke();
 
-  ctx.fillStyle='rgba(245,245,240,.54)';
-  ctx.font='700 27px Oswald, Arial';
-  ctx.fillText('BOUSSOLE HWBT EXPRESS',110,1438);
-  ctx.fillStyle='rgba(245,245,240,.50)';
-  ctx.font='800 44px Oswald, Arial';
-  ctx.fillText('#HWBTacademy',110,1540);
-  ctx.fillStyle='rgba(201,160,122,.58)';
-  ctx.font='800 40px Oswald, Arial';
-  ctx.fillText('#Hardworksbeatstalent',110,1600);
+  ctx.fillStyle='rgba(245,245,240,.58)';
+  ctx.font='800 42px Oswald, Arial';
+  ctx.fillText('HWBT BOUSSOLE EXPRESS',82,1508);
+  ctx.fillStyle='rgba(245,245,240,.46)';
+  ctx.font='800 58px Oswald, Arial';
+  ctx.fillText('#HWBTacademy',82,1608);
+  ctx.fillStyle='rgba(201,160,122,.50)';
+  ctx.font='800 52px Oswald, Arial';
+  ctx.fillText('#Hardworksbeatstalent',82,1682);
   return canvas;
 }
 async function downloadCard(){
