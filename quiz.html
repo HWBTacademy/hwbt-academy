@@ -68,33 +68,39 @@ input{font-family:var(--font-body)}
 .opt:hover{border-color:var(--bronze);background:var(--bronze-dim)}
 
 /* ---- Player card (personnalisable, style HWBT) ---- */
-.resultwrap{width:min(440px,94vw);text-align:center}
-.playercard{position:relative;width:100%;max-width:380px;margin:0 auto;aspect-ratio:4/4.5;border-radius:10px;overflow:hidden;padding:26px 24px 22px;
-  background:#101014;
+.resultwrap{width:min(470px,94vw);text-align:center}
+.playercard{position:relative;width:100%;max-width:430px;margin:0 auto;aspect-ratio:9/16;border-radius:0;overflow:hidden;padding:30px 24px 24px;
+  background:#050506 url("assets/img/hwbt-night-court.png") center top/cover no-repeat;
   border:2px solid var(--bronze);
-  box-shadow:0 0 40px -14px rgba(0,0,0,.6);
+  box-shadow:0 0 44px -12px rgba(0,0,0,.8);
   display:flex;flex-direction:column;text-align:left}
-.playercard-photo{position:absolute;right:0;bottom:0;width:56%;height:90%;background-size:cover;background-position:center top;filter:contrast(1.05) saturate(.85);opacity:0;transition:opacity .2s;pointer-events:none}
-.playercard-overlay{position:absolute;inset:0;pointer-events:none;
-  background:linear-gradient(100deg, rgba(6,6,8,.96) 0%, rgba(6,6,8,.82) 38%, rgba(6,6,8,.25) 68%, rgba(6,6,8,.05) 100%), linear-gradient(0deg, rgba(0,0,0,.5) 0%, transparent 40%)}
-.pc-top{display:flex;justify-content:space-between;align-items:flex-start;position:relative;z-index:2}
-.pc-eyebrow{font-family:var(--font-title);font-size:9px;letter-spacing:3px;color:var(--bronze2)}
-.pc-watermark{font-family:var(--font-title);font-size:30px;font-weight:800;letter-spacing:3px;color:rgba(255,255,255,.07)}
-.pc-name{font-family:var(--font-title);font-size:clamp(24px,6.4vw,32px);font-weight:800;color:#fff;text-transform:uppercase;line-height:1;margin-top:18px;position:relative;z-index:2;word-break:break-word}
-.pc-line{height:1px;width:80px;background:var(--bronze);margin:14px 0 12px;position:relative;z-index:2}
-.pc-rows{display:flex;flex-direction:column;gap:6px;position:relative;z-index:2}
-.pc-profile-name{font-family:var(--font-title);font-size:clamp(20px,5.2vw,25px);font-weight:800;letter-spacing:.5px;color:var(--bronze2);text-transform:uppercase;line-height:1.05}
-.pc-row{display:flex;align-items:center;gap:10px;margin-top:4px}
-.pc-icon{width:22px;height:22px;border-radius:50%;border:1px solid var(--bronze);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:10px;color:var(--bronze2)}
-.pc-row span{font-family:var(--font-title);font-size:11.5px;letter-spacing:1px;color:#fff;text-transform:uppercase}
-.pc-blurb{font-size:11px;color:rgba(255,255,255,.68);line-height:1.55;margin-top:10px;position:relative;z-index:2;padding-right:26%}
-.pc-stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px 4px;margin-top:14px;position:relative;z-index:2;max-width:78%}
-.pc-stat{text-align:center}
-.pc-stat .v{font-family:var(--font-title);font-size:23px;font-weight:800;color:#fff;line-height:1}
-.pc-stat .k{font-family:var(--font-title);font-size:7px;letter-spacing:1px;color:rgba(255,255,255,.55);margin-top:3px}
-.pc-bottom{position:absolute;right:20px;bottom:18px;text-align:right;z-index:2}
-.pc-bottom .n{font-family:var(--font-title);font-size:44px;font-weight:800;color:#fff;line-height:1}
-.pc-bottom .l{font-family:var(--font-title);font-size:8.5px;letter-spacing:1.3px;color:var(--bronze2);margin-top:2px}
+.playercard:before{content:"";position:absolute;inset:8px;border:1px solid rgba(201,160,122,.62);pointer-events:none;z-index:3}
+.playercard:after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,rgba(0,0,0,.96) 0%,rgba(0,0,0,.88) 42%,rgba(0,0,0,.30) 72%,rgba(0,0,0,.78) 100%),repeating-linear-gradient(135deg,rgba(201,160,122,.08) 0 1px,transparent 1px 8px);pointer-events:none;z-index:1}
+.playercard-photo{position:absolute;right:18px;top:26px;width:47%;height:45%;background-size:cover;background-position:center top;filter:contrast(1.04) saturate(.9);opacity:0;transition:opacity .2s;pointer-events:none;z-index:2;clip-path:polygon(22% 0,100% 0,100% 88%,82% 100%,10% 100%,0 30%);border:2px solid var(--bronze)}
+.playercard-overlay{display:none}
+.pc-top{position:relative;z-index:4;display:block;min-height:108px}
+.pc-eyebrow{position:absolute;left:4px;top:68px;font-family:var(--font-title);font-size:18px;font-weight:800;letter-spacing:2px;color:var(--bronze2)}
+.pc-eyebrow:before{content:"HWBT";display:block;font-size:58px;line-height:.82;color:#fff;letter-spacing:0}
+.pc-watermark{display:none}
+.pc-name{font-family:var(--font-title);font-size:clamp(32px,9vw,48px);font-weight:800;color:#fff;text-transform:uppercase;line-height:.95;margin-top:36px;position:relative;z-index:4;word-break:break-word;letter-spacing:1px}
+.pc-line{height:2px;width:120px;background:var(--bronze);margin:16px 0 14px;position:relative;z-index:4}
+.pc-rows{display:flex;flex-direction:column;gap:8px;position:relative;z-index:4}
+.pc-profile-name{font-family:var(--font-title);font-size:clamp(58px,17vw,84px);font-weight:800;letter-spacing:0;color:var(--bronze2);text-transform:uppercase;line-height:.86;max-width:94%;text-shadow:0 0 18px rgba(201,160,122,.16)}
+.pc-row{display:flex;align-items:center;gap:10px;margin-top:8px}
+.pc-icon{display:none}
+.pc-row:before,.pc-row:after{content:"";height:1px;background:var(--bronze);flex:0 0 34px}
+.pc-row span{font-family:var(--font-title);font-size:clamp(18px,5vw,26px);font-weight:800;letter-spacing:.2px;color:#fff;text-transform:none;line-height:1.1}
+.pc-blurb{position:absolute;left:24px;right:24px;bottom:176px;z-index:4;font-size:clamp(13px,3.5vw,17px);color:rgba(245,241,232,.80);line-height:1.42;padding:16px 18px;border:1px solid rgba(201,160,122,.72);border-radius:5px;background:rgba(0,0,0,.28);max-height:180px;overflow:hidden}
+.pc-stats-grid{position:absolute;left:168px;right:28px;bottom:78px;display:grid;grid-template-columns:repeat(6,1fr);gap:0;z-index:4;max-width:none;border:1px solid rgba(201,160,122,.70);border-left:0;border-right:0;padding:8px 0 9px}
+.pc-stat{text-align:center;border-left:1px solid rgba(201,160,122,.45)}
+.pc-stat:first-child{border-left:0}
+.pc-stat .v{font-family:var(--font-title);font-size:clamp(17px,5vw,27px);font-weight:800;color:#d5aa7d;line-height:1}
+.pc-stat .k{font-family:var(--font-title);font-size:9px;letter-spacing:1px;color:rgba(245,241,232,.75);margin-top:4px}
+.pc-bottom{position:absolute;left:28px;bottom:78px;text-align:left;z-index:4;border:1px solid rgba(201,160,122,.70);border-right:0;padding:7px 12px 8px 0}
+.pc-bottom .n{font-family:var(--font-title);font-size:clamp(48px,14vw,72px);font-weight:800;color:#d5aa7d;line-height:.9;display:inline-block;vertical-align:middle}
+.pc-bottom .l{font-family:var(--font-title);font-size:13px;letter-spacing:1px;color:var(--bronze2);margin-top:0;display:inline-block;vertical-align:middle;margin-left:8px;line-height:1.05;width:42px}
+.playercard .pc-bottom:after{content:"BOUSSOLE HWBT EXPRESS";position:absolute;left:0;top:76px;width:260px;font-family:var(--font-title);font-size:14px;letter-spacing:2px;color:rgba(201,160,122,.9)}
+.playercard .pc-stats-grid:after{content:"#HWBTAcademy  #HardWorkBeatsTalent";position:absolute;left:-80px;top:78px;width:340px;font-family:var(--font-title);font-size:18px;font-weight:800;color:#fff;line-height:1.55;white-space:normal}
 
 .personalize-box{width:100%;max-width:380px;margin:16px auto 0;background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:14px 16px;text-align:left}
 .personalize-title{font-family:var(--font-title);font-size:9.5px;letter-spacing:2px;color:var(--gray2);margin-bottom:10px}
@@ -153,13 +159,12 @@ input{font-family:var(--font-body)}
   .qcard{padding:24px 20px}
   .qtext{font-size:21px}
   .opt{font-size:13px;padding:14px 15px}
-  .playercard{max-width:100%;padding:24px 20px 20px}
-  .pc-name{font-size:30px}
-  .pc-profile-name{font-size:25px}
-  .pc-row span{font-size:10.5px;line-height:1.2}
-  .pc-blurb{font-size:10.5px;padding-right:22%}
-  .pc-bottom{right:16px;bottom:16px}
-  .pc-bottom .n{font-size:40px}
+  .playercard{max-width:100%;padding:26px 22px 22px}
+  .pc-name{font-size:38px}
+  .pc-profile-name{font-size:62px}
+  .pc-row span{font-size:20px;line-height:1.2}
+  .pc-blurb{font-size:15px}
+  .pc-bottom .n{font-size:54px}
   .personalize-box{max-width:100%}
   .detail-story,.detail-box,.comm-box{font-size:12px}
 }
@@ -169,10 +174,10 @@ input{font-family:var(--font-body)}
   .result-row2{flex-direction:column}
   .btn{width:100%;padding:13px 16px}
   .personalize-row{flex-direction:column}
-  .pc-stats-grid{max-width:72%;gap:9px 2px}
-  .pc-stat .v{font-size:20px}
-  .pc-bottom .n{font-size:34px}
-  .pc-blurb{padding-right:16%}
+  .pc-profile-name{font-size:54px}
+  .pc-stat .v{font-size:18px}
+  .pc-bottom .n{font-size:48px}
+  .pc-blurb{font-size:13px;padding:14px}
 }
 </style>
 </head>
@@ -1041,127 +1046,160 @@ async function renderCardCanvas(){
   canvas.height=1920;
   const ctx=canvas.getContext('2d');
   const nightCourt = await loadStoryNightCourt();
-  const grad=ctx.createLinearGradient(0,0,1080,1920);
-  grad.addColorStop(0,'#07070a');
-  grad.addColorStop(.48,mixHex(c1.hex,'#08080b',0.28));
-  grad.addColorStop(1,mixHex(c2.hex,'#07070a',0.22));
-  ctx.fillStyle=grad;
+  ctx.fillStyle='#050506';
   ctx.fillRect(0,0,1080,1920);
-
   if(nightCourt){
     ctx.save();
-    ctx.globalAlpha=.16;
-    const bgH = 1080 * (nightCourt.height / nightCourt.width);
-    ctx.drawImage(nightCourt,0,0,1080,bgH);
+    ctx.globalAlpha=.30;
+    drawCoverImage(ctx,nightCourt,0,0,1080,1920);
     ctx.restore();
-    const courtFade=ctx.createLinearGradient(0,0,0,980);
-    courtFade.addColorStop(0,'rgba(0,0,0,.48)');
-    courtFade.addColorStop(.52,'rgba(0,0,0,.66)');
-    courtFade.addColorStop(1,'rgba(0,0,0,.82)');
-    ctx.fillStyle=courtFade;
-    ctx.fillRect(0,0,1080,1020);
   }
-
-  ctx.globalAlpha=.24;
-  ctx.fillStyle=c1.hex; ctx.beginPath(); ctx.arc(115,300,340,0,Math.PI*2); ctx.fill();
-  ctx.fillStyle=c2.hex; ctx.beginPath(); ctx.arc(1040,1370,450,0,Math.PI*2); ctx.fill();
-  ctx.globalAlpha=.09;
-  ctx.strokeStyle='#f5f1e8';
-  for(let y=0;y<1920;y+=34){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(1080,y);ctx.stroke();}
-  ctx.globalAlpha=.16;
-  ctx.strokeStyle='#c9a07a';
-  ctx.lineWidth=3;
-  for(let x=-620;x<1120;x+=180){ctx.beginPath();ctx.moveTo(x,1900);ctx.lineTo(x+780,70);ctx.stroke();}
-  ctx.globalAlpha=1;
-
-  ctx.fillStyle='rgba(0,0,0,.58)';
-  ctx.fillRect(56,56,968,170);
-  ctx.fillRect(56,1664,968,200);
-  ctx.strokeStyle='#c9a07a';
-  ctx.lineWidth=7;
-  ctx.strokeRect(56,56,968,1808);
-  ctx.strokeStyle='rgba(255,255,255,.24)';
+  const shade=ctx.createLinearGradient(0,0,1080,1920);
+  shade.addColorStop(0,'rgba(0,0,0,.74)');
+  shade.addColorStop(.45,'rgba(0,0,0,.92)');
+  shade.addColorStop(1,'rgba(0,0,0,.88)');
+  ctx.fillStyle=shade;
+  ctx.fillRect(0,0,1080,1920);
+  ctx.fillStyle=rgba(c1.hex,.14);
+  ctx.fillRect(0,0,1080,1920);
+  ctx.strokeStyle='rgba(201,160,122,.95)';
+  ctx.lineWidth=5;
+  ctx.strokeRect(24,24,1032,1872);
+  ctx.strokeStyle='rgba(201,160,122,.55)';
   ctx.lineWidth=2;
-  ctx.strokeRect(78,78,924,1764);
-
-  ctx.fillStyle='#fff';
-  ctx.font='800 86px Oswald, Arial';
-  ctx.letterSpacing=0;
-  ctx.fillText('HWBT',84,150);
+  ctx.strokeRect(44,44,992,1832);
+  ctx.globalAlpha=.10;
   ctx.strokeStyle='#c9a07a';
-  ctx.lineWidth=3;
-  ctx.beginPath();
-  ctx.moveTo(84,166);
-  ctx.lineTo(345,166);
-  ctx.stroke();
-  ctx.fillStyle='#c9a07a';
-  ctx.font='600 28px Oswald, Arial';
-  ctx.fillText(tr().storyKicker,86,192);
+  for(let x=-720;x<1120;x+=34){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x+900,1920);ctx.stroke();}
+  ctx.globalAlpha=1;
 
   if(storyPhotoImage && storyPhotoImage.complete){
     ctx.save();
-    ctx.globalAlpha=.88;
     ctx.beginPath();
-    roundedRectPath(ctx,604,236,376,500,30);
+    ctx.moveTo(660,62);
+    ctx.lineTo(1028,62);
+    ctx.lineTo(1028,1118);
+    ctx.lineTo(945,1190);
+    ctx.lineTo(600,1190);
+    ctx.lineTo(545,230);
+    ctx.closePath();
     ctx.clip();
-    drawCoverImage(ctx,storyPhotoImage,604,236,376,500);
+    drawCoverImage(ctx,storyPhotoImage,545,62,483,1128);
     ctx.restore();
-    ctx.strokeStyle='rgba(201,160,122,.75)';
+    const photoShade=ctx.createLinearGradient(545,62,1028,1190);
+    photoShade.addColorStop(0,'rgba(0,0,0,.05)');
+    photoShade.addColorStop(.55,'rgba(0,0,0,.18)');
+    photoShade.addColorStop(1,'rgba(0,0,0,.55)');
+    ctx.fillStyle=photoShade;
+    ctx.fillRect(545,62,483,1128);
+    ctx.strokeStyle='rgba(201,160,122,.95)';
     ctx.lineWidth=4;
     ctx.beginPath();
-    roundedRectPath(ctx,604,236,376,500,30);
+    ctx.moveTo(660,62);
+    ctx.lineTo(1028,62);
+    ctx.lineTo(1028,1118);
+    ctx.lineTo(945,1190);
+    ctx.lineTo(600,1190);
+    ctx.lineTo(545,230);
+    ctx.closePath();
     ctx.stroke();
   }
 
+  ctx.fillStyle='#fff';
+  ctx.font='800 122px Oswald, Arial';
+  ctx.fillText('HWBT',82,170);
+  ctx.strokeStyle='#c9a07a';
+  ctx.lineWidth=4;
+  ctx.beginPath();
+  ctx.moveTo(68,206);
+  ctx.quadraticCurveTo(240,190,420,205);
+  ctx.stroke();
+  ctx.fillStyle='#c9a07a';
+  ctx.font='800 51px Oswald, Arial';
+  ctx.fillText('ACADEMY',126,252);
+
   const playerName=(document.getElementById('pcNameInput').value.trim() || tr().cardName).toUpperCase();
   ctx.fillStyle='#fff';
-  ctx.font='800 82px Oswald, Arial';
-  wrapCanvasText(ctx,playerName,84,360,520,82);
-
-  ctx.fillStyle='#c9a07a';
   ctx.font='800 76px Oswald, Arial';
-  let nextY=wrapCanvasText(ctx,display.name,84,585,820,76);
+  wrapCanvasText(ctx,playerName,82,450,440,78);
+
+  const profileWords=display.name.toUpperCase().split(/\s+/);
+  ctx.fillStyle='#c9a07a';
+  ctx.font='800 172px Oswald, Arial';
+  if(profileWords.length<=2){
+    ctx.fillText(profileWords[0] || display.name.toUpperCase(),82,805);
+    if(profileWords[1]) ctx.fillText(profileWords.slice(1).join(' '),82,1040);
+  }else{
+    const firstLine=profileWords.slice(0,2).join(' ');
+    const secondLine=profileWords.slice(2).join(' ');
+    ctx.font='800 130px Oswald, Arial';
+    ctx.fillText(firstLine,82,805);
+    ctx.fillText(secondLine,82,985);
+  }
+
+  ctx.strokeStyle='#c9a07a';
+  ctx.lineWidth=3;
+  ctx.beginPath();
+  ctx.moveTo(60,1128);
+  ctx.lineTo(132,1128);
+  ctx.moveTo(620,1128);
+  ctx.lineTo(1010,1128);
+  ctx.stroke();
   ctx.fillStyle='#fff';
-  ctx.font='500 34px Oswald, Arial';
-  nextY=wrapCanvasText(ctx,display.line,88,nextY+18,800,46);
+  ctx.font='800 40px Oswald, Arial';
+  ctx.fillText(display.line,155,1142);
 
   const story=(details?details.story:p.story);
-  ctx.fillStyle='rgba(245,245,240,.78)';
-  ctx.font='400 32px Inter, Arial';
-  wrapCanvasText(ctx,story,88,nextY+42,850,48);
+  ctx.fillStyle='rgba(0,0,0,.36)';
+  ctx.strokeStyle='rgba(201,160,122,.76)';
+  ctx.lineWidth=2;
+  roundedRectPath(ctx,58,1190,964,360,8);
+  ctx.fill();
+  ctx.stroke();
+  ctx.fillStyle='rgba(245,241,232,.78)';
+  ctx.font='400 35px Inter, Arial';
+  wrapCanvasText(ctx,story,155,1265,780,52);
 
   const ovr = Math.round((p.stats.pui+p.stats.pre+p.stats.sfr+p.stats.cre+p.stats.reg+p.stats.equ)/6);
-  ctx.fillStyle='#fff';
-  ctx.font='800 160px Oswald, Arial';
-  ctx.fillText(String(ovr),84,1320);
+  ctx.strokeStyle='rgba(201,160,122,.76)';
+  ctx.lineWidth=2;
+  roundedRectPath(ctx,58,1570,964,100,8);
+  ctx.stroke();
   ctx.fillStyle='#c9a07a';
-  ctx.font='600 28px Oswald, Arial';
-  ctx.fillText(tr().cardNote,94,1360);
-
+  ctx.font='800 70px Oswald, Arial';
+  ctx.fillText(String(ovr),92,1642);
+  ctx.font='700 22px Oswald, Arial';
+  ctx.fillText(tr().cardNote.replace(' /','/'),174,1613);
   const statLabels = [['pui','PUI'],['pre','PRE'],['sfr','SFR'],['cre','CRE'],['reg','REG'],['equ','EQU']];
-  let sx=320, sy=1225;
   ctx.textAlign='center';
   statLabels.forEach(([k,l],i)=>{
-    const x=sx+(i%3)*185, y=sy+Math.floor(i/3)*145;
-    ctx.fillStyle='#fff';
-    ctx.font='800 62px Oswald, Arial';
-    ctx.fillText(p.stats[k],x,y);
-    ctx.fillStyle='rgba(245,245,240,.55)';
-    ctx.font='600 20px Oswald, Arial';
-    ctx.fillText(l,x,y+34);
+    const x=300+i*115;
+    ctx.strokeStyle='rgba(201,160,122,.42)';
+    ctx.beginPath();
+    ctx.moveTo(x-54,1587);
+    ctx.lineTo(x-54,1654);
+    ctx.stroke();
+    ctx.fillStyle='#c9a07a';
+    ctx.font='800 43px Oswald, Arial';
+    ctx.fillText(p.stats[k],x,1626);
+    ctx.fillStyle='rgba(245,241,232,.78)';
+    ctx.font='500 19px Oswald, Arial';
+    ctx.fillText(l,x,1652);
   });
   ctx.textAlign='left';
-
-  ctx.fillStyle='rgba(245,245,240,.72)';
-  ctx.font='700 27px Oswald, Arial';
-  ctx.fillText('BOUSSOLE HWBT EXPRESS',84,1588);
-  ctx.fillStyle='rgba(245,245,240,.72)';
-  ctx.font='500 28px Inter, Arial';
-  wrapCanvasText(ctx,'#HWBTAcademy  #HardWorkBeatsTalent  #PadelProgress',84,1662,900,42);
-  ctx.fillText('#TrainWithPurpose',84,1716);
   ctx.fillStyle='#c9a07a';
-  ctx.font='700 33px Oswald, Arial';
-  ctx.fillText('HARD WORK BEATS TALENT',84,1818);
+  ctx.font='500 29px Oswald, Arial';
+  ctx.fillText('BOUSSOLE HWBT EXPRESS',82,1736);
+  ctx.strokeStyle='rgba(201,160,122,.50)';
+  ctx.beginPath();
+  ctx.moveTo(420,1724);
+  ctx.lineTo(1010,1724);
+  ctx.stroke();
+  ctx.fillStyle='#fff';
+  ctx.font='800 40px Oswald, Arial';
+  ctx.fillText('#HWBTAcademy',82,1814);
+  ctx.fillStyle='#c9a07a';
+  ctx.fillText('#HardWorkBeatsTalent',82,1870);
   return canvas;
 }
 async function downloadCard(){
@@ -1173,7 +1211,7 @@ async function downloadCard(){
 }
 function shareTextFor(p){
   const display = profileDisplay(p);
-  return `${tr().shareText(display.name)}\n\n#HWBTAcademy\n#HardWorkBeatsTalent\n#PadelProgress\n#TrainWithPurpose`;
+  return `${tr().shareText(display.name)}\n\n#HWBTAcademy\n#HardWorkBeatsTalent`;
 }
 async function tryNativeShare(p){
   // On mobile, this opens the system share sheet with Instagram/Facebook/Messages etc. among the options,
