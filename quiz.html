@@ -798,6 +798,7 @@ let currentQ = 0;
 let scores = {};
 let finalProfile = null;
 let storyPhotoImage = null;
+let storyNightCourtPromise = null;
 
 function showScreen(id){
   document.querySelectorAll('.screen').forEach(s=>s.classList.add('hidden'));
@@ -1008,6 +1009,16 @@ function drawCoverImage(ctx,img,x,y,w,h){
   const sx=(img.width-sw)/2, sy=(img.height-sh)/2;
   ctx.drawImage(img,sx,sy,sw,sh,x,y,w,h);
 }
+function loadStoryNightCourt(){
+  if(storyNightCourtPromise) return storyNightCourtPromise;
+  storyNightCourtPromise = new Promise((resolve)=>{
+    const img = new Image();
+    img.onload = ()=>resolve(img);
+    img.onerror = ()=>resolve(null);
+    img.src = 'assets/img/hwbt-night-court.png';
+  });
+  return storyNightCourtPromise;
+}
 function roundedRectPath(ctx,x,y,w,h,r){
   const radius=Math.min(r,w/2,h/2);
   ctx.moveTo(x+radius,y);
@@ -1029,12 +1040,27 @@ async function renderCardCanvas(){
   canvas.width=1080;
   canvas.height=1920;
   const ctx=canvas.getContext('2d');
+  const nightCourt = await loadStoryNightCourt();
   const grad=ctx.createLinearGradient(0,0,1080,1920);
   grad.addColorStop(0,'#07070a');
   grad.addColorStop(.48,mixHex(c1.hex,'#08080b',0.28));
   grad.addColorStop(1,mixHex(c2.hex,'#07070a',0.22));
   ctx.fillStyle=grad;
   ctx.fillRect(0,0,1080,1920);
+
+  if(nightCourt){
+    ctx.save();
+    ctx.globalAlpha=.16;
+    const bgH = 1080 * (nightCourt.height / nightCourt.width);
+    ctx.drawImage(nightCourt,0,0,1080,bgH);
+    ctx.restore();
+    const courtFade=ctx.createLinearGradient(0,0,0,980);
+    courtFade.addColorStop(0,'rgba(0,0,0,.48)');
+    courtFade.addColorStop(.52,'rgba(0,0,0,.66)');
+    courtFade.addColorStop(1,'rgba(0,0,0,.82)');
+    ctx.fillStyle=courtFade;
+    ctx.fillRect(0,0,1080,1020);
+  }
 
   ctx.globalAlpha=.24;
   ctx.fillStyle=c1.hex; ctx.beginPath(); ctx.arc(115,300,340,0,Math.PI*2); ctx.fill();
@@ -1071,38 +1097,19 @@ async function renderCardCanvas(){
   ctx.fillStyle='#c9a07a';
   ctx.font='600 28px Oswald, Arial';
   ctx.fillText(tr().storyKicker,86,192);
-  ctx.fillStyle='rgba(255,255,255,.08)';
-  ctx.font='800 230px Oswald, Arial';
-  ctx.fillText('HWBT',555,192);
-
-  ctx.fillStyle='rgba(255,255,255,.92)';
-  ctx.font='800 48px Oswald, Arial';
-  ctx.fillText('HWBT',824,250);
-  ctx.strokeStyle='rgba(201,160,122,.86)';
-  ctx.lineWidth=2;
-  ctx.beginPath();
-  ctx.moveTo(824,263);
-  ctx.lineTo(948,263);
-  ctx.stroke();
-  ctx.fillStyle='rgba(201,160,122,.86)';
-  ctx.font='700 22px Oswald, Arial';
-  ctx.fillText('ACADEMY',830,294);
-  ctx.fillStyle='rgba(245,245,240,.48)';
-  ctx.font='500 11px Inter, Arial';
-  ctx.fillText('HARD WORK BEATS TALENT',828,318);
 
   if(storyPhotoImage && storyPhotoImage.complete){
     ctx.save();
     ctx.globalAlpha=.88;
     ctx.beginPath();
-    roundedRectPath(ctx,640,245,310,430,28);
+    roundedRectPath(ctx,604,236,376,500,30);
     ctx.clip();
-    drawCoverImage(ctx,storyPhotoImage,640,245,310,430);
+    drawCoverImage(ctx,storyPhotoImage,604,236,376,500);
     ctx.restore();
     ctx.strokeStyle='rgba(201,160,122,.75)';
     ctx.lineWidth=4;
     ctx.beginPath();
-    roundedRectPath(ctx,640,245,310,430,28);
+    roundedRectPath(ctx,604,236,376,500,30);
     ctx.stroke();
   }
 
@@ -1124,11 +1131,6 @@ async function renderCardCanvas(){
   wrapCanvasText(ctx,story,88,nextY+42,850,48);
 
   const ovr = Math.round((p.stats.pui+p.stats.pre+p.stats.sfr+p.stats.cre+p.stats.reg+p.stats.equ)/6);
-  ctx.fillStyle='rgba(0,0,0,.46)';
-  ctx.fillRect(84,1150,912,322);
-  ctx.strokeStyle='rgba(201,160,122,.75)';
-  ctx.lineWidth=3;
-  ctx.strokeRect(84,1150,912,322);
   ctx.fillStyle='#fff';
   ctx.font='800 160px Oswald, Arial';
   ctx.fillText(String(ovr),84,1320);
