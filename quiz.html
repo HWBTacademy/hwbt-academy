@@ -273,6 +273,7 @@ input{font-family:var(--font-body)}
 
     <div class="result-actions">
       <button class="btn btn-primary btn-block" onclick="shareProfile()">PARTAGER / ENREGISTRER LA STORY</button>
+      <button class="btn btn-ghost btn-block" onclick="emailCard()">ENVOYER LE PROFIL COMPLET PAR MAIL</button>
     </div>
 
     <div class="detail-section">
@@ -349,7 +350,7 @@ const UI = {
     sub:"Découvre ton profil naturel en match. 12 questions tirées d'une banque de 30. Résultat immédiat, carte joueur partageable.",
     start:'COMMENCER LE TEST', profileCard:'PROFIL JOUEUR', cardName:'JOUEUR HWBT', cardNote:'NOTE /99',
     personalize:'PERSONNALISE TA CARTE', namePlaceholder:'Ton prénom', photo:'PHOTO',
-    shareSave:'PARTAGER / ENREGISTRER LA STORY', instagram:'INSTAGRAM', facebook:'FACEBOOK', download:'TÉLÉCHARGER LA STORY', email:'ENVOYER PAR EMAIL', restart:'REFAIRE LE TEST',
+    shareSave:'PARTAGER / ENREGISTRER LA STORY', emailFull:'ENVOYER LE PROFIL COMPLET PAR MAIL', instagram:'INSTAGRAM', facebook:'FACEBOOK', download:'TÉLÉCHARGER LA STORY', email:'ENVOYER PAR EMAIL', restart:'REFAIRE LE TEST',
     storyKicker:'ACADEMY · PROFIL JOUEUR',
     detail:'TON PROFIL EN DÉTAIL', strengths:'POINTS FORTS', work:'AXES DE TRAVAIL', comm:'COMMENT BIEN COMMUNIQUER AVEC TOI',
     cta:'Envie de développer ce profil sur le terrain avec un vrai programme de coaching ?', ctaBtn:'DÉCOUVRIR HWBT ACADEMY',
@@ -364,7 +365,7 @@ const UI = {
     sub:'Ontdek jouw natuurlijke wedstrijdprofiel. 12 vragen uit een basis van 30. Direct resultaat, deelbare spelerskaart.',
     start:'START DE TEST', profileCard:'SPELERSPROFIEL', cardName:'HWBT-SPELER', cardNote:'SCORE /99',
     personalize:'PERSONALISEER JE KAART', namePlaceholder:'Je voornaam', photo:'FOTO',
-    shareSave:'DEEL / BEWAAR DE STORY', instagram:'INSTAGRAM', facebook:'FACEBOOK', download:'DOWNLOAD DE STORY', email:'VERSTUUR VIA EMAIL', restart:'HERSTART DE TEST',
+    shareSave:'DEEL / BEWAAR DE STORY', emailFull:'VERSTUUR VOLLEDIG PROFIEL VIA EMAIL', instagram:'INSTAGRAM', facebook:'FACEBOOK', download:'DOWNLOAD DE STORY', email:'VERSTUUR VIA EMAIL', restart:'HERSTART DE TEST',
     storyKicker:'ACADEMY · SPELERSPROFIEL',
     detail:'JOUW PROFIEL IN DETAIL', strengths:'STERKE PUNTEN', work:'WERKPUNTEN', comm:'HOE COMMUNICEER JE BEST MET JOU',
     cta:'Wil je dit profiel op het terrein ontwikkelen met echte coaching?', ctaBtn:'ONTDEK HWBT ACADEMY',
@@ -379,13 +380,45 @@ const UI = {
     sub:'Discover your natural match profile. 12 questions selected from a base of 30. Instant result, shareable player card.',
     start:'START THE TEST', profileCard:'PLAYER PROFILE', cardName:'HWBT PLAYER', cardNote:'RATING /99',
     personalize:'CUSTOMIZE YOUR CARD', namePlaceholder:'Your first name', photo:'PHOTO',
-    shareSave:'SHARE / SAVE STORY', instagram:'INSTAGRAM', facebook:'FACEBOOK', download:'DOWNLOAD STORY', email:'SEND BY EMAIL', restart:'RESTART TEST',
+    shareSave:'SHARE / SAVE STORY', emailFull:'SEND FULL PROFILE BY EMAIL', instagram:'INSTAGRAM', facebook:'FACEBOOK', download:'DOWNLOAD STORY', email:'SEND BY EMAIL', restart:'RESTART TEST',
     storyKicker:'ACADEMY · PLAYER PROFILE',
     detail:'YOUR PROFILE IN DETAIL', strengths:'STRENGTHS', work:'WORK AXES', comm:'HOW TO COMMUNICATE WITH YOU',
     cta:'Want to develop this profile on court with a real coaching program?', ctaBtn:'DISCOVER HWBT ACADEMY',
     shareToast:'Story downloaded — open your app and post it with the copied text.', copied:'Share text copied',
     shareText:n=>`I completed the HWBT Express Compass.\nMy padel profile is: ${n}.\nWhat type of player are you?`,
     resultText:'This profile does not define your level. It shows your natural match tendency. The court confirms the profile.'
+  }
+};
+const EMAIL_I18N = {
+  fr:{
+    subject:'HWBT Academy - Profil complet',
+    compass:'BOUSSOLE HWBT EXPRESS',
+    profile:'Profil',
+    signature:'Signature',
+    summary:'RESUME DU PROFIL',
+    strengths:'POINTS FORTS',
+    work:'AXES DE TRAVAIL',
+    comm:'COMMENT BIEN COMMUNIQUER AVEC TOI'
+  },
+  nl:{
+    subject:'HWBT Academy - Volledig profiel',
+    compass:'HWBT EXPRESS KOMPAS',
+    profile:'Profiel',
+    signature:'Signatuur',
+    summary:'SAMENVATTING VAN HET PROFIEL',
+    strengths:'STERKE PUNTEN',
+    work:'WERKPUNTEN',
+    comm:'HOE COMMUNICEER JE BEST MET JOU'
+  },
+  en:{
+    subject:'HWBT Academy - Full profile',
+    compass:'HWBT EXPRESS COMPASS',
+    profile:'Profile',
+    signature:'Signature',
+    summary:'PROFILE SUMMARY',
+    strengths:'STRENGTHS',
+    work:'WORK AXES',
+    comm:'HOW TO COMMUNICATE WITH YOU'
   }
 };
 const PROFILE_I18N = {
@@ -831,6 +864,7 @@ function applyLanguage(){
   document.querySelector('.file-btn').childNodes[0].textContent = u.photo + ' ';
   const actionButtons = document.querySelectorAll('.result-actions button');
   if(actionButtons[0]) actionButtons[0].textContent = u.shareSave;
+  if(actionButtons[1]) actionButtons[1].textContent = u.emailFull;
   document.querySelector('.detail-title').textContent = u.detail;
   document.querySelector('.detail-box.forts h4').textContent = u.strengths;
   document.querySelector('.detail-box.faibles h4').textContent = u.work;
@@ -1279,8 +1313,31 @@ async function shareToFacebook(){
 function emailCard(){
   const p = PROFILES[finalProfile];
   const display = profileDisplay(p);
-  const subject = `HWBT Academy : ${display.name}`;
-  const body = `${shareTextFor(p)}\n\n${display.line}`;
+  const details = profileDetails(p);
+  const labels = EMAIL_I18N[currentLang] || EMAIL_I18N.fr;
+  const bulletList = items => (items || []).map(item => `- ${item}`).join('\n');
+  const subject = `${labels.subject} : ${display.name}`;
+  const body = [
+    labels.compass,
+    '',
+    `${labels.profile} : ${display.name}`,
+    `${labels.signature} : ${display.line}`,
+    '',
+    labels.summary,
+    details.story,
+    '',
+    labels.strengths,
+    bulletList(details.forts),
+    '',
+    labels.work,
+    bulletList(details.faibles),
+    '',
+    labels.comm,
+    details.comm,
+    '',
+    '#HWBTAcademy',
+    '#HardWorkBeatsTalent'
+  ].join('\n');
   window.location.href = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 }
 
