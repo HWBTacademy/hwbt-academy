@@ -347,10 +347,11 @@ const UI = {
     sub:"Découvre ton profil naturel en match. 12 questions tirées d'une banque de 30. Résultat immédiat, carte joueur partageable.",
     start:'COMMENCER LE TEST', profileCard:'PROFIL JOUEUR', cardName:'JOUEUR HWBT', cardNote:'NOTE /99',
     personalize:'PERSONNALISE TA CARTE', namePlaceholder:'Ton prénom', photo:'PHOTO',
-    instagram:'INSTAGRAM', facebook:'FACEBOOK', download:"TÉLÉCHARGER L'IMAGE", email:'ENVOYER PAR EMAIL', restart:'REFAIRE LE TEST',
+    instagram:'INSTAGRAM', facebook:'FACEBOOK', download:'TÉLÉCHARGER LA STORY', email:'ENVOYER PAR EMAIL', restart:'REFAIRE LE TEST',
+    storyKicker:'ACADEMY · PROFIL JOUEUR',
     detail:'TON PROFIL EN DÉTAIL', strengths:'POINTS FORTS', work:'AXES DE TRAVAIL', comm:'COMMENT BIEN COMMUNIQUER AVEC TOI',
     cta:'Envie de développer ce profil sur le terrain avec un vrai programme de coaching ?', ctaBtn:'DÉCOUVRIR HWBT ACADEMY',
-    shareToast:"Image téléchargée — ouvre ton app et publie-la avec le texte copié.", copied:'Texte de partage copié',
+    shareToast:'Story téléchargée — ouvre ton app et publie-la avec le texte copié.', copied:'Texte de partage copié',
     shareText:n=>`J’ai fait la Boussole HWBT Express.\nMon profil padel est : ${n}.\nEt toi, tu es quel type de joueur ?`,
     resultText:'Ce profil ne définit pas ton niveau. Il montre ta tendance naturelle en match. Le terrain confirme le profil.'
   },
@@ -361,10 +362,11 @@ const UI = {
     sub:'Ontdek jouw natuurlijke wedstrijdprofiel. 12 vragen uit een basis van 30. Direct resultaat, deelbare spelerskaart.',
     start:'START DE TEST', profileCard:'SPELERSPROFIEL', cardName:'HWBT-SPELER', cardNote:'SCORE /99',
     personalize:'PERSONALISEER JE KAART', namePlaceholder:'Je voornaam', photo:'FOTO',
-    instagram:'INSTAGRAM', facebook:'FACEBOOK', download:'DOWNLOAD DE AFBEELDING', email:'VERSTUUR VIA EMAIL', restart:'HERSTART DE TEST',
+    instagram:'INSTAGRAM', facebook:'FACEBOOK', download:'DOWNLOAD DE STORY', email:'VERSTUUR VIA EMAIL', restart:'HERSTART DE TEST',
+    storyKicker:'ACADEMY · SPELERSPROFIEL',
     detail:'JOUW PROFIEL IN DETAIL', strengths:'STERKE PUNTEN', work:'WERKPUNTEN', comm:'HOE COMMUNICEER JE BEST MET JOU',
     cta:'Wil je dit profiel op het terrein ontwikkelen met echte coaching?', ctaBtn:'ONTDEK HWBT ACADEMY',
-    shareToast:'Afbeelding gedownload — open je app en post ze met de gekopieerde tekst.', copied:'Deeltekst gekopieerd',
+    shareToast:'Story gedownload — open je app en post ze met de gekopieerde tekst.', copied:'Deeltekst gekopieerd',
     shareText:n=>`Ik heb het HWBT Express Kompas gedaan.\nMijn padelprofiel is: ${n}.\nEn jij, welk type speler ben jij?`,
     resultText:'Dit profiel bepaalt niet jouw niveau. Het toont jouw natuurlijke wedstrijdreactie. Het terrein bevestigt het profiel.'
   },
@@ -375,10 +377,11 @@ const UI = {
     sub:'Discover your natural match profile. 12 questions selected from a base of 30. Instant result, shareable player card.',
     start:'START THE TEST', profileCard:'PLAYER PROFILE', cardName:'HWBT PLAYER', cardNote:'RATING /99',
     personalize:'CUSTOMIZE YOUR CARD', namePlaceholder:'Your first name', photo:'PHOTO',
-    instagram:'INSTAGRAM', facebook:'FACEBOOK', download:'DOWNLOAD IMAGE', email:'SEND BY EMAIL', restart:'RESTART TEST',
+    instagram:'INSTAGRAM', facebook:'FACEBOOK', download:'DOWNLOAD STORY', email:'SEND BY EMAIL', restart:'RESTART TEST',
+    storyKicker:'ACADEMY · PLAYER PROFILE',
     detail:'YOUR PROFILE IN DETAIL', strengths:'STRENGTHS', work:'WORK AXES', comm:'HOW TO COMMUNICATE WITH YOU',
     cta:'Want to develop this profile on court with a real coaching program?', ctaBtn:'DISCOVER HWBT ACADEMY',
-    shareToast:'Image downloaded — open your app and post it with the copied text.', copied:'Share text copied',
+    shareToast:'Story downloaded — open your app and post it with the copied text.', copied:'Share text copied',
     shareText:n=>`I completed the HWBT Express Compass.\nMy padel profile is: ${n}.\nWhat type of player are you?`,
     resultText:'This profile does not define your level. It shows your natural match tendency. The court confirms the profile.'
   }
@@ -794,6 +797,7 @@ function shuffleArray(arr){
 let currentQ = 0;
 let scores = {};
 let finalProfile = null;
+let storyPhotoImage = null;
 
 function showScreen(id){
   document.querySelectorAll('.screen').forEach(s=>s.classList.add('hidden'));
@@ -963,6 +967,7 @@ function updateCardPhoto(e){
     const photo = document.getElementById('pcPhoto');
     photo.style.backgroundImage = `url(${url})`;
     photo.style.opacity = '0.9';
+    storyPhotoImage = img;
   };
   img.src = url;
 }
@@ -983,14 +988,146 @@ function showToast(msg){
 }
 
 /* ================= SHARE / DOWNLOAD ================= */
+function wrapCanvasText(ctx,text,x,y,maxWidth,lineHeight){
+  const words=String(text||'').split(/\s+/);
+  let line='';
+  for(const word of words){
+    const test=line?line+' '+word:word;
+    if(ctx.measureText(test).width>maxWidth && line){
+      ctx.fillText(line,x,y);
+      line=word;
+      y+=lineHeight;
+    }else line=test;
+  }
+  if(line)ctx.fillText(line,x,y);
+  return y+lineHeight;
+}
+function drawCoverImage(ctx,img,x,y,w,h){
+  const r=Math.max(w/img.width,h/img.height);
+  const sw=w/r, sh=h/r;
+  const sx=(img.width-sw)/2, sy=(img.height-sh)/2;
+  ctx.drawImage(img,sx,sy,sw,sh,x,y,w,h);
+}
+function roundedRectPath(ctx,x,y,w,h,r){
+  const radius=Math.min(r,w/2,h/2);
+  ctx.moveTo(x+radius,y);
+  ctx.lineTo(x+w-radius,y);
+  ctx.quadraticCurveTo(x+w,y,x+w,y+radius);
+  ctx.lineTo(x+w,y+h-radius);
+  ctx.quadraticCurveTo(x+w,y+h,x+w-radius,y+h);
+  ctx.lineTo(x+radius,y+h);
+  ctx.quadraticCurveTo(x,y+h,x,y+h-radius);
+  ctx.lineTo(x,y+radius);
+  ctx.quadraticCurveTo(x,y,x+radius,y);
+}
 async function renderCardCanvas(){
-  const node = document.getElementById('fifaCard');
-  return await html2canvas(node, {backgroundColor:'#0B0B0F', scale:2, useCORS:true});
+  const p = PROFILES[finalProfile];
+  const display = profileDisplay(p);
+  const details = profileDetails(p);
+  const c1 = COLORS[p.p1], c2 = COLORS[p.p2];
+  const canvas=document.createElement('canvas');
+  canvas.width=1080;
+  canvas.height=1920;
+  const ctx=canvas.getContext('2d');
+  const grad=ctx.createLinearGradient(0,0,1080,1920);
+  grad.addColorStop(0,'#07070a');
+  grad.addColorStop(.48,mixHex(c1.hex,'#08080b',0.28));
+  grad.addColorStop(1,mixHex(c2.hex,'#07070a',0.22));
+  ctx.fillStyle=grad;
+  ctx.fillRect(0,0,1080,1920);
+
+  ctx.globalAlpha=.25;
+  ctx.fillStyle=c1.hex; ctx.beginPath(); ctx.arc(130,320,360,0,Math.PI*2); ctx.fill();
+  ctx.fillStyle=c2.hex; ctx.beginPath(); ctx.arc(1060,1320,430,0,Math.PI*2); ctx.fill();
+  ctx.globalAlpha=.07;
+  ctx.strokeStyle='#ffffff';
+  for(let y=0;y<1920;y+=32){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(1080,y);ctx.stroke();}
+  ctx.globalAlpha=1;
+
+  ctx.strokeStyle=mixHex(c1.hex,c2.hex,.55);
+  ctx.lineWidth=6;
+  ctx.strokeRect(56,56,968,1808);
+
+  ctx.fillStyle='#fff';
+  ctx.font='800 86px Oswald, Arial';
+  ctx.letterSpacing=0;
+  ctx.fillText('HWBT',84,150);
+  ctx.fillStyle='#c9a07a';
+  ctx.font='600 28px Oswald, Arial';
+  ctx.fillText(tr().storyKicker,86,192);
+  ctx.fillStyle='rgba(255,255,255,.08)';
+  ctx.font='800 180px Oswald, Arial';
+  ctx.fillText('HWBT',615,170);
+
+  if(storyPhotoImage && storyPhotoImage.complete){
+    ctx.save();
+    ctx.globalAlpha=.88;
+    ctx.beginPath();
+    roundedRectPath(ctx,640,245,310,430,28);
+    ctx.clip();
+    drawCoverImage(ctx,storyPhotoImage,640,245,310,430);
+    ctx.restore();
+    ctx.strokeStyle='rgba(201,160,122,.75)';
+    ctx.lineWidth=4;
+    ctx.beginPath();
+    roundedRectPath(ctx,640,245,310,430,28);
+    ctx.stroke();
+  }
+
+  const playerName=(document.getElementById('pcNameInput').value.trim() || tr().cardName).toUpperCase();
+  ctx.fillStyle='#fff';
+  ctx.font='800 82px Oswald, Arial';
+  wrapCanvasText(ctx,playerName,84,380,520,82);
+
+  ctx.fillStyle='#c9a07a';
+  ctx.font='800 76px Oswald, Arial';
+  let nextY=wrapCanvasText(ctx,display.name,84,610,820,76);
+  ctx.fillStyle='#fff';
+  ctx.font='500 34px Oswald, Arial';
+  nextY=wrapCanvasText(ctx,display.line,88,nextY+18,800,46);
+
+  const story=(details?details.story:p.story);
+  ctx.fillStyle='rgba(245,245,240,.78)';
+  ctx.font='400 32px Inter, Arial';
+  wrapCanvasText(ctx,story,88,nextY+42,850,48);
+
+  const ovr = Math.round((p.stats.pui+p.stats.pre+p.stats.sfr+p.stats.cre+p.stats.reg+p.stats.equ)/6);
+  ctx.fillStyle='#fff';
+  ctx.font='800 160px Oswald, Arial';
+  ctx.fillText(String(ovr),84,1320);
+  ctx.fillStyle='#c9a07a';
+  ctx.font='600 28px Oswald, Arial';
+  ctx.fillText(tr().cardNote,94,1360);
+
+  const statLabels = [['pui','PUI'],['pre','PRE'],['sfr','SFR'],['cre','CRE'],['reg','REG'],['equ','EQU']];
+  let sx=320, sy=1225;
+  ctx.textAlign='center';
+  statLabels.forEach(([k,l],i)=>{
+    const x=sx+(i%3)*185, y=sy+Math.floor(i/3)*145;
+    ctx.fillStyle='#fff';
+    ctx.font='800 62px Oswald, Arial';
+    ctx.fillText(p.stats[k],x,y);
+    ctx.fillStyle='rgba(245,245,240,.55)';
+    ctx.font='600 20px Oswald, Arial';
+    ctx.fillText(l,x,y+34);
+  });
+  ctx.textAlign='left';
+
+  ctx.fillStyle='rgba(245,245,240,.75)';
+  ctx.font='500 27px Inter, Arial';
+  wrapCanvasText(ctx,'#HWBTAcademy  #HardWorkBeatsTalent  #PadelProgress  #TrainWithPurpose',84,1620,900,42);
+  ctx.fillStyle='#c9a07a';
+  ctx.font='700 32px Oswald, Arial';
+  ctx.fillText('HARD WORK BEATS TALENT',84,1760);
+  ctx.fillStyle='rgba(245,245,240,.45)';
+  ctx.font='500 25px Inter, Arial';
+  ctx.fillText('hwbtacademy.github.io/hwbt-academy/quiz.html',84,1808);
+  return canvas;
 }
 async function downloadCard(){
   const canvas = await renderCardCanvas();
   const link = document.createElement('a');
-  link.download = 'hwbt-carte-joueur.png';
+  link.download = 'hwbt-story-profil-joueur.png';
   link.href = canvas.toDataURL('image/png');
   link.click();
 }
@@ -1005,7 +1142,7 @@ async function tryNativeShare(p){
     const canvas = await renderCardCanvas();
     return await new Promise((resolve)=>{
       canvas.toBlob(async (blob)=>{
-        const file = new File([blob], 'hwbt-carte-joueur.png', {type:'image/png'});
+        const file = new File([blob], 'hwbt-story-profil-joueur.png', {type:'image/png'});
         if(navigator.canShare && navigator.canShare({files:[file]})){
           try{ await navigator.share({files:[file], text: shareTextFor(p)}); resolve(true); return; }catch(e){ resolve(false); return; }
         }
