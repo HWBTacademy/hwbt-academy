@@ -370,6 +370,7 @@ textarea.c-input{resize:vertical;min-height:72px}
 /* LANG */
 .lang-en .fr-only{display:none!important}
 .lang-fr .en-only{display:none!important}
+.lang-nl .en-only{display:none!important}
 
 @media(max-width:768px){
   .lang-bar{padding:5px 16px}
@@ -816,6 +817,7 @@ textarea.c-input{resize:vertical;min-height:72px}
   <!-- LANG BAR -->
   <div class="lang-bar">
     <button class="lbtn active" id="btn-fr" onclick="setLang('fr')">FR</button>
+    <button class="lbtn" id="btn-nl" onclick="setLang('nl')">NL</button>
     <button class="lbtn" id="btn-en" onclick="setLang('en')">EN</button>
   </div>
 
@@ -1735,22 +1737,115 @@ function closeMenu(){
 }
 
 // Lang switcher
+const NL_TEXT={
+  "Histoire":"Verhaal","Méthode":"Methode","Boussole":"Kompas","Tarifs":"Tarieven","Plateforme":"Platform","Rejoindre":"Meedoen","12 Profils":"12 Profielen","Outils":"Tools",
+  "Demander une séance d'essai":"Vraag een proeftraining aan",
+  "Académie de Padel — Nivelles & Diegem (Belgique)":"Padelacademie — Nijvel & Diegem (België)",
+  "Coaching padel basé sur ton profil, ta méthode et ta progression mesurable.":"Padelcoaching op basis van jouw profiel, jouw methode en meetbare vooruitgang.",
+  "Tu viens avec ton niveau. On identifie ton profil, tes priorités de travail et ton plan de progression. Séance après séance, tu sais exactement quoi améliorer — et pourquoi.":"Jij komt met je niveau. We bepalen je profiel, je werkprioriteiten en je groeiplan. Sessie na sessie weet je exact wat je moet verbeteren — en waarom.",
+  "Faire le test de personnalité express →":"Doe de express persoonlijkheidstest →",
+  "Carnet du Compétiteur":"Competitienotitieboek","Piliers":"Pijlers","Profils":"Profielen","Aspects":"Aspecten","schéma tactique":"tactisch schema","position offensive":"offensieve positie",
+  "Comprendre":"Begrijpen","S'entraîner":"Trainen","Valider":"Valideren","Évoluer":"Evolueren","La performance commence par les bons choix.":"Prestatie begint bij de juiste keuzes.",
+  "Mon histoire":"Mijn verhaal","Du terrain":"Van het terrein","à la méthode":"naar de methode",
+  "Coach HWBT Academy · Nivelles · Diegem":"Coach HWBT Academy · Nijvel · Diegem",
+  "LE TRAVAIL ACHARNÉ EST LA":"HARD WERK IS DE","SEULE":"ENIGE","MÉTHODE.":"METHODE.",
+  "Je m'appelle Thomas Demarbaix. Mon parcours a commencé sur les parquets de volley et les courts de tennis, où j'ai développé un goût prononcé pour ce qui ne se voit pas : la précision des déplacements, le sens du timing et la lecture du jeu.":"Ik ben Thomas Demarbaix. Mijn traject begon op volleybalvelden en tennisbanen, waar ik een sterke interesse ontwikkelde voor wat je niet meteen ziet: de precisie van verplaatsingen, gevoel voor timing en spelinzicht.",
+  "En découvrant le padel, j'ai retrouvé cette alliance parfaite entre rythme effréné et intelligence tactique. Un sport où le duo prime — la technique seule ne suffit pas sans structure solide.":"Toen ik padel ontdekte, vond ik die perfecte combinatie terug van hoog ritme en tactische intelligentie. Een sport waar het duo centraal staat — techniek alleen volstaat niet zonder een sterke structuur.",
+  "Constat simple : la plupart des joueurs ont la motivation, mais manquent de méthode. En s'éparpillant, ils stagnent. HWBT est né pour répondre à ça. Mon objectif ? Transformer ton énergie en plan d'action structuré pour bâtir un jeu stable, efficace et réfléchi. Je coache principalement à Nivelles et Diegem.":"Een eenvoudige vaststelling: de meeste spelers hebben motivatie, maar missen methode. Door versnipperd te trainen, stagneren ze. HWBT is ontstaan om daarop te antwoorden. Mijn doel? Jouw energie omzetten in een gestructureerd actieplan om een stabiel, efficiënt en doordacht spel op te bouwen. Ik coach vooral in Nijvel en Diegem.",
+  "La boucle HWBT":"De HWBT-loop","Connaître son jeu, ses forces, ses zones de travail":"Je spel, sterktes en werkzones leren kennen","Travailler avec méthode et intention":"Trainen met methode en intentie","Tester sous pression en match":"Testen onder wedstrijddruk","Intégrer, ajuster, recommencer":"Integreren, bijsturen, herbeginnen",
+  "Méthode HWBT":"HWBT-methode","Les 4 Piliers":"De 4 pijlers","Pilier 01":"Pijler 01","Pilier 02":"Pijler 02","Pilier 03":"Pijler 03","Pilier 04":"Pijler 04",
+  "Technique":"Techniek","Tactique":"Tactiek","Mental":"Mentaal","Physique":"Fysiek",
+  "Maîtrise des gestes fondamentaux. Précision, timing et automatismes sous pression.":"Beheersing van fundamentele bewegingen. Precisie, timing en automatismen onder druk.",
+  "Lecture du jeu, positionnement en duo et construction intelligente des points.":"Spelinzicht, positionering als duo en intelligente puntopbouw.",
+  "Gestion de la pression, confiance en compétition et résilience dans les moments clés.":"Omgaan met druk, vertrouwen in competitie en veerkracht op sleutelmomenten.",
+  "Mobilité, explosivité et récupération optimisée pour le padel haute intensité.":"Mobiliteit, explosiviteit en optimale recuperatie voor padel met hoge intensiteit.",
+  "répétition → automatisme":"herhaling → automatisme","lire · anticiper · décider":"lezen · anticiperen · beslissen","focus sous pression ✓":"focus onder druk ✓","mobilité + récupération":"mobiliteit + recuperatie",
+  "Piliers structurants":"Structurerende pijlers","Profils joueurs":"Spelersprofielen","Aspects mesurés":"Gemeten aspecten",
+  "Le talent explique":"Talent verklaart","ton point de départ.":"je vertrekpunt.","Le travail construit":"Hard werk bouwt","ton chemin.":"je weg.",
+  "Diagnostic":"Diagnose","La Boussole HWBT":"Het HWBT-kompas","12 profils joueurs":"12 spelersprofielen","Le langage du compétiteur.":"De taal van de competitiespeler.",
+  "Chaque compétiteur possède 4 énergies naturelles. Aucune n'est meilleure qu'une autre. Comprendre sa boussole permet de progresser avec plus d'intention.":"Elke competitiespeler heeft 4 natuurlijke energieën. Geen enkele is beter dan de andere. Je kompas begrijpen helpt om gerichter vooruitgang te boeken.",
+  "Pas un test. Pas une étiquette.":"Geen test. Geen etiket.","Une boussole pour comprendre comment tu progresses.":"Een kompas om te begrijpen hoe jij vooruitgaat.",
+  "Pour quel joueur ?":"Voor welke speler?","C'est fait pour toi si...":"Dit is voor jou als...",
+  "Débutant":"Beginner","Intermédiaire":"Gemiddeld niveau","Populaire":"Recreatief","Compétiteur":"Competitiespeler","Duo":"Duo",
+  "Apprendre les bases sans prendre de mauvaises habitudes. Poser des fondations solides dès le départ.":"De basis leren zonder slechte gewoontes op te bouwen. Vanaf het begin een stevige fundering leggen.",
+  "Construire un jeu plus stable et plus intelligent. Comprendre pourquoi tu stagues et comment débloquer ta progression.":"Een stabieler en intelligenter spel opbouwen. Begrijpen waarom je stagneert en hoe je je progressie opnieuw losmaakt.",
+  "Gérer la pression, les choix tactiques et les matchs importants. Transformer le travail en résultats concrets en tournoi.":"Druk, tactische keuzes en belangrijke wedstrijden beheren. Training omzetten in concrete resultaten op tornooi.",
+  "Améliorer la communication, les positions et les automatismes. Jouer vraiment ensemble, pas juste côte à côte.":"Communicatie, posities en automatismen verbeteren. Echt samen spelen, niet gewoon naast elkaar.",
+  "bases solides dès le début":"stevige basis vanaf het begin","sortir du plateau":"uit je plateau geraken","mental + tactique compétition":"mentaal + competitietactiek","complémentarité + automatismes":"complementariteit + automatismen",
+  "Boussole HWBT":"HWBT-kompas","Les 12 profils joueurs":"De 12 spelersprofielen",
+  "Chaque joueur possède une combinaison dominante d'énergies. Le but n'est pas de mettre une étiquette, mais de mieux comprendre comment tu apprends, réagis sous pression et progresses.":"Elke speler heeft een dominante combinatie van energieën. Het doel is niet om een etiket te plakken, maar om beter te begrijpen hoe je leert, reageert onder druk en vooruitgaat.",
+  "Le Catalyseur":"De Katalysator","Le Bâtisseur":"De Bouwer","Le Pilier":"De Pijler","Le Cardinal":"De Kardinaal","Le Capitaine":"De Kapitein","Le Général":"De Generaal","Le Showman":"De Showman","L'Artiste":"De Artiest","Le Moteur":"De Motor","La Dynamo":"De Dynamo","Le Créatif":"De Creatieveling","Le Visionnaire Libre":"De Vrije Visionair","Le Posé":"De Rustbrenger","L'Équilibriste":"De Evenwichtsspeler","Le Roc":"De Rots","Le Métronome":"De Metronoom","La Bouge":"De Pulse","Le Stratège":"De Strateeg","L'Architecte":"De Architect","Le Discipliné":"De Controleur","L'Exact":"De Exacte","Le Visionnaire":"De Visionair","L'Avant":"De Vooruitdenker",
+  "Énergique. Il combine l'énergie du Rouge avec la progression déterminée du Jaune. Sous pression, il réfléchit plus — c'est agit. Il construit un match qui gagne en intensité.":"Energiek. Hij combineert de energie van Rood met de vastberaden progressie van Geel. Onder druk denkt hij minder lang — hij handelt. Hij bouwt een match die aan intensiteit wint.",
+  "Force tranquille. Il combine la puissance du Rouge et la fiabilité du Vert. Il participe aux moments clés — il y réfléchit, sa présence physique rassure, sa cohésion désarme l'adversaire.":"Rustige kracht. Hij combineert de kracht van Rood met de betrouwbaarheid van Groen. In sleutelmomenten is hij aanwezig — zijn fysieke présence stelt gerust en zijn samenhang ontwapent de tegenstander.",
+  "Passionné et décisionnaire. Il combine l'action du Rouge avec l'analyse du Bleu. Il joue régulièrement et agit avec assurance. Naturellement dans le duo, toujours dans le plan.":"Gepassioneerd en besluitvaardig. Hij combineert de actie van Rood met de analyse van Blauw. Hij speelt regelmatig en handelt met vertrouwen. Natuurlijk aanwezig in het duo, altijd binnen het plan.",
+  "Créatif et explosif. Il combine l'improvisation du Jaune avec l'audace du Rouge. Il invente des coups que l'adversaire ne voit pas venir. Son jeu est spectacle — et parfois victoire.":"Creatief en explosief. Hij combineert de improvisatie van Geel met de durf van Rood. Hij bedenkt slagen die de tegenstander niet ziet aankomen. Zijn spel is spektakel — en soms overwinning.",
+  "Énergie collective. Il combine l'enthousiasme du Jaune et la fiabilité du Vert. Il dynamise ses partenaires, maintient le rythme du duo, et ne lâche rien sur l'adversaire.":"Collectieve energie. Hij combineert het enthousiasme van Geel met de betrouwbaarheid van Groen. Hij geeft zijn partners energie, houdt het ritme van het duo vast en laat de tegenstander niet los.",
+  "Intelligence créative. Il combine l'intuition du Jaune et la précision du Bleu. Il construit des points complexes avec une logique que l'adversaire ne peut pas — pas une utilisation en mouvement.":"Creatieve intelligentie. Hij combineert de intuïtie van Geel met de precisie van Blauw. Hij bouwt complexe punten met een logica die de tegenstander moeilijk kan lezen.",
+  "Stabilité équilibrée. Il combine la fiabilité du Vert et la solidité du duo. Il crée un environnement sécurisé pour le duo, maintient le cap sous pression, et transforme la résistance en victoire.":"Evenwichtige stabiliteit. Hij combineert de betrouwbaarheid van Groen met de sterkte van het duo. Hij creëert veiligheid, houdt koers onder druk en verandert weerstand in overwinning.",
+  "Résistance totale. Il combine la solidité du Vert et la combativité du Bleu. Il ne perd pas de coups gratuits, il attend toujours la balle au fond, et l'adversaire finit toujours par craquer.":"Totale weerstand. Hij combineert de stevigheid van Groen met de strijdlust van Blauw. Hij geeft geen gratis punten weg, blijft altijd aanwezig en de tegenstander kraakt uiteindelijk.",
+  "Précision calme. Il combine la constance du Vert et la lecture du Bleu. Il conjugue avec rythme, il s'adapte et il s'ajuste, et il gagne en dignité par la régularité du cœur tactique.":"Kalme precisie. Hij combineert de constantheid van Groen met het inzicht van Blauw. Hij speelt met ritme, past zich aan en wint door de regelmaat van zijn tactische kern.",
+  "Intelligence pure. Il combine la logique du Bleu et la fiabilité du Vert. Il construit une compréhension totale de l'adversaire et de la situation, puis exécute avec précision.":"Pure intelligentie. Hij combineert de logica van Blauw met de betrouwbaarheid van Groen. Hij bouwt een volledig begrip van tegenstander en situatie op, en voert daarna precies uit.",
+  "Rigueur compétitrice. Il combine la précision du Bleu et la détermination du Rouge. Il joue avec une régularité presque mécanique, mais se laisse déstabiliser par l'intuition.":"Competitieve strengheid. Hij combineert de precisie van Blauw met de vastberadenheid van Rood. Hij speelt met bijna mechanische regelmaat, maar kan door intuïtief spel uit balans raken.",
+  "Capacité à retourner un match":"Vermogen om een match te keren","Endurance et impact sur la durée":"Uithouding en impact op lange termijn","Lecture du jeu exceptionnelle":"Uitzonderlijk spelinzicht","Répertoire technique étendu":"Uitgebreid technisch repertoire","Endurance physique et mentale":"Fysiek en mentaal uithoudingsvermogen","Vision du jeu exceptionnelle":"Uitzonderlijke spelvisie","Stabilité structurelle exemplaire":"Voorbeeldige structurele stabiliteit","Régularité technique exemplaire":"Voorbeeldige technische regelmaat","Régularité technique exceptionnelle":"Uitzonderlijke technische regelmaat","Analyse de haut niveau":"Analyse op hoog niveau","Précision technique exceptionnelle":"Uitzonderlijke technische precisie",
+  "Tarifs de lancement":"Lanceringstarieven","1h30 · terrain non inclus":"1u30 · terrein niet inbegrepen","Formule":"Formule","Individuel":"Individueel","par séance":"per sessie","par personne":"per persoon","par personne · 3 ou 4":"per persoon · 3 of 4","1 joueur — focus sur ton jeu. Analyse personnalisée et plan de progression.":"1 speler — focus op jouw spel. Persoonlijke analyse en groeiplan.","2 joueurs — focus paire. Complémentarité et jeu à deux optimisé.":"2 spelers — focus op het duo. Complementariteit en geoptimaliseerd samenspel.","Exercices ciblés pour progresser ensemble.":"Gerichte oefeningen om samen vooruit te gaan.","Accompagnement tournoi et analyse des matchs.":"Tornooibegeleiding en matchanalyse.","analyse perso + plan de prog.":"persoonlijke analyse + plan","complémentarité + communication":"complementariteit + communicatie","exercices collectifs ciblés":"gerichte groepsoefeningen","prépa + analyse match":"voorbereiding + matchanalyse","membres uniquement":"enkel leden",
+  "Courts couverts · disponible maintenant":"Overdekte terreinen · nu beschikbaar","Digital":"Digitaal","Plateforme membres":"Ledenplatform","Ton carnet de bord digital. Séances, objectifs, retour coach. Tu sais quoi bosser, et pourquoi.":"Jouw digitaal logboek. Sessies, doelen, feedback van de coach. Je weet waaraan je moet werken, en waarom.","Historique des séances":"Sessieverleden","Toutes tes séances archivées et analysées":"Al je sessies gearchiveerd en geanalyseerd","Objectifs actionnables":"Actiegerichte doelen","Des axes de travail simples et concrets":"Eenvoudige en concrete werkpunten","Feedback coach":"Coachfeedback","Retour personnalisé après chaque séance":"Persoonlijke feedback na elke sessie","Profil Boussole":"Kompasprofiel","Ton profil couleur + axes de vigilance":"Jouw kleurprofiel + aandachtspunten","Aperçu — carnet digital":"Preview — digitaal logboek","piliers":"pijlers","profils":"profielen","Séance du 16/06 · Technique revers":"Sessie van 16/06 · Backhandtechniek","Séance du 10/06 · Tactique duo":"Sessie van 10/06 · Duotactiek","Séance du 03/06 · Mental compétition":"Sessie van 03/06 · Competitiementaliteit",
+  "T-shirts HWBT":"HWBT T-shirts","Personnalisation Blade · Couleurs HWBT":"Blade-personalisatie · HWBT-kleuren","Noir · Or · Blanc cassé":"Zwart · Goud · Gebroken wit",
+  "Après chaque séance":"Na elke sessie","Ce que tu reçois":"Wat je krijgt","Un objectif clair":"Een duidelijk doel","Un seul point de travail prioritaire à intégrer avant la prochaine séance.":"Eén prioritair werkpunt om te integreren voor de volgende sessie.","Un feedback personnalisé":"Persoonlijke feedback","Ce qui a bien fonctionné, ce qui peut encore évoluer, adapté à ton profil.":"Wat goed werkte en wat nog kan evolueren, aangepast aan jouw profiel.","Un axe de vigilance":"Een aandachtspunt","Le point à surveiller en match selon ton profil boussole.":"Het punt om in match te bewaken volgens jouw kompasprofiel.","Un suivi sur la plateforme":"Opvolging op het platform","Tout est archivé sur ta plateforme membre. Tu vois ta progression dans le temps.":"Alles wordt bewaard op je ledenplatform. Je ziet je vooruitgang doorheen de tijd.",
+  "\"Déjà testé avec des joueurs jeunes et adultes, débutants et compétiteurs, en duo et en groupe. La méthode s'adapte au joueur, pas l'inverse.\"":"\"Al getest met jonge en volwassen spelers, beginners en competitiespelers, in duo en in groep. De methode past zich aan de speler aan, niet omgekeerd.\"",
+  "piliers de progression":"pijlers van vooruitgang","profils joueurs":"spelersprofielen","aspects mesurés":"gemeten aspecten","courts — Nivelles & Diegem":"terreinen — Nijvel & Diegem","Demander une séance d'essai →":"Vraag een proeftraining aan →",
+  "Contact":"Contact","Rejoins":"Word lid van","l'académie":"de academie","Explique-moi ton niveau et ton objectif. Réponse rapide. Du concret. Mon rôle : t'aider à comprendre ton jeu, pas seulement corriger ton geste.":"Vertel me je niveau en je doel. Snelle reactie. Concreet. Mijn rol: je helpen je spel te begrijpen, niet alleen je slag corrigeren.","Ancien joueur de tennis et volley, passionné par la lecture du jeu, la progression mentale et le travail structuré.":"Voormalig tennis- en volleybalspeler, gepassioneerd door spelinzicht, mentale progressie en gestructureerd werk.","Me contacter sur WhatsApp":"Contacteer mij via WhatsApp","ou remplis le formulaire joueur":"of vul het spelersformulier in","Ton niveau actuel...":"Je huidige niveau...","Débutant (- de 1 an)":"Beginner (- dan 1 jaar)","Intermédiaire (1–3 ans)":"Gemiddeld (1–3 jaar)","Duo (avec partenaire)":"Duo (met partner)","Envoyer ma demande":"Mijn aanvraag verzenden","✓ Demande envoyée — je te réponds rapidement !":"✓ Aanvraag verzonden — ik antwoord snel!"
+};
+function applyDutch(){
+  document.querySelectorAll('.fr-only').forEach(el=>{
+    if(!el.dataset.frText) el.dataset.frText=el.textContent.trim();
+    const key=el.dataset.frText;
+    if(NL_TEXT[key]) el.textContent=NL_TEXT[key];
+  });
+  document.querySelectorAll('input[placeholder],textarea[placeholder]').forEach(el=>{
+    if(!el.dataset.frPlaceholder) el.dataset.frPlaceholder=el.getAttribute('placeholder')||'';
+    const val=NL_TEXT[el.dataset.frPlaceholder];
+    if(val) el.setAttribute('placeholder',val);
+  });
+  document.querySelectorAll('option').forEach(el=>{
+    if(!el.dataset.frText) el.dataset.frText=el.textContent.trim();
+    const val=NL_TEXT[el.dataset.frText];
+    if(val) el.textContent=val;
+  });
+}
+function restoreFrench(){
+  document.querySelectorAll('.fr-only').forEach(el=>{ if(el.dataset.frText) el.textContent=el.dataset.frText; });
+  document.querySelectorAll('input[placeholder],textarea[placeholder]').forEach(el=>{ if(el.dataset.frPlaceholder) el.setAttribute('placeholder',el.dataset.frPlaceholder); });
+  document.querySelectorAll('option').forEach(el=>{ if(el.dataset.frText) el.textContent=el.dataset.frText; });
+}
 function setLang(l){
   const s=document.getElementById('site');
-  s.classList.remove('lang-fr','lang-en');
+  s.classList.remove('lang-fr','lang-en','lang-nl');
   s.classList.add('lang-'+l);
+  if(l==='nl') applyDutch(); else restoreFrench();
   document.getElementById('btn-fr').classList.toggle('active',l==='fr');
+  document.getElementById('btn-nl').classList.toggle('active',l==='nl');
   document.getElementById('btn-en').classList.toggle('active',l==='en');
+  document.documentElement.lang=l;
+  updateTicker(l);
 }
 
 // Ticker
-const ticks=['Hard Work Beats Talent','HWBT ACADEMY','Nivelles · Diegem',"Comprendre · S'entraîner · Valider · Évoluer",'12 profils joueurs','Deviens acteur de ta progression','4 piliers · 36 aspects','Unity Builds Our Legacy','Le carnet du compétiteur'];
+const ticksByLang={
+  fr:['Hard Work Beats Talent','HWBT ACADEMY','Nivelles · Diegem',"Comprendre · S'entraîner · Valider · Évoluer",'12 profils joueurs','Deviens acteur de ta progression','4 piliers · 36 aspects','Unity Builds Our Legacy','Le carnet du compétiteur'],
+  nl:['Hard Work Beats Talent','HWBT ACADEMY','Nijvel · Diegem','Begrijpen · Trainen · Valideren · Evolueren','12 spelersprofielen','Word eigenaar van je vooruitgang','4 pijlers · 36 aspecten','Unity Builds Our Legacy','Het notitieboek van de competitiespeler'],
+  en:['Hard Work Beats Talent','HWBT ACADEMY','Nivelles · Diegem','Understand · Train · Validate · Evolve','12 player profiles','Own your progress','4 pillars · 36 aspects','Unity Builds Our Legacy',"The competitor's notebook"]
+};
 const inner=document.getElementById('tick');
-let h='';
-for(let i=0;i<4;i++) ticks.forEach(t=>{
-  h+=`<span class="ti"><span>${t}</span><span class="ti-dot"></span></span>`;
-});
-inner.innerHTML=h;
+function updateTicker(lang='fr'){
+  if(!inner)return;
+  let h='';
+  const ticks=ticksByLang[lang]||ticksByLang.fr;
+  for(let i=0;i<4;i++) ticks.forEach(t=>{
+    h+=`<span class="ti"><span>${t}</span><span class="ti-dot"></span></span>`;
+  });
+  inner.innerHTML=h;
+}
+updateTicker('fr');
 
 // Count up
 function countUp(el,target,dur){
@@ -1767,7 +1862,13 @@ function handleForm(e){
   const level=document.getElementById('f-level').value;
   const goal=document.getElementById('f-goal').value;
   // Ouvre WhatsApp avec le message pré-rempli
-  const msg=encodeURIComponent(`Bonjour Thomas,\nJe m'appelle ${name}.\nNiveau : ${level}\nObjectif : ${goal}\nContact : ${email}${phone?' / '+phone:''}`);
+  const currentLang=document.documentElement.lang||'fr';
+  const msgText=currentLang==='nl'
+    ? `Hallo Thomas,\nIk ben ${name}.\nNiveau: ${level}\nDoel: ${goal}\nContact: ${email}${phone?' / '+phone:''}`
+    : currentLang==='en'
+      ? `Hello Thomas,\nMy name is ${name}.\nLevel: ${level}\nGoal: ${goal}\nContact: ${email}${phone?' / '+phone:''}`
+      : `Bonjour Thomas,\nJe m'appelle ${name}.\nNiveau : ${level}\nObjectif : ${goal}\nContact : ${email}${phone?' / '+phone:''}`;
+  const msg=encodeURIComponent(msgText);
   window.open(`https://wa.me/32498088771?text=${msg}`,'_blank');
   document.getElementById('f-success').style.display='block';
   document.getElementById('f-success-en').style.display='block';
