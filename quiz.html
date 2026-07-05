@@ -120,6 +120,7 @@ input{font-family:var(--font-body)}
 /* ---- Detail section ---- */
 .detail-section{margin-top:28px;text-align:left}
 .detail-title{font-family:var(--font-title);font-size:11px;letter-spacing:2.5px;color:var(--gray2);text-align:center;margin-bottom:16px}
+.detail-note{margin:-6px 0 16px;text-align:center;color:rgba(245,241,232,.72);font-size:13px;line-height:1.6}
 .detail-story{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:16px;font-size:12.5px;color:#d8d8dd;line-height:1.7;margin-bottom:12px}
 .detail-cols{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 @media(max-width:420px){.detail-cols{grid-template-columns:1fr}}
@@ -273,11 +274,11 @@ input{font-family:var(--font-body)}
 
     <div class="result-actions">
       <button class="btn btn-primary btn-block" onclick="shareProfile()">PARTAGER / ENREGISTRER LA STORY</button>
-      <button class="btn btn-ghost btn-block" onclick="emailCard()">ENVOYER LE PROFIL COMPLET PAR MAIL</button>
     </div>
 
     <div class="detail-section">
       <div class="detail-title">TON PROFIL EN DÉTAIL</div>
+      <div class="detail-note">Ceci est un résumé du profil. Si tu veux le profil complet, demande-le.</div>
       <div class="detail-story" id="detailStory"></div>
       <div class="detail-cols">
         <div class="detail-box forts"><h4>POINTS FORTS</h4><ul id="detailForts"></ul></div>
@@ -350,11 +351,12 @@ const UI = {
     sub:"Découvre ton profil naturel en match. 12 questions aléatoires. Résultat immédiat, carte joueur partageable.",
     start:'COMMENCER LE TEST', profileCard:'PROFIL JOUEUR', cardName:'JOUEUR HWBT', cardNote:'NOTE /99',
     personalize:'PERSONNALISE TA CARTE', namePlaceholder:'Ton prénom', photo:'PHOTO',
-    shareSave:'PARTAGER / ENREGISTRER LA STORY', emailFull:'ENVOYER LE PROFIL COMPLET PAR MAIL', instagram:'INSTAGRAM', facebook:'FACEBOOK', download:'TÉLÉCHARGER LA STORY', email:'ENVOYER PAR EMAIL', restart:'REFAIRE LE TEST',
+    shareSave:'PARTAGER / ENREGISTRER LA STORY', instagram:'INSTAGRAM', facebook:'FACEBOOK', download:'TÉLÉCHARGER LA STORY', email:'ENVOYER PAR EMAIL', restart:'REFAIRE LE TEST',
     storyKicker:'ACADEMY · PROFIL JOUEUR',
     detail:'TON PROFIL EN DÉTAIL', strengths:'POINTS FORTS', work:'AXES DE TRAVAIL', comm:'COMMENT BIEN COMMUNIQUER AVEC TOI',
+    summaryNote:'Ceci est un résumé du profil. Si tu veux le profil complet, demande-le.',
     cta:'Envie de développer ce profil sur le terrain avec un vrai programme de coaching ?', ctaBtn:'DÉCOUVRIR HWBT ACADEMY',
-    shareToast:'Story téléchargée — ouvre ton app et publie-la avec le texte copié.', copied:'Texte de partage copié', emailToast:"Profil complet copié. Si ton app mail ne s’ouvre pas, colle le texte dans ton email.",
+    shareToast:'Story téléchargée — ouvre ton app et publie-la avec le texte copié.', copied:'Texte de partage copié',
     shareText:n=>`J’ai fait la Boussole HWBT Express.\nMon profil padel est : ${n}.\nEt toi, tu es quel type de joueur ?`,
     resultText:'Ce profil ne définit pas ton niveau. Il montre ta tendance naturelle en match. Le terrain confirme le profil.'
   },
@@ -365,11 +367,12 @@ const UI = {
     sub:'Ontdek jouw natuurlijke wedstrijdprofiel. 12 willekeurige vragen. Direct resultaat, deelbare spelerskaart.',
     start:'START DE TEST', profileCard:'SPELERSPROFIEL', cardName:'HWBT-SPELER', cardNote:'SCORE /99',
     personalize:'PERSONALISEER JE KAART', namePlaceholder:'Je voornaam', photo:'FOTO',
-    shareSave:'DEEL / BEWAAR DE STORY', emailFull:'VERSTUUR VOLLEDIG PROFIEL VIA EMAIL', instagram:'INSTAGRAM', facebook:'FACEBOOK', download:'DOWNLOAD DE STORY', email:'VERSTUUR VIA EMAIL', restart:'HERSTART DE TEST',
+    shareSave:'DEEL / BEWAAR DE STORY', instagram:'INSTAGRAM', facebook:'FACEBOOK', download:'DOWNLOAD DE STORY', email:'VERSTUUR VIA EMAIL', restart:'HERSTART DE TEST',
     storyKicker:'ACADEMY · SPELERSPROFIEL',
     detail:'JOUW PROFIEL IN DETAIL', strengths:'STERKE PUNTEN', work:'WERKPUNTEN', comm:'HOE COMMUNICEER JE BEST MET JOU',
+    summaryNote:'Dit is een samenvatting van het profiel. Wil je het volledige profiel, vraag het dan aan.',
     cta:'Wil je dit profiel op het terrein ontwikkelen met echte coaching?', ctaBtn:'ONTDEK HWBT ACADEMY',
-    shareToast:'Story gedownload — open je app en post ze met de gekopieerde tekst.', copied:'Deeltekst gekopieerd', emailToast:'Volledig profiel gekopieerd. Als je mailapp niet opent, plak de tekst in je e-mail.',
+    shareToast:'Story gedownload — open je app en post ze met de gekopieerde tekst.', copied:'Deeltekst gekopieerd',
     shareText:n=>`Ik heb het HWBT Express Kompas gedaan.\nMijn padelprofiel is: ${n}.\nEn jij, welk type speler ben jij?`,
     resultText:'Dit profiel bepaalt niet jouw niveau. Het toont jouw natuurlijke wedstrijdreactie. Het terrein bevestigt het profiel.'
   },
@@ -380,45 +383,14 @@ const UI = {
     sub:'Discover your natural match profile. 12 random questions. Instant result, shareable player card.',
     start:'START THE TEST', profileCard:'PLAYER PROFILE', cardName:'HWBT PLAYER', cardNote:'RATING /99',
     personalize:'CUSTOMIZE YOUR CARD', namePlaceholder:'Your first name', photo:'PHOTO',
-    shareSave:'SHARE / SAVE STORY', emailFull:'SEND FULL PROFILE BY EMAIL', instagram:'INSTAGRAM', facebook:'FACEBOOK', download:'DOWNLOAD STORY', email:'SEND BY EMAIL', restart:'RESTART TEST',
+    shareSave:'SHARE / SAVE STORY', instagram:'INSTAGRAM', facebook:'FACEBOOK', download:'DOWNLOAD STORY', email:'SEND BY EMAIL', restart:'RESTART TEST',
     storyKicker:'ACADEMY · PLAYER PROFILE',
     detail:'YOUR PROFILE IN DETAIL', strengths:'STRENGTHS', work:'WORK AXES', comm:'HOW TO COMMUNICATE WITH YOU',
+    summaryNote:'This is a profile summary. If you want the full profile, ask for it.',
     cta:'Want to develop this profile on court with a real coaching program?', ctaBtn:'DISCOVER HWBT ACADEMY',
-    shareToast:'Story downloaded — open your app and post it with the copied text.', copied:'Share text copied', emailToast:'Full profile copied. If your mail app does not open, paste the text into your email.',
+    shareToast:'Story downloaded — open your app and post it with the copied text.', copied:'Share text copied',
     shareText:n=>`I completed the HWBT Express Compass.\nMy padel profile is: ${n}.\nWhat type of player are you?`,
     resultText:'This profile does not define your level. It shows your natural match tendency. The court confirms the profile.'
-  }
-};
-const EMAIL_I18N = {
-  fr:{
-    subject:'HWBT Academy - Profil complet',
-    compass:'BOUSSOLE HWBT EXPRESS',
-    profile:'Profil',
-    signature:'Signature',
-    summary:'RESUME DU PROFIL',
-    strengths:'POINTS FORTS',
-    work:'AXES DE TRAVAIL',
-    comm:'COMMENT BIEN COMMUNIQUER AVEC TOI'
-  },
-  nl:{
-    subject:'HWBT Academy - Volledig profiel',
-    compass:'HWBT EXPRESS KOMPAS',
-    profile:'Profiel',
-    signature:'Signatuur',
-    summary:'SAMENVATTING VAN HET PROFIEL',
-    strengths:'STERKE PUNTEN',
-    work:'WERKPUNTEN',
-    comm:'HOE COMMUNICEER JE BEST MET JOU'
-  },
-  en:{
-    subject:'HWBT Academy - Full profile',
-    compass:'HWBT EXPRESS COMPASS',
-    profile:'Profile',
-    signature:'Signature',
-    summary:'PROFILE SUMMARY',
-    strengths:'STRENGTHS',
-    work:'WORK AXES',
-    comm:'HOW TO COMMUNICATE WITH YOU'
   }
 };
 const PROFILE_I18N = {
@@ -905,8 +877,8 @@ function applyLanguage(){
   document.querySelector('.file-btn').childNodes[0].textContent = u.photo + ' ';
   const actionButtons = document.querySelectorAll('.result-actions button');
   if(actionButtons[0]) actionButtons[0].textContent = u.shareSave;
-  if(actionButtons[1]) actionButtons[1].textContent = u.emailFull;
   document.querySelector('.detail-title').textContent = u.detail;
+  document.querySelector('.detail-note').textContent = u.summaryNote;
   document.querySelector('.detail-box.forts h4').textContent = u.strengths;
   document.querySelector('.detail-box.faibles h4').textContent = u.work;
   document.querySelector('.comm-box h4').textContent = u.comm;
@@ -1351,50 +1323,6 @@ async function shareToFacebook(){
     showToast(tr().shareToast);
   }
 }
-function buildFullProfileEmail(){
-  const p = PROFILES[finalProfile];
-  const display = profileDisplay(p);
-  const details = profileDetails(p);
-  const labels = EMAIL_I18N[currentLang] || EMAIL_I18N.fr;
-  const bulletList = items => (items || []).map(item => `- ${item}`).join('\n');
-  const subject = `${labels.subject} : ${display.name}`;
-  const body = [
-    labels.compass,
-    '',
-    `${labels.profile} : ${display.name}`,
-    `${labels.signature} : ${display.line}`,
-    '',
-    labels.summary,
-    details.story,
-    '',
-    labels.strengths,
-    bulletList(details.forts),
-    '',
-    labels.work,
-    bulletList(details.faibles),
-    '',
-    labels.comm,
-    details.comm,
-    '',
-    '#HWBTAcademy',
-    '#HardWorkBeatsTalent'
-  ].join('\n');
-  return {subject, body};
-}
-async function emailCard(){
-  const {subject, body} = buildFullProfileEmail();
-  try{ await navigator.clipboard.writeText(body); }catch(e){}
-  showToast(tr().emailToast);
-
-  const mailtoUrl = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-  const link = document.createElement('a');
-  link.href = mailtoUrl;
-  link.style.display = 'none';
-  document.body.appendChild(link);
-  link.click();
-  link.remove();
-}
-
 /* ================= ADMIN ================= */
 function openAdminGate(){ showScreen('adminGateScreen'); }
 function checkAdminGate(){
