@@ -273,15 +273,6 @@ input{font-family:var(--font-body)}
 
     <div class="result-actions">
       <button class="btn btn-primary btn-block" onclick="shareProfile()">PARTAGER / ENREGISTRER LA STORY</button>
-      <div class="result-row2">
-        <button class="btn btn-primary" onclick="shareToInstagram()">📷 INSTAGRAM</button>
-        <button class="btn btn-primary" onclick="shareToFacebook()">📘 FACEBOOK</button>
-      </div>
-      <div class="result-row2">
-        <button class="btn btn-ghost" onclick="downloadCard()">TÉLÉCHARGER L'IMAGE</button>
-        <button class="btn btn-ghost" onclick="emailCard()">ENVOYER PAR EMAIL</button>
-      </div>
-      <button class="btn btn-ghost btn-block" onclick="restartQuiz()">REFAIRE LE TEST</button>
     </div>
 
     <div class="detail-section">
@@ -840,11 +831,6 @@ function applyLanguage(){
   document.querySelector('.file-btn').childNodes[0].textContent = u.photo + ' ';
   const actionButtons = document.querySelectorAll('.result-actions button');
   if(actionButtons[0]) actionButtons[0].textContent = u.shareSave;
-  if(actionButtons[1]) actionButtons[1].textContent = u.instagram;
-  if(actionButtons[2]) actionButtons[2].textContent = u.facebook;
-  if(actionButtons[3]) actionButtons[3].textContent = u.download;
-  if(actionButtons[4]) actionButtons[4].textContent = u.email;
-  if(actionButtons[5]) actionButtons[5].textContent = u.restart;
   document.querySelector('.detail-title').textContent = u.detail;
   document.querySelector('.detail-box.forts h4').textContent = u.strengths;
   document.querySelector('.detail-box.faibles h4').textContent = u.work;
