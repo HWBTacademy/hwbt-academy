@@ -418,18 +418,18 @@ const UI = {
   }
 };
 const PROFILE_I18N = {
- 'rouge-jaune':{fr:['LE CATALYSEUR','Tu fais bouger le match.'],nl:['DE KATALYSATOR','Jij brengt de wedstrijd in beweging.'],en:['THE CATALYST','You make the match move.']},
- 'rouge-vert':{fr:['LE PILIER','Tu imposes par ta présence.'],nl:['DE PIJLER','Jij maakt impact door je aanwezigheid.'],en:['THE PILLAR','You impose through your presence.']},
- 'rouge-bleu':{fr:['LE CAPITAINE','Tu veux diriger le match.'],nl:['DE KAPITEIN','Jij wil de wedstrijd sturen.'],en:['THE CAPTAIN','You want to lead the match.']},
- 'jaune-rouge':{fr:['LE SHOWMAN','Tu joues pour créer l’impact.'],nl:['DE SHOWMAN','Jij speelt om impact te creëren.'],en:['THE SHOWMAN','You play to create impact.']},
- 'jaune-vert':{fr:['LE MOTEUR','Tu fais vivre le duo.'],nl:['DE MOTOR','Jij houdt het duo in beweging.'],en:['THE ENGINE','You keep the pair alive.']},
- 'jaune-bleu':{fr:['LE CRÉATIF','Tu vois des options que les autres ne voient pas.'],nl:['DE CREATIEVELING','Jij ziet opties die anderen niet zien.'],en:['THE CREATIVE','You see options others do not see.']},
- 'vert-jaune':{fr:['LE POSÉ','Tu stabilises le match.'],nl:['DE RUSTBRENGER','Jij brengt rust in de wedstrijd.'],en:['THE COMPOSED PLAYER','You stabilize the match.']},
- 'vert-rouge':{fr:['LE ROC','Tu ne donnes rien facilement.'],nl:['DE ROTS','Jij geeft niets makkelijk weg.'],en:['THE ROCK','You give nothing away easily.']},
- 'vert-bleu':{fr:['LE MÉTRONOME','Tu construis avec patience et logique.'],nl:['DE METRONOOM','Jij bouwt met geduld en logica.'],en:['THE METRONOME','You build with patience and logic.']},
- 'bleu-vert':{fr:['LE STRATÈGE','Tu gagnes avec le plan.'],nl:['DE STRATEEG','Jij wint met een plan.'],en:['THE STRATEGIST','You win with the plan.']},
- 'bleu-rouge':{fr:['LE CONTRÔLEUR','Tu veux comprendre, puis exécuter.'],nl:['DE CONTROLEUR','Jij wil eerst begrijpen en dan uitvoeren.'],en:['THE CONTROLLER','You want to understand, then execute.']},
- 'bleu-jaune':{fr:['LE LECTEUR','Tu lis le jeu et tu cherches la solution.'],nl:['DE LEZER','Jij leest het spel en zoekt de oplossing.'],en:['THE READER','You read the game and look for the solution.']}
+ 'rouge-jaune':{fr:['LE BULDOZE','Tu fais bouger le match.'],nl:['LE BULDOZE','Jij brengt de wedstrijd in beweging.'],en:['LE BULDOZE','You make the match move.']},
+ 'rouge-vert':{fr:['LE GARDIEN','Tu imposes par ta présence.'],nl:['LE GARDIEN','Jij maakt impact door je aanwezigheid.'],en:['LE GARDIEN','You impose through your presence.']},
+ 'rouge-bleu':{fr:['LE CAPITAINE','Tu veux diriger le match.'],nl:['LE CAPITAINE','Jij wil de wedstrijd sturen.'],en:['LE CAPITAINE','You want to lead the match.']},
+ 'jaune-rouge':{fr:["L'ARTISTE",'Tu joues pour créer l’impact.'],nl:["L'ARTISTE",'Jij speelt om impact te creëren.'],en:["L'ARTISTE",'You play to create impact.']},
+ 'jaune-vert':{fr:['LE MOTEUR','Tu fais vivre le duo.'],nl:['LE MOTEUR','Jij houdt het duo in beweging.'],en:['LE MOTEUR','You keep the pair alive.']},
+ 'jaune-bleu':{fr:['LE CREATIF','Tu vois des options que les autres ne voient pas.'],nl:['LE CREATIF','Jij ziet opties die anderen niet zien.'],en:['LE CREATIF','You see options others do not see.']},
+ 'vert-jaune':{fr:["L'EQUILIBRISTE",'Tu stabilises le match.'],nl:["L'EQUILIBRISTE",'Jij brengt rust in de wedstrijd.'],en:["L'EQUILIBRISTE",'You stabilize the match.']},
+ 'vert-rouge':{fr:['LE MUR','Tu ne donnes rien facilement.'],nl:['LE MUR','Jij geeft niets makkelijk weg.'],en:['LE MUR','You give nothing away easily.']},
+ 'vert-bleu':{fr:['LE TEMPS','Tu construis avec patience et logique.'],nl:['LE TEMPS','Jij bouwt met geduld en logica.'],en:['LE TEMPS','You build with patience and logic.']},
+ 'bleu-vert':{fr:["L'ARCHITECTE",'Tu gagnes avec le plan.'],nl:["L'ARCHITECTE",'Jij wint met een plan.'],en:["L'ARCHITECTE",'You win with the plan.']},
+ 'bleu-rouge':{fr:['LE SOLDAT','Tu veux comprendre, puis exécuter.'],nl:['LE SOLDAT','Jij wil eerst begrijpen en dan uitvoeren.'],en:['LE SOLDAT','You want to understand, then execute.']},
+ 'bleu-jaune':{fr:['LE VISIONAIRE','Tu lis le jeu et tu cherches la solution.'],nl:['LE VISIONAIRE','Jij leest het spel en zoekt de oplossing.'],en:['LE VISIONAIRE','You read the game and look for the solution.']}
 };
 const PROFILE_DETAILS_I18N = {
  'rouge-jaune':{
@@ -522,21 +522,21 @@ function rgba(hex, alpha){
 /* ================= 12 PROFILES (primary-secondary) ================= */
 const PROFILES = {
 'rouge-jaune': {
-  key:'rouge-jaune', name:'LE CATALYSEUR', sub:'Le Bâtisseur', p1:'rouge', p2:'jaune',
+  key:'rouge-jaune', name:'LE BULDOZE', sub:'Le Bâtisseur', p1:'rouge', p2:'jaune',
   story:"Tu es une explosion d'énergie contrôlée. Sous pression, tu n'analyses pas longtemps : tu agis, et tu entraînes tout le monde avec toi. Connecté, tu fais basculer un match qui semblait perdu en quelques échanges.",
   forts:["Capacité à renverser un match à lui seul dans les moments critiques","Prise de risque qui déstabilise complètement l'adversaire","Énergie et charisme qui entraînent tout le partenaire"],
   faibles:["Peut se précipiter et perdre des points par excès de confiance","Manque parfois de patience dans la construction du point","Difficulté à garder la même intensité sur un match long"],
-  comm:"Le Catalyseur a besoin de sentir qu'on lui fait confiance pour prendre des initiatives — le brider trop tôt casse sa dynamique. Donne-lui des objectifs clairs sur le \"quand\" oser plutôt que sur le \"si\" il doit oser, et félicite l'audace même quand le coup ne passe pas : c'est ce qui le fait progresser le plus vite.",
-  quote:"Le Catalyseur ne fait pas gagner le point. Il fait basculer le match.",
+  comm:"Le Bulldoze a besoin de sentir qu'on lui fait confiance pour prendre des initiatives — le brider trop tôt casse sa dynamique. Donne-lui des objectifs clairs sur le \"quand\" oser plutôt que sur le \"si\" il doit oser, et félicite l'audace même quand le coup ne passe pas : c'est ce qui le fait progresser le plus vite.",
+  quote:"Le Bulldoze ne fait pas gagner le point. Il fait basculer le match.",
   stats:{pui:88,pre:65,sfr:70,cre:82,reg:60,equ:75}
 },
 'rouge-vert': {
-  key:'rouge-vert', name:'LE PILIER', sub:'Le Gardien', p1:'rouge', p2:'vert',
+  key:'rouge-vert', name:'LE GARDIEN', sub:'Le Gardien', p1:'rouge', p2:'vert',
   story:"Tu es une force tranquille et explosive à la fois. Rien ne te fait perdre tes moyens : plus la pression monte, plus tu t'ancres. Ta présence et ta constance rassurent ton partenaire et usent l'adversaire, point après point.",
   forts:["Endurance et intensité qui tiennent sur la durée du match","Fiabilité totale dans les moments critiques","Présence physique qui pèse sur le moral adverse"],
   faibles:["Peut manquer de créativité pour sortir d'un plan qui ne fonctionne plus","Parfois trop attentiste, laisse traîner des points gagnables","Difficulté à changer de rythme rapidement"],
-  comm:"Le Pilier progresse par la répétition et la confiance, pas par la pression. Donne-lui un cadre stable, des repères physiques concrets, et évite de le bousculer avec des changements tactiques trop fréquents : il a besoin de temps pour ajuster, mais une fois ajusté, il ne lâche plus.",
-  quote:"Le Pilier ne cherche pas le spectaculaire. Il cherche la victoire.",
+  comm:"Le Gardien progresse par la répétition et la confiance, pas par la pression. Donne-lui un cadre stable, des repères physiques concrets, et évite de le bousculer avec des changements tactiques trop fréquents : il a besoin de temps pour ajuster, mais une fois ajusté, il ne lâche plus.",
+  quote:"Le Gardien ne cherche pas le spectaculaire. Il cherche la victoire.",
   stats:{pui:90,pre:68,sfr:80,cre:55,reg:78,equ:70}
 },
 'rouge-bleu': {
@@ -549,12 +549,12 @@ const PROFILES = {
   stats:{pui:82,pre:78,sfr:84,cre:62,reg:74,equ:76}
 },
 'jaune-rouge': {
-  key:'jaune-rouge', name:'LE SHOWMAN', sub:"L'Artiste", p1:'jaune', p2:'rouge',
+  key:'jaune-rouge', name:"L'ARTISTE", sub:"L'Artiste", p1:'jaune', p2:'rouge',
   story:"Ton jeu naît de l'audace et de l'expression. Tu inventes des coups que l'adversaire ne voit pas venir, et ton énergie transforme chaque match en spectacle. Cette confiance débordante te porte — mais elle peut aussi te faire perdre le fil du match.",
   forts:["Répertoire technique étendu et varié","Audace assumée dans les moments décisifs","Capacité à surprendre et déstabiliser l'adversaire"],
   faibles:["Peut privilégier le beau geste au coup efficace","Manque parfois de discipline dans les points simples","Sensible au regard des autres, joue parfois pour l'audience"],
-  comm:"Le Showman a besoin de reconnaissance pour donner le meilleur de lui-même — valorise ses prises de risque réussies. Recadre-le avec des objectifs simples et mesurables sur les points \"faciles\", où sa tendance à en faire trop peut coûter cher.",
-  quote:"Le Showman ne joue pas pour gagner. Il gagne en jouant.",
+  comm:"L'Artiste a besoin de reconnaissance pour donner le meilleur de lui-même — valorise ses prises de risque réussies. Recadre-le avec des objectifs simples et mesurables sur les points \"faciles\", où sa tendance à en faire trop peut coûter cher.",
+  quote:"L'Artiste ne joue pas pour gagner. Il gagne en jouant.",
   stats:{pui:78,pre:70,sfr:62,cre:92,reg:55,equ:72}
 },
 'jaune-vert': {
@@ -567,66 +567,66 @@ const PROFILES = {
   stats:{pui:74,pre:62,sfr:68,cre:76,reg:80,equ:90}
 },
 'jaune-bleu': {
-  key:'jaune-bleu', name:'LE CRÉATIF', sub:'Le Visionnaire libre', p1:'jaune', p2:'bleu',
+  key:'jaune-bleu', name:'LE CREATIF', sub:'Le Visionaire libre', p1:'jaune', p2:'bleu',
   story:"Tu construis des points complexes avec une intelligence de jeu que l'adversaire ne perçoit souvent que trop tard. Un joueur imprévisible mais réfléchi — créatif avec une vraie méthode derrière.",
   forts:["Vision de jeu exceptionnelle, voit les angles avant les autres","Construction de points complexes et originaux","Capacité d'adaptation créative face à des schémas inhabituels"],
   faibles:["Peut sur-compliquer des points qui auraient pu être simples","Parfois hésitant entre l'instinct et l'analyse","Manque de régularité dans l'exécution de ses idées"],
-  comm:"Le Créatif a besoin d'espace pour explorer ses idées, mais aussi d'un cadre pour les canaliser. Encourage-le à expliquer son raisonnement à voix haute — ça l'aide à clarifier ses choix et à distinguer les bonnes idées des tentatives trop risquées.",
-  quote:"Le Créatif voit des options que les autres n'ont pas encore imaginées.",
+  comm:"Le Creatif a besoin d'espace pour explorer ses idées, mais aussi d'un cadre pour les canaliser. Encourage-le à expliquer son raisonnement à voix haute — ça l'aide à clarifier ses choix et à distinguer les bonnes idées des tentatives trop risquées.",
+  quote:"Le Creatif voit des options que les autres n'ont pas encore imaginées.",
   stats:{pui:62,pre:74,sfr:66,cre:94,reg:58,equ:68}
 },
 'vert-jaune': {
-  key:'vert-jaune', name:'LE POSÉ', sub:"L'Équilibriste", p1:'vert', p2:'jaune',
+  key:'vert-jaune', name:"L'EQUILIBRISTE", sub:"L'Équilibriste", p1:'vert', p2:'jaune',
   story:"Ta stabilité émotionnelle rassure ton partenaire, et ton contact humain crée une vraie complicité sur le terrain. Tu ne cherches pas à gagner vite — tu transformes la patience en arme de résistance.",
   forts:["Stabilité émotionnelle exemplaire, quasi imperturbable","Impact positif et rassurant sur le partenaire","Régularité technique même sous pression"],
   faibles:["Peut manquer de mordant dans les moments qui demandent de l'agressivité","Parfois trop conciliant, évite le conflit constructif","Difficulté à hausser le rythme quand il le faudrait"],
-  comm:"Le Posé s'épanouit dans un climat de confiance et de bienveillance. Évite les remarques trop dures ou l'urgence excessive — donne-lui plutôt du temps et des encouragements réguliers, et il finira par éroder n'importe quel adversaire par sa constance.",
-  quote:"Le Posé n'essaie pas de gagner vite. Il fait en sorte que l'adversaire finisse par perdre.",
+  comm:"L'Equilibriste s'épanouit dans un climat de confiance et de bienveillance. Évite les remarques trop dures ou l'urgence excessive — donne-lui plutôt du temps et des encouragements réguliers, et il finira par éroder n'importe quel adversaire par sa constance.",
+  quote:"L'Equilibriste n'essaie pas de gagner vite. Il fait en sorte que l'adversaire finisse par perdre.",
   stats:{pui:58,pre:72,sfr:85,cre:68,reg:82,equ:88}
 },
 'vert-rouge': {
-  key:'vert-rouge', name:'LE ROC', sub:'Le Mur', p1:'vert', p2:'rouge',
+  key:'vert-rouge', name:'LE MUR', sub:'Le Mur', p1:'vert', p2:'rouge',
   story:"Rien ne te fait plier : tu rends toujours la balle et tu transformes l'usure en arme de victoire. Face à toi, l'adversaire doit gagner le point trois fois avant qu'il ne soit vraiment terminé.",
   forts:["Régularité technique exceptionnelle sur toute la durée du match","Endurance physique et mentale à toute épreuve","Aucune panique possible sous pression"],
   faibles:["Peut manquer d'initiative pour conclure les points rapidement","Parfois trop attentiste face à un adversaire qui prend l'initiative","Difficulté à sortir de sa zone de confort tactique"],
-  comm:"Le Roc a besoin qu'on valorise sa constance plutôt que de lui demander d'être plus spectaculaire — ce n'est pas son jeu. Encourage-le à prendre ponctuellement l'initiative en lui donnant un signal clair du \"bon moment\", plutôt que de le laisser deviner quand attaquer.",
-  quote:"Le Roc ne cède jamais. Il fait toujours douter en premier.",
+  comm:"Le Mur a besoin qu'on valorise sa constance plutôt que de lui demander d'être plus spectaculaire — ce n'est pas son jeu. Encourage-le à prendre ponctuellement l'initiative en lui donnant un signal clair du \"bon moment\", plutôt que de le laisser deviner quand attaquer.",
+  quote:"Le Mur ne cède jamais. Il fait toujours douter en premier.",
   stats:{pui:84,pre:70,sfr:88,cre:50,reg:90,equ:72}
 },
 'vert-bleu': {
-  key:'vert-bleu', name:'LE MÉTRONOME', sub:'Le Temps', p1:'vert', p2:'bleu',
+  key:'vert-bleu', name:'LE TEMPS', sub:'Le Temps', p1:'vert', p2:'bleu',
   story:"Ta précision calme impose un rythme que l'adversaire finit par subir, forcé de s'adapter à ton tempo plutôt que l'inverse. Tu gagnes en imposant ta cadence, pas en cherchant le coup gagnant à tout prix.",
   forts:["Régularité technique exceptionnelle, quasi sans faute","Lecture du jeu affûtée qui anticipe les intentions adverses","Capacité à imposer son propre rythme au match"],
   faibles:["Peut manquer de variation pour surprendre un adversaire qui s'adapte","Parfois trop prévisible dans ses choix de jeu","Difficulté à accélérer quand le contexte l'exige"],
-  comm:"Le Métronome répond bien à des objectifs précis et mesurables — donne-lui des repères chiffrés plutôt que des consignes générales. Il a aussi besoin d'être encouragé à sortir ponctuellement de sa zone de confort tactique.",
-  quote:"Le Métronome transforme la régularité en arme tactique.",
+  comm:"Le Temps répond bien à des objectifs précis et mesurables — donne-lui des repères chiffrés plutôt que des consignes générales. Il a aussi besoin d'être encouragé à sortir ponctuellement de sa zone de confort tactique.",
+  quote:"Le Temps transforme la régularité en arme tactique.",
   stats:{pui:60,pre:90,sfr:82,cre:55,reg:92,equ:65}
 },
 'bleu-vert': {
-  key:'bleu-vert', name:'LE STRATÈGE', sub:"L'Architecte", p1:'bleu', p2:'vert',
+  key:'bleu-vert', name:"L'ARCHITECTE", sub:"L'Architecte", p1:'bleu', p2:'vert',
   story:"Tu construis une compréhension totale de l'adversaire et du contexte, puis tu exécutes ton plan avec précision et sans précipitation. Ton jeu ressemble à une partie d'échecs jouée à pleine vitesse.",
   forts:["Analyse tactique fine et rapide du jeu adverse","Anticipation des schémas et des patterns de jeu","Adaptation permanente et intelligente du plan de jeu"],
   faibles:["Peut sur-analyser au lieu d'agir dans l'instant","Parfois trop rigide quand le plan initial doit être abandonné vite","Manque d'instinct dans les situations totalement imprévues"],
-  comm:"Le Stratège a besoin de comprendre le \"pourquoi\" avant d'exécuter — donne-lui du contexte et de la logique, pas juste des consignes. Attention cependant à ne pas le laisser trop réfléchir en plein point : parfois, il doit apprendre à agir avant d'avoir toutes les réponses.",
-  quote:"Le Stratège ne joue pas le point. Il joue le match.",
+  comm:"L'Architecte a besoin de comprendre le \"pourquoi\" avant d'exécuter — donne-lui du contexte et de la logique, pas juste des consignes. Attention cependant à ne pas le laisser trop réfléchir en plein point : parfois, il doit apprendre à agir avant d'avoir toutes les réponses.",
+  quote:"L'Architecte ne joue pas le point. Il joue le match.",
   stats:{pui:58,pre:85,sfr:80,cre:70,reg:86,equ:68}
 },
 'bleu-rouge': {
-  key:'bleu-rouge', name:'LE DISCIPLINÉ', sub:'Le Soldat', p1:'bleu', p2:'rouge',
+  key:'bleu-rouge', name:'LE SOLDAT', sub:'Le Soldat', p1:'bleu', p2:'rouge',
   story:"Tu exécutes ton jeu avec une rigueur mécanique, sans jamais te laisser distraire par l'émotion du moment. Cette discipline devient un avantage compétitif redoutable sur la durée d'un match ou d'une saison.",
   forts:["Précision technique exceptionnelle et constante","Concentration inébranlable sur la durée","Gestion émotionnelle solide, quasi sans faille"],
   faibles:["Peut manquer de spontanéité et de créativité","Parfois trop dur avec lui-même après une erreur","Difficulté à s'adapter à un adversaire complètement atypique"],
-  comm:"Le Discipliné répond bien à des standards clairs et exigeants — il aime savoir précisément ce qui est attendu de lui. Sois vigilant sur son autocritique : il a souvent besoin qu'on lui rappelle que la régularité inclut aussi le droit à l'erreur.",
-  quote:"Le Discipliné transforme la méthode en avantage compétitif.",
+  comm:"Le Soldat répond bien à des standards clairs et exigeants — il aime savoir précisément ce qui est attendu de lui. Sois vigilant sur son autocritique : il a souvent besoin qu'on lui rappelle que la régularité inclut aussi le droit à l'erreur.",
+  quote:"Le Soldat transforme la méthode en avantage compétitif.",
   stats:{pui:76,pre:92,sfr:88,cre:48,reg:90,equ:60}
 },
 'bleu-jaune': {
-  key:'bleu-jaune', name:'LE VISIONNAIRE', sub:"L'Oracle", p1:'bleu', p2:'jaune',
+  key:'bleu-jaune', name:'LE VISIONAIRE', sub:"L'Oracle", p1:'bleu', p2:'jaune',
   story:"Tu vois les solutions que les autres n'imaginent pas encore, et tu les exécutes avec une confiance tranquille. Un joueur qui surprend sans jamais paraître pris de court.",
   forts:["Vision de jeu exceptionnelle, une longueur d'avance","Innovation tactique permanente","Capacité à surprendre l'adversaire tout en gardant le contrôle"],
   faibles:["Peut sembler distant ou trop dans sa tête pour son partenaire","Parfois trop confiant dans des solutions non testées","Difficulté à revenir à un jeu simple quand c'est nécessaire"],
-  comm:"Le Visionnaire a besoin qu'on prenne ses idées au sérieux, même quand elles sortent de l'ordinaire — c'est souvent là que se trouve sa valeur ajoutée. Aide-le à garder un plan B simple et solide pour les moments où l'inspiration ne suffit pas.",
-  quote:"Le Visionnaire joue un coup d'avance. Toujours.",
+  comm:"Le Visionaire a besoin qu'on prenne ses idées au sérieux, même quand elles sortent de l'ordinaire — c'est souvent là que se trouve sa valeur ajoutée. Aide-le à garder un plan B simple et solide pour les moments où l'inspiration ne suffit pas.",
+  quote:"Le Visionaire joue un coup d'avance. Toujours.",
   stats:{pui:60,pre:82,sfr:72,cre:90,reg:64,equ:66}
 }
 };
