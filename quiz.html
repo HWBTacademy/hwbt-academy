@@ -151,6 +151,13 @@ input{font-family:var(--font-body)}
 .stat-box .n{font-family:var(--font-title);font-size:22px;font-weight:700}
 .stat-box .l{font-size:8px;letter-spacing:1px;color:var(--gray);margin-top:4px}
 .admin-toprow{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap;margin-bottom:10px}
+.admin-tool{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:18px;margin-bottom:24px}
+.admin-tool-title{font-family:var(--font-title);font-size:14px;letter-spacing:1.5px;color:var(--bronze);margin-bottom:8px}
+.admin-tool-text{font-size:12px;color:var(--gray);line-height:1.6;margin-bottom:14px}
+.admin-form{display:grid;grid-template-columns:1.4fr 1fr auto;gap:10px;align-items:end}
+.admin-field label{display:block;font-family:var(--font-title);font-size:9px;letter-spacing:1.5px;color:var(--gray2);margin-bottom:6px}
+.admin-field input,.admin-field select{width:100%;padding:11px 12px;background:var(--bg4);border:1px solid var(--border2);border-radius:8px;color:var(--white);font-size:13px;font-family:var(--font-body)}
+.admin-field input:focus,.admin-field select:focus{outline:none;border-color:var(--bronze)}
 
 @media(max-width:480px){
   .screen{padding:16px}
@@ -179,6 +186,7 @@ input{font-family:var(--font-body)}
   .result-row2{flex-direction:column}
   .btn{width:100%;padding:13px 16px}
   .personalize-row{flex-direction:column}
+  .admin-form{grid-template-columns:1fr}
   .pc-profile-name{font-size:54px}
   .pc-stat .v{font-size:18px}
   .pc-bottom .n{font-size:48px}
@@ -322,6 +330,21 @@ input{font-family:var(--font-body)}
       <div style="display:flex;gap:8px">
         <button class="btn btn-ghost" onclick="exportCSV()">EXPORT CSV</button>
         <button class="btn btn-ghost" onclick="showScreen('landingScreen')">RETOUR AU TEST</button>
+      </div>
+    </div>
+    <div class="admin-tool">
+      <div class="admin-tool-title">CRÉER UNE FICHE JOUEUR</div>
+      <div class="admin-tool-text">Utilise cet outil si quelqu’un a perdu sa fiche. Choisis son profil, ajoute son prénom, puis personnalise la carte avec une photo et télécharge la story.</div>
+      <div class="admin-form">
+        <div class="admin-field">
+          <label for="adminProfileSelect">PROFIL HWBT</label>
+          <select id="adminProfileSelect"></select>
+        </div>
+        <div class="admin-field">
+          <label for="adminPlayerName">PRÉNOM</label>
+          <input id="adminPlayerName" type="text" placeholder="Ex: Thomas">
+        </div>
+        <button class="btn btn-primary" onclick="createCoachCard()">CRÉER LA FICHE</button>
       </div>
     </div>
     <div class="admin-stats" id="adminStats"></div>
@@ -997,6 +1020,7 @@ function renderResultCard(resetPersonalization=true){
     document.getElementById('pcPhoto').style.backgroundImage = '';
     document.getElementById('pcPhoto').style.opacity = '0';
     document.getElementById('pcPhotoInput').value = '';
+    storyPhotoImage = null;
   }
 
   document.getElementById('detailStory').textContent = details ? details.story : p.story;
@@ -1335,10 +1359,31 @@ function checkAdminGate(){
   const v = document.getElementById('adminInput').value.trim();
   if(v === ADMIN_PASSWORD){
     loadAdmin();
+    populateCoachProfiles();
     showScreen('adminScreen');
   } else {
     document.getElementById('adminErr').textContent = 'Mot de passe incorrect.';
   }
+}
+function populateCoachProfiles(){
+  const select = document.getElementById('adminProfileSelect');
+  if(!select || select.options.length) return;
+  select.innerHTML = Object.keys(PROFILES)
+    .map(key=>`<option value="${key}">${PROFILES[key].name}</option>`)
+    .join('');
+}
+function createCoachCard(){
+  const select = document.getElementById('adminProfileSelect');
+  if(!select || !select.value) return;
+  finalProfile = select.value;
+  renderResultCard(true);
+  const name = document.getElementById('adminPlayerName').value.trim();
+  if(name){
+    document.getElementById('pcNameInput').value = name;
+    updateCardName();
+  }
+  showScreen('resultScreen');
+  setTimeout(()=>document.getElementById('pcNameInput').focus(), 150);
 }
 async function loadAdmin(){
   let counts = {};
