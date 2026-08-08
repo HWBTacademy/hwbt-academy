@@ -452,9 +452,52 @@ textarea.c-input{resize:vertical;min-height:72px}
 .mobile-menu a:hover,.mobile-menu button.mm-link:hover{color:#c49e50}
 .mobile-menu .mm-cta{font-family:'Inter',sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;padding:12px 28px;border:1px solid rgba(196,158,80,.45);color:#c49e50;background:transparent;cursor:pointer;margin-top:8px;transition:background .2s}
 .mobile-menu .mm-cta:hover{background:rgba(196,158,80,.08)}
-@media(max-width:768px){.burger{display:flex}}</style>
+.menu-close{position:absolute;top:20px;right:20px;width:48px;height:48px;border:1px solid rgba(196,158,80,.45);background:#15130f;color:#f4efe6;font-size:32px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.methodology-intro{display:none;padding-top:150px;padding-bottom:64px;background:radial-gradient(circle at 80% 20%,rgba(196,158,80,.12),transparent 42%),#0d0c0a}
+.methodology-page .methodology-intro{display:block}
+.methodology-page .hero,.methodology-page #histoire,.methodology-page #pour-qui,.methodology-page #tarifs,.methodology-page #shop,.methodology-page #contact{display:none}
+.methodology-page #methode>.method-cta{display:none}
+.home-page #boussole,.home-page #profils,.home-page #plateforme,.home-page #apres-seance{display:none}
+.method-cta{display:inline-flex;align-items:center;gap:10px;margin-top:24px;padding:13px 20px;border:1px solid rgba(196,158,80,.5);color:#d9b66c;text-decoration:none;font-size:11px;letter-spacing:1.5px;text-transform:uppercase}
+.method-cta:hover{background:rgba(196,158,80,.08)}
+section[id]{scroll-margin-top:86px}
+@media(max-width:768px){
+  body{background:#12110f;color:#f8f4ec}
+  .burger{display:flex}
+  .nav{height:68px;padding:0 16px;background:rgba(14,13,11,.97);border-bottom-color:rgba(196,158,80,.22)}
+  .nav-logo svg{height:34px!important}
+  .lang-bar{top:78px;right:12px;background:rgba(20,18,15,.96);padding:4px;border:1px solid rgba(196,158,80,.2)}
+  .lbtn{font-size:11px;padding:6px 8px}
+  .mobile-menu{background:rgba(16,15,13,.99);gap:18px;padding:74px 24px 28px;overflow-y:auto}
+  .mobile-menu a,.mobile-menu button.mm-link{font-size:32px;color:#f3eee5;line-height:1.05}
+  .mobile-menu .mm-cta{font-size:12px;color:#e1bd73;border-color:#c49e50;padding:14px 22px}
+  .section{padding:68px 20px;background:#12110f}
+  .section:nth-of-type(even){background:#171511}
+  .s-label{font-size:14px;color:#d9b66c;margin-bottom:12px}
+  .s-title{font-size:clamp(38px,11vw,54px);line-height:.98;letter-spacing:1.5px;margin-bottom:28px;overflow-wrap:anywhere}
+  .hist-grid{gap:28px}
+  .hist-body,.hist-body p{font-size:16px!important;line-height:1.75!important;color:rgba(248,244,236,.78)!important}
+  .hist-quote{font-size:27px;line-height:1.12}
+  .pillar-name,.pc-type,.shop-name,.feat-name,.loc-name{font-size:22px!important;color:#f8f4ec!important}
+  .pillar-desc,.pc-info,.shop-note,.feat-desc,.loc-sub,.pricing-periods{font-size:14px!important;line-height:1.65!important;color:rgba(248,244,236,.7)!important}
+  .pillars,.pricing,.shop-grid{gap:12px}
+  .pillar,.pc,.shop-item,.feat-item{background:#1b1915;border-color:rgba(196,158,80,.22);padding:22px 18px}
+  .pc-price{font-size:52px}
+  .pc-unit{font-size:12px;color:rgba(248,244,236,.65)}
+  .hero{min-height:100svh;padding-top:96px;background:#11100e}
+  .hero-title{font-size:clamp(58px,18vw,88px);line-height:.86}
+  .hero-sub,.hero-desc{font-size:16px!important;line-height:1.65!important;color:rgba(248,244,236,.76)!important}
+  .methodology-intro{padding:130px 20px 64px}
+  .methodology-intro .s-title{font-size:clamp(44px,13vw,64px)}
+}
+@media(max-width:390px){
+  .s-title{font-size:36px}
+  .mobile-menu a,.mobile-menu button.mm-link{font-size:28px}
+  .section{padding-left:16px;padding-right:16px}
+}
+</style>
 </head>
-<body>
+<body class="home-page">
 
 <!-- ══ INTRO ══ -->
 <div id="intro">
@@ -831,7 +874,7 @@ textarea.c-input{resize:vertical;min-height:72px}
     <ul class="nav-links">
       <li><a href="#histoire" class="fr-only">Histoire</a><a href="#histoire" class="en-only">Story</a></li>
       <li><a href="#methode" class="fr-only">Méthode</a><a href="#methode" class="en-only">Method</a></li>
-      <li><a href="#boussole" class="fr-only">Boussole</a><a href="#boussole" class="en-only">Compass</a></li>
+      <li><a href="methodologie.html" class="fr-only">Approfondir</a><a href="methodologie.html" class="en-only">Learn more</a></li>
     </ul>
     <!-- LOGO centré -->
     <div class="nav-logo">
@@ -845,11 +888,11 @@ textarea.c-input{resize:vertical;min-height:72px}
       <ul class="nav-links">
         <li><a href="#tarifs" class="fr-only">Tarifs</a><a href="#tarifs" class="en-only">Pricing</a></li>
         <li><a href="#shop" class="fr-only">Shop</a><a href="#shop" class="en-only">Shop</a></li>
-        <li><a href="#plateforme" class="fr-only">Plateforme</a><a href="#plateforme" class="en-only">Platform</a></li>
+        <li><a href="methodologie.html#plateforme" class="fr-only">Suivi</a><a href="methodologie.html#plateforme" class="en-only">Tracking</a></li>
       </ul>
       <button class="nav-cta fr-only" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Rejoindre</button>
       <button class="nav-cta en-only" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Join</button>
-      <button class="burger" id="burger" onclick="toggleMenu()" aria-label="Menu">
+      <button class="burger" id="burger" onclick="toggleMenu()" aria-label="Menu" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
     </div>
@@ -857,16 +900,17 @@ textarea.c-input{resize:vertical;min-height:72px}
 
   <!-- MOBILE MENU -->
   <div class="mobile-menu" id="mobile-menu">
+    <button class="menu-close" type="button" onclick="closeMenu()" aria-label="Fermer le menu">×</button>
     <a href="#histoire" onclick="closeMenu()" class="fr-only">Histoire</a>
     <a href="#histoire" onclick="closeMenu()" class="en-only">Story</a>
     <a href="#methode" onclick="closeMenu()" class="fr-only">Méthode</a>
     <a href="#methode" onclick="closeMenu()" class="en-only">Method</a>
-    <a href="#profils" onclick="closeMenu()" class="fr-only">12 Profils</a>
-    <a href="#profils" onclick="closeMenu()" class="en-only">12 Profiles</a>
+    <a href="methodologie.html" onclick="closeMenu()" class="fr-only">Méthodologie complète</a>
+    <a href="methodologie.html" onclick="closeMenu()" class="en-only">Full methodology</a>
     <a href="#tarifs" onclick="closeMenu()" class="fr-only">Tarifs</a>
     <a href="#tarifs" onclick="closeMenu()" class="en-only">Pricing</a>
-    <a href="#plateforme" onclick="closeMenu()" class="fr-only">Plateforme</a>
-    <a href="#plateforme" onclick="closeMenu()" class="en-only">Platform</a>
+    <a href="methodologie.html#plateforme" onclick="closeMenu()" class="fr-only">Suivi</a>
+    <a href="methodologie.html#plateforme" onclick="closeMenu()" class="en-only">Tracking</a>
     <a href="#shop" onclick="closeMenu()" class="fr-only">Outils</a>
     <a href="#shop" onclick="closeMenu()" class="en-only">Tools</a>
     <button class="mm-cta fr-only" onclick="closeMenu();document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Demander une séance d'essai</button>
@@ -1059,14 +1103,12 @@ textarea.c-input{resize:vertical;min-height:72px}
       </div>
       <div>
         <div class="hist-body fr-only">
-          <p>Je m'appelle Thomas Demarbaix. Mon parcours a commencé sur les parquets de volley et les courts de tennis, où j'ai développé un goût prononcé pour ce qui ne se voit pas : la précision des déplacements, le sens du timing et la lecture du jeu.</p>
-          <p>En découvrant le padel, j'ai retrouvé cette alliance parfaite entre rythme effréné et intelligence tactique. Un sport où le duo prime — la technique seule ne suffit pas sans structure solide.</p>
-          <p>Constat simple : la plupart des joueurs ont la motivation, mais manquent de méthode. En s'éparpillant, ils stagnent. HWBT est né pour répondre à ça. Mon objectif ? Transformer ton énergie en plan d'action structuré pour bâtir un jeu stable, efficace et réfléchi. Je coache à Nivelles, à l'Argayon.</p>
+          <p>Je m'appelle Thomas Demarbaix. Mon parcours entre volley, tennis et padel m'a appris à regarder au-delà du geste : les déplacements, le timing et la lecture du jeu.</p>
+          <p>J'ai créé HWBT pour transformer ta motivation en progression structurée. Une méthode claire, adaptée à ton profil, pour construire un jeu stable et intelligent. Je coache à Nivelles, à l'Argayon.</p>
         </div>
         <div class="hist-body en-only">
-          <p>My name is Thomas Demarbaix. My journey started on volleyball courts and tennis courts, where I developed a sharp sense for what you can't see: movement precision, timing, and reading the game.</p>
-          <p>When I discovered padel, I found that perfect blend of pace and tactical intelligence — a sport where the duo comes first. Technique alone isn't enough without solid structure behind it.</p>
-          <p>Simple observation: most players have motivation, but lack method. Scattered effort leads to stagnation. HWBT was born to fix that. My goal? Turn your energy into a structured action plan to build a stable, efficient, intelligent game. I coach in Nivelles at Argayon.</p>
+          <p>My name is Thomas Demarbaix. My background in volleyball, tennis and padel taught me to look beyond the stroke: movement, timing and reading the game.</p>
+          <p>I created HWBT to turn your motivation into structured progress. A clear method, adapted to your profile, to build a stable and intelligent game. I coach in Nivelles at Argayon.</p>
         </div>
         <div class="hist-sign">— Thomas Demarbaix</div>
         <div class="loop-card" style="margin-top:18px">
@@ -1087,6 +1129,18 @@ textarea.c-input{resize:vertical;min-height:72px}
     </div>
   </section>
 
+  <!-- INTRO MÉTHODOLOGIE — visible sur la page dédiée -->
+  <section class="section methodology-intro" id="methodologie">
+    <div class="s-label fr-only">Méthodologie complète</div>
+    <div class="s-label en-only">Complete methodology</div>
+    <h1 class="s-title fr-only">Comprendre ton jeu.<br>Construire ta progression.</h1>
+    <h1 class="s-title en-only">Understand your game.<br>Build your progress.</h1>
+    <div class="hist-body fr-only" style="max-width:720px"><p>Cette page rassemble la méthode HWBT en profondeur : les quatre piliers, la Boussole, les douze profils joueurs et le système de suivi. Avance à ton rythme et découvre ce qui structure réellement ta progression.</p></div>
+    <div class="hist-body en-only" style="max-width:720px"><p>This page explores the HWBT method in depth: the four pillars, the Compass, the twelve player profiles and the tracking system. Explore at your own pace and discover what truly structures your progress.</p></div>
+    <a class="method-cta fr-only" href="index.html">← Retour à l'accueil</a>
+    <a class="method-cta en-only" href="index.html">← Back to home</a>
+  </section>
+
   <!-- PILLARS -->
   <section class="section" id="methode">
     <div class="s-label reveal fr-only">Méthode HWBT</div>
@@ -1104,6 +1158,8 @@ textarea.c-input{resize:vertical;min-height:72px}
       <div class="sb"><span class="sb-n" id="c2">0</span><div class="sb-l fr-only">Profils joueurs</div><div class="sb-l en-only">Player profiles</div></div>
       <div class="sb"><span class="sb-n" id="c3">0</span><div class="sb-l fr-only">Aspects mesurés</div><div class="sb-l en-only">Aspects measured</div></div>
     </div>
+    <a class="method-cta fr-only" href="methodologie.html">Découvrir toute la méthodologie →</a>
+    <a class="method-cta en-only" href="methodologie.html">Explore the full methodology →</a>
   </section>
 
   <!-- MANIFESTO -->
@@ -1680,6 +1736,13 @@ textarea.c-input{resize:vertical;min-height:72px}
 // Intro HWBT
 window.addEventListener('DOMContentLoaded',()=>{
   const g=id=>document.getElementById(id);
+  const skipIntro=document.body.classList.contains('methodology-page')||sessionStorage.getItem('hwbt-intro-seen');
+  if(skipIntro){
+    const intro=g('intro'); if(intro) intro.remove();
+    const site=g('site'); if(site) site.style.opacity='1';
+    return;
+  }
+  sessionStorage.setItem('hwbt-intro-seen','1');
   const D=(id,t)=>setTimeout(()=>{const e=g(id);if(e)e.classList.add('go')},t);
   const ON=(id,t)=>setTimeout(()=>{const e=g(id);if(e)e.classList.add('on')},t);
 
@@ -1730,16 +1793,20 @@ function toggleMenu(){
   const m=document.getElementById('mobile-menu');
   b.classList.toggle('open');
   m.classList.toggle('open');
+  b.setAttribute('aria-expanded',m.classList.contains('open'));
   document.body.style.overflow=m.classList.contains('open')?'hidden':'';
 }
 function closeMenu(){
   document.getElementById('burger').classList.remove('open');
   document.getElementById('mobile-menu').classList.remove('open');
+  document.getElementById('burger').setAttribute('aria-expanded','false');
   document.body.style.overflow='';
 }
 
 // Lang switcher
 const NL_TEXT={
+  "Je m'appelle Thomas Demarbaix. Mon parcours entre volley, tennis et padel m'a appris à regarder au-delà du geste : les déplacements, le timing et la lecture du jeu.":"Ik ben Thomas Demarbaix. Mijn achtergrond in volleybal, tennis en padel leerde me verder te kijken dan de slag: verplaatsing, timing en spelinzicht.","J'ai créé HWBT pour transformer ta motivation en progression structurée. Une méthode claire, adaptée à ton profil, pour construire un jeu stable et intelligent. Je coache à Nivelles, à l'Argayon.":"Ik heb HWBT opgericht om jouw motivatie om te zetten in gestructureerde vooruitgang. Een duidelijke methode, aangepast aan jouw profiel, om een stabiel en intelligent spel op te bouwen. Ik coach in Nijvel, bij Argayon.",
+  "Approfondir":"Verdiepen","Méthodologie complète":"Volledige methodologie","Comprendre ton jeu.Construire ta progression.":"Begrijp je spel.Bouw aan je vooruitgang.","Cette page rassemble la méthode HWBT en profondeur : les quatre piliers, la Boussole, les douze profils joueurs et le système de suivi. Avance à ton rythme et découvre ce qui structure réellement ta progression.":"Deze pagina bundelt de HWBT-methode in detail: de vier pijlers, het Kompas, de twaalf spelersprofielen en het opvolgingssysteem. Ontdek op je eigen tempo wat jouw vooruitgang echt structureert.","← Retour à l'accueil":"← Terug naar de startpagina","Découvrir toute la méthodologie →":"Ontdek de volledige methodologie →","Suivi":"Opvolging",
   "Histoire":"Verhaal","Méthode":"Methode","Boussole":"Kompas","Tarifs":"Tarieven","Plateforme":"Platform","Rejoindre":"Meedoen","12 Profils":"12 Profielen","Outils":"Tools",
   "Demander une séance d'essai":"Vraag een proeftraining aan",
   "Académie de Padel — Nivelles & Diegem (Belgique)":"Padelacademie — Nijvel & Diegem (België)",
