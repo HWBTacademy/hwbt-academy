@@ -301,6 +301,9 @@ h2.s-title,.s-title{font-family:'Bebas Neue',sans-serif;font-size:40px;letter-sp
 .pricing-periods{margin-top:16px;font-size:11px;line-height:1.8;color:rgba(237,232,223,.5)}
 .pricing-periods strong{color:var(--text);font-weight:600}
 .pricing-intro{max-width:720px;margin:-10px 0 28px;font-size:14px;line-height:1.7;color:rgba(237,232,223,.72)}
+.private-course{display:flex;align-items:center;justify-content:space-between;gap:18px;margin:-10px 0 24px;padding:15px 18px;border:1px solid rgba(196,158,80,.35);background:#0d0c0a}
+.private-course strong{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:1.5px;color:#fff}
+.private-course span{font-family:'Caveat',cursive;font-size:16px;color:#d9b66c}
 .locs{display:flex;border:1px solid rgba(196,158,80,.08);border-top:none}
 .loc{flex:1;padding:15px 20px;display:flex;align-items:center;gap:11px;border-right:1px solid rgba(196,158,80,.06);transition:background .2s}
 .loc:last-child{border-right:none}
@@ -521,6 +524,8 @@ section[id]{scroll-margin-top:86px}
   .pillar-name,.pc-type,.shop-name,.feat-name,.loc-name{font-size:22px!important;color:#f8f4ec!important}
   .pillar-desc,.pc-info,.shop-note,.feat-desc,.loc-sub,.pricing-periods,.p-desc{font-size:15px!important;line-height:1.65!important;color:rgba(255,255,255,.78)!important}
   .pricing-intro{font-size:17px;line-height:1.7;color:rgba(255,255,255,.86);margin-top:-12px;margin-bottom:30px}
+  .private-course{padding:18px;margin-top:-12px;margin-bottom:26px;flex-direction:column;align-items:flex-start;gap:4px}
+  .private-course strong{font-size:28px}.private-course span{font-size:19px}
   .pillars,.pricing,.shop-grid{gap:12px}
   .pillar,.pc,.shop-item,.feat-item,.audience-grid>div{background:#0d0d0c!important;border-color:rgba(196,158,80,.32)!important;padding:24px 19px!important}
   .audience-grid{grid-template-columns:1fr!important;gap:12px!important}
@@ -1475,6 +1480,7 @@ section[id]{scroll-margin-top:86px}
     <h2 class="s-title reveal en-only">Choose your plan</h2>
     <p class="pricing-intro reveal fr-only">Des cours structurés pour les joueurs qui souhaitent progresser avec sérieux et se préparer progressivement à la compétition, dans un cadre bienveillant adapté à chacun.</p>
     <p class="pricing-intro reveal en-only">Structured lessons for players who want to progress with purpose and gradually prepare for competition, in a supportive environment adapted to each individual.</p>
+    <div class="private-course reveal"><strong class="fr-only">Cours particulier</strong><strong class="en-only">Private lesson</strong><span class="fr-only">Sur demande</span><span class="en-only">On request</span></div>
     <div class="pricing reveal">
       <div class="pc"><div class="pc-type">1 × 1 h 30 / <span class="fr-only">semaine</span><span class="en-only">week</span></div><div class="pc-price">300€*</div><div class="pc-unit fr-only">10 cours / période</div><div class="pc-unit en-only">10 lessons / period</div></div>
       <div class="pc feat"><div class="pc-type">2 × 1 h 30 / <span class="fr-only">semaine</span><span class="en-only">week</span></div><div class="pc-price">500€*</div><div class="pc-unit fr-only">20 cours / période</div><div class="pc-unit en-only">20 lessons / period</div></div>
@@ -1822,6 +1828,7 @@ function closeMenu(){
 
 // Lang switcher
 const NL_TEXT={
+  "Cours particulier":"Privéles","Sur demande":"Op aanvraag",
   "Académie de Padel — Argayon (Nivelles)":"Padelacademie — Argayon (Nijvel)","Coach HWBT Academy · Argayon (Nivelles)":"Coach HWBT Academy · Argayon (Nijvel)","J'ai créé HWBT pour transformer ta motivation en progression structurée. Une méthode claire, adaptée à ton profil, pour construire un jeu stable et intelligent. Je coache à Argayon (Nivelles).":"Ik heb HWBT opgericht om jouw motivatie om te zetten in gestructureerde vooruitgang. Een duidelijke methode, aangepast aan jouw profiel, om een stabiel en intelligent spel op te bouwen. Ik coach bij Argayon (Nijvel).","lieu — Argayon (Nivelles)":"locatie — Argayon (Nijvel)",
   "Des cours structurés pour les joueurs qui souhaitent progresser avec sérieux et se préparer progressivement à la compétition, dans un cadre bienveillant adapté à chacun.":"Gestructureerde lessen voor spelers die doelgericht willen groeien en zich stap voor stap willen voorbereiden op competitie, in een ondersteunende omgeving aangepast aan iedereen.",
   "Les 4 piliers":"De 4 pijlers",
