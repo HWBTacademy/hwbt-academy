@@ -106,7 +106,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);overf
 .nav-links a{font-family:'Caveat',cursive;font-size:15px;color:rgba(237,232,223,.58);text-decoration:none;transition:color .2s}
 .nav-links a:hover{color:var(--gold)}
 .nav-logo{width:170px;height:46px;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}
-.nav-logo img{position:absolute;width:360px;max-width:none;left:50%;top:50%;transform:translate(-50%,-42%)}
+.nav-logo img{width:160px;height:44px;object-fit:contain;display:block}
 .nav-cta{font-family:'Inter',sans-serif;font-size:9px;letter-spacing:2px;text-transform:uppercase;padding:7px 15px;border:1px solid rgba(196,158,80,.4);color:var(--gold);background:transparent;cursor:pointer;transition:all .2s}
 .nav-cta:hover{background:var(--gold);color:var(--bg)}
 
@@ -358,7 +358,7 @@ textarea.c-input{resize:vertical;min-height:72px}
    FOOTER
 ══════════════════════════════ */
 .footer{padding:20px 40px;display:flex;align-items:center;justify-content:space-between;border-top:1px solid rgba(196,158,80,.07);position:relative;z-index:1}
-.footer-logo{width:120px;height:34px;object-fit:cover;object-position:center 43%}
+.footer-logo{width:130px;height:48px;object-fit:contain}
 .f-slogan{font-family:'Caveat',cursive;font-size:13px;color:rgba(237,232,223,.13)}
 .f-copy{font-size:8px;color:rgba(237,232,223,.13)}
 
@@ -465,7 +465,7 @@ textarea.c-input{resize:vertical;min-height:72px}
 .home-page .hero-right,#notebook-bg{display:none!important}
 .home-page .hero{grid-template-columns:1fr;background:#050505}
 .home-page .hero-left{max-width:920px;margin:0 auto;width:100%;text-align:center;align-items:center}
-.official-hero-logo{width:min(760px,92vw);aspect-ratio:3/1;object-fit:cover;object-position:center 43%;display:block;margin:0 auto 20px}
+.official-hero-logo{width:min(660px,92vw);height:auto;object-fit:contain;display:block;margin:0 auto 20px}
 .audience-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
 .method-cta{display:inline-flex;align-items:center;gap:10px;margin-top:24px;padding:13px 20px;border:1px solid rgba(196,158,80,.5);color:#d9b66c;text-decoration:none;font-size:11px;letter-spacing:1.5px;text-transform:uppercase}
 .method-cta:hover{background:rgba(196,158,80,.08)}
@@ -475,7 +475,7 @@ section[id]{scroll-margin-top:86px}
   .reveal{opacity:1!important;transform:none!important}
   .burger{display:flex}
   .nav{height:72px;padding:0 14px;background:rgba(5,5,5,.98);border-bottom-color:rgba(196,158,80,.35)}
-  .nav-logo{width:142px;height:46px}.nav-logo img{width:310px}
+  .nav-logo{width:142px;height:48px}.nav-logo img{width:138px;height:46px}
   .lang-bar{top:78px;right:12px;background:rgba(20,18,15,.96);padding:4px;border:1px solid rgba(196,158,80,.2)}
   .lbtn{font-size:11px;padding:6px 8px}
   .mobile-menu{background:rgba(5,5,5,.995);gap:16px;padding:84px 24px 30px;overflow-y:auto}
@@ -503,7 +503,7 @@ section[id]{scroll-margin-top:86px}
   .hero-sub,.hero-desc{font-size:16px!important;line-height:1.65!important;color:rgba(248,244,236,.76)!important}
   .methodology-intro{padding:130px 20px 64px}
   .methodology-intro .s-title{font-size:clamp(48px,14vw,68px)}
-  .official-hero-logo{width:calc(100vw - 24px);aspect-ratio:2.25/1;margin-bottom:14px}
+  .official-hero-logo{width:calc(100vw - 32px);height:auto;margin-bottom:14px}
 }
 @media(max-width:390px){
   h2.s-title,.s-title{font-size:48px}
@@ -887,13 +887,12 @@ section[id]{scroll-margin-top:86px}
   <!-- NAV -->
   <nav class="nav">
     <ul class="nav-links">
-      <li><a href="#histoire" class="fr-only">Histoire</a><a href="#histoire" class="en-only">Story</a></li>
-      <li><a href="#methode" class="fr-only">Les 4 piliers</a><a href="#methode" class="en-only">4 pillars</a></li>
+      <li><a href="#histoire" class="fr-only">Mon histoire</a><a href="#histoire" class="en-only">My story</a></li>
       <li><a href="methodologie.html" class="fr-only">Méthode HWBT</a><a href="methodologie.html" class="en-only">HWBT Method</a></li>
     </ul>
     <!-- LOGO centré -->
     <div class="nav-logo">
-      <img src="assets/img/logo-hwbt-academy.png" alt="HWBT Academy"/>
+      <img src="assets/img/logo-hwbt-transparent.png" alt="HWBT Academy"/>
     </div>
     <div style="display:flex;align-items:center;gap:18px">
       <ul class="nav-links">
@@ -912,16 +911,14 @@ section[id]{scroll-margin-top:86px}
   <!-- MOBILE MENU -->
   <div class="mobile-menu" id="mobile-menu">
     <button class="menu-close" type="button" onclick="closeMenu()" aria-label="Fermer le menu">×</button>
-    <a href="#histoire" onclick="closeMenu()" class="fr-only">Histoire</a>
-    <a href="#histoire" onclick="closeMenu()" class="en-only">Story</a>
-    <a href="#methode" onclick="closeMenu()" class="fr-only">Les 4 piliers</a>
-    <a href="#methode" onclick="closeMenu()" class="en-only">4 pillars</a>
+    <a href="#histoire" onclick="closeMenu()" class="fr-only">Mon histoire</a>
+    <a href="#histoire" onclick="closeMenu()" class="en-only">My story</a>
     <a href="methodologie.html" onclick="closeMenu()" class="fr-only">Méthode HWBT</a>
     <a href="methodologie.html" onclick="closeMenu()" class="en-only">HWBT Method</a>
     <a href="#tarifs" onclick="closeMenu()" class="fr-only">Tarifs</a>
     <a href="#tarifs" onclick="closeMenu()" class="en-only">Pricing</a>
-    <a href="#shop" onclick="closeMenu()" class="fr-only">Outils</a>
-    <a href="#shop" onclick="closeMenu()" class="en-only">Tools</a>
+    <a href="#shop" onclick="closeMenu()">Shop</a>
+    <a href="#contact" onclick="closeMenu()">Contact</a>
     <button class="mm-cta fr-only" onclick="closeMenu();document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Demander une séance d'essai</button>
     <button class="mm-cta en-only" onclick="closeMenu();document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Request a trial session</button>
   </div>
@@ -938,7 +935,7 @@ section[id]{scroll-margin-top:86px}
       <div class="hero-eyebrow fr-only">Académie de Padel — Nivelles (Belgique)</div>
       <div class="hero-eyebrow en-only">Padel Academy — Nivelles (Belgium)</div>
       <div class="hero-logo-wrap">
-        <img class="official-hero-logo" src="assets/img/logo-hwbt-academy.png" alt="HWBT Academy"/>
+        <img class="official-hero-logo" src="assets/img/logo-hwbt-transparent.png" alt="HWBT Academy"/>
       </div>
       <h1 class="hero-motto fr-only">Coaching padel basé sur ton profil, ta méthode et ta progression mesurable.</h1>
       <h1 class="hero-motto en-only">Padel coaching built on your profile, your method and measurable progress.</h1>
@@ -1728,7 +1725,7 @@ section[id]{scroll-margin-top:86px}
 
   <!-- FOOTER -->
   <footer class="footer">
-    <img class="footer-logo" src="assets/img/logo-hwbt-academy.png" alt="HWBT Academy"/>
+    <img class="footer-logo" src="assets/img/logo-hwbt-transparent.png" alt="HWBT Academy"/>
     <div class="f-slogan">Unity Builds Our Legacy</div>
     <div class="f-copy">© 2026 HWBT Academy — Belgium</div>
   </footer>
