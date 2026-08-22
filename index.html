@@ -5,9 +5,32 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <meta name="description" content="HWBT Academy — Méthode de padel, 4 piliers, 12 profils et suivi personnalisé à Argayon (Nivelles)."/>
 <title>HWBT Academy | Hard Work Beats Talent</title>
+<link rel="canonical" href="https://hwbtacademy.be/"/>
+<meta name="theme-color" content="#050505"/>
+<meta property="og:type" content="website"/>
+<meta property="og:title" content="HWBT Academy | Coaching padel à Argayon (Nivelles)"/>
+<meta property="og:description" content="Une méthode claire et personnalisée pour comprendre ton jeu et progresser durablement."/>
+<meta property="og:url" content="https://hwbtacademy.be/"/>
+<meta property="og:image" content="https://hwbtacademy.be/assets/img/og-hwbt.jpg"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<link rel="icon" href="assets/img/logo-hwbt-transparent.webp" type="image/webp"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600&family=Caveat:wght@400;600&display=swap" rel="stylesheet"/>
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"SportsActivityLocation",
+  "name":"HWBT Academy",
+  "url":"https://hwbtacademy.be/",
+  "image":"https://hwbtacademy.be/assets/img/og-hwbt.jpg",
+  "description":"Coaching de padel personnalisé à Argayon (Nivelles), basé sur quatre piliers de progression.",
+  "areaServed":"Nivelles, Belgique",
+  "priceRange":"€€",
+  "founder":{"@type":"Person","name":"Thomas Demarbaix"},
+  "availableLanguage":["fr","nl","en"]
+}
+</script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{--gold:#c49e50;--gold-dim:rgba(196,158,80,.12);--bg:#0c0b09;--text:#ede8df}
@@ -28,8 +51,8 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);overf
 .nav-links{display:flex;gap:20px;list-style:none}
 .nav-links a{font-family:'Caveat',cursive;font-size:15px;color:rgba(237,232,223,.58);text-decoration:none;transition:color .2s}
 .nav-links a:hover{color:var(--gold)}
-.nav-logo{width:170px;height:46px;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}
-.nav-logo img{width:160px;height:44px;object-fit:contain;display:block}
+.nav-logo{width:200px;height:64px;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}
+.nav-logo img{width:190px;height:64px;object-fit:contain;display:block}
 .nav-cta{font-family:'Inter',sans-serif;font-size:9px;letter-spacing:2px;text-transform:uppercase;padding:7px 15px;border:1px solid rgba(196,158,80,.4);color:var(--gold);background:transparent;cursor:pointer;transition:all .2s}
 .nav-cta:hover{background:var(--gold);color:var(--bg)}
 
@@ -399,6 +422,11 @@ textarea.c-input{resize:vertical;min-height:72px}
 .method-cta{display:inline-flex;align-items:center;gap:10px;margin-top:24px;padding:13px 20px;border:1px solid rgba(196,158,80,.5);color:#d9b66c;text-decoration:none;font-size:11px;letter-spacing:1.5px;text-transform:uppercase}
 .method-cta:hover{background:rgba(196,158,80,.08)}
 section[id]{scroll-margin-top:86px}
+.home-page #boussole,.home-page #pour-qui,.home-page #profils,.home-page #plateforme,.home-page .manifesto{display:none!important}
+.shop-media{position:relative;border:1px solid rgba(196,158,80,.18);margin-bottom:14px;background:#090806;aspect-ratio:4/3;overflow:hidden}
+.shop-media img{width:100%;height:100%;object-fit:contain;display:block}
+.shop-order{display:flex;align-items:center;justify-content:center;width:100%;margin-top:14px;padding:12px 10px;border:1px solid rgba(196,158,80,.45);color:#d9b66c;text-decoration:none;font-family:'Inter',sans-serif;font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;transition:background .2s,color .2s}
+.shop-order:hover{background:#c49e50;color:#090806}
 @media(max-width:768px){
   body{background:#050505;color:#fff}
   .reveal{opacity:1!important;transform:none!important}
@@ -493,9 +521,9 @@ section[id]{scroll-margin-top:86px}
       <li><a href="methodologie.html" class="fr-only">Méthode HWBT</a><a href="methodologie.html" class="en-only">HWBT Method</a></li>
     </ul>
     <!-- LOGO centré -->
-    <div class="nav-logo">
-      <img src="assets/img/logo-hwbt-transparent.png" alt="HWBT Academy"/>
-    </div>
+    <a class="nav-logo" href="index.html" aria-label="Accueil HWBT Academy">
+      <img src="assets/img/logo-hwbt-transparent.webp" alt="HWBT Academy"/>
+    </a>
     <div style="display:flex;align-items:center;gap:18px">
       <ul class="nav-links">
         <li><a href="#tarifs" class="fr-only">Tarifs</a><a href="#tarifs" class="en-only">Pricing</a></li>
@@ -542,7 +570,7 @@ section[id]{scroll-margin-top:86px}
       <div class="hero-eyebrow fr-only">Académie de Padel — Argayon (Nivelles)</div>
       <div class="hero-eyebrow en-only">Padel Academy — Argayon (Nivelles)</div>
       <div class="hero-logo-wrap">
-        <img class="official-hero-logo" src="assets/img/logo-hwbt-transparent.png" alt="HWBT Academy"/>
+         <img class="official-hero-logo" src="assets/img/logo-hwbt-transparent.webp" alt="HWBT Academy" fetchpriority="high"/>
       </div>
       <h1 class="hero-motto fr-only">Coaching padel basé sur ton profil, ta méthode et ta progression mesurable.</h1>
       <h1 class="hero-motto en-only">Padel coaching built on your profile, your method and measurable progress.</h1>
@@ -696,7 +724,7 @@ section[id]{scroll-margin-top:86px}
       <div>
         <!-- PHOTO THOMAS -->
         <div style="margin-bottom:22px;position:relative;overflow:hidden;border:1px solid rgba(196,158,80,.15);background:#0d0c0a;aspect-ratio:4/3">
-          <img src="assets/img/thomas.jpg" alt="Thomas Demarbaix — HWBT Academy" style="width:100%;height:100%;object-fit:cover;display:block"/>
+          <img src="assets/img/thomas.webp" alt="Thomas Demarbaix — HWBT Academy" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;display:block"/>
           <div style="position:absolute;bottom:0;left:0;right:0;padding:10px 12px;background:linear-gradient(to top,rgba(8,7,6,.85),transparent)">
             <div style="font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:2px;color:#ede8df">Thomas Demarbaix</div>
             <div style="font-family:'Caveat',cursive;font-size:11px;color:rgba(196,158,80,.55)" class="fr-only">Coach HWBT Academy · Argayon (Nivelles)</div>
@@ -756,6 +784,8 @@ section[id]{scroll-margin-top:86px}
     <div class="s-label reveal en-only">HWBT Method</div>
     <h2 class="s-title reveal fr-only">Les 4 Piliers</h2>
     <h2 class="s-title reveal en-only">The 4 Pillars</h2>
+    <p class="pricing-intro reveal fr-only">Une méthode simple pour travailler le bon geste, prendre de meilleures décisions, rester solide sous pression et construire un corps capable de répéter l'effort.</p>
+    <p class="pricing-intro reveal en-only">A simple method to develop the right technique, make better decisions, stay composed under pressure and build a body capable of repeating the effort.</p>
     <div class="pillars reveal">
       <div class="pillar"><div class="p-big">T</div><div class="p-idx fr-only">Pilier 01</div><div class="p-idx en-only">Pillar 01</div><div class="p-name fr-only">Technique</div><div class="p-name en-only">Technical</div><div class="p-bar"></div><div class="p-desc fr-only">Maîtrise des gestes fondamentaux. Précision, timing et automatismes sous pression.</div><div class="p-desc en-only">Core gesture mastery. Precision, timing and automatisms under pressure.</div><div class="p-note">répétition → automatisme</div></div>
       <div class="pillar"><div class="p-big">Ta</div><div class="p-idx fr-only">Pilier 02</div><div class="p-idx en-only">Pillar 02</div><div class="p-name fr-only">Tactique</div><div class="p-name en-only">Tactical</div><div class="p-bar"></div><div class="p-desc fr-only">Lecture du jeu, positionnement en duo et construction intelligente des points.</div><div class="p-desc en-only">Reading the game, duo positioning and intelligent point construction.</div><div class="p-note">lire · anticiper · décider</div></div>
@@ -769,274 +799,6 @@ section[id]{scroll-margin-top:86px}
     </div>
     <a class="method-cta fr-only" href="methodologie.html">Découvrir toute la méthodologie →</a>
     <a class="method-cta en-only" href="methodologie.html">Explore the full methodology →</a>
-  </section>
-
-  <!-- MANIFESTO -->
-  <div class="manifesto reveal">
-    <div class="mq fr-only">Le talent explique <span>ton point de départ.</span></div>
-    <div class="mq en-only">Talent explains <span>where you start.</span></div>
-    <div class="mq-sep"></div>
-    <div class="mq fr-only">Le travail construit <span>ton chemin.</span></div>
-    <div class="mq en-only">Work builds <span>your path.</span></div>
-  </div>
-
-  <!-- BOUSSOLE -->
-  <section class="section" id="boussole">
-    <div class="s-label reveal fr-only">Diagnostic</div>
-    <div class="s-label reveal en-only">Diagnostic</div>
-    <h2 class="s-title reveal fr-only">La Boussole HWBT</h2>
-    <h2 class="s-title reveal en-only">The HWBT Compass</h2>
-    <div class="compass-grid reveal">
-      <div>
-        <svg viewBox="0 0 260 260" width="100%" aria-label="HWBT Compass">
-          <defs><radialGradient id="cbg" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#141210"/><stop offset="100%" stop-color="#0a0908"/></radialGradient></defs>
-          <circle cx="130" cy="130" r="125" fill="url(#cbg)" stroke="rgba(196,158,80,.16)" stroke-width="1"/>
-          <path d="M130,130 L130,10 A120,120 0 0,1 250,130 Z" fill="rgba(196,80,80,.11)"/>
-          <path d="M130,130 L250,130 A120,120 0 0,1 130,250 Z" fill="rgba(196,158,80,.09)"/>
-          <path d="M130,130 L130,250 A120,120 0 0,1 10,130 Z" fill="rgba(80,160,100,.09)"/>
-          <path d="M130,130 L10,130 A120,120 0 0,1 130,10 Z" fill="rgba(80,120,196,.09)"/>
-          <line x1="130" y1="10" x2="130" y2="250" stroke="rgba(196,158,80,.16)" stroke-width=".8"/>
-          <line x1="10" y1="130" x2="250" y2="130" stroke="rgba(196,158,80,.16)" stroke-width=".8"/>
-          <line x1="45" y1="45" x2="215" y2="215" stroke="rgba(196,158,80,.05)" stroke-width=".5"/>
-          <line x1="215" y1="45" x2="45" y2="215" stroke="rgba(196,158,80,.05)" stroke-width=".5"/>
-          <!-- Tactical dashes on compass -->
-          <g stroke="rgba(196,158,80,.18)" fill="none">
-            <path d="M130,72 L130,54" stroke-width=".8" stroke-dasharray="2,2"/>
-            <path d="M130,188 L130,206" stroke-width=".8" stroke-dasharray="2,2"/>
-            <path d="M72,130 L54,130" stroke-width=".8" stroke-dasharray="2,2"/>
-            <path d="M188,130 L206,130" stroke-width=".8" stroke-dasharray="2,2"/>
-          </g>
-          <circle cx="130" cy="130" r="37" fill="#0d0c0a" stroke="rgba(196,158,80,.26)" stroke-width="1"/>
-          <text x="130" y="126" text-anchor="middle" font-family="'Bebas Neue',sans-serif" font-size="7" fill="#c49e50" letter-spacing="1">THE</text>
-          <text x="130" y="136" text-anchor="middle" font-family="'Bebas Neue',sans-serif" font-size="8" fill="#c49e50" letter-spacing="1">COMPETITOR</text>
-          <text x="130" y="28" text-anchor="middle" font-family="'Bebas Neue',sans-serif" font-size="11" fill="rgba(210,90,90,.85)" letter-spacing="1.5">I ACT</text>
-          <text x="228" y="134" text-anchor="middle" font-family="'Bebas Neue',sans-serif" font-size="9" fill="rgba(196,158,80,.85)" letter-spacing="1">I EXP.</text>
-          <text x="130" y="232" text-anchor="middle" font-family="'Bebas Neue',sans-serif" font-size="10" fill="rgba(80,160,100,.85)" letter-spacing="1.5">I SECURE</text>
-          <text x="32" y="134" text-anchor="middle" font-family="'Bebas Neue',sans-serif" font-size="9" fill="rgba(100,140,210,.85)" letter-spacing="1">I UND.</text>
-          <text x="130" y="8" text-anchor="middle" font-family="'Bebas Neue',sans-serif" font-size="7" fill="rgba(196,158,80,.3)" letter-spacing="2">N</text>
-          <text x="252" y="133" font-family="'Bebas Neue',sans-serif" font-size="7" fill="rgba(196,158,80,.3)" letter-spacing="2">E</text>
-          <text x="130" y="257" text-anchor="middle" font-family="'Bebas Neue',sans-serif" font-size="7" fill="rgba(196,158,80,.3)" letter-spacing="2">S</text>
-          <text x="4" y="133" font-family="'Bebas Neue',sans-serif" font-size="7" fill="rgba(196,158,80,.3)" letter-spacing="2">O</text>
-        </svg>
-        <div style="margin-top:10px;text-align:center">
-          <div style="font-family:'Caveat',cursive;font-size:11px;color:rgba(196,158,80,.3);margin-bottom:7px" class="fr-only">12 profils joueurs</div>
-          <div style="font-family:'Caveat',cursive;font-size:11px;color:rgba(196,158,80,.3);margin-bottom:7px" class="en-only">12 player profiles</div>
-          <div id="profile-dots" style="display:flex;justify-content:center;gap:3px;flex-wrap:wrap;max-width:200px;margin:0 auto"></div>
-        </div>
-      </div>
-      <div>
-        <div style="font-family:'Caveat',cursive;font-size:17px;color:#c49e50;margin-bottom:6px" class="fr-only">Le langage du compétiteur.</div>
-        <div style="font-family:'Caveat',cursive;font-size:17px;color:#c49e50;margin-bottom:6px" class="en-only">The competitor's language.</div>
-        <div style="font-size:13px;line-height:1.755;color:rgba(237,232,223,.56);margin-bottom:18px" class="fr-only">Chaque compétiteur possède 4 énergies naturelles. Aucune n'est meilleure qu'une autre. Comprendre sa boussole permet de progresser avec plus d'intention.</div>
-        <div style="font-size:13px;line-height:1.755;color:rgba(237,232,223,.56);margin-bottom:18px" class="en-only">Every competitor carries 4 natural energies. None is better than another. Understanding your compass means progressing with more intention.</div>
-        <div class="compass-panels">
-          <div class="cp act"><div class="cp-accent"></div><div class="cp-title">I ACT</div><div class="cp-vals">Courage · Determination · Intensity</div><div class="cp-note">Challenge: slow down, listen</div></div>
-          <div class="cp exp"><div class="cp-accent"></div><div class="cp-title">I EXPRESS</div><div class="cp-vals">Enthusiasm · Creativity · Optimism</div><div class="cp-note">Challenge: stay focused</div></div>
-          <div class="cp sec"><div class="cp-accent"></div><div class="cp-title">I SECURE</div><div class="cp-vals">Stability · Confidence · Cohesion</div><div class="cp-note">Challenge: dare to step out</div></div>
-          <div class="cp und"><div class="cp-accent"></div><div class="cp-title">I UNDERSTAND</div><div class="cp-vals">Rigor · Reflection · Fairness</div><div class="cp-note">Challenge: accept imperfection</div></div>
-        </div>
-        <div class="compass-foot fr-only">Pas un test. Pas une étiquette. <span>Une boussole pour comprendre comment tu progresses.</span></div>
-        <div class="compass-foot en-only">Not a test. Not a label. <span>A compass to help you understand how you progress.</span></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- POUR QUI -->
-  <section class="section" id="pour-qui">
-    <div class="s-label reveal fr-only">Pour quel joueur ?</div>
-    <div class="s-label reveal en-only">Who is it for?</div>
-    <h2 class="s-title reveal fr-only">C'est fait pour toi si...</h2>
-    <h2 class="s-title reveal en-only">It's for you if...</h2>
-    <div class="reveal audience-grid">
-      <div style="border:1px solid rgba(196,158,80,.1);padding:22px 16px;background:#0d0c0a;transition:border-color .2s,transform .2s" onmouseenter="this.style.borderColor='rgba(196,158,80,.35)';this.style.transform='translateY(-3px)'" onmouseleave="this.style.borderColor='rgba(196,158,80,.1)';this.style.transform='translateY(0)'">
-        <div style="font-family:'Bebas Neue',sans-serif;font-size:11px;letter-spacing:2px;color:rgba(196,158,80,.4);margin-bottom:10px">01</div>
-        <div style="font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:1.5px;color:#ede8df;margin-bottom:10px" class="fr-only">Débutant</div>
-        <div style="font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:1.5px;color:#ede8df;margin-bottom:10px" class="en-only">Beginner</div>
-        <div style="height:1px;background:rgba(196,158,80,.1);margin-bottom:10px"></div>
-        <div style="font-size:11px;line-height:1.65;color:rgba(237,232,223,.58)" class="fr-only">Apprendre les bases sans prendre de mauvaises habitudes. Poser des fondations solides dès le départ.</div>
-        <div style="font-size:11px;line-height:1.65;color:rgba(237,232,223,.58)" class="en-only">Learn the basics without building bad habits. Set solid foundations from day one.</div>
-        <div style="font-family:'Caveat',cursive;font-size:11px;color:rgba(196,158,80,.3);margin-top:8px" class="fr-only">bases solides dès le début</div>
-        <div style="font-family:'Caveat',cursive;font-size:11px;color:rgba(196,158,80,.3);margin-top:8px" class="en-only">solid foundations from the start</div>
-      </div>
-      <div style="border:1px solid rgba(196,158,80,.1);padding:22px 16px;background:#0d0c0a;transition:border-color .2s,transform .2s" onmouseenter="this.style.borderColor='rgba(196,158,80,.35)';this.style.transform='translateY(-3px)'" onmouseleave="this.style.borderColor='rgba(196,158,80,.1)';this.style.transform='translateY(0)'">
-        <div style="font-family:'Bebas Neue',sans-serif;font-size:11px;letter-spacing:2px;color:rgba(196,158,80,.4);margin-bottom:10px">02</div>
-        <div style="font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:1.5px;color:#ede8df;margin-bottom:10px" class="fr-only">Intermédiaire</div>
-        <div style="font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:1.5px;color:#ede8df;margin-bottom:10px" class="en-only">Intermediate</div>
-        <div style="height:1px;background:rgba(196,158,80,.1);margin-bottom:10px"></div>
-        <div style="font-size:11px;line-height:1.65;color:rgba(237,232,223,.58)" class="fr-only">Construire un jeu plus stable et plus intelligent. Comprendre pourquoi tu stagues et comment débloquer ta progression.</div>
-        <div style="font-size:11px;line-height:1.65;color:rgba(237,232,223,.58)" class="en-only">Build a more stable and intelligent game. Understand why you stagnate and how to unlock your progression.</div>
-        <div style="font-family:'Caveat',cursive;font-size:11px;color:rgba(196,158,80,.3);margin-top:8px" class="fr-only">sortir du plateau</div>
-        <div style="font-family:'Caveat',cursive;font-size:11px;color:rgba(196,158,80,.3);margin-top:8px" class="en-only">break through the plateau</div>
-      </div>
-      <div style="border:1px solid rgba(196,158,80,.45);padding:22px 16px;background:#0f0e0b;transition:border-color .2s,transform .2s;position:relative" onmouseenter="this.style.transform='translateY(-3px)'" onmouseleave="this.style.transform='translateY(0)'">
-        <div style="position:absolute;top:-1px;left:14px;font-family:'Caveat',cursive;font-size:11px;background:#c49e50;color:#0c0b09;padding:2px 7px" class="fr-only">Populaire</div>
-        <div style="position:absolute;top:-1px;left:14px;font-family:'Caveat',cursive;font-size:11px;background:#c49e50;color:#0c0b09;padding:2px 7px" class="en-only">Popular</div>
-        <div style="font-family:'Bebas Neue',sans-serif;font-size:11px;letter-spacing:2px;color:rgba(196,158,80,.4);margin-bottom:10px;margin-top:8px">03</div>
-        <div style="font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:1.5px;color:#ede8df;margin-bottom:10px" class="fr-only">Compétiteur</div>
-        <div style="font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:1.5px;color:#ede8df;margin-bottom:10px" class="en-only">Competitor</div>
-        <div style="height:1px;background:rgba(196,158,80,.15);margin-bottom:10px"></div>
-        <div style="font-size:11px;line-height:1.65;color:rgba(237,232,223,.58)" class="fr-only">Gérer la pression, les choix tactiques et les matchs importants. Transformer le travail en résultats concrets en tournoi.</div>
-        <div style="font-size:11px;line-height:1.65;color:rgba(237,232,223,.58)" class="en-only">Manage pressure, tactical choices and important matches. Turn work into real tournament results.</div>
-        <div style="font-family:'Caveat',cursive;font-size:11px;color:rgba(196,158,80,.3);margin-top:8px" class="fr-only">mental + tactique compétition</div>
-        <div style="font-family:'Caveat',cursive;font-size:11px;color:rgba(196,158,80,.3);margin-top:8px" class="en-only">mental + competition tactics</div>
-      </div>
-      <div style="border:1px solid rgba(196,158,80,.1);padding:22px 16px;background:#0d0c0a;transition:border-color .2s,transform .2s" onmouseenter="this.style.borderColor='rgba(196,158,80,.35)';this.style.transform='translateY(-3px)'" onmouseleave="this.style.borderColor='rgba(196,158,80,.1)';this.style.transform='translateY(0)'">
-        <div style="font-family:'Bebas Neue',sans-serif;font-size:11px;letter-spacing:2px;color:rgba(196,158,80,.4);margin-bottom:10px">04</div>
-        <div style="font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:1.5px;color:#ede8df;margin-bottom:10px">Duo</div>
-        <div style="height:1px;background:rgba(196,158,80,.1);margin-bottom:10px"></div>
-        <div style="font-size:11px;line-height:1.65;color:rgba(237,232,223,.58)" class="fr-only">Améliorer la communication, les positions et les automatismes. Jouer vraiment ensemble, pas juste côte à côte.</div>
-        <div style="font-size:11px;line-height:1.65;color:rgba(237,232,223,.58)" class="en-only">Improve communication, positioning and automatisms. Actually play together, not just side by side.</div>
-        <div style="font-family:'Caveat',cursive;font-size:11px;color:rgba(196,158,80,.3);margin-top:8px" class="fr-only">complémentarité + automatismes</div>
-        <div style="font-family:'Caveat',cursive;font-size:11px;color:rgba(196,158,80,.3);margin-top:8px" class="en-only">complementarity + automatisms</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 12 PROFILS -->
-  <section class="section" id="profils">
-    <div class="s-label reveal fr-only">Boussole HWBT</div>
-    <div class="s-label reveal en-only">HWBT Compass</div>
-    <h2 class="s-title reveal fr-only">Les 12 profils joueurs</h2>
-    <h2 class="s-title reveal en-only">The 12 player profiles</h2>
-    <div style="font-size:13px;line-height:1.78;color:rgba(237,232,223,.58);max-width:580px;margin-bottom:26px" class="reveal fr-only">Chaque joueur possède une combinaison dominante d'énergies. Le but n'est pas de mettre une étiquette, mais de mieux comprendre comment tu apprends, réagis sous pression et progresses.</div>
-    <div style="font-size:13px;line-height:1.78;color:rgba(237,232,223,.58);max-width:580px;margin-bottom:26px" class="reveal en-only">Every player has a dominant energy combination. The goal isn't to label you, but to understand how you learn, react under pressure and progress.</div>
-
-    <!-- Grille 4x3 — 12 profils -->
-    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px" class="reveal" id="profils-grid">
-
-      <!-- 1 — Le Catalyseur -->
-      <div class="profil-card" data-colors="rouge,jaune">
-        <div class="pc-num">01</div>
-        <div class="pc-name fr-only">Le Catalyseur</div><div class="pc-name en-only">The Catalyst</div>
-        <div class="pc-sub fr-only">Le Bâtisseur</div><div class="pc-sub en-only">The Builder</div>
-        <div class="pc-tags"><span class="ptag rouge">ROUGE</span><span class="ptag jaune">JAUNE</span></div>
-        <div class="pc-desc fr-only">Énergique. Il combine l'énergie du Rouge avec la progression déterminée du Jaune. Sous pression, il réfléchit plus — c'est agit. Il construit un match qui gagne en intensité.</div>
-        <div class="pc-desc en-only">Energetic. Combines Red energy with the determined progression of Yellow. Under pressure he thinks more — then acts. He builds a match that grows in intensity.</div>
-        <div class="pc-quality fr-only">Capacité à retourner un match</div><div class="pc-quality en-only">Ability to turn a match around</div>
-      </div>
-
-      <!-- 2 — Le Pilier -->
-      <div class="profil-card" data-colors="rouge,vert">
-        <div class="pc-num">02</div>
-        <div class="pc-name fr-only">Le Pilier</div><div class="pc-name en-only">The Pillar</div>
-        <div class="pc-sub fr-only">Le Cardinal</div><div class="pc-sub en-only">The Cardinal</div>
-        <div class="pc-tags"><span class="ptag rouge">ROUGE</span><span class="ptag vert">VERT</span></div>
-        <div class="pc-desc fr-only">Force tranquille. Il combine la puissance du Rouge et la fiabilité du Vert. Il participe aux moments clés — il y réfléchit, sa présence physique rassure, sa cohésion désarme l'adversaire.</div>
-        <div class="pc-desc en-only">Quiet force. Combines Red power and Green reliability. Joins key moments — thinks it through, his physical presence reassures, his cohesion disarms the opponent.</div>
-        <div class="pc-quality fr-only">Endurance et impact sur la durée</div><div class="pc-quality en-only">Endurance and long-term impact</div>
-      </div>
-
-      <!-- 3 — Le Capitaine -->
-      <div class="profil-card" data-colors="rouge,bleu">
-        <div class="pc-num">03</div>
-        <div class="pc-name fr-only">Le Capitaine</div><div class="pc-name en-only">The Captain</div>
-        <div class="pc-sub fr-only">Le Général</div><div class="pc-sub en-only">The General</div>
-        <div class="pc-tags"><span class="ptag rouge">ROUGE</span><span class="ptag bleu">BLEU</span></div>
-        <div class="pc-desc fr-only">Passionné et décisionnaire. Il combine l'action du Rouge avec l'analyse du Bleu. Il joue régulièrement et agit avec assurance. Naturellement dans le duo, toujours dans le plan.</div>
-        <div class="pc-desc en-only">Passionate decision-maker. Combines Red action with Blue analysis. Plays consistently and acts with confidence. Naturally in the duo, always in the plan.</div>
-        <div class="pc-quality fr-only">Lecture du jeu exceptionnelle</div><div class="pc-quality en-only">Exceptional game reading</div>
-      </div>
-
-      <!-- 4 — Le Showman -->
-      <div class="profil-card" data-colors="jaune">
-        <div class="pc-num">04</div>
-        <div class="pc-name fr-only">Le Showman</div><div class="pc-name en-only">The Showman</div>
-        <div class="pc-sub fr-only">L'Artiste</div><div class="pc-sub en-only">The Artist</div>
-        <div class="pc-tags"><span class="ptag jaune">JAUNE</span></div>
-        <div class="pc-desc fr-only">Créatif et explosif. Il combine l'improvisation du Jaune avec l'audace du Rouge. Il invente des coups que l'adversaire ne voit pas venir. Son jeu est spectacle — et parfois victoire.</div>
-        <div class="pc-desc en-only">Creative and explosive. Combines Yellow improvisation with Red audacity. Invents shots the opponent never sees coming. His game is spectacle — and sometimes victory.</div>
-        <div class="pc-quality fr-only">Répertoire technique étendu</div><div class="pc-quality en-only">Extensive technical repertoire</div>
-      </div>
-
-      <!-- 5 — Le Moteur -->
-      <div class="profil-card" data-colors="jaune,vert">
-        <div class="pc-num">05</div>
-        <div class="pc-name fr-only">Le Moteur</div><div class="pc-name en-only">The Engine</div>
-        <div class="pc-sub fr-only">La Dynamo</div><div class="pc-sub en-only">The Dynamo</div>
-        <div class="pc-tags"><span class="ptag jaune">JAUNE</span><span class="ptag vert">VERT</span></div>
-        <div class="pc-desc fr-only">Énergie collective. Il combine l'enthousiasme du Jaune et la fiabilité du Vert. Il dynamise ses partenaires, maintient le rythme du duo, et ne lâche rien sur l'adversaire.</div>
-        <div class="pc-desc en-only">Collective energy. Combines Yellow enthusiasm and Green reliability. Energizes partners, maintains duo rhythm, never lets go against the opponent.</div>
-        <div class="pc-quality fr-only">Endurance physique et mentale</div><div class="pc-quality en-only">Physical and mental endurance</div>
-      </div>
-
-      <!-- 6 — Le Créatif -->
-      <div class="profil-card" data-colors="jaune,bleu">
-        <div class="pc-num">06</div>
-        <div class="pc-name fr-only">Le Créatif</div><div class="pc-name en-only">The Creative</div>
-        <div class="pc-sub fr-only">Le Visionnaire Libre</div><div class="pc-sub en-only">The Free Visionary</div>
-        <div class="pc-tags"><span class="ptag jaune">JAUNE</span><span class="ptag bleu">BLEU</span></div>
-        <div class="pc-desc fr-only">Intelligence créative. Il combine l'intuition du Jaune et la précision du Bleu. Il construit des points complexes avec une logique que l'adversaire ne peut pas — pas une utilisation en mouvement.</div>
-        <div class="pc-desc en-only">Creative intelligence. Combines Yellow intuition and Blue precision. Builds complex points with a logic the opponent cannot anticipate — not a random movement user.</div>
-        <div class="pc-quality fr-only">Vision du jeu exceptionnelle</div><div class="pc-quality en-only">Exceptional game vision</div>
-      </div>
-
-      <!-- 7 — Le Posé -->
-      <div class="profil-card" data-colors="vert">
-        <div class="pc-num">07</div>
-        <div class="pc-name fr-only">Le Posé</div><div class="pc-name en-only">The Composed</div>
-        <div class="pc-sub fr-only">L'Équilibriste</div><div class="pc-sub en-only">The Balancer</div>
-        <div class="pc-tags"><span class="ptag vert">VERT</span></div>
-        <div class="pc-desc fr-only">Stabilité équilibrée. Il combine la fiabilité du Vert et la solidité du duo. Il crée un environnement sécurisé pour le duo, maintient le cap sous pression, et transforme la résistance en victoire.</div>
-        <div class="pc-desc en-only">Balanced stability. Combines Green reliability and duo solidity. Creates a secure environment for the duo, holds course under pressure, and turns resistance into victory.</div>
-        <div class="pc-quality fr-only">Stabilité structurelle exemplaire</div><div class="pc-quality en-only">Exemplary structural stability</div>
-      </div>
-
-      <!-- 8 — Le Roc -->
-      <div class="profil-card" data-colors="vert,bleu">
-        <div class="pc-num">08</div>
-        <div class="pc-name fr-only">Le Roc</div><div class="pc-name en-only">The Rock</div>
-        <div class="pc-sub fr-only">Le Roc</div><div class="pc-sub en-only">The Rock</div>
-        <div class="pc-tags"><span class="ptag vert">VERT</span><span class="ptag bleu">BLEU</span></div>
-        <div class="pc-desc fr-only">Résistance totale. Il combine la solidité du Vert et la combativité du Bleu. Il ne perd pas de coups gratuits, il attend toujours la balle au fond, et l'adversaire finit toujours par craquer.</div>
-        <div class="pc-desc en-only">Total resistance. Combines Green solidity and Blue combativeness. Never loses free points, always waits for the deep ball, and the opponent always cracks in the end.</div>
-        <div class="pc-quality fr-only">Régularité technique exemplaire</div><div class="pc-quality en-only">Exemplary technical consistency</div>
-      </div>
-
-      <!-- 9 — Le Métronome -->
-      <div class="profil-card" data-colors="vert,bleu">
-        <div class="pc-num">09</div>
-        <div class="pc-name fr-only">Le Métronome</div><div class="pc-name en-only">The Metronome</div>
-        <div class="pc-sub fr-only">La Bouge</div><div class="pc-sub en-only">The Pulse</div>
-        <div class="pc-tags"><span class="ptag bleu">BLEU</span><span class="ptag vert">VERT</span></div>
-        <div class="pc-desc fr-only">Précision calme. Il combine la constance du Vert et la lecture du Bleu. Il conjugue avec rythme, il s'adapte et il s'ajuste, et il gagne en dignité par la régularité du cœur tactique.</div>
-        <div class="pc-desc en-only">Calm precision. Combines Green consistency and Blue reading. Conjugates with rhythm, adapts and adjusts, and wins with dignity through the regularity of the tactical core.</div>
-        <div class="pc-quality fr-only">Régularité technique exceptionnelle</div><div class="pc-quality en-only">Exceptional technical regularity</div>
-      </div>
-
-      <!-- 10 — Le Stratège -->
-      <div class="profil-card" data-colors="bleu">
-        <div class="pc-num">10</div>
-        <div class="pc-name fr-only">Le Stratège</div><div class="pc-name en-only">The Strategist</div>
-        <div class="pc-sub fr-only">L'Architecte</div><div class="pc-sub en-only">The Architect</div>
-        <div class="pc-tags"><span class="ptag bleu">BLEU</span></div>
-        <div class="pc-desc fr-only">Intelligence pure. Il combine la logique du Bleu et la fiabilité du Vert. Il construit une compréhension totale de l'adversaire et de la situation, puis exécute avec précision.</div>
-        <div class="pc-desc en-only">Pure intelligence. Combines Blue logic and Green reliability. Builds total understanding of the opponent and situation, then executes with precision.</div>
-        <div class="pc-quality fr-only">Analyse de haut niveau</div><div class="pc-quality en-only">High-level analysis</div>
-      </div>
-
-      <!-- 11 — Le Discipliné -->
-      <div class="profil-card" data-colors="bleu,rouge">
-        <div class="pc-num">11</div>
-        <div class="pc-name fr-only">Le Discipliné</div><div class="pc-name en-only">The Disciplined</div>
-        <div class="pc-sub fr-only">L'Exact</div><div class="pc-sub en-only">The Exact</div>
-        <div class="pc-tags"><span class="ptag bleu">BLEU</span><span class="ptag rouge">ROUGE</span></div>
-        <div class="pc-desc fr-only">Rigueur compétitrice. Il combine la précision du Bleu et la détermination du Rouge. Il joue avec une régularité presque mécanique, mais se laisse déstabiliser par l'intuition.</div>
-        <div class="pc-desc en-only">Competitive rigor. Combines Blue precision and Red determination. Plays with almost mechanical regularity, but can be destabilized by intuition.</div>
-        <div class="pc-quality fr-only">Précision technique exceptionnelle</div><div class="pc-quality en-only">Exceptional technical precision</div>
-      </div>
-
-      <!-- 12 — Le Visionnaire -->
-      <div class="profil-card" data-colors="bleu,jaune">
-        <div class="pc-num">12</div>
-        <div class="pc-name fr-only">Le Visionnaire</div><div class="pc-name en-only">The Visionary</div>
-        <div class="pc-sub fr-only">L'Avant</div><div class="pc-sub en-only">The Forward</div>
-        <div class="pc-tags"><span class="ptag bleu">BLEU</span><span class="ptag jaune">JAUNE</span></div>
-        <div class="pc-desc fr-only">Intelligence créative. Il combine l'analyse du Bleu et la créativité du Jaune. Il voit les solutions que les autres n'imaginent pas, mais oui, voire plus confiance et se surprend constamment l'adversaire.</div>
-        <div class="pc-desc en-only">Creative intelligence. Combines Blue analysis and Yellow creativity. Sees solutions others cannot imagine, builds confidence and constantly surprises the opponent.</div>
-        <div class="pc-quality fr-only">Vision du jeu exceptionnelle</div><div class="pc-quality en-only">Exceptional game vision</div>
-      </div>
-
-    </div>
   </section>
 
   <!-- TARIFS -->
@@ -1053,57 +815,8 @@ section[id]{scroll-margin-top:86px}
       <div class="pc feat"><div class="pc-type">2 × 1 h 30 / <span class="fr-only">semaine</span><span class="en-only">week</span></div><div class="pc-price">500€*</div><div class="pc-unit fr-only">20 cours / période</div><div class="pc-unit en-only">20 lessons / period</div></div>
       <div class="pc"><div class="pc-type fr-only">Créneaux proposés</div><div class="pc-type en-only">Available time slots</div><ul class="pc-slots"><li class="fr-only">Lundi 16 h 30 – 18 h 00</li><li class="en-only">Monday 4:30–6:00 pm</li><li class="fr-only">Jeudi 16 h 30 – 18 h 00</li><li class="en-only">Thursday 4:30–6:00 pm</li><li class="fr-only">Vendredi 16 h 30 – 18 h 00</li><li class="en-only">Friday 4:30–6:00 pm</li><li class="fr-only">Samedi matin</li><li class="en-only">Saturday morning</li><li class="fr-only">Dimanche matin</li><li class="en-only">Sunday morning</li></ul></div>
     </div>
-    <div class="pricing-periods reveal fr-only"><strong>Période 1</strong> 21/09 – 13/12 &nbsp;·&nbsp; <strong>Période 2</strong> 04/01 – 28/03 &nbsp;·&nbsp; <strong>Période 3</strong> 29/03 – 20/06<br><strong>Lieu :</strong> Argayon (Nivelles) · Horaire à convenir.<br>* Tarif à confirmer.</div>
-    <div class="pricing-periods reveal en-only"><strong>Period 1</strong> 21/09 – 13/12 &nbsp;·&nbsp; <strong>Period 2</strong> 04/01 – 28/03 &nbsp;·&nbsp; <strong>Period 3</strong> 29/03 – 20/06<br><strong>Location:</strong> Argayon (Nivelles) · Schedule to be agreed.<br>* Price to be confirmed.</div>
-  </section>
-
-  <!-- PLATEFORME -->
-  <section class="section" id="plateforme">
-    <div class="s-label reveal fr-only">Digital</div>
-    <div class="s-label reveal en-only">Digital</div>
-    <h2 class="s-title reveal fr-only">Plateforme membres</h2>
-    <h2 class="s-title reveal en-only">Member platform</h2>
-    <div class="platform-grid reveal">
-      <div>
-        <div style="font-size:13px;line-height:1.78;color:rgba(237,232,223,.56);margin-bottom:20px" class="fr-only">Ton carnet de bord digital. Séances, objectifs, retour coach. Tu sais quoi bosser, et pourquoi.</div>
-        <div style="font-size:13px;line-height:1.78;color:rgba(237,232,223,.56);margin-bottom:20px" class="en-only">Your digital training log. Sessions, goals, coach feedback. You know what to work on, and why.</div>
-        <div class="feat-list">
-          <div class="feat-item"><div class="feat-num">01</div><div><div class="feat-name fr-only">Historique des séances</div><div class="feat-name en-only">Session history</div><div class="feat-desc fr-only">Toutes tes séances archivées et analysées</div><div class="feat-desc en-only">All your sessions archived and analyzed</div></div></div>
-          <div class="feat-item"><div class="feat-num">02</div><div><div class="feat-name fr-only">Objectifs actionnables</div><div class="feat-name en-only">Actionable goals</div><div class="feat-desc fr-only">Des axes de travail simples et concrets</div><div class="feat-desc en-only">Simple, concrete work axes</div></div></div>
-          <div class="feat-item"><div class="feat-num">03</div><div><div class="feat-name fr-only">Feedback coach</div><div class="feat-name en-only">Coach feedback</div><div class="feat-desc fr-only">Retour personnalisé après chaque séance</div><div class="feat-desc en-only">Personalized feedback after each session</div></div></div>
-          <div class="feat-item"><div class="feat-num">04</div><div><div class="feat-name fr-only">Profil Boussole</div><div class="feat-name en-only">Compass profile</div><div class="feat-desc fr-only">Ton profil couleur + axes de vigilance</div><div class="feat-desc en-only">Your color profile + alert zones</div></div></div>
-        </div>
-        <div class="platform-cta">
-          <button disabled style="display:inline-flex;align-items:center;gap:10px;font-family:'Inter',sans-serif;font-size:9px;font-weight:600;letter-spacing:2px;text-transform:uppercase;padding:12px 22px;background:rgba(196,158,80,.04);border:1px solid rgba(196,158,80,.2);color:rgba(196,158,80,.4);cursor:not-allowed;opacity:.7">
-            <span>🚧</span> UNDER CONSTRUCTION
-          </button>
-        </div>
-      </div>
-      <div style="border:1px solid rgba(196,158,80,.1);padding:24px;background:rgba(14,13,10,.6)">
-        <div style="font-family:'Caveat',cursive;font-size:13px;color:rgba(196,158,80,.38);margin-bottom:16px;border-bottom:1px solid rgba(196,158,80,.07);padding-bottom:10px" class="fr-only">Aperçu — carnet digital</div>
-        <div style="font-family:'Caveat',cursive;font-size:13px;color:rgba(196,158,80,.38);margin-bottom:16px;border-bottom:1px solid rgba(196,158,80,.07);padding-bottom:10px" class="en-only">Preview — digital notebook</div>
-        <svg viewBox="0 0 300 200" width="100%" aria-hidden="true">
-          <rect x="0" y="0" width="300" height="200" fill="rgba(14,13,10,.5)" stroke="rgba(196,158,80,.1)" stroke-width=".8"/>
-          <line x1="0" y1="30" x2="300" y2="30" stroke="rgba(196,158,80,.08)" stroke-width=".8"/>
-          <text x="10" y="20" font-family="'Bebas Neue',sans-serif" font-size="9" fill="rgba(196,158,80,.4)" letter-spacing="2">HWBT PLATFORM</text>
-          <rect x="10" y="40" width="85" height="50" fill="none" stroke="rgba(196,158,80,.12)" stroke-width=".8"/>
-          <text x="18" y="58" font-family="'Bebas Neue',sans-serif" font-size="22" fill="#c49e50">4</text>
-          <text x="18" y="82" font-family="Caveat,cursive" font-size="9" fill="rgba(237,232,223,.3)">piliers</text>
-          <rect x="107" y="40" width="85" height="50" fill="none" stroke="rgba(196,158,80,.12)" stroke-width=".8"/>
-          <text x="115" y="58" font-family="'Bebas Neue',sans-serif" font-size="22" fill="#c49e50">12</text>
-          <text x="115" y="82" font-family="Caveat,cursive" font-size="9" fill="rgba(237,232,223,.3)">profils</text>
-          <rect x="204" y="40" width="86" height="50" fill="none" stroke="rgba(196,158,80,.12)" stroke-width=".8"/>
-          <text x="212" y="58" font-family="'Bebas Neue',sans-serif" font-size="22" fill="#c49e50">36</text>
-          <text x="212" y="82" font-family="Caveat,cursive" font-size="9" fill="rgba(237,232,223,.3)">aspects</text>
-          <rect x="10" y="102" width="280" height="28" fill="none" stroke="rgba(196,158,80,.08)" stroke-width=".8"/>
-          <text x="16" y="121" font-family="Caveat,cursive" font-size="11" fill="rgba(237,232,223,.3)">Séance du 16/06 · Technique revers</text>
-          <rect x="10" y="140" width="280" height="28" fill="none" stroke="rgba(196,158,80,.07)" stroke-width=".8"/>
-          <text x="16" y="159" font-family="Caveat,cursive" font-size="11" fill="rgba(237,232,223,.22)">Séance du 10/06 · Tactique duo</text>
-          <rect x="10" y="172" width="280" height="20" fill="none" stroke="rgba(196,158,80,.05)" stroke-width=".8"/>
-          <text x="16" y="186" font-family="Caveat,cursive" font-size="9" fill="rgba(237,232,223,.15)">Séance du 03/06 · Mental compétition</text>
-        </svg>
-      </div>
-    </div>
+    <div class="pricing-periods reveal fr-only"><strong>Saison 2026–2027</strong><br><strong>Période 1</strong> 21/09 – 13/12 &nbsp;·&nbsp; <strong>Période 2</strong> 04/01 – 28/03 &nbsp;·&nbsp; <strong>Période 3</strong> 29/03 – 20/06<br><strong>Lieu :</strong> Argayon (Nivelles) · Horaire à convenir.<br>* Tarifs indicatifs, à confirmer lors de l'inscription.</div>
+    <div class="pricing-periods reveal en-only"><strong>2026–2027 season</strong><br><strong>Period 1</strong> 21/09 – 13/12 &nbsp;·&nbsp; <strong>Period 2</strong> 04/01 – 28/03 &nbsp;·&nbsp; <strong>Period 3</strong> 29/03 – 20/06<br><strong>Location:</strong> Argayon (Nivelles) · Schedule to be agreed.<br>* Indicative prices, confirmed upon registration.</div>
   </section>
 
   <!-- OUTILS HWBT -->
@@ -1121,8 +834,8 @@ section[id]{scroll-margin-top:86px}
         <div class="shop-name en-only">T-shirt #1</div>
         <div class="shop-slogan fr-only">Blade × HWBT Academy</div>
         <div class="shop-slogan en-only">Blade × HWBT Academy</div>
-        <div style="position:relative;border:1px solid rgba(196,158,80,.12);margin-bottom:12px;background:rgba(10,9,7,.5);aspect-ratio:1;overflow:hidden">
-          <img src="assets/img/tshirt1.jpg" alt="T-shirt #1 — Blade × HWBT Academy" style="width:100%;height:100%;object-fit:cover;display:block"/>
+        <div class="shop-media">
+          <img src="assets/img/tshirt1.webp" alt="T-shirt #1 — Blade × HWBT Academy" loading="lazy" decoding="async"/>
           <div style="position:absolute;top:6px;left:6px;width:10px;height:10px;border-top:1px solid rgba(196,158,80,.3);border-left:1px solid rgba(196,158,80,.3)"></div>
           <div style="position:absolute;top:6px;right:6px;width:10px;height:10px;border-top:1px solid rgba(196,158,80,.3);border-right:1px solid rgba(196,158,80,.3)"></div>
           <div style="position:absolute;bottom:6px;left:6px;width:10px;height:10px;border-bottom:1px solid rgba(196,158,80,.3);border-left:1px solid rgba(196,158,80,.3)"></div>
@@ -1133,6 +846,8 @@ section[id]{scroll-margin-top:86px}
         <div class="shop-note fr-only">Personnalisation Blade · Couleurs HWBT</div>
         <div class="shop-note en-only">Blade customization · HWBT colors</div>
         <div class="shop-note" style="margin-top:6px"><span style="font-family:'Caveat',cursive;font-size:11px;color:rgba(196,158,80,.35)">Noir · Or · Blanc cassé</span></div>
+        <div class="shop-note fr-only">Tailles et disponibilité sur demande</div><div class="shop-note en-only">Sizes and availability on request</div>
+        <a class="shop-order" href="https://wa.me/32498088771?text=Bonjour%20Thomas%2C%20je%20souhaite%20commander%20le%20T-shirt%20HWBT%20n%C2%B01." target="_blank" rel="noopener"><span class="fr-only">Commander sur WhatsApp</span><span class="en-only">Order on WhatsApp</span></a>
       </div>
 
       <!-- T-shirt 2 -->
@@ -1141,8 +856,8 @@ section[id]{scroll-margin-top:86px}
         <div class="shop-name en-only">T-shirt #2</div>
         <div class="shop-slogan fr-only">Blade × HWBT Academy</div>
         <div class="shop-slogan en-only">Blade × HWBT Academy</div>
-        <div style="position:relative;border:1px solid rgba(196,158,80,.12);margin-bottom:12px;background:rgba(10,9,7,.5);aspect-ratio:1;overflow:hidden">
-          <img src="assets/img/tshirt2.jpg" alt="T-shirt #2 — Blade × HWBT Academy" style="width:100%;height:100%;object-fit:cover;display:block"/>
+        <div class="shop-media">
+          <img src="assets/img/tshirt2.webp" alt="T-shirt #2 — Blade × HWBT Academy" loading="lazy" decoding="async"/>
           <div style="position:absolute;top:6px;left:6px;width:10px;height:10px;border-top:1px solid rgba(196,158,80,.3);border-left:1px solid rgba(196,158,80,.3)"></div>
           <div style="position:absolute;top:6px;right:6px;width:10px;height:10px;border-top:1px solid rgba(196,158,80,.3);border-right:1px solid rgba(196,158,80,.3)"></div>
           <div style="position:absolute;bottom:6px;left:6px;width:10px;height:10px;border-bottom:1px solid rgba(196,158,80,.3);border-left:1px solid rgba(196,158,80,.3)"></div>
@@ -1153,6 +868,8 @@ section[id]{scroll-margin-top:86px}
         <div class="shop-note fr-only">Personnalisation Blade · Couleurs HWBT</div>
         <div class="shop-note en-only">Blade customization · HWBT colors</div>
         <div class="shop-note" style="margin-top:6px"><span style="font-family:'Caveat',cursive;font-size:11px;color:rgba(196,158,80,.35)">Noir · Or · Blanc cassé</span></div>
+        <div class="shop-note fr-only">Tailles et disponibilité sur demande</div><div class="shop-note en-only">Sizes and availability on request</div>
+        <a class="shop-order" href="https://wa.me/32498088771?text=Bonjour%20Thomas%2C%20je%20souhaite%20commander%20le%20T-shirt%20HWBT%20n%C2%B02." target="_blank" rel="noopener"><span class="fr-only">Commander sur WhatsApp</span><span class="en-only">Order on WhatsApp</span></a>
       </div>
 
       <!-- T-shirt 3 -->
@@ -1161,8 +878,8 @@ section[id]{scroll-margin-top:86px}
         <div class="shop-name en-only">T-shirt #3</div>
         <div class="shop-slogan fr-only">Blade × HWBT Academy</div>
         <div class="shop-slogan en-only">Blade × HWBT Academy</div>
-        <div style="position:relative;border:1px solid rgba(196,158,80,.12);margin-bottom:12px;background:rgba(10,9,7,.5);aspect-ratio:1;overflow:hidden">
-          <img src="assets/img/tshirt3.png" alt="T-shirt #3 — Blade × HWBT Academy" style="width:100%;height:100%;object-fit:cover;display:block"/>
+        <div class="shop-media">
+          <img src="assets/img/tshirt3.webp" alt="T-shirt #3 — Blade × HWBT Academy" loading="lazy" decoding="async"/>
           <div style="position:absolute;top:6px;left:6px;width:10px;height:10px;border-top:1px solid rgba(196,158,80,.3);border-left:1px solid rgba(196,158,80,.3)"></div>
           <div style="position:absolute;top:6px;right:6px;width:10px;height:10px;border-top:1px solid rgba(196,158,80,.3);border-right:1px solid rgba(196,158,80,.3)"></div>
           <div style="position:absolute;bottom:6px;left:6px;width:10px;height:10px;border-bottom:1px solid rgba(196,158,80,.3);border-left:1px solid rgba(196,158,80,.3)"></div>
@@ -1173,6 +890,8 @@ section[id]{scroll-margin-top:86px}
         <div class="shop-note fr-only">Personnalisation Blade · Couleurs HWBT</div>
         <div class="shop-note en-only">Blade customization · HWBT colors</div>
         <div class="shop-note" style="margin-top:6px"><span style="font-family:'Caveat',cursive;font-size:11px;color:rgba(196,158,80,.35)">Noir · Or · Blanc cassé</span></div>
+        <div class="shop-note fr-only">Tailles et disponibilité sur demande</div><div class="shop-note en-only">Sizes and availability on request</div>
+        <a class="shop-order" href="https://wa.me/32498088771?text=Bonjour%20Thomas%2C%20je%20souhaite%20commander%20le%20T-shirt%20HWBT%20n%C2%B03." target="_blank" rel="noopener"><span class="fr-only">Commander sur WhatsApp</span><span class="en-only">Order on WhatsApp</span></a>
       </div>
 
     </div>
@@ -1216,10 +935,10 @@ section[id]{scroll-margin-top:86px}
         <div style="display:flex;align-items:flex-start;gap:14px;padding:16px;border:1px solid rgba(196,158,80,.1);background:#0d0c0a">
           <div style="font-family:'Bebas Neue',sans-serif;font-size:22px;color:#c49e50;min-width:32px;line-height:1">04</div>
           <div>
-            <div style="font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:1.5px;color:#ede8df;margin-bottom:5px" class="fr-only">Un suivi sur la plateforme</div>
-            <div style="font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:1.5px;color:#ede8df;margin-bottom:5px" class="en-only">Platform tracking</div>
-            <div style="font-size:12px;line-height:1.65;color:rgba(237,232,223,.55)" class="fr-only">Tout est archivé sur ta plateforme membre. Tu vois ta progression dans le temps.</div>
-            <div style="font-size:12px;line-height:1.65;color:rgba(237,232,223,.55)" class="en-only">Everything is archived on your member platform. You see your progress over time.</div>
+            <div style="font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:1.5px;color:#ede8df;margin-bottom:5px" class="fr-only">Un résumé de séance</div>
+            <div style="font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:1.5px;color:#ede8df;margin-bottom:5px" class="en-only">A session summary</div>
+            <div style="font-size:12px;line-height:1.65;color:rgba(237,232,223,.55)" class="fr-only">Tu repars avec une priorité simple et concrète à travailler.</div>
+            <div style="font-size:12px;line-height:1.65;color:rgba(237,232,223,.55)" class="en-only">You leave with one simple, concrete priority to work on.</div>
           </div>
         </div>
       </div>
@@ -1227,11 +946,11 @@ section[id]{scroll-margin-top:86px}
         <!-- Testimonial / proof -->
         <div style="border:1px solid rgba(196,158,80,.15);padding:24px;background:rgba(14,13,10,.7);position:relative">
           <div style="font-family:'Caveat',cursive;font-size:32px;color:rgba(196,158,80,.15);position:absolute;top:10px;left:16px;line-height:1">❝</div>
-          <div style="font-family:'Caveat',cursive;font-size:15px;line-height:1.65;color:rgba(237,232,223,.6);padding-left:12px;margin-bottom:14px" class="fr-only">"Déjà testé avec des joueurs jeunes et adultes, débutants et compétiteurs, en duo et en groupe. La méthode s'adapte au joueur, pas l'inverse."</div>
-          <div style="font-family:'Caveat',cursive;font-size:15px;line-height:1.65;color:rgba(237,232,223,.6);padding-left:12px;margin-bottom:14px" class="en-only">"Already tested with young and adult players, beginners and competitors, in duo and group. The method adapts to the player, not the other way around."</div>
+          <div style="font-family:'Caveat',cursive;font-size:15px;line-height:1.65;color:rgba(237,232,223,.72);padding-left:12px;margin-bottom:14px" class="fr-only">Un coaching structuré, exigeant et bienveillant. La méthode s'adapte au joueur, à son rythme et à ses objectifs — jamais l'inverse.</div>
+          <div style="font-family:'Caveat',cursive;font-size:15px;line-height:1.65;color:rgba(237,232,223,.72);padding-left:12px;margin-bottom:14px" class="en-only">Structured, demanding and supportive coaching. The method adapts to the player, their pace and their goals — never the other way around.</div>
           <div style="display:flex;align-items:center;gap:10px;padding-left:12px">
             <div style="width:28px;height:28px;border-radius:50%;border:1px solid rgba(196,158,80,.3);display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:11px;color:#c49e50;flex-shrink:0">TD</div>
-            <div style="font-family:'Caveat',cursive;font-size:12px;color:rgba(196,158,80,.45)">Thomas Demarbaix — HWBT Academy</div>
+            <div style="font-family:'Caveat',cursive;font-size:12px;color:rgba(196,158,80,.65)" class="fr-only">La promesse HWBT</div><div style="font-family:'Caveat',cursive;font-size:12px;color:rgba(196,158,80,.65)" class="en-only">The HWBT promise</div>
           </div>
         </div>
         <!-- Stats proof -->
@@ -1301,9 +1020,9 @@ section[id]{scroll-margin-top:86px}
         <div style="font-family:'Caveat',cursive;font-size:13px;color:rgba(196,158,80,.38);margin-bottom:12px;display:flex;align-items:center;gap:6px" class="en-only"><span>✦</span> or fill in the player form</div>
         <form class="c-form" onsubmit="handleForm(event)">
           <input class="c-input" type="text" id="f-name" placeholder="Prénom / First name" autocomplete="given-name" required/>
-          <input class="c-input" type="email" id="f-email" placeholder="Email" autocomplete="email" required/>
+          <input class="c-input" type="email" id="f-email" placeholder="Email (facultatif)" autocomplete="email"/>
           <input class="c-input" type="tel" id="f-phone" placeholder="WhatsApp / Téléphone"/>
-          <textarea class="c-input" id="f-goal" placeholder="Ton objectif en quelques mots... / Your goal in a few words..." style="resize:vertical;min-height:70px"></textarea>
+          <textarea class="c-input" id="f-goal" placeholder="Ton objectif en quelques mots... / Your goal in a few words..." style="resize:vertical;min-height:70px" required></textarea>
           <button type="submit" class="c-send fr-only">Envoyer ma demande</button>
           <button type="submit" class="c-send en-only">Send my request</button>
           <div id="f-success" style="display:none;font-family:'Caveat',cursive;font-size:13px;color:rgba(196,158,80,.6);text-align:center;padding:10px;border:1px solid rgba(196,158,80,.2)" class="fr-only">✓ Demande envoyée — je te réponds rapidement !</div>
@@ -1315,9 +1034,10 @@ section[id]{scroll-margin-top:86px}
 
   <!-- FOOTER -->
   <footer class="footer">
-    <img class="footer-logo" src="assets/img/logo-hwbt-transparent.png" alt="HWBT Academy"/>
+    <img class="footer-logo" src="assets/img/logo-hwbt-transparent.webp" alt="HWBT Academy"/>
     <div class="f-slogan">Unity Builds Our Legacy</div>
     <div class="f-copy">© 2026 HWBT Academy — Belgium</div>
+    <a href="confidentialite.html" style="font-size:11px;color:rgba(237,232,223,.52);text-decoration:none" class="fr-only">Confidentialité</a><a href="confidentialite.html" style="font-size:11px;color:rgba(237,232,223,.52);text-decoration:none" class="en-only">Privacy</a>
   </footer>
 
 </div>
@@ -1341,11 +1061,13 @@ function closeMenu(){
 
 // Lang switcher
 const NL_TEXT={
+  "Énergique. Il combine l'énergie du Rouge avec la progression déterminée du Jaune. Sous pression, il réfléchit moins longtemps : il agit. Il construit un match qui gagne en intensité.":"Energiek. Hij combineert de energie van Rood met de vastberaden progressie van Geel. Onder druk denkt hij minder lang: hij handelt. Hij bouwt een match die aan intensiteit wint.","Force tranquille. Il combine la puissance du Rouge et la fiabilité du Vert. Il répond présent dans les moments clés, rassure son partenaire et use l'adversaire par sa solidité.":"Rustige kracht. Hij combineert de kracht van Rood met de betrouwbaarheid van Groen. Hij is aanwezig op sleutelmomenten, stelt zijn partner gerust en put de tegenstander uit met zijn stabiliteit.","Intelligence créative. Il combine l'intuition du Jaune et la précision du Bleu. Il construit des points complexes avec une logique que l'adversaire ne perçoit souvent que trop tard.":"Creatieve intelligentie. Hij combineert de intuïtie van Geel met de precisie van Blauw. Hij bouwt complexe punten met een logica die de tegenstander vaak pas te laat begrijpt.","Résistance totale. Il combine la solidité du Vert et la rigueur du Bleu. Il donne peu de points gratuits, reste stable dans l'échange et pousse l'adversaire à la faute.":"Totale weerstand. Hij combineert de stevigheid van Groen met de discipline van Blauw. Hij geeft weinig gratis punten weg, blijft stabiel in de rally en dwingt de tegenstander tot fouten.","Précision calme. Il combine la constance du Vert et la lecture du Bleu. Il impose son rythme, s'adapte avec patience et gagne grâce à sa régularité tactique.":"Kalme precisie. Hij combineert de constantheid van Groen met het inzicht van Blauw. Hij bepaalt zijn ritme, past zich geduldig aan en wint dankzij zijn tactische regelmaat.","Intelligence créative. Il combine l'analyse du Bleu et la créativité du Jaune. Il voit des solutions que les autres n'imaginent pas et surprend constamment l'adversaire.":"Creatieve intelligentie. Hij combineert de analyse van Blauw met de creativiteit van Geel. Hij ziet oplossingen die anderen niet bedenken en verrast de tegenstander voortdurend.",
+  "Tailles et disponibilité sur demande":"Maten en beschikbaarheid op aanvraag","Commander sur WhatsApp":"Bestellen via WhatsApp","Un résumé de séance":"Een samenvatting van de training","Tu repars avec une priorité simple et concrète à travailler.":"Je vertrekt met één eenvoudige en concrete prioriteit om aan te werken.","La promesse HWBT":"De HWBT-belofte","Un coaching structuré, exigeant et bienveillant. La méthode s'adapte au joueur, à son rythme et à ses objectifs — jamais l'inverse.":"Gestructureerde, veeleisende en ondersteunende coaching. De methode past zich aan de speler, zijn tempo en zijn doelen aan — nooit omgekeerd.","Email (facultatif)":"E-mail (optioneel)","Confidentialité":"Privacy",
   "Cours particulier":"Privéles","Sur demande":"Op aanvraag",
-  "Académie de Padel — Argayon (Nivelles)":"Padelacademie — Argayon (Nijvel)","Coach HWBT Academy · Argayon (Nivelles)":"Coach HWBT Academy · Argayon (Nijvel)","J'ai créé HWBT pour transformer ta motivation en progression structurée. Une méthode claire, adaptée à ton profil, pour construire un jeu stable et intelligent. Je coache à Argayon (Nivelles).":"Ik heb HWBT opgericht om jouw motivatie om te zetten in gestructureerde vooruitgang. Een duidelijke methode, aangepast aan jouw profiel, om een stabiel en intelligent spel op te bouwen. Ik coach bij Argayon (Nijvel).","lieu — Argayon (Nivelles)":"locatie — Argayon (Nijvel)",
+  "Académie de Padel — Argayon (Nivelles)":"Padelacademie — Argayon (Nivelles)","Coach HWBT Academy · Argayon (Nivelles)":"Coach HWBT Academy · Argayon (Nivelles)","J'ai créé HWBT pour transformer ta motivation en progression structurée. Une méthode claire, adaptée à ton profil, pour construire un jeu stable et intelligent. Je coache à Argayon (Nivelles).":"Ik heb HWBT opgericht om jouw motivatie om te zetten in gestructureerde vooruitgang. Een duidelijke methode, aangepast aan jouw profiel, om een stabiel en intelligent spel op te bouwen. Ik coach bij Argayon (Nivelles).","lieu — Argayon (Nivelles)":"locatie — Argayon (Nivelles)",
   "Des cours structurés pour les joueurs qui souhaitent progresser avec sérieux et se préparer progressivement à la compétition, dans un cadre bienveillant adapté à chacun.":"Gestructureerde lessen voor spelers die doelgericht willen groeien en zich stap voor stap willen voorbereiden op competitie, in een ondersteunende omgeving aangepast aan iedereen.",
   "Les 4 piliers":"De 4 pijlers",
-  "Je m'appelle Thomas Demarbaix. Mon parcours entre volley, tennis et padel m'a appris à regarder au-delà du geste : les déplacements, le timing et la lecture du jeu.":"Ik ben Thomas Demarbaix. Mijn achtergrond in volleybal, tennis en padel leerde me verder te kijken dan de slag: verplaatsing, timing en spelinzicht.","J'ai créé HWBT pour transformer ta motivation en progression structurée. Une méthode claire, adaptée à ton profil, pour construire un jeu stable et intelligent. Je coache à Argayon (Nivelles). Les cours peuvent être donnés en français, en néerlandais ou en anglais, selon la langue dans laquelle tu te sens le plus à l'aise.":"Ik heb HWBT opgericht om jouw motivatie om te zetten in gestructureerde vooruitgang. Een duidelijke methode, aangepast aan jouw profiel, om een stabiel en intelligent spel op te bouwen. Ik geef les bij Argayon (Nijvel). De lessen kunnen in het Frans, Nederlands of Engels worden gegeven, in de taal waarin jij je het meest op je gemak voelt.",
+  "Je m'appelle Thomas Demarbaix. Mon parcours entre volley, tennis et padel m'a appris à regarder au-delà du geste : les déplacements, le timing et la lecture du jeu.":"Ik ben Thomas Demarbaix. Mijn achtergrond in volleybal, tennis en padel leerde me verder te kijken dan de slag: verplaatsing, timing en spelinzicht.","J'ai créé HWBT pour transformer ta motivation en progression structurée. Une méthode claire, adaptée à ton profil, pour construire un jeu stable et intelligent. Je coache à Argayon (Nivelles). Les cours peuvent être donnés en français, en néerlandais ou en anglais, selon la langue dans laquelle tu te sens le plus à l'aise.":"Ik heb HWBT opgericht om jouw motivatie om te zetten in gestructureerde vooruitgang. Een duidelijke methode, aangepast aan jouw profiel, om een stabiel en intelligent spel op te bouwen. Ik geef les bij Argayon (Nivelles). De lessen kunnen in het Frans, Nederlands of Engels worden gegeven, in de taal waarin jij je het meest op je gemak voelt.",
   "Approfondir":"Verdiepen","Méthodologie complète":"Volledige methodologie","Comprendre ton jeu.Construire ta progression.":"Begrijp je spel.Bouw aan je vooruitgang.","Cette page rassemble la méthode HWBT en profondeur : les quatre piliers, la Boussole, les douze profils joueurs et le système de suivi. Avance à ton rythme et découvre ce qui structure réellement ta progression.":"Deze pagina bundelt de HWBT-methode in detail: de vier pijlers, het Kompas, de twaalf spelersprofielen en het opvolgingssysteem. Ontdek op je eigen tempo wat jouw vooruitgang echt structureert.","← Retour à l'accueil":"← Terug naar de startpagina","Découvrir toute la méthodologie →":"Ontdek de volledige methodologie →","Suivi":"Opvolging",
   "Histoire":"Verhaal","Méthode":"Methode","Boussole":"Kompas","Tarifs":"Tarieven","Plateforme":"Platform","Rejoindre":"Meedoen","12 Profils":"12 Profielen","Outils":"Tools",
   "Demander une séance d'essai":"Vraag een proeftraining aan",
@@ -1432,13 +1154,14 @@ function setLang(l){
   document.getElementById('btn-nl').classList.toggle('active',l==='nl');
   document.getElementById('btn-en').classList.toggle('active',l==='en');
   document.documentElement.lang=l;
+  localStorage.setItem('hwbt_site_lang',l);
   updateTicker(l);
 }
 
 // Ticker
 const ticksByLang={
   fr:['Hard Work Beats Talent','HWBT ACADEMY','Argayon (Nivelles)',"Comprendre · S'entraîner · Valider · Évoluer",'12 profils joueurs','Deviens acteur de ta progression','4 piliers · 36 aspects','Unity Builds Our Legacy','Le carnet du compétiteur'],
-  nl:['Hard Work Beats Talent','HWBT ACADEMY','Argayon (Nijvel)','Begrijpen · Trainen · Valideren · Evolueren','12 spelersprofielen','Word eigenaar van je vooruitgang','4 pijlers · 36 aspecten','Unity Builds Our Legacy','Het notitieboek van de competitiespeler'],
+  nl:['Hard Work Beats Talent','HWBT ACADEMY','Argayon (Nivelles)','Begrijpen · Trainen · Valideren · Evolueren','12 spelersprofielen','Word eigenaar van je vooruitgang','4 pijlers · 36 aspecten','Unity Builds Our Legacy','Het notitieboek van de competitiespeler'],
   en:['Hard Work Beats Talent','HWBT ACADEMY','Argayon (Nivelles)','Understand · Train · Validate · Evolve','12 player profiles','Own your progress','4 pillars · 36 aspects','Unity Builds Our Legacy',"The competitor's notebook"]
 };
 const inner=document.getElementById('tick');
@@ -1451,7 +1174,7 @@ function updateTicker(lang='fr'){
   });
   inner.innerHTML=h;
 }
-updateTicker('fr');
+setLang(localStorage.getItem('hwbt_site_lang')||'fr');
 
 // Count up
 function countUp(el,target,dur){
@@ -1466,13 +1189,14 @@ function handleForm(e){
   const email=document.getElementById('f-email').value;
   const phone=document.getElementById('f-phone').value;
   const goal=document.getElementById('f-goal').value;
+  const contact=[email,phone].filter(Boolean).join(' / ');
   // Ouvre WhatsApp avec le message pré-rempli
   const currentLang=document.documentElement.lang||'fr';
   const msgText=currentLang==='nl'
-    ? `Hallo Thomas,\nIk ben ${name}.\nDoel: ${goal}\nContact: ${email}${phone?' / '+phone:''}`
+    ? `Hallo Thomas,\nIk ben ${name}.\nDoel: ${goal}${contact?'\nContact: '+contact:''}`
     : currentLang==='en'
-      ? `Hello Thomas,\nMy name is ${name}.\nGoal: ${goal}\nContact: ${email}${phone?' / '+phone:''}`
-      : `Bonjour Thomas,\nJe m'appelle ${name}.\nObjectif : ${goal}\nContact : ${email}${phone?' / '+phone:''}`;
+      ? `Hello Thomas,\nMy name is ${name}.\nGoal: ${goal}${contact?'\nContact: '+contact:''}`
+      : `Bonjour Thomas,\nJe m'appelle ${name}.\nObjectif : ${goal}${contact?'\nContact : '+contact:''}`;
   const msg=encodeURIComponent(msgText);
   window.open(`https://wa.me/32498088771?text=${msg}`,'_blank');
   document.getElementById('f-success').style.display='block';
@@ -1502,7 +1226,7 @@ new IntersectionObserver(e=>{e.forEach(en=>{if(en.isIntersecting&&!h1){h1=true;
 const colors=['rgba(196,80,80,.5)','rgba(196,158,80,.5)','rgba(80,160,100,.5)','rgba(80,120,200,.5)'];
 const combos=[[0,0],[0,1],[0,2],[0,3],[1,1],[1,2],[1,3],[2,2],[2,3],[3,3],[0,2],[1,3]];
 const pd=document.getElementById('profile-dots');
-combos.forEach(([a,b])=>{
+if(pd) combos.forEach(([a,b])=>{
   pd.innerHTML+=`<div style="width:15px;height:15px;border-radius:50%;background:conic-gradient(${colors[a]} 0deg 180deg,${colors[b]} 180deg 360deg);border:1px solid rgba(196,158,80,.12)"></div>`;
 });
 

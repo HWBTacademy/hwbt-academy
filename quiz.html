@@ -4,7 +4,17 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Quel type de joueur es-tu ? — HWBT Academy</title>
-<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Réponds à 12 questions et découvre ton profil joueur avec la Boussole Express HWBT Academy.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://hwbtacademy.be/quiz.html">
+<meta name="theme-color" content="#050505">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Quel joueur es-tu ? | Boussole Express HWBT">
+<meta property="og:description" content="Réponds à 12 questions et découvre ton profil joueur HWBT.">
+<meta property="og:url" content="https://hwbtacademy.be/quiz.html">
+<meta property="og:image" content="https://hwbtacademy.be/assets/img/og-hwbt.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="assets/img/logo-hwbt-transparent.webp" type="image/webp">
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <style>
@@ -302,7 +312,7 @@ input{font-family:var(--font-body)}
 
     <div class="cta-block">
       <p class="cta-text">Envie de développer ce profil sur le terrain avec un vrai programme de coaching ?</p>
-      <a class="btn btn-primary btn-block" href="https://hwbtacademy.github.io/hwbt-academy/" target="_blank" style="text-decoration:none">DÉCOUVRIR HWBT ACADEMY</a>
+      <a class="btn btn-primary btn-block" href="https://hwbtacademy.be/" target="_blank" rel="noopener" style="text-decoration:none">DÉCOUVRIR HWBT ACADEMY</a>
     </div>
 
     <a class="footlink" href="#" onclick="openAdminGate();return false;">Espace coach</a>
@@ -357,7 +367,7 @@ input{font-family:var(--font-body)}
 /* ================= CONFIG ================= */
 const QUIZ_PASSWORD = 'HWBT2026';
 const ADMIN_PASSWORD = 'COACHHWBT'; // à changer par Thomas
-const TEST_URL = 'https://hwbtacademy.github.io/hwbt-academy/'; // ⚠️ à remplacer par l'URL réelle une fois le test mis en ligne
+const TEST_URL = 'https://hwbtacademy.be/quiz.html';
 const LOCAL_STATS_KEY = 'hwbt-profile-counts-v1';
 const ONLINE_STATS_ENDPOINT = ''; // À connecter plus tard à un Google Sheet / Apps Script pour un compteur global.
 
@@ -370,7 +380,7 @@ const COLORS = {
 };
 const COLOR_ORDER = ['rouge','jaune','vert','bleu'];
 
-let currentLang = sessionStorage.getItem('hwbt_lang') || 'fr';
+let currentLang = localStorage.getItem('hwbt_site_lang') || sessionStorage.getItem('hwbt_lang') || 'fr';
 const UI = {
   fr:{
     gateText:'Choisis ta langue pour commencer.',
@@ -885,6 +895,7 @@ function showScreen(id){
 function setLang(lang){
   currentLang = lang;
   sessionStorage.setItem('hwbt_lang', lang);
+  localStorage.setItem('hwbt_site_lang', lang);
   document.documentElement.lang = lang;
   applyLanguage();
   if(!document.getElementById('quizScreen').classList.contains('hidden')) renderQuestion();
