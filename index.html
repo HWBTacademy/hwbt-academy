@@ -13,7 +13,7 @@
 <meta property="og:url" content="https://hwbtacademy.be/"/>
 <meta property="og:image" content="https://hwbtacademy.be/assets/img/og-hwbt.jpg"/>
 <meta name="twitter:card" content="summary_large_image"/>
-<link rel="icon" href="assets/img/logo-hwbt-transparent.webp" type="image/webp"/>
+<link rel="icon" href="assets/img/logo-hwbt-clean-v3.webp" type="image/webp"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600&family=Caveat:wght@400;600&display=swap" rel="stylesheet"/>
@@ -522,7 +522,7 @@ section[id]{scroll-margin-top:86px}
     </ul>
     <!-- LOGO centré -->
     <a class="nav-logo" href="index.html" aria-label="Accueil HWBT Academy">
-      <img src="assets/img/logo-hwbt-transparent.webp" alt="HWBT Academy"/>
+      <img src="assets/img/logo-hwbt-clean-v3.webp" alt="HWBT Academy"/>
     </a>
     <div style="display:flex;align-items:center;gap:18px">
       <ul class="nav-links">
@@ -570,17 +570,19 @@ section[id]{scroll-margin-top:86px}
       <div class="hero-eyebrow fr-only">Académie de Padel — Argayon (Nivelles)</div>
       <div class="hero-eyebrow en-only">Padel Academy — Argayon (Nivelles)</div>
       <div class="hero-logo-wrap">
-         <img class="official-hero-logo" src="assets/img/logo-hwbt-transparent.webp" alt="HWBT Academy" fetchpriority="high"/>
+         <img class="official-hero-logo" src="assets/img/logo-hwbt-clean-v3.webp" alt="HWBT Academy" fetchpriority="high"/>
       </div>
       <h1 class="hero-motto fr-only">Coaching padel basé sur ton profil, ta méthode et ta progression mesurable.</h1>
       <h1 class="hero-motto en-only">Padel coaching built on your profile, your method and measurable progress.</h1>
       <div class="hero-desc fr-only">Tu viens avec ton niveau. On identifie ton profil, tes priorités de travail et ton plan de progression. Séance après séance, tu sais exactement quoi améliorer — et pourquoi.</div>
       <div class="hero-desc en-only">You bring your level. We identify your profile, your work priorities and your progress plan. Session after session, you know exactly what to improve — and why.</div>
       <div class="hero-btns">
-        <button class="btn-gold fr-only" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Demander une séance d'essai</button>
-        <button class="btn-gold en-only" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Request a trial session</button>
-        <button class="btn-ghost fr-only" onclick="window.location.href='quiz.html'">Faire le test de personnalité express →</button>
-        <button class="btn-ghost en-only" onclick="window.location.href='quiz.html'">Take the express personality test →</button>
+        <button class="btn-gold fr-only" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Demander des informations</button>
+        <button class="btn-gold en-only" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Request information</button>
+        <button class="btn-ghost fr-only" onclick="window.location.href='quiz.html'">Faire le test express →</button>
+        <button class="btn-ghost en-only" onclick="window.location.href='quiz.html'">Take the express test →</button>
+        <button class="btn-ghost fr-only" onclick="document.getElementById('tarifs').scrollIntoView({behavior:'smooth'})">Voir les tarifs</button>
+        <button class="btn-ghost en-only" onclick="document.getElementById('tarifs').scrollIntoView({behavior:'smooth'})">View pricing</button>
       </div>
       <div class="hero-scroll">
         <div class="hs-txt">scroll</div>
@@ -1034,7 +1036,7 @@ section[id]{scroll-margin-top:86px}
 
   <!-- FOOTER -->
   <footer class="footer">
-    <img class="footer-logo" src="assets/img/logo-hwbt-transparent.webp" alt="HWBT Academy"/>
+    <img class="footer-logo" src="assets/img/logo-hwbt-clean-v3.webp" alt="HWBT Academy"/>
     <div class="f-slogan">Unity Builds Our Legacy</div>
     <div class="f-copy">© 2026 HWBT Academy — Belgium</div>
     <a href="confidentialite.html" style="font-size:11px;color:rgba(237,232,223,.52);text-decoration:none" class="fr-only">Confidentialité</a><a href="confidentialite.html" style="font-size:11px;color:rgba(237,232,223,.52);text-decoration:none" class="en-only">Privacy</a>
@@ -1061,6 +1063,7 @@ function closeMenu(){
 
 // Lang switcher
 const NL_TEXT={
+  "Demander des informations":"Informatie aanvragen","Faire le test express →":"Doe de snelle test →","Voir les tarifs":"Bekijk de tarieven",
   "Énergique. Il combine l'énergie du Rouge avec la progression déterminée du Jaune. Sous pression, il réfléchit moins longtemps : il agit. Il construit un match qui gagne en intensité.":"Energiek. Hij combineert de energie van Rood met de vastberaden progressie van Geel. Onder druk denkt hij minder lang: hij handelt. Hij bouwt een match die aan intensiteit wint.","Force tranquille. Il combine la puissance du Rouge et la fiabilité du Vert. Il répond présent dans les moments clés, rassure son partenaire et use l'adversaire par sa solidité.":"Rustige kracht. Hij combineert de kracht van Rood met de betrouwbaarheid van Groen. Hij is aanwezig op sleutelmomenten, stelt zijn partner gerust en put de tegenstander uit met zijn stabiliteit.","Intelligence créative. Il combine l'intuition du Jaune et la précision du Bleu. Il construit des points complexes avec une logique que l'adversaire ne perçoit souvent que trop tard.":"Creatieve intelligentie. Hij combineert de intuïtie van Geel met de precisie van Blauw. Hij bouwt complexe punten met een logica die de tegenstander vaak pas te laat begrijpt.","Résistance totale. Il combine la solidité du Vert et la rigueur du Bleu. Il donne peu de points gratuits, reste stable dans l'échange et pousse l'adversaire à la faute.":"Totale weerstand. Hij combineert de stevigheid van Groen met de discipline van Blauw. Hij geeft weinig gratis punten weg, blijft stabiel in de rally en dwingt de tegenstander tot fouten.","Précision calme. Il combine la constance du Vert et la lecture du Bleu. Il impose son rythme, s'adapte avec patience et gagne grâce à sa régularité tactique.":"Kalme precisie. Hij combineert de constantheid van Groen met het inzicht van Blauw. Hij bepaalt zijn ritme, past zich geduldig aan en wint dankzij zijn tactische regelmaat.","Intelligence créative. Il combine l'analyse du Bleu et la créativité du Jaune. Il voit des solutions que les autres n'imaginent pas et surprend constamment l'adversaire.":"Creatieve intelligentie. Hij combineert de analyse van Blauw met de creativiteit van Geel. Hij ziet oplossingen die anderen niet bedenken en verrast de tegenstander voortdurend.",
   "Tailles et disponibilité sur demande":"Maten en beschikbaarheid op aanvraag","Commander sur WhatsApp":"Bestellen via WhatsApp","Un résumé de séance":"Een samenvatting van de training","Tu repars avec une priorité simple et concrète à travailler.":"Je vertrekt met één eenvoudige en concrete prioriteit om aan te werken.","La promesse HWBT":"De HWBT-belofte","Un coaching structuré, exigeant et bienveillant. La méthode s'adapte au joueur, à son rythme et à ses objectifs — jamais l'inverse.":"Gestructureerde, veeleisende en ondersteunende coaching. De methode past zich aan de speler, zijn tempo en zijn doelen aan — nooit omgekeerd.","Email (facultatif)":"E-mail (optioneel)","Confidentialité":"Privacy",
   "Cours particulier":"Privéles","Sur demande":"Op aanvraag",
