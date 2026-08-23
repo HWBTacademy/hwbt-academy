@@ -422,7 +422,8 @@ textarea.c-input{resize:vertical;min-height:72px}
 .home-page .hero{grid-template-columns:1fr;background:radial-gradient(circle at 50% 42%,rgba(196,158,80,.105),transparent 38%),linear-gradient(180deg,#090806 0%,#050505 100%)}
 .home-page .hero-left{max-width:920px;margin:0 auto;width:100%;text-align:center;align-items:center}
 .official-hero-logo{width:min(660px,92vw);height:auto;object-fit:contain;display:block;margin:0 auto 20px}
-.hero-brand{width:min(720px,92vw);position:relative;margin:0 auto 24px;padding:14px 20px 5px;isolation:isolate;text-align:center;text-rendering:geometricPrecision;-webkit-font-smoothing:antialiased}
+.hero-brand-stage{width:min(880px,96vw);position:relative;margin:0 auto 24px;isolation:isolate}
+.hero-brand{width:min(720px,92vw);position:relative;z-index:2;margin:0 auto;padding:14px 20px 5px;text-align:center;text-rendering:geometricPrecision;-webkit-font-smoothing:antialiased}
 .hero-brand::before{content:'';position:absolute;z-index:-1;inset:-35px -20px;background:radial-gradient(ellipse at center,rgba(184,115,51,.12),transparent 67%);opacity:0;animation:brandGlow 2.2s .35s ease-out forwards;pointer-events:none}
 .hero-brand-main{font-family:'Bebas Neue',sans-serif;font-size:clamp(132px,18vw,250px);font-weight:400;line-height:.72;letter-spacing:clamp(2px,.45vw,8px);color:#f7f4ee;clip-path:inset(0 50% 0 50%);animation:brandReveal .85s .22s cubic-bezier(.2,.75,.2,1) forwards}
 .hero-brand-rule{width:100%;height:clamp(3px,.35vw,5px);margin:clamp(19px,2.2vw,28px) auto clamp(13px,1.5vw,20px);background:linear-gradient(90deg,transparent 0%,#9a592b 8%,#c98a4d 48%,#b87333 72%,transparent 100%);transform:scaleX(0);animation:brandRule 1s .75s cubic-bezier(.2,.8,.2,1) forwards;transform-origin:center}
@@ -431,7 +432,22 @@ textarea.c-input{resize:vertical;min-height:72px}
 @keyframes brandRule{to{transform:scaleX(1)}}
 @keyframes brandSub{to{opacity:1;transform:translateY(0)}}
 @keyframes brandGlow{0%{opacity:0;transform:scale(.8)}55%{opacity:1}100%{opacity:.55;transform:scale(1)}}
-@media(prefers-reduced-motion:reduce){.hero-brand::before,.hero-brand-main,.hero-brand-rule,.hero-brand-sub{animation:none!important}.hero-brand::before{opacity:.55}.hero-brand-main{clip-path:none}.hero-brand-rule{transform:none}.hero-brand-sub{opacity:1;transform:none}}
+.hero-padel-motion{position:absolute;z-index:1;inset:50% auto auto 50%;width:100%;height:auto;transform:translate(-50%,-50%);overflow:visible;pointer-events:none;opacity:.72}
+.padel-court-line{fill:none;stroke:rgba(184,115,51,.28);stroke-width:1.5;stroke-dasharray:1400;stroke-dashoffset:1400;animation:padelCourtDraw 1.7s .4s ease-out forwards}
+.padel-net{stroke:rgba(247,244,238,.2);stroke-width:2;stroke-dasharray:8 7;opacity:0;animation:padelNetIn .7s 1s forwards}
+.padel-flight{fill:none;stroke:rgba(204,145,78,.36);stroke-width:1.4;stroke-dasharray:6 10;opacity:0;animation:padelFlightIn .6s 1.45s forwards}
+.padel-ball{fill:#d9e85d;stroke:#f7f4ee;stroke-width:1.5;filter:url(#ballGlow);opacity:0;animation:padelBallIn .25s 1.55s forwards}
+.padel-racket{fill:rgba(5,5,5,.9);stroke:#b87333;stroke-width:2;transform-box:fill-box;transform-origin:center}
+.padel-racket-detail{fill:none;stroke:rgba(247,244,238,.25);stroke-width:1}
+.padel-racket-left{animation:padelSwingLeft 5.2s 1.45s ease-in-out infinite}
+.padel-racket-right{animation:padelSwingRight 5.2s 1.45s ease-in-out infinite}
+@keyframes padelCourtDraw{to{stroke-dashoffset:0}}
+@keyframes padelNetIn{to{opacity:1}}
+@keyframes padelFlightIn{to{opacity:1}}
+@keyframes padelBallIn{to{opacity:1}}
+@keyframes padelSwingLeft{0%,6%,100%{transform:rotate(-10deg)}9%{transform:rotate(15deg)}14%{transform:rotate(-10deg)}}
+@keyframes padelSwingRight{0%,48%,100%{transform:rotate(10deg)}52%{transform:rotate(-15deg)}57%{transform:rotate(10deg)}}
+@media(prefers-reduced-motion:reduce){.hero-brand::before,.hero-brand-main,.hero-brand-rule,.hero-brand-sub,.padel-court-line,.padel-net,.padel-flight,.padel-ball,.padel-racket{animation:none!important}.hero-brand::before{opacity:.55}.hero-brand-main{clip-path:none}.hero-brand-rule{transform:none}.hero-brand-sub{opacity:1;transform:none}.padel-court-line{stroke-dashoffset:0}.padel-net{opacity:1}.padel-flight,.padel-ball{display:none}}
 .audience-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
 .method-cta{display:inline-flex;align-items:center;gap:10px;margin-top:24px;padding:13px 20px;border:1px solid rgba(196,158,80,.5);color:#d9b66c;text-decoration:none;font-size:11px;letter-spacing:1.5px;text-transform:uppercase}
 .method-cta:hover{background:rgba(196,158,80,.08)}
@@ -508,6 +524,9 @@ section[id]{scroll-margin-top:86px}
   .methodology-intro .s-title{font-size:clamp(48px,14vw,68px)}
   .official-hero-logo{width:calc(100vw - 32px);height:auto;margin-bottom:14px}
   .hero-brand{width:calc(100vw - 24px);padding:10px 4px 2px;margin-bottom:20px}
+  .hero-brand-stage{width:calc(100vw - 8px);margin-bottom:20px}
+  .hero-padel-motion{width:112%;opacity:.58}
+  .padel-racket{display:none}
   .hero-brand-main{font-size:clamp(104px,31vw,154px);line-height:.74;letter-spacing:2px}
   .hero-brand-rule{margin:16px auto 12px;height:3px;width:94%}
   .hero-brand-sub{font-size:clamp(39px,12vw,58px);letter-spacing:4px}
@@ -588,10 +607,21 @@ section[id]{scroll-margin-top:86px}
       <div class="hero-eyebrow fr-only">Académie de Padel — Argayon (Nivelles)</div>
       <div class="hero-eyebrow en-only">Padel Academy — Argayon (Nivelles)</div>
       <div class="hero-logo-wrap">
-         <div class="hero-brand" role="img" aria-label="HWBT Academy">
-           <div class="hero-brand-main" aria-hidden="true">HWBT</div>
-           <div class="hero-brand-rule" aria-hidden="true"></div>
-           <div class="hero-brand-sub" aria-hidden="true">ACADEMY</div>
+         <div class="hero-brand-stage">
+           <svg class="hero-padel-motion" viewBox="0 0 900 470" aria-hidden="true">
+             <defs><filter id="ballGlow" x="-300%" y="-300%" width="700%" height="700%"><feGaussianBlur stdDeviation="4" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+             <path class="padel-court-line" d="M104 48 L796 48 L862 422 L38 422 Z M450 48 L450 422 M71 235 L829 235 M86 138 L814 138 M55 330 L845 330"/>
+             <line class="padel-net" x1="71" y1="235" x2="829" y2="235"/>
+             <path id="padel-rally-path" class="padel-flight" d="M112 338 Q260 72 450 202 T788 105 Q716 360 452 268 T112 338"/>
+             <g transform="translate(80 332) rotate(-10)"><g class="padel-racket padel-racket-left"><ellipse cx="0" cy="0" rx="25" ry="34"/><path d="M0 32 L0 70" stroke="#b87333" stroke-width="8" stroke-linecap="round"/><path class="padel-racket-detail" d="M-15 -16 H15 M-19 -4 H19 M-19 8 H19 M-13 20 H13 M-10 -27 V27 M0 -32 V32 M10 -27 V27"/></g></g>
+             <g transform="translate(820 98) rotate(10)"><g class="padel-racket padel-racket-right"><ellipse cx="0" cy="0" rx="25" ry="34"/><path d="M0 32 L0 70" stroke="#b87333" stroke-width="8" stroke-linecap="round"/><path class="padel-racket-detail" d="M-15 -16 H15 M-19 -4 H19 M-19 8 H19 M-13 20 H13 M-10 -27 V27 M0 -32 V32 M10 -27 V27"/></g></g>
+             <circle class="padel-ball" r="7"><animateMotion dur="5.2s" begin="1.55s" repeatCount="indefinite" rotate="auto"><mpath href="#padel-rally-path"/></animateMotion></circle>
+           </svg>
+           <div class="hero-brand" role="img" aria-label="HWBT Academy">
+             <div class="hero-brand-main" aria-hidden="true">HWBT</div>
+             <div class="hero-brand-rule" aria-hidden="true"></div>
+             <div class="hero-brand-sub" aria-hidden="true">ACADEMY</div>
+           </div>
          </div>
       </div>
       <h1 class="hero-motto fr-only">Coaching padel basé sur ton profil, ta méthode et ta progression mesurable.</h1>
