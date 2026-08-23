@@ -524,10 +524,20 @@ section[id]{scroll-margin-top:86px}
   .methodology-intro{padding:130px 20px 64px}
   .methodology-intro .s-title{font-size:clamp(48px,14vw,68px)}
   .official-hero-logo{width:calc(100vw - 32px);height:auto;margin-bottom:14px}
-  .hero-brand{width:calc(100vw - 24px);padding:18px 4px 12px;margin-bottom:0}
-  .hero-brand-stage{width:calc(100vw - 8px);margin-bottom:20px}
-  .hero-padel-motion{width:118%;left:50%;opacity:.78}
-  .padel-beam{opacity:.42}
+  .hero-brand{width:min(74vw,300px);padding:0;margin:0;position:absolute;left:50%;top:51%;transform:translate(-50%,-50%);animation-name:logoFloodlightMobile}
+  .hero-brand-stage{width:calc(100vw - 20px);height:278px;margin:0 auto 24px;display:flex;align-items:center;justify-content:center;background:radial-gradient(ellipse at 50% 72%,rgba(196,158,80,.15),transparent 58%)}
+  .hero-brand-stage::after{left:8%;right:8%;bottom:5%;height:42%}
+  .hero-logo-wrap .hero-padel-motion{width:100%;height:100%;left:50%;opacity:1}
+  .padel-beam{animation-name:padelBeamOnMobile}
+  .padel-glass-frame{stroke:rgba(196,158,80,.62);stroke-width:2.4}
+  .padel-glass{stroke:rgba(240,235,224,.28);fill:rgba(22,23,21,.48)}
+  .padel-cage{stroke:rgba(230,230,220,.22);stroke-width:1.2}
+  .padel-court-mark{stroke:rgba(225,192,126,.54);stroke-width:1.8}
+  .padel-net{stroke:rgba(245,240,230,.52);stroke-width:1.8}
+  .padel-light-pole{stroke:rgba(196,158,80,.7);stroke-width:3.4}
+  .padel-lamp{stroke:#d6ae5b;stroke-width:2}
+  @keyframes logoFloodlightMobile{0%,34%{filter:brightness(.3);transform:translate(-50%,-50%) scale(.94)}42%{filter:brightness(.75)}48%{filter:brightness(.42)}61%{filter:brightness(1.18)}69%{filter:brightness(.84)}100%{filter:brightness(1);transform:translate(-50%,-50%) scale(1)}}
+  @keyframes padelBeamOnMobile{0%,37%{opacity:0}44%{opacity:.72}50%{opacity:.24}63%{opacity:.88}70%{opacity:.52}100%{opacity:.72}}
 }
 @media(max-width:390px){
   h2.s-title,.s-title{font-size:48px}
@@ -606,7 +616,7 @@ section[id]{scroll-margin-top:86px}
       <div class="hero-eyebrow en-only">Padel Academy — Argayon (Nivelles)</div>
       <div class="hero-logo-wrap">
          <div class="hero-brand-stage">
-           <svg class="hero-padel-motion" viewBox="0 0 900 500" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+           <svg class="hero-padel-motion" viewBox="0 0 900 500" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
              <defs>
                <linearGradient id="padelNight" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#020202"/><stop offset=".56" stop-color="#070706"/><stop offset="1" stop-color="#0d0b08"/></linearGradient>
                <linearGradient id="courtFloor" x1=".5" y1="0" x2=".5" y2="1"><stop offset="0" stop-color="#151613" stop-opacity=".25"/><stop offset="1" stop-color="#21180f" stop-opacity=".78"/></linearGradient>
