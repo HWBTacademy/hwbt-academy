@@ -53,10 +53,8 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);overf
 .nav-links a:hover{color:var(--gold)}
 .nav-logo{width:200px;height:64px;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}
 .nav-logo img{width:190px;height:64px;object-fit:contain;display:block}
-.brand-mini{display:flex;flex-direction:column;align-items:center;justify-content:center;text-rendering:geometricPrecision;-webkit-font-smoothing:antialiased}
-.brand-mini-main{font-family:'Bebas Neue',sans-serif;font-size:43px;line-height:.72;letter-spacing:1.5px;color:#f7f4ee}
-.brand-mini-rule{width:100%;height:1.5px;margin:6px 0 3px;background:#b87333;transform:scaleX(.88)}
-.brand-mini-sub{font-family:'Bebas Neue',sans-serif;font-size:17px;line-height:.8;letter-spacing:2px;color:#c48245}
+.brand-mini{width:138px;height:60px;display:flex;align-items:center;justify-content:center}
+.brand-mini img{width:100%;height:100%;display:block;object-fit:contain}
 .nav-cta{font-family:'Inter',sans-serif;font-size:9px;letter-spacing:2px;text-transform:uppercase;padding:7px 15px;border:1px solid rgba(196,158,80,.4);color:var(--gold);background:transparent;cursor:pointer;transition:all .2s}
 .nav-cta:hover{background:var(--gold);color:var(--bg)}
 
@@ -424,14 +422,10 @@ textarea.c-input{resize:vertical;min-height:72px}
 .official-hero-logo{width:min(660px,92vw);height:auto;object-fit:contain;display:block;margin:0 auto 20px}
 .hero-brand-stage{width:min(920px,98vw);position:relative;margin:0 auto 24px;isolation:isolate;overflow:hidden;border-radius:2px;background:radial-gradient(ellipse at 50% 82%,rgba(154,89,43,.11),transparent 48%)}
 .hero-brand-stage::after{content:'';position:absolute;z-index:1;left:18%;right:18%;bottom:3%;height:28%;background:radial-gradient(ellipse at center,rgba(240,208,143,.18),rgba(184,115,51,.06) 43%,transparent 72%);filter:blur(15px);opacity:0;animation:padelGroundLight 1.8s 1.15s ease-out forwards;pointer-events:none}
-.hero-brand{width:min(720px,92vw);position:relative;z-index:3;margin:0 auto;padding:36px 20px 24px;text-align:center;text-rendering:geometricPrecision;-webkit-font-smoothing:antialiased;filter:brightness(.32);animation:logoFloodlight 2.1s .65s cubic-bezier(.22,.75,.24,1) forwards}
+.hero-brand{width:min(760px,92vw);position:relative;z-index:3;margin:0 auto;padding:22px 10px 16px;filter:brightness(.32);animation:logoFloodlight 2.1s .65s cubic-bezier(.22,.75,.24,1) forwards}
 .hero-brand::before{content:'';position:absolute;z-index:-1;inset:-52px -35px;background:radial-gradient(ellipse at center,rgba(255,238,197,.26),rgba(184,115,51,.10) 42%,transparent 70%);opacity:0;animation:brandGlow 2.2s 1.05s ease-out forwards;pointer-events:none}
-.hero-brand-main{font-family:'Bebas Neue',sans-serif;font-size:clamp(132px,18vw,250px);font-weight:400;line-height:.72;letter-spacing:clamp(2px,.45vw,8px);color:#fffdf8;clip-path:inset(0 50% 0 50%);text-shadow:0 0 1px #fff,0 0 24px rgba(255,244,214,.12);animation:brandReveal .85s .22s cubic-bezier(.2,.75,.2,1) forwards}
-.hero-brand-rule{width:100%;height:clamp(3px,.35vw,5px);margin:clamp(19px,2.2vw,28px) auto clamp(13px,1.5vw,20px);background:linear-gradient(90deg,transparent 0%,#9a592b 8%,#c98a4d 48%,#b87333 72%,transparent 100%);transform:scaleX(0);animation:brandRule 1s .75s cubic-bezier(.2,.8,.2,1) forwards;transform-origin:center}
-.hero-brand-sub{font-family:'Bebas Neue',sans-serif;font-size:clamp(44px,6.2vw,82px);line-height:.86;letter-spacing:clamp(4px,.7vw,10px);color:#b87333;opacity:0;transform:translateY(12px);animation:brandSub .65s 1.12s ease-out forwards}
+.hero-official-logo{width:100%;height:auto;display:block;object-fit:contain;filter:drop-shadow(0 0 18px rgba(255,244,214,.08));clip-path:inset(0 50% 0 50%);animation:brandReveal .85s .22s cubic-bezier(.2,.75,.2,1) forwards}
 @keyframes brandReveal{to{clip-path:inset(0 0 0 0)}}
-@keyframes brandRule{to{transform:scaleX(1)}}
-@keyframes brandSub{to{opacity:1;transform:translateY(0)}}
 @keyframes brandGlow{0%{opacity:0;transform:scale(.78)}45%{opacity:.16}58%{opacity:.78}64%{opacity:.36}76%{opacity:1}100%{opacity:.72;transform:scale(1)}}
 @keyframes logoFloodlight{0%,34%{filter:brightness(.3)}42%{filter:brightness(.75)}48%{filter:brightness(.42)}61%{filter:brightness(1.18)}69%{filter:brightness(.84)}100%{filter:brightness(1)}}
 @keyframes padelGroundLight{0%,38%{opacity:0;transform:scaleX(.5)}52%{opacity:.35}66%{opacity:.13}100%{opacity:1;transform:scaleX(1)}}
@@ -448,13 +442,13 @@ textarea.c-input{resize:vertical;min-height:72px}
 .padel-lamp{fill:#292720;stroke:#c99a52;stroke-width:1.4;filter:url(#lampGlow);animation:padelLampOn 2.2s .55s ease-out forwards}
 .padel-beam{opacity:0;mix-blend-mode:screen;animation:padelBeamOn 2.2s .62s ease-out forwards}
 .padel-scene-lines{opacity:0;animation:padelSceneOn 1.65s .82s ease-out forwards}
-.padel-ball{fill:#dcec54;stroke:#fff7d6;stroke-width:1;filter:url(#ballGlow);opacity:0;animation:padelBallIn .35s 2.35s forwards}
-.padel-ball-trail{fill:none;stroke:rgba(220,236,84,.26);stroke-width:1.4;stroke-dasharray:3 10;opacity:0;animation:padelBallIn .45s 2.2s forwards}
+.padel-ball{fill:#c49e50;stroke:#fff7e6;stroke-width:1;filter:url(#ballGlow);opacity:0;animation:padelBallIn .35s 2.35s forwards}
+.padel-ball-trail{fill:none;stroke:rgba(196,158,80,.28);stroke-width:1.4;stroke-dasharray:3 10;opacity:0;animation:padelBallIn .45s 2.2s forwards}
 @keyframes padelLampOn{0%,32%{fill:#292720;filter:none}39%{fill:#fff5d4}45%{fill:#554b35}58%,100%{fill:#fff9e8;filter:url(#lampGlow)}}
 @keyframes padelBeamOn{0%,37%{opacity:0}44%{opacity:.65}50%{opacity:.18}63%{opacity:.82}70%{opacity:.45}100%{opacity:.66}}
 @keyframes padelSceneOn{0%,22%{opacity:.16}48%{opacity:.72}55%{opacity:.4}100%{opacity:1}}
 @keyframes padelBallIn{to{opacity:1}}
-@media(prefers-reduced-motion:reduce){.hero-brand-stage::after,.hero-brand,.hero-brand::before,.hero-brand-main,.hero-brand-rule,.hero-brand-sub,.padel-lamp,.padel-beam,.padel-scene-lines,.padel-ball,.padel-ball-trail{animation:none!important}.hero-brand-stage::after{opacity:1}.hero-brand{filter:none}.hero-brand::before{opacity:.7}.hero-brand-main{clip-path:none}.hero-brand-rule{transform:none}.hero-brand-sub{opacity:1;transform:none}.padel-lamp{fill:#fff9e8}.padel-beam{opacity:.55}.padel-scene-lines{opacity:1}.padel-ball,.padel-ball-trail{display:none}}
+@media(prefers-reduced-motion:reduce){.hero-brand-stage::after,.hero-brand,.hero-brand::before,.hero-official-logo,.padel-lamp,.padel-beam,.padel-scene-lines,.padel-ball,.padel-ball-trail{animation:none!important}.hero-brand-stage::after{opacity:1}.hero-brand{filter:none}.hero-brand::before{opacity:.7}.hero-official-logo{clip-path:none}.padel-lamp{fill:#fff9e8}.padel-beam{opacity:.55}.padel-scene-lines{opacity:1}.padel-ball,.padel-ball-trail{display:none}}
 .audience-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
 .method-cta{display:inline-flex;align-items:center;gap:10px;margin-top:24px;padding:13px 20px;border:1px solid rgba(196,158,80,.5);color:#d9b66c;text-decoration:none;font-size:11px;letter-spacing:1.5px;text-transform:uppercase}
 .method-cta:hover{background:rgba(196,158,80,.08)}
@@ -530,13 +524,10 @@ section[id]{scroll-margin-top:86px}
   .methodology-intro{padding:130px 20px 64px}
   .methodology-intro .s-title{font-size:clamp(48px,14vw,68px)}
   .official-hero-logo{width:calc(100vw - 32px);height:auto;margin-bottom:14px}
-  .hero-brand{width:calc(100vw - 24px);padding:26px 4px 18px;margin-bottom:0}
+  .hero-brand{width:calc(100vw - 24px);padding:18px 4px 12px;margin-bottom:0}
   .hero-brand-stage{width:calc(100vw - 8px);margin-bottom:20px}
   .hero-padel-motion{width:118%;left:50%;opacity:.78}
   .padel-beam{opacity:.42}
-  .hero-brand-main{font-size:clamp(104px,31vw,154px);line-height:.74;letter-spacing:2px}
-  .hero-brand-rule{margin:16px auto 12px;height:3px;width:94%}
-  .hero-brand-sub{font-size:clamp(39px,12vw,58px);letter-spacing:4px}
 }
 @media(max-width:390px){
   h2.s-title,.s-title{font-size:48px}
@@ -566,7 +557,7 @@ section[id]{scroll-margin-top:86px}
     </ul>
     <!-- LOGO centré -->
     <a class="nav-logo" href="index.html" aria-label="Accueil HWBT Academy">
-      <span class="brand-mini" aria-hidden="true"><span class="brand-mini-main">HWBT</span><span class="brand-mini-rule"></span><span class="brand-mini-sub">ACADEMY</span></span>
+      <span class="brand-mini" aria-hidden="true"><img src="assets/img/logo-hwbt-transparent.png" alt=""/></span>
     </a>
     <div style="display:flex;align-items:center;gap:18px">
       <ul class="nav-links">
@@ -647,9 +638,7 @@ section[id]{scroll-margin-top:86px}
              <circle class="padel-ball" r="5.5"><animateMotion dur="4.8s" begin="2.35s" repeatCount="indefinite"><mpath href="#padel-rally-path"/></animateMotion></circle>
            </svg>
            <div class="hero-brand" role="img" aria-label="HWBT Academy">
-             <div class="hero-brand-main" aria-hidden="true">HWBT</div>
-             <div class="hero-brand-rule" aria-hidden="true"></div>
-             <div class="hero-brand-sub" aria-hidden="true">ACADEMY</div>
+             <img class="hero-official-logo" src="assets/img/logo-hwbt-transparent.png" alt="" decoding="async"/>
            </div>
          </div>
       </div>
@@ -1117,7 +1106,7 @@ section[id]{scroll-margin-top:86px}
 
   <!-- FOOTER -->
   <footer class="footer">
-    <div class="brand-mini" role="img" aria-label="HWBT Academy"><span class="brand-mini-main" aria-hidden="true">HWBT</span><span class="brand-mini-rule" aria-hidden="true"></span><span class="brand-mini-sub" aria-hidden="true">ACADEMY</span></div>
+    <div class="brand-mini" role="img" aria-label="HWBT Academy"><img src="assets/img/logo-hwbt-transparent.png" alt="" loading="lazy" decoding="async"/></div>
     <div class="f-slogan">Unity Builds Our Legacy</div>
     <div class="f-copy">© 2026 HWBT Academy — Belgium</div>
     <a href="confidentialite.html" style="font-size:11px;color:rgba(237,232,223,.52);text-decoration:none" class="fr-only">Confidentialité</a><a href="confidentialite.html" style="font-size:11px;color:rgba(237,232,223,.52);text-decoration:none" class="en-only">Privacy</a>
