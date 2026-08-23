@@ -53,6 +53,10 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);overf
 .nav-links a:hover{color:var(--gold)}
 .nav-logo{width:200px;height:64px;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}
 .nav-logo img{width:190px;height:64px;object-fit:contain;display:block}
+.brand-mini{display:flex;flex-direction:column;align-items:center;justify-content:center;text-rendering:geometricPrecision;-webkit-font-smoothing:antialiased}
+.brand-mini-main{font-family:'Bebas Neue',sans-serif;font-size:43px;line-height:.72;letter-spacing:1.5px;color:#f7f4ee}
+.brand-mini-rule{width:100%;height:1.5px;margin:6px 0 3px;background:#b87333;transform:scaleX(.88)}
+.brand-mini-sub{font-family:'Bebas Neue',sans-serif;font-size:17px;line-height:.8;letter-spacing:2px;color:#c48245}
 .nav-cta{font-family:'Inter',sans-serif;font-size:9px;letter-spacing:2px;text-transform:uppercase;padding:7px 15px;border:1px solid rgba(196,158,80,.4);color:var(--gold);background:transparent;cursor:pointer;transition:all .2s}
 .nav-cta:hover{background:var(--gold);color:var(--bg)}
 
@@ -418,6 +422,16 @@ textarea.c-input{resize:vertical;min-height:72px}
 .home-page .hero{grid-template-columns:1fr;background:radial-gradient(circle at 50% 42%,rgba(196,158,80,.105),transparent 38%),linear-gradient(180deg,#090806 0%,#050505 100%)}
 .home-page .hero-left{max-width:920px;margin:0 auto;width:100%;text-align:center;align-items:center}
 .official-hero-logo{width:min(660px,92vw);height:auto;object-fit:contain;display:block;margin:0 auto 20px}
+.hero-brand{width:min(720px,92vw);position:relative;margin:0 auto 24px;padding:14px 20px 5px;isolation:isolate;text-align:center;text-rendering:geometricPrecision;-webkit-font-smoothing:antialiased}
+.hero-brand::before{content:'';position:absolute;z-index:-1;inset:-35px -20px;background:radial-gradient(ellipse at center,rgba(184,115,51,.12),transparent 67%);opacity:0;animation:brandGlow 2.2s .35s ease-out forwards;pointer-events:none}
+.hero-brand-main{font-family:'Bebas Neue',sans-serif;font-size:clamp(132px,18vw,250px);font-weight:400;line-height:.72;letter-spacing:clamp(2px,.45vw,8px);color:#f7f4ee;clip-path:inset(0 50% 0 50%);animation:brandReveal .85s .22s cubic-bezier(.2,.75,.2,1) forwards}
+.hero-brand-rule{width:100%;height:clamp(3px,.35vw,5px);margin:clamp(19px,2.2vw,28px) auto clamp(13px,1.5vw,20px);background:linear-gradient(90deg,transparent 0%,#9a592b 8%,#c98a4d 48%,#b87333 72%,transparent 100%);transform:scaleX(0);animation:brandRule 1s .75s cubic-bezier(.2,.8,.2,1) forwards;transform-origin:center}
+.hero-brand-sub{font-family:'Bebas Neue',sans-serif;font-size:clamp(44px,6.2vw,82px);line-height:.86;letter-spacing:clamp(4px,.7vw,10px);color:#b87333;opacity:0;transform:translateY(12px);animation:brandSub .65s 1.12s ease-out forwards}
+@keyframes brandReveal{to{clip-path:inset(0 0 0 0)}}
+@keyframes brandRule{to{transform:scaleX(1)}}
+@keyframes brandSub{to{opacity:1;transform:translateY(0)}}
+@keyframes brandGlow{0%{opacity:0;transform:scale(.8)}55%{opacity:1}100%{opacity:.55;transform:scale(1)}}
+@media(prefers-reduced-motion:reduce){.hero-brand::before,.hero-brand-main,.hero-brand-rule,.hero-brand-sub{animation:none!important}.hero-brand::before{opacity:.55}.hero-brand-main{clip-path:none}.hero-brand-rule{transform:none}.hero-brand-sub{opacity:1;transform:none}}
 .audience-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
 .method-cta{display:inline-flex;align-items:center;gap:10px;margin-top:24px;padding:13px 20px;border:1px solid rgba(196,158,80,.5);color:#d9b66c;text-decoration:none;font-size:11px;letter-spacing:1.5px;text-transform:uppercase}
 .method-cta:hover{background:rgba(196,158,80,.08)}
@@ -493,6 +507,10 @@ section[id]{scroll-margin-top:86px}
   .methodology-intro{padding:130px 20px 64px}
   .methodology-intro .s-title{font-size:clamp(48px,14vw,68px)}
   .official-hero-logo{width:calc(100vw - 32px);height:auto;margin-bottom:14px}
+  .hero-brand{width:calc(100vw - 24px);padding:10px 4px 2px;margin-bottom:20px}
+  .hero-brand-main{font-size:clamp(104px,31vw,154px);line-height:.74;letter-spacing:2px}
+  .hero-brand-rule{margin:16px auto 12px;height:3px;width:94%}
+  .hero-brand-sub{font-size:clamp(39px,12vw,58px);letter-spacing:4px}
 }
 @media(max-width:390px){
   h2.s-title,.s-title{font-size:48px}
@@ -522,7 +540,7 @@ section[id]{scroll-margin-top:86px}
     </ul>
     <!-- LOGO centré -->
     <a class="nav-logo" href="index.html" aria-label="Accueil HWBT Academy">
-      <img src="assets/img/logo-hwbt-clean-v3.webp" alt="HWBT Academy"/>
+      <span class="brand-mini" aria-hidden="true"><span class="brand-mini-main">HWBT</span><span class="brand-mini-rule"></span><span class="brand-mini-sub">ACADEMY</span></span>
     </a>
     <div style="display:flex;align-items:center;gap:18px">
       <ul class="nav-links">
@@ -570,7 +588,11 @@ section[id]{scroll-margin-top:86px}
       <div class="hero-eyebrow fr-only">Académie de Padel — Argayon (Nivelles)</div>
       <div class="hero-eyebrow en-only">Padel Academy — Argayon (Nivelles)</div>
       <div class="hero-logo-wrap">
-         <img class="official-hero-logo" src="assets/img/logo-hwbt-clean-v3.webp" alt="HWBT Academy" fetchpriority="high"/>
+         <div class="hero-brand" role="img" aria-label="HWBT Academy">
+           <div class="hero-brand-main" aria-hidden="true">HWBT</div>
+           <div class="hero-brand-rule" aria-hidden="true"></div>
+           <div class="hero-brand-sub" aria-hidden="true">ACADEMY</div>
+         </div>
       </div>
       <h1 class="hero-motto fr-only">Coaching padel basé sur ton profil, ta méthode et ta progression mesurable.</h1>
       <h1 class="hero-motto en-only">Padel coaching built on your profile, your method and measurable progress.</h1>
@@ -1036,7 +1058,7 @@ section[id]{scroll-margin-top:86px}
 
   <!-- FOOTER -->
   <footer class="footer">
-    <img class="footer-logo" src="assets/img/logo-hwbt-clean-v3.webp" alt="HWBT Academy"/>
+    <div class="brand-mini" role="img" aria-label="HWBT Academy"><span class="brand-mini-main" aria-hidden="true">HWBT</span><span class="brand-mini-rule" aria-hidden="true"></span><span class="brand-mini-sub" aria-hidden="true">ACADEMY</span></div>
     <div class="f-slogan">Unity Builds Our Legacy</div>
     <div class="f-copy">© 2026 HWBT Academy — Belgium</div>
     <a href="confidentialite.html" style="font-size:11px;color:rgba(237,232,223,.52);text-decoration:none" class="fr-only">Confidentialité</a><a href="confidentialite.html" style="font-size:11px;color:rgba(237,232,223,.52);text-decoration:none" class="en-only">Privacy</a>
