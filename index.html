@@ -422,32 +422,39 @@ textarea.c-input{resize:vertical;min-height:72px}
 .home-page .hero{grid-template-columns:1fr;background:radial-gradient(circle at 50% 42%,rgba(196,158,80,.105),transparent 38%),linear-gradient(180deg,#090806 0%,#050505 100%)}
 .home-page .hero-left{max-width:920px;margin:0 auto;width:100%;text-align:center;align-items:center}
 .official-hero-logo{width:min(660px,92vw);height:auto;object-fit:contain;display:block;margin:0 auto 20px}
-.hero-brand-stage{width:min(880px,96vw);position:relative;margin:0 auto 24px;isolation:isolate}
-.hero-brand{width:min(720px,92vw);position:relative;z-index:2;margin:0 auto;padding:14px 20px 5px;text-align:center;text-rendering:geometricPrecision;-webkit-font-smoothing:antialiased}
-.hero-brand::before{content:'';position:absolute;z-index:-1;inset:-35px -20px;background:radial-gradient(ellipse at center,rgba(184,115,51,.12),transparent 67%);opacity:0;animation:brandGlow 2.2s .35s ease-out forwards;pointer-events:none}
-.hero-brand-main{font-family:'Bebas Neue',sans-serif;font-size:clamp(132px,18vw,250px);font-weight:400;line-height:.72;letter-spacing:clamp(2px,.45vw,8px);color:#f7f4ee;clip-path:inset(0 50% 0 50%);animation:brandReveal .85s .22s cubic-bezier(.2,.75,.2,1) forwards}
+.hero-brand-stage{width:min(920px,98vw);position:relative;margin:0 auto 24px;isolation:isolate;overflow:hidden;border-radius:2px;background:radial-gradient(ellipse at 50% 82%,rgba(154,89,43,.11),transparent 48%)}
+.hero-brand-stage::after{content:'';position:absolute;z-index:1;left:18%;right:18%;bottom:3%;height:28%;background:radial-gradient(ellipse at center,rgba(240,208,143,.18),rgba(184,115,51,.06) 43%,transparent 72%);filter:blur(15px);opacity:0;animation:padelGroundLight 1.8s 1.15s ease-out forwards;pointer-events:none}
+.hero-brand{width:min(720px,92vw);position:relative;z-index:3;margin:0 auto;padding:36px 20px 24px;text-align:center;text-rendering:geometricPrecision;-webkit-font-smoothing:antialiased;filter:brightness(.32);animation:logoFloodlight 2.1s .65s cubic-bezier(.22,.75,.24,1) forwards}
+.hero-brand::before{content:'';position:absolute;z-index:-1;inset:-52px -35px;background:radial-gradient(ellipse at center,rgba(255,238,197,.26),rgba(184,115,51,.10) 42%,transparent 70%);opacity:0;animation:brandGlow 2.2s 1.05s ease-out forwards;pointer-events:none}
+.hero-brand-main{font-family:'Bebas Neue',sans-serif;font-size:clamp(132px,18vw,250px);font-weight:400;line-height:.72;letter-spacing:clamp(2px,.45vw,8px);color:#fffdf8;clip-path:inset(0 50% 0 50%);text-shadow:0 0 1px #fff,0 0 24px rgba(255,244,214,.12);animation:brandReveal .85s .22s cubic-bezier(.2,.75,.2,1) forwards}
 .hero-brand-rule{width:100%;height:clamp(3px,.35vw,5px);margin:clamp(19px,2.2vw,28px) auto clamp(13px,1.5vw,20px);background:linear-gradient(90deg,transparent 0%,#9a592b 8%,#c98a4d 48%,#b87333 72%,transparent 100%);transform:scaleX(0);animation:brandRule 1s .75s cubic-bezier(.2,.8,.2,1) forwards;transform-origin:center}
 .hero-brand-sub{font-family:'Bebas Neue',sans-serif;font-size:clamp(44px,6.2vw,82px);line-height:.86;letter-spacing:clamp(4px,.7vw,10px);color:#b87333;opacity:0;transform:translateY(12px);animation:brandSub .65s 1.12s ease-out forwards}
 @keyframes brandReveal{to{clip-path:inset(0 0 0 0)}}
 @keyframes brandRule{to{transform:scaleX(1)}}
 @keyframes brandSub{to{opacity:1;transform:translateY(0)}}
-@keyframes brandGlow{0%{opacity:0;transform:scale(.8)}55%{opacity:1}100%{opacity:.55;transform:scale(1)}}
-.hero-padel-motion{position:absolute;z-index:1;inset:50% auto auto 50%;width:100%;height:auto;transform:translate(-50%,-50%);overflow:visible;pointer-events:none;opacity:.72}
-.padel-court-line{fill:none;stroke:rgba(184,115,51,.28);stroke-width:1.5;stroke-dasharray:1400;stroke-dashoffset:1400;animation:padelCourtDraw 1.7s .4s ease-out forwards}
-.padel-net{stroke:rgba(247,244,238,.2);stroke-width:2;stroke-dasharray:8 7;opacity:0;animation:padelNetIn .7s 1s forwards}
-.padel-flight{fill:none;stroke:rgba(204,145,78,.36);stroke-width:1.4;stroke-dasharray:6 10;opacity:0;animation:padelFlightIn .6s 1.45s forwards}
-.padel-ball{fill:#d9e85d;stroke:#f7f4ee;stroke-width:1.5;filter:url(#ballGlow);opacity:0;animation:padelBallIn .25s 1.55s forwards}
-.padel-racket{fill:rgba(5,5,5,.9);stroke:#b87333;stroke-width:2;transform-box:fill-box;transform-origin:center}
-.padel-racket-detail{fill:none;stroke:rgba(247,244,238,.25);stroke-width:1}
-.padel-racket-left{animation:padelSwingLeft 5.2s 1.45s ease-in-out infinite}
-.padel-racket-right{animation:padelSwingRight 5.2s 1.45s ease-in-out infinite}
-@keyframes padelCourtDraw{to{stroke-dashoffset:0}}
-@keyframes padelNetIn{to{opacity:1}}
-@keyframes padelFlightIn{to{opacity:1}}
+@keyframes brandGlow{0%{opacity:0;transform:scale(.78)}45%{opacity:.16}58%{opacity:.78}64%{opacity:.36}76%{opacity:1}100%{opacity:.72;transform:scale(1)}}
+@keyframes logoFloodlight{0%,34%{filter:brightness(.3)}42%{filter:brightness(.75)}48%{filter:brightness(.42)}61%{filter:brightness(1.18)}69%{filter:brightness(.84)}100%{filter:brightness(1)}}
+@keyframes padelGroundLight{0%,38%{opacity:0;transform:scaleX(.5)}52%{opacity:.35}66%{opacity:.13}100%{opacity:1;transform:scaleX(1)}}
+.hero-padel-motion{position:absolute;z-index:1;inset:50% auto auto 50%;width:100%;height:100%;transform:translate(-50%,-50%);overflow:hidden;pointer-events:none;opacity:.9}
+.padel-night{fill:url(#padelNight)}
+.padel-court-floor{fill:url(#courtFloor);stroke:rgba(184,115,51,.32);stroke-width:1.5}
+.padel-glass{fill:rgba(16,20,21,.38);stroke:rgba(214,220,215,.16);stroke-width:1.4}
+.padel-glass-frame,.padel-cage,.padel-court-mark,.padel-net{fill:none;stroke-linecap:round;stroke-linejoin:round}
+.padel-glass-frame{stroke:rgba(184,115,51,.34);stroke-width:1.8}
+.padel-cage{stroke:rgba(210,215,211,.13);stroke-width:1}
+.padel-court-mark{stroke:rgba(225,192,126,.32);stroke-width:1.4}
+.padel-net{stroke:rgba(226,220,207,.32);stroke-width:1.5;stroke-dasharray:4 4}
+.padel-light-pole{fill:none;stroke:rgba(184,115,51,.42);stroke-width:3}
+.padel-lamp{fill:#292720;stroke:#c99a52;stroke-width:1.4;filter:url(#lampGlow);animation:padelLampOn 2.2s .55s ease-out forwards}
+.padel-beam{opacity:0;mix-blend-mode:screen;animation:padelBeamOn 2.2s .62s ease-out forwards}
+.padel-scene-lines{opacity:0;animation:padelSceneOn 1.65s .82s ease-out forwards}
+.padel-ball{fill:#dcec54;stroke:#fff7d6;stroke-width:1;filter:url(#ballGlow);opacity:0;animation:padelBallIn .35s 2.35s forwards}
+.padel-ball-trail{fill:none;stroke:rgba(220,236,84,.26);stroke-width:1.4;stroke-dasharray:3 10;opacity:0;animation:padelBallIn .45s 2.2s forwards}
+@keyframes padelLampOn{0%,32%{fill:#292720;filter:none}39%{fill:#fff5d4}45%{fill:#554b35}58%,100%{fill:#fff9e8;filter:url(#lampGlow)}}
+@keyframes padelBeamOn{0%,37%{opacity:0}44%{opacity:.65}50%{opacity:.18}63%{opacity:.82}70%{opacity:.45}100%{opacity:.66}}
+@keyframes padelSceneOn{0%,22%{opacity:.16}48%{opacity:.72}55%{opacity:.4}100%{opacity:1}}
 @keyframes padelBallIn{to{opacity:1}}
-@keyframes padelSwingLeft{0%,6%,100%{transform:rotate(-10deg)}9%{transform:rotate(15deg)}14%{transform:rotate(-10deg)}}
-@keyframes padelSwingRight{0%,48%,100%{transform:rotate(10deg)}52%{transform:rotate(-15deg)}57%{transform:rotate(10deg)}}
-@media(prefers-reduced-motion:reduce){.hero-brand::before,.hero-brand-main,.hero-brand-rule,.hero-brand-sub,.padel-court-line,.padel-net,.padel-flight,.padel-ball,.padel-racket{animation:none!important}.hero-brand::before{opacity:.55}.hero-brand-main{clip-path:none}.hero-brand-rule{transform:none}.hero-brand-sub{opacity:1;transform:none}.padel-court-line{stroke-dashoffset:0}.padel-net{opacity:1}.padel-flight,.padel-ball{display:none}}
+@media(prefers-reduced-motion:reduce){.hero-brand-stage::after,.hero-brand,.hero-brand::before,.hero-brand-main,.hero-brand-rule,.hero-brand-sub,.padel-lamp,.padel-beam,.padel-scene-lines,.padel-ball,.padel-ball-trail{animation:none!important}.hero-brand-stage::after{opacity:1}.hero-brand{filter:none}.hero-brand::before{opacity:.7}.hero-brand-main{clip-path:none}.hero-brand-rule{transform:none}.hero-brand-sub{opacity:1;transform:none}.padel-lamp{fill:#fff9e8}.padel-beam{opacity:.55}.padel-scene-lines{opacity:1}.padel-ball,.padel-ball-trail{display:none}}
 .audience-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
 .method-cta{display:inline-flex;align-items:center;gap:10px;margin-top:24px;padding:13px 20px;border:1px solid rgba(196,158,80,.5);color:#d9b66c;text-decoration:none;font-size:11px;letter-spacing:1.5px;text-transform:uppercase}
 .method-cta:hover{background:rgba(196,158,80,.08)}
@@ -523,10 +530,10 @@ section[id]{scroll-margin-top:86px}
   .methodology-intro{padding:130px 20px 64px}
   .methodology-intro .s-title{font-size:clamp(48px,14vw,68px)}
   .official-hero-logo{width:calc(100vw - 32px);height:auto;margin-bottom:14px}
-  .hero-brand{width:calc(100vw - 24px);padding:10px 4px 2px;margin-bottom:20px}
+  .hero-brand{width:calc(100vw - 24px);padding:26px 4px 18px;margin-bottom:0}
   .hero-brand-stage{width:calc(100vw - 8px);margin-bottom:20px}
-  .hero-padel-motion{width:112%;opacity:.58}
-  .padel-racket{display:none}
+  .hero-padel-motion{width:118%;left:50%;opacity:.78}
+  .padel-beam{opacity:.42}
   .hero-brand-main{font-size:clamp(104px,31vw,154px);line-height:.74;letter-spacing:2px}
   .hero-brand-rule{margin:16px auto 12px;height:3px;width:94%}
   .hero-brand-sub{font-size:clamp(39px,12vw,58px);letter-spacing:4px}
@@ -608,14 +615,36 @@ section[id]{scroll-margin-top:86px}
       <div class="hero-eyebrow en-only">Padel Academy — Argayon (Nivelles)</div>
       <div class="hero-logo-wrap">
          <div class="hero-brand-stage">
-           <svg class="hero-padel-motion" viewBox="0 0 900 470" aria-hidden="true">
-             <defs><filter id="ballGlow" x="-300%" y="-300%" width="700%" height="700%"><feGaussianBlur stdDeviation="4" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
-             <path class="padel-court-line" d="M104 48 L796 48 L862 422 L38 422 Z M450 48 L450 422 M71 235 L829 235 M86 138 L814 138 M55 330 L845 330"/>
-             <line class="padel-net" x1="71" y1="235" x2="829" y2="235"/>
-             <path id="padel-rally-path" class="padel-flight" d="M112 338 Q260 72 450 202 T788 105 Q716 360 452 268 T112 338"/>
-             <g transform="translate(80 332) rotate(-10)"><g class="padel-racket padel-racket-left"><ellipse cx="0" cy="0" rx="25" ry="34"/><path d="M0 32 L0 70" stroke="#b87333" stroke-width="8" stroke-linecap="round"/><path class="padel-racket-detail" d="M-15 -16 H15 M-19 -4 H19 M-19 8 H19 M-13 20 H13 M-10 -27 V27 M0 -32 V32 M10 -27 V27"/></g></g>
-             <g transform="translate(820 98) rotate(10)"><g class="padel-racket padel-racket-right"><ellipse cx="0" cy="0" rx="25" ry="34"/><path d="M0 32 L0 70" stroke="#b87333" stroke-width="8" stroke-linecap="round"/><path class="padel-racket-detail" d="M-15 -16 H15 M-19 -4 H19 M-19 8 H19 M-13 20 H13 M-10 -27 V27 M0 -32 V32 M10 -27 V27"/></g></g>
-             <circle class="padel-ball" r="7"><animateMotion dur="5.2s" begin="1.55s" repeatCount="indefinite" rotate="auto"><mpath href="#padel-rally-path"/></animateMotion></circle>
+           <svg class="hero-padel-motion" viewBox="0 0 900 500" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+             <defs>
+               <linearGradient id="padelNight" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#020202"/><stop offset=".56" stop-color="#070706"/><stop offset="1" stop-color="#0d0b08"/></linearGradient>
+               <linearGradient id="courtFloor" x1=".5" y1="0" x2=".5" y2="1"><stop offset="0" stop-color="#151613" stop-opacity=".25"/><stop offset="1" stop-color="#21180f" stop-opacity=".78"/></linearGradient>
+               <linearGradient id="beamLeft" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fffbe9" stop-opacity=".72"/><stop offset=".42" stop-color="#eacb8d" stop-opacity=".20"/><stop offset="1" stop-color="#b87333" stop-opacity="0"/></linearGradient>
+               <linearGradient id="beamRight" x1="1" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fffbe9" stop-opacity=".72"/><stop offset=".42" stop-color="#eacb8d" stop-opacity=".20"/><stop offset="1" stop-color="#b87333" stop-opacity="0"/></linearGradient>
+               <filter id="lampGlow" x="-400%" y="-400%" width="900%" height="900%"><feGaussianBlur stdDeviation="6" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+               <filter id="ballGlow" x="-300%" y="-300%" width="700%" height="700%"><feGaussianBlur stdDeviation="3" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+               <pattern id="padelMesh" width="12" height="12" patternUnits="userSpaceOnUse"><path d="M0 0L12 12M12 0L0 12" stroke="rgba(220,220,210,.09)" stroke-width=".7"/></pattern>
+             </defs>
+             <rect class="padel-night" width="900" height="500"/>
+             <path class="padel-beam" fill="url(#beamLeft)" d="M91 78 L342 482 L540 482 L114 78 Z"/>
+             <path class="padel-beam" fill="url(#beamRight)" d="M809 78 L558 482 L360 482 L786 78 Z"/>
+             <g class="padel-scene-lines">
+               <path class="padel-court-floor" d="M274 270 L626 270 L790 488 L110 488 Z"/>
+               <path class="padel-glass" d="M274 118 H626 V270 H274 Z"/>
+               <path class="padel-glass" d="M110 196 L274 118 V270 L110 488 Z M626 118 L790 196 V488 L626 270 Z"/>
+               <path fill="url(#padelMesh)" opacity=".7" d="M110 196 L274 118 V270 L110 488 Z M626 118 L790 196 V488 L626 270 Z"/>
+               <path class="padel-glass-frame" d="M110 488V196L274 118H626L790 196V488M274 118V270L110 488M626 118V270L790 488M362 118V270M450 118V270M538 118V270M192 157V378M708 157V378"/>
+               <path class="padel-cage" d="M124 220L261 154M119 250L265 180M114 281L269 207M109 313L272 235M776 220L639 154M781 250L635 180M786 281L631 207M791 313L628 235"/>
+               <path class="padel-court-mark" d="M274 270H626M110 488H790M450 270V488M210 354H690M274 270L110 488M626 270L790 488"/>
+               <path class="padel-net" d="M210 354H690M210 354V374M690 354V374M216 360H684M222 366H678M228 372H672"/>
+             </g>
+             <g>
+               <path class="padel-light-pole" d="M103 80V316M797 80V316"/>
+               <g transform="translate(79 56)"><rect class="padel-lamp" x="0" y="0" width="23" height="12" rx="2"/><rect class="padel-lamp" x="28" y="0" width="23" height="12" rx="2"/></g>
+               <g transform="translate(770 56)"><rect class="padel-lamp" x="0" y="0" width="23" height="12" rx="2"/><rect class="padel-lamp" x="28" y="0" width="23" height="12" rx="2"/></g>
+             </g>
+             <path id="padel-rally-path" class="padel-ball-trail" d="M235 390 Q330 238 448 318 T666 238 Q638 390 503 340 T235 390"/>
+             <circle class="padel-ball" r="5.5"><animateMotion dur="4.8s" begin="2.35s" repeatCount="indefinite"><mpath href="#padel-rally-path"/></animateMotion></circle>
            </svg>
            <div class="hero-brand" role="img" aria-label="HWBT Academy">
              <div class="hero-brand-main" aria-hidden="true">HWBT</div>
