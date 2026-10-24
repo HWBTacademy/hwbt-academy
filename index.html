@@ -280,7 +280,7 @@ h2.s-title,.s-title{font-family:'Bebas Neue',sans-serif;font-size:40px;letter-sp
    SHOP
 ══════════════════════════════ */
 .shop-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-.shop-item{border:1px solid rgba(196,158,80,.1);padding:20px 16px;background:#0d0c0a;transition:border-color .2s}
+.shop-item{border:1px solid rgba(196,158,80,.1);padding:20px 16px;background:#0d0c0a;transition:border-color .2s;display:flex;flex-direction:column}
 .shop-item:hover{border-color:rgba(196,158,80,.28)}
 .shop-name{font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:1.5px;color:var(--text);margin-bottom:5px}
 .shop-slogan{font-family:'Caveat',cursive;font-size:11px;color:rgba(196,158,80,.38);margin-bottom:12px}
@@ -455,9 +455,9 @@ textarea.c-input{resize:vertical;min-height:72px}
 .method-cta:hover{background:rgba(196,158,80,.08)}
 section[id]{scroll-margin-top:86px}
 .home-page #boussole,.home-page #pour-qui,.home-page #profils,.home-page #plateforme,.home-page .manifesto{display:none!important}
-.shop-media{position:relative;border:1px solid rgba(196,158,80,.18);margin-bottom:14px;background:#090806;aspect-ratio:4/3;overflow:hidden}
+.shop-media{position:relative;border:1px solid rgba(196,158,80,.18);margin-bottom:14px;background:radial-gradient(circle at 50% 42%,rgba(196,158,80,.09),transparent 56%),#090806;aspect-ratio:1/1;overflow:hidden}
 .shop-media img{width:100%;height:100%;object-fit:contain;display:block}
-.shop-order{display:flex;align-items:center;justify-content:center;width:100%;margin-top:14px;padding:12px 10px;border:1px solid rgba(196,158,80,.45);color:#d9b66c;text-decoration:none;font-family:'Inter',sans-serif;font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;transition:background .2s,color .2s}
+.shop-order{display:flex;align-items:center;justify-content:center;width:100%;margin-top:auto;padding:12px 10px;border:1px solid rgba(196,158,80,.45);color:#d9b66c;text-decoration:none;font-family:'Inter',sans-serif;font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;transition:background .2s,color .2s}
 .shop-order:hover{background:#c49e50;color:#090806}
 @media(max-width:768px){
   body{background:#050505;color:#fff}
@@ -906,75 +906,73 @@ section[id]{scroll-margin-top:86px}
   <section class="section" id="shop">
     <div class="s-label reveal fr-only">Shop</div>
     <div class="s-label reveal en-only">Shop</div>
-    <h2 class="s-title reveal fr-only">T-shirts HWBT</h2>
-    <h2 class="s-title reveal en-only">HWBT T-shirts</h2>
+    <h2 class="s-title reveal">HWBT Sportswear</h2>
     <div class="shop-grid reveal">
 
-
-      <!-- T-shirt 1 -->
       <div class="shop-item">
-        <div class="shop-name fr-only">T-shirt #1</div>
-        <div class="shop-name en-only">T-shirt #1</div>
-        <div class="shop-slogan fr-only">Blade × HWBT Academy</div>
-        <div class="shop-slogan en-only">Blade × HWBT Academy</div>
-        <div class="shop-media">
-          <img src="assets/img/tshirt1.webp" alt="T-shirt #1 — Blade × HWBT Academy" loading="lazy" decoding="async"/>
-          <div style="position:absolute;top:6px;left:6px;width:10px;height:10px;border-top:1px solid rgba(196,158,80,.3);border-left:1px solid rgba(196,158,80,.3)"></div>
-          <div style="position:absolute;top:6px;right:6px;width:10px;height:10px;border-top:1px solid rgba(196,158,80,.3);border-right:1px solid rgba(196,158,80,.3)"></div>
-          <div style="position:absolute;bottom:6px;left:6px;width:10px;height:10px;border-bottom:1px solid rgba(196,158,80,.3);border-left:1px solid rgba(196,158,80,.3)"></div>
-          <div style="position:absolute;bottom:6px;right:6px;width:10px;height:10px;border-bottom:1px solid rgba(196,158,80,.3);border-right:1px solid rgba(196,158,80,.3)"></div>
-        </div>
-        <div class="shop-price fr-only">15€</div>
-        <div class="shop-price en-only">15€</div>
-        <div class="shop-note fr-only">Personnalisation Blade · Couleurs HWBT</div>
-        <div class="shop-note en-only">Blade customization · HWBT colors</div>
-        <div class="shop-note" style="margin-top:6px"><span style="font-family:'Caveat',cursive;font-size:11px;color:rgba(196,158,80,.35)">Noir · Or · Blanc cassé</span></div>
+        <div class="shop-name fr-only">T-shirt coton</div><div class="shop-name en-only">Cotton T-shirt</div>
+        <div class="shop-slogan">HWBT Sportswear · Octopus</div>
+        <div class="shop-media"><img src="assets/img/sportswear-tshirt-coton.webp" alt="T-shirt coton HWBT Sportswear vert olive" loading="lazy" decoding="async"/></div>
+        <div class="shop-price">11€</div>
+        <div class="shop-note fr-only">Coton peigné 180 g/m² · Doux et confortable</div><div class="shop-note en-only">Combed cotton 180 g/m² · Soft and comfortable</div>
+        <div class="shop-note fr-only">Vert olive · Pieuvre bronze</div><div class="shop-note en-only">Olive green · Bronze octopus</div>
         <div class="shop-note fr-only">Tailles et disponibilité sur demande</div><div class="shop-note en-only">Sizes and availability on request</div>
-        <a class="shop-order" href="https://wa.me/32498088771?text=Bonjour%20Thomas%2C%20je%20souhaite%20commander%20le%20T-shirt%20HWBT%20n%C2%B01." target="_blank" rel="noopener"><span class="fr-only">Commander sur WhatsApp</span><span class="en-only">Order on WhatsApp</span></a>
+        <a class="shop-order" href="https://wa.me/32498088771?text=Bonjour%20Thomas%2C%20je%20souhaite%20commander%20le%20T-shirt%20coton%20HWBT." target="_blank" rel="noopener"><span class="fr-only">Commander sur WhatsApp</span><span class="en-only">Order on WhatsApp</span></a>
       </div>
 
-      <!-- T-shirt 2 -->
       <div class="shop-item">
-        <div class="shop-name fr-only">T-shirt #2</div>
-        <div class="shop-name en-only">T-shirt #2</div>
-        <div class="shop-slogan fr-only">Blade × HWBT Academy</div>
-        <div class="shop-slogan en-only">Blade × HWBT Academy</div>
-        <div class="shop-media">
-          <img src="assets/img/tshirt2.webp" alt="T-shirt #2 — Blade × HWBT Academy" loading="lazy" decoding="async"/>
-          <div style="position:absolute;top:6px;left:6px;width:10px;height:10px;border-top:1px solid rgba(196,158,80,.3);border-left:1px solid rgba(196,158,80,.3)"></div>
-          <div style="position:absolute;top:6px;right:6px;width:10px;height:10px;border-top:1px solid rgba(196,158,80,.3);border-right:1px solid rgba(196,158,80,.3)"></div>
-          <div style="position:absolute;bottom:6px;left:6px;width:10px;height:10px;border-bottom:1px solid rgba(196,158,80,.3);border-left:1px solid rgba(196,158,80,.3)"></div>
-          <div style="position:absolute;bottom:6px;right:6px;width:10px;height:10px;border-bottom:1px solid rgba(196,158,80,.3);border-right:1px solid rgba(196,158,80,.3)"></div>
-        </div>
-        <div class="shop-price fr-only">15€</div>
-        <div class="shop-price en-only">15€</div>
-        <div class="shop-note fr-only">Personnalisation Blade · Couleurs HWBT</div>
-        <div class="shop-note en-only">Blade customization · HWBT colors</div>
-        <div class="shop-note" style="margin-top:6px"><span style="font-family:'Caveat',cursive;font-size:11px;color:rgba(196,158,80,.35)">Noir · Or · Blanc cassé</span></div>
+        <div class="shop-name fr-only">T-shirt compétition</div><div class="shop-name en-only">Competition T-shirt</div>
+        <div class="shop-slogan">HWBT Sportswear · Octopus</div>
+        <div class="shop-media"><img src="assets/img/sportswear-tshirt-competition.webp" alt="T-shirt technique de compétition HWBT Sportswear noir" loading="lazy" decoding="async"/></div>
+        <div class="shop-price">18€</div>
+        <div class="shop-note fr-only">Léger et respirant · Personnalisable</div><div class="shop-note en-only">Lightweight and breathable · Customizable</div>
+        <div class="shop-note fr-only">Nom et drapeau inclus</div><div class="shop-note en-only">Name and flag included</div>
         <div class="shop-note fr-only">Tailles et disponibilité sur demande</div><div class="shop-note en-only">Sizes and availability on request</div>
-        <a class="shop-order" href="https://wa.me/32498088771?text=Bonjour%20Thomas%2C%20je%20souhaite%20commander%20le%20T-shirt%20HWBT%20n%C2%B02." target="_blank" rel="noopener"><span class="fr-only">Commander sur WhatsApp</span><span class="en-only">Order on WhatsApp</span></a>
+        <a class="shop-order" href="https://wa.me/32498088771?text=Bonjour%20Thomas%2C%20je%20souhaite%20commander%20le%20T-shirt%20competition%20HWBT." target="_blank" rel="noopener"><span class="fr-only">Commander sur WhatsApp</span><span class="en-only">Order on WhatsApp</span></a>
       </div>
 
-      <!-- T-shirt 3 -->
       <div class="shop-item">
-        <div class="shop-name fr-only">T-shirt #3</div>
-        <div class="shop-name en-only">T-shirt #3</div>
-        <div class="shop-slogan fr-only">Blade × HWBT Academy</div>
-        <div class="shop-slogan en-only">Blade × HWBT Academy</div>
-        <div class="shop-media">
-          <img src="assets/img/tshirt3.webp" alt="T-shirt #3 — Blade × HWBT Academy" loading="lazy" decoding="async"/>
-          <div style="position:absolute;top:6px;left:6px;width:10px;height:10px;border-top:1px solid rgba(196,158,80,.3);border-left:1px solid rgba(196,158,80,.3)"></div>
-          <div style="position:absolute;top:6px;right:6px;width:10px;height:10px;border-top:1px solid rgba(196,158,80,.3);border-right:1px solid rgba(196,158,80,.3)"></div>
-          <div style="position:absolute;bottom:6px;left:6px;width:10px;height:10px;border-bottom:1px solid rgba(196,158,80,.3);border-left:1px solid rgba(196,158,80,.3)"></div>
-          <div style="position:absolute;bottom:6px;right:6px;width:10px;height:10px;border-bottom:1px solid rgba(196,158,80,.3);border-right:1px solid rgba(196,158,80,.3)"></div>
-        </div>
-        <div class="shop-price fr-only">15€</div>
-        <div class="shop-price en-only">15€</div>
-        <div class="shop-note fr-only">Personnalisation Blade · Couleurs HWBT</div>
-        <div class="shop-note en-only">Blade customization · HWBT colors</div>
-        <div class="shop-note" style="margin-top:6px"><span style="font-family:'Caveat',cursive;font-size:11px;color:rgba(196,158,80,.35)">Noir · Or · Blanc cassé</span></div>
+        <div class="shop-name fr-only">T-shirt entraînement</div><div class="shop-name en-only">Training T-shirt</div>
+        <div class="shop-slogan">HWBT Sportswear · Octopus</div>
+        <div class="shop-media"><img src="assets/img/sportswear-tshirt-entrainement.webp" alt="T-shirt technique d'entraînement HWBT Sportswear rouge" loading="lazy" decoding="async"/></div>
+        <div class="shop-price">12€</div>
+        <div class="shop-note fr-only">Technique, léger et respirant</div><div class="shop-note en-only">Technical, lightweight and breathable</div>
+        <div class="shop-note fr-only">Rouge Academy · Logo Argayon</div><div class="shop-note en-only">Academy red · Argayon logo</div>
         <div class="shop-note fr-only">Tailles et disponibilité sur demande</div><div class="shop-note en-only">Sizes and availability on request</div>
-        <a class="shop-order" href="https://wa.me/32498088771?text=Bonjour%20Thomas%2C%20je%20souhaite%20commander%20le%20T-shirt%20HWBT%20n%C2%B03." target="_blank" rel="noopener"><span class="fr-only">Commander sur WhatsApp</span><span class="en-only">Order on WhatsApp</span></a>
+        <a class="shop-order" href="https://wa.me/32498088771?text=Bonjour%20Thomas%2C%20je%20souhaite%20commander%20le%20T-shirt%20entrainement%20HWBT." target="_blank" rel="noopener"><span class="fr-only">Commander sur WhatsApp</span><span class="en-only">Order on WhatsApp</span></a>
+      </div>
+
+      <div class="shop-item">
+        <div class="shop-name fr-only">Short technique</div><div class="shop-name en-only">Technical shorts</div>
+        <div class="shop-slogan">HWBT Sportswear · Octopus</div>
+        <div class="shop-media"><img src="assets/img/sportswear-short-technique.webp" alt="Short technique HWBT Sportswear noir" loading="lazy" decoding="async"/></div>
+        <div class="shop-price">18€</div>
+        <div class="shop-note fr-only">Léger · Poches pour balles</div><div class="shop-note en-only">Lightweight · Ball pockets</div>
+        <div class="shop-note fr-only">Noir · Logos HWBT et pieuvre</div><div class="shop-note en-only">Black · HWBT and octopus logos</div>
+        <div class="shop-note fr-only">Tailles et disponibilité sur demande</div><div class="shop-note en-only">Sizes and availability on request</div>
+        <a class="shop-order" href="https://wa.me/32498088771?text=Bonjour%20Thomas%2C%20je%20souhaite%20commander%20le%20short%20technique%20HWBT." target="_blank" rel="noopener"><span class="fr-only">Commander sur WhatsApp</span><span class="en-only">Order on WhatsApp</span></a>
+      </div>
+
+      <div class="shop-item">
+        <div class="shop-name fr-only">Hoodie Academy</div><div class="shop-name en-only">Academy hoodie</div>
+        <div class="shop-slogan">HWBT Sportswear · Octopus</div>
+        <div class="shop-media"><img src="assets/img/sportswear-hoodie.webp" alt="Hoodie noir HWBT Academy avec pieuvre bronze" loading="lazy" decoding="async"/></div>
+        <div class="shop-price">20€</div>
+        <div class="shop-note fr-only">Molleton 280 g/m² · Chaleur et confort</div><div class="shop-note en-only">Fleece 280 g/m² · Warm and comfortable</div>
+        <div class="shop-note fr-only">Noir · Pieuvre bronze sur la manche</div><div class="shop-note en-only">Black · Bronze octopus on the sleeve</div>
+        <div class="shop-note fr-only">Tailles et disponibilité sur demande</div><div class="shop-note en-only">Sizes and availability on request</div>
+        <a class="shop-order" href="https://wa.me/32498088771?text=Bonjour%20Thomas%2C%20je%20souhaite%20commander%20le%20hoodie%20HWBT%20Academy." target="_blank" rel="noopener"><span class="fr-only">Commander sur WhatsApp</span><span class="en-only">Order on WhatsApp</span></a>
+      </div>
+
+      <div class="shop-item">
+        <div class="shop-name fr-only">Pantalon coton</div><div class="shop-name en-only">Cotton joggers</div>
+        <div class="shop-slogan">HWBT Sportswear · Octopus</div>
+        <div class="shop-media"><img src="assets/img/sportswear-pantalon-coton.webp" alt="Pantalon coton noir HWBT Sportswear avec pieuvre bronze" loading="lazy" decoding="async"/></div>
+        <div class="shop-price">20€</div>
+        <div class="shop-note fr-only">Molleton 280 g/m² · Poches zippées</div><div class="shop-note en-only">Fleece 280 g/m² · Zipped pockets</div>
+        <div class="shop-note fr-only">Noir · Coupe confortable</div><div class="shop-note en-only">Black · Comfortable fit</div>
+        <div class="shop-note fr-only">Tailles et disponibilité sur demande</div><div class="shop-note en-only">Sizes and availability on request</div>
+        <a class="shop-order" href="https://wa.me/32498088771?text=Bonjour%20Thomas%2C%20je%20souhaite%20commander%20le%20pantalon%20coton%20HWBT." target="_blank" rel="noopener"><span class="fr-only">Commander sur WhatsApp</span><span class="en-only">Order on WhatsApp</span></a>
       </div>
 
     </div>
@@ -1201,7 +1199,7 @@ const NL_TEXT={
   "Capacité à retourner un match":"Vermogen om een match te keren","Endurance et impact sur la durée":"Uithouding en impact op lange termijn","Lecture du jeu exceptionnelle":"Uitzonderlijk spelinzicht","Répertoire technique étendu":"Uitgebreid technisch repertoire","Endurance physique et mentale":"Fysiek en mentaal uithoudingsvermogen","Vision du jeu exceptionnelle":"Uitzonderlijke spelvisie","Stabilité structurelle exemplaire":"Voorbeeldige structurele stabiliteit","Régularité technique exemplaire":"Voorbeeldige technische regelmaat","Régularité technique exceptionnelle":"Uitzonderlijke technische regelmaat","Analyse de haut niveau":"Analyse op hoog niveau","Précision technique exceptionnelle":"Uitzonderlijke technische precisie",
   "Choisis ta formule":"Kies je formule","semaine":"week","10 cours / période":"10 lessen / periode","20 cours / période":"20 lessen / periode","Groupe de 3 ou 4 personnes":"Groep van 3 of 4 personen","Créneaux proposés":"Voorgestelde tijdstippen","Lundi 16 h 30 – 18 h 00":"Maandag 16.30 – 18.00 uur","Jeudi 16 h 30 – 18 h 00":"Donderdag 16.30 – 18.00 uur","Vendredi 16 h 30 – 18 h 00":"Vrijdag 16.30 – 18.00 uur","Samedi matin":"Zaterdagochtend","Dimanche matin":"Zondagochtend","Période 1 21/09 – 13/12 · Période 2 04/01 – 28/03 · Période 3 29/03 – 20/06Horaire à convenir.":"Periode 1 21/09 – 13/12 · Periode 2 04/01 – 28/03 · Periode 3 29/03 – 20/06Tijdstip in overleg.",
   "Courts couverts · disponible maintenant":"Overdekte terreinen · nu beschikbaar","Digital":"Digitaal","Plateforme membres":"Ledenplatform","Ton carnet de bord digital. Séances, objectifs, retour coach. Tu sais quoi bosser, et pourquoi.":"Jouw digitaal logboek. Sessies, doelen, feedback van de coach. Je weet waaraan je moet werken, en waarom.","Historique des séances":"Sessieverleden","Toutes tes séances archivées et analysées":"Al je sessies gearchiveerd en geanalyseerd","Objectifs actionnables":"Actiegerichte doelen","Des axes de travail simples et concrets":"Eenvoudige en concrete werkpunten","Feedback coach":"Coachfeedback","Retour personnalisé après chaque séance":"Persoonlijke feedback na elke sessie","Profil Boussole":"Kompasprofiel","Ton profil couleur + axes de vigilance":"Jouw kleurprofiel + aandachtspunten","Aperçu — carnet digital":"Preview — digitaal logboek","piliers":"pijlers","profils":"profielen","Séance du 16/06 · Technique revers":"Sessie van 16/06 · Backhandtechniek","Séance du 10/06 · Tactique duo":"Sessie van 10/06 · Duotactiek","Séance du 03/06 · Mental compétition":"Sessie van 03/06 · Competitiementaliteit",
-  "T-shirts HWBT":"HWBT T-shirts","Personnalisation Blade · Couleurs HWBT":"Blade-personalisatie · HWBT-kleuren","Noir · Or · Blanc cassé":"Zwart · Goud · Gebroken wit",
+  "T-shirt coton":"Katoenen T-shirt","T-shirt compétition":"Competitie T-shirt","T-shirt entraînement":"Training T-shirt","Short technique":"Technische short","Hoodie Academy":"Academy hoodie","Pantalon coton":"Katoenen joggingbroek","Coton peigné 180 g/m² · Doux et confortable":"Gekamd katoen 180 g/m² · Zacht en comfortabel","Vert olive · Pieuvre bronze":"Olijfgroen · Bronzen octopus","Léger et respirant · Personnalisable":"Licht en ademend · Personaliseerbaar","Nom et drapeau inclus":"Naam en vlag inbegrepen","Technique, léger et respirant":"Technisch, licht en ademend","Rouge Academy · Logo Argayon":"Academy-rood · Argayon-logo","Léger · Poches pour balles":"Licht · Ballenzakken","Noir · Logos HWBT et pieuvre":"Zwart · HWBT- en octopuslogo's","Molleton 280 g/m² · Chaleur et confort":"Fleece 280 g/m² · Warm en comfortabel","Noir · Pieuvre bronze sur la manche":"Zwart · Bronzen octopus op de mouw","Molleton 280 g/m² · Poches zippées":"Fleece 280 g/m² · Zakken met rits","Noir · Coupe confortable":"Zwart · Comfortabele pasvorm","Tailles et disponibilité sur demande":"Maten en beschikbaarheid op aanvraag","Commander sur WhatsApp":"Bestellen via WhatsApp",
   "Après chaque séance":"Na elke sessie","Ce que tu reçois":"Wat je krijgt","Un objectif clair":"Een duidelijk doel","Un seul point de travail prioritaire à intégrer avant la prochaine séance.":"Eén prioritair werkpunt om te integreren voor de volgende sessie.","Un feedback personnalisé":"Persoonlijke feedback","Ce qui a bien fonctionné, ce qui peut encore évoluer, adapté à ton profil.":"Wat goed werkte en wat nog kan evolueren, aangepast aan jouw profiel.","Un axe de vigilance":"Een aandachtspunt","Le point à surveiller en match selon ton profil boussole.":"Het punt om in match te bewaken volgens jouw kompasprofiel.","Un suivi sur la plateforme":"Opvolging op het platform","Tout est archivé sur ta plateforme membre. Tu vois ta progression dans le temps.":"Alles wordt bewaard op je ledenplatform. Je ziet je vooruitgang doorheen de tijd.",
   "\"Déjà testé avec des joueurs jeunes et adultes, débutants et compétiteurs, en duo et en groupe. La méthode s'adapte au joueur, pas l'inverse.\"":"\"Al getest met jonge en volwassen spelers, beginners en competitiespelers, in duo en in groep. De methode past zich aan de speler aan, niet omgekeerd.\"",
   "piliers de progression":"pijlers van vooruitgang","profils joueurs":"spelersprofielen","aspects mesurés":"gemeten aspecten","Demander une séance d'essai →":"Vraag een proeftraining aan →",
