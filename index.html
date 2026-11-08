@@ -434,8 +434,21 @@ textarea.c-input{resize:vertical;min-height:72px}
 .home-page #boussole,.home-page #profils,.home-page #plateforme,.home-page #apres-seance{display:none}
 #pour-qui{display:none!important}
 .home-page .hero-right,#notebook-bg{display:none!important}
-.home-page .hero{display:block;min-height:calc(100svh - 105px);background:linear-gradient(90deg,rgba(4,4,4,.95) 0%,rgba(4,4,4,.77) 39%,rgba(4,4,4,.28) 70%,rgba(4,4,4,.45) 100%),url('assets/img/thomas.webp') center 34%/cover no-repeat}
-.home-page .hero::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(5,5,5,.82) 100%);pointer-events:none}
+.home-page .hero{display:block;min-height:calc(100svh - 105px);background:#050505}
+.home-page .hero::after{content:'';position:absolute;z-index:1;inset:0;background:linear-gradient(90deg,rgba(4,4,4,.97) 0%,rgba(4,4,4,.82) 36%,rgba(4,4,4,.22) 69%,rgba(4,4,4,.42) 100%),linear-gradient(180deg,transparent 55%,rgba(5,5,5,.88) 100%);pointer-events:none}
+.hero-carousel{position:absolute;z-index:0;inset:0;overflow:hidden;background:#050505}
+.hero-slide{position:absolute;inset:0;opacity:0;transition:opacity 1.05s ease;pointer-events:none}
+.hero-slide.is-active{opacity:1;z-index:1}
+.hero-slide-bg,.hero-slide-photo{position:absolute;inset:0;width:100%;height:100%;display:block}
+.hero-slide-bg{object-fit:cover;filter:blur(28px) brightness(.48) saturate(.82);transform:scale(1.09)}
+.hero-slide-photo{object-fit:contain;object-position:center;transform:translateX(22%);filter:saturate(.94) contrast(1.03);transition:transform 7s ease}
+.hero-slide.is-active .hero-slide-photo{transform:translateX(22%) scale(1.018)}
+.hero-carousel-controls{position:absolute;z-index:8;right:28px;bottom:24px;display:flex;align-items:center;gap:10px}
+.hero-arrow{width:38px;height:38px;border:1px solid rgba(217,182,108,.55);background:rgba(5,5,5,.62);color:#f2e7d1;font-size:20px;line-height:1;cursor:pointer;transition:background .2s,color .2s}
+.hero-arrow:hover{background:#c49e50;color:#090806}
+.hero-dots{display:flex;align-items:center;gap:7px;padding:0 4px}
+.hero-dot{width:7px;height:7px;border-radius:50%;border:1px solid #d9b66c;background:transparent;padding:0;cursor:pointer;transition:transform .2s,background .2s}
+.hero-dot.is-active{background:#d9b66c;transform:scale(1.35)}
 .home-page .hero-left{max-width:none;margin:0;width:100%;min-height:calc(100svh - 105px);padding:9vh 7vw 11vh;text-align:left;align-items:flex-start;position:relative;z-index:2}
 .home-page .hero-left::before,.home-page .hero-left::after{display:none}
 .home-page .hero-logo-wrap{display:none}
@@ -499,6 +512,11 @@ section[id]{scroll-margin-top:86px}
   .mobile-menu{background:rgba(5,5,5,.995);gap:16px;padding:84px 24px 30px;overflow-y:auto}
   .mobile-menu a,.mobile-menu button.mm-link{font-size:30px;color:#fff;line-height:1.08;text-align:center}
   .home-page .hero{min-height:calc(100svh - 78px);background-position:58% center;padding:0}
+  .home-page .hero::after{background:linear-gradient(180deg,rgba(5,5,5,.08) 0%,rgba(5,5,5,.16) 38%,rgba(5,5,5,.94) 77%,#050505 100%)}
+  .hero-slide-bg{display:block;filter:blur(22px) brightness(.4) saturate(.82);transform:scale(1.1)}
+  .hero-slide-photo,.hero-slide.is-active .hero-slide-photo{object-fit:contain;object-position:center top;transform:none;filter:saturate(.96) contrast(1.03)}
+  .hero-carousel-controls{right:14px;top:16px;bottom:auto}
+  .hero-arrow{width:34px;height:34px;font-size:18px;background:rgba(5,5,5,.72)}
   .home-page .hero-left{min-height:calc(100svh - 78px);justify-content:flex-end;padding:250px 20px 38px;background:linear-gradient(180deg,rgba(5,5,5,.08) 10%,rgba(5,5,5,.38) 43%,rgba(5,5,5,.97) 78%)}
   .hero-photo-title{font-size:58px;margin-bottom:16px}
   .hero-photo-title span{font-size:.48em;letter-spacing:5px}
@@ -640,6 +658,29 @@ section[id]{scroll-margin-top:86px}
 
   <!-- HERO -->
   <section class="hero">
+    <div class="hero-carousel" id="hero-carousel" aria-label="Photos HWBT Academy">
+      <div class="hero-slide is-active" data-hero-slide="0">
+        <img class="hero-slide-bg" src="assets/img/hero-carousel-1.webp" alt="" aria-hidden="true" decoding="async"/>
+        <img class="hero-slide-photo" src="assets/img/hero-carousel-1.webp" alt="Coach HWBT Academy et trois jeunes joueurs vus de dos sur le terrain de padel" fetchpriority="high" decoding="async"/>
+      </div>
+      <div class="hero-slide" data-hero-slide="1">
+        <img class="hero-slide-bg" src="assets/img/hero-carousel-2.webp" alt="" aria-hidden="true" loading="lazy" decoding="async"/>
+        <img class="hero-slide-photo" src="assets/img/hero-carousel-2.webp" alt="Coach HWBT Academy avec un jeune joueur sur un terrain de padel couvert" loading="lazy" decoding="async"/>
+      </div>
+      <div class="hero-slide" data-hero-slide="2">
+        <img class="hero-slide-bg" src="assets/img/hero-carousel-3.webp" alt="" aria-hidden="true" loading="lazy" decoding="async"/>
+        <img class="hero-slide-photo" src="assets/img/hero-carousel-3.webp" alt="Séance de coaching HWBT Academy sur un terrain de padel couvert" loading="lazy" decoding="async"/>
+      </div>
+      <div class="hero-carousel-controls" aria-label="Contrôles du carrousel">
+        <button class="hero-arrow" id="hero-prev" type="button" aria-label="Photo précédente">‹</button>
+        <div class="hero-dots">
+          <button class="hero-dot is-active" type="button" data-hero-dot="0" aria-label="Afficher la photo 1" aria-current="true"></button>
+          <button class="hero-dot" type="button" data-hero-dot="1" aria-label="Afficher la photo 2"></button>
+          <button class="hero-dot" type="button" data-hero-dot="2" aria-label="Afficher la photo 3"></button>
+        </div>
+        <button class="hero-arrow" id="hero-next" type="button" aria-label="Photo suivante">›</button>
+      </div>
+    </div>
     <div class="bracket tl"></div><div class="bracket tr"></div>
     <div class="bracket bl"></div><div class="bracket br"></div>
 
@@ -1315,6 +1356,40 @@ function updateTicker(lang='fr'){
   inner.innerHTML=h;
 }
 setLang(localStorage.getItem('hwbt_site_lang')||'fr');
+
+// Carrousel de la page d'accueil — la photo de groupe reste toujours la première
+const heroCarousel=document.getElementById('hero-carousel');
+const heroSlides=[...document.querySelectorAll('[data-hero-slide]')];
+const heroDots=[...document.querySelectorAll('[data-hero-dot]')];
+let heroIndex=0;
+let heroTimer;
+function showHeroSlide(index){
+  if(!heroSlides.length)return;
+  heroIndex=(index+heroSlides.length)%heroSlides.length;
+  heroSlides.forEach((slide,i)=>slide.classList.toggle('is-active',i===heroIndex));
+  heroDots.forEach((dot,i)=>{
+    const active=i===heroIndex;
+    dot.classList.toggle('is-active',active);
+    if(active)dot.setAttribute('aria-current','true');else dot.removeAttribute('aria-current');
+  });
+}
+function stopHeroCarousel(){clearInterval(heroTimer)}
+function startHeroCarousel(){
+  stopHeroCarousel();
+  if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+    heroTimer=setInterval(()=>showHeroSlide(heroIndex+1),6000);
+  }
+}
+document.getElementById('hero-prev')?.addEventListener('click',()=>{showHeroSlide(heroIndex-1);startHeroCarousel()});
+document.getElementById('hero-next')?.addEventListener('click',()=>{showHeroSlide(heroIndex+1);startHeroCarousel()});
+heroDots.forEach(dot=>dot.addEventListener('click',()=>{showHeroSlide(Number(dot.dataset.heroDot));startHeroCarousel()}));
+heroCarousel?.addEventListener('mouseenter',stopHeroCarousel);
+heroCarousel?.addEventListener('mouseleave',startHeroCarousel);
+heroCarousel?.addEventListener('focusin',stopHeroCarousel);
+heroCarousel?.addEventListener('focusout',startHeroCarousel);
+document.addEventListener('visibilitychange',()=>document.hidden?stopHeroCarousel():startHeroCarousel());
+showHeroSlide(0);
+startHeroCarousel();
 
 // Count up
 function countUp(el,target,dur){
